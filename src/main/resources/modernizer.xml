@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<modernizer>
+
+<!--
+This file contains the standard set of violations for Modernizer.  The
+violation names use the same format that javap emits.
+-->
+
+  <violation>
+    <name>com/google/common/base/Charsets.ISO_8859_1:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Charsets.US_ASCII:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Charsets.UTF_8:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Charsets.UTF_16BE:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Charsets.UTF_16LE:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Charsets.UTF_16:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Objects.equal:(Ljava/lang/Object;Ljava/lang/Object;)Z</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Objects.equal(Object, Object)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Objects.hashCode:([Ljava/lang/Object;)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Objects.hash(Object...)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Optional.absent:()Lcom/google/common/base/Optional;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Optional</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Optional.of:(Ljava/lang/Object;)Lcom/google/common/base/Optional;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Optional</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Optional.fromNullable:(Ljava/lang/Object;)Lcom/google/common/base/Optional;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Optional</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.ArrayList&lt;&gt;()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Lists.newArrayList:(Ljava/lang/Iterable;)Ljava/util/ArrayList;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(java.lang.Iterable)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Lists.newArrayListWithCapacity:(I)Ljava/util/ArrayList;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Lists.newLinkedList:()Ljava/util/LinkedList;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.LinkedList&lt;&gt;()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Lists.newLinkedList:(Ljava/lang/Iterable;)Ljava/util/LinkedList;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.LinkedList&lt;&gt;(java.lang.Iterable)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/Files.toByteArray:(Ljava/io/File;)[B</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Chars.compare:(CC)I</name>
+    <version>1.7</version>
+    <comment>Prefer java.lang.Char.compare(char, char)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Ints.compare:(II)I</name>
+    <version>1.7</version>
+    <comment>Prefer java.lang.Integer.compare(int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Longs.compare:(JJ)I</name>
+    <version>1.7</version>
+    <comment>Prefer java.lang.Long.compare(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Shorts.compare:(SS)I</name>
+    <version>1.7</version>
+    <comment>Prefer java.lang.Short.compare(short, short)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/InputStreamReader."&lt;init&gt;":(Ljava/io/InputStream;Ljava/lang/String;)V</name>
+    <version>1.4</version>
+    <comment>Prefer java.io.InputStreamReader(java.io.InputStream, java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/OutputStreamWriter."&lt;init&gt;":(Ljava/io/OutputStream;Ljava/lang/String;)V</name>
+    <version>1.4</version>
+    <comment>Prefer java.io.OutputStreamWriter(java.io.OutputStream, java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/String.getBytes:(Ljava/lang/String;)[B</name>
+    <version>1.6</version>
+    <comment>Prefer java.lang.String.getBytes(java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/String."&lt;init&gt;":([BIILjava/lang/String;)V</name>
+    <version>1.6</version>
+    <comment>Prefer java.lang.String.&lt;init&gt;(byte[], int, int, java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/String."&lt;init&gt;":([BLjava/lang/String;)V</name>
+    <version>1.6</version>
+    <comment>Prefer java.lang.String.&lt;init&gt;(byte[], java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/StringBuffer."&lt;init&gt;":()V</name>
+    <version>1.5</version>
+    <comment>Prefer java.lang.StringBuilder</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/StringBuffer."&lt;init&gt;":(I)V</name>
+    <version>1.5</version>
+    <comment>Prefer java.lang.StringBuilder</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/StringBuffer."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>1.5</version>
+    <comment>Prefer java.lang.StringBuilder</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/StringBuffer."&lt;init&gt;":(Ljava/lang/CharSequence;)V</name>
+    <version>1.5</version>
+    <comment>Prefer java.lang.StringBuilder</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/HttpURLConnection.setFixedLengthStreamingMode:(I)V</name>
+    <version>1.7</version>
+    <comment>Prefer java.net.HttpURLConnection.setFixedLengthStreamingMode(long)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Hashtable."&lt;init&gt;":(IF)V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.HashMap</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Hashtable."&lt;init&gt;":(I)V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.HashMap</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Hashtable."&lt;init&gt;":()V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.HashMap</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Hashtable."&lt;init&gt;":(Ljava/util/Map;)V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.HashMap</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Vector."&lt;init&gt;":()V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.ArrayList</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Vector."&lt;init&gt;":(I)V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.ArrayList</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Vector."&lt;init&gt;":(II)V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.ArrayList</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Vector."&lt;init&gt;":(Ljava/util/Collection;)V</name>
+    <version>1.2</version>
+    <comment>Prefer java.util.ArrayList</comment>
+  </violation>
+
+</modernizer>
