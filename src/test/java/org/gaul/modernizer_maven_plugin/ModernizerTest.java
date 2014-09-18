@@ -27,6 +27,7 @@ import java.util.Vector;
 
 import com.google.common.base.Charsets;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;

@@ -288,4 +288,10 @@ violation names use the same format that javap emits.
     <comment>Prefer java.util.ArrayList</comment>
   </violation>
 
+  <violation>
+    <name>org/apache/commons/io/FileUtils.readFileToByteArray:(Ljava/io/File;)[B</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
+  </violation>
+
 </modernizer>
