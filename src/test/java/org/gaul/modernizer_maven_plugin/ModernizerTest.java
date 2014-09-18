@@ -52,7 +52,7 @@ public final class ModernizerTest {
         ClassReader cr = new ClassReader(
                 new ArrayListTestClass().getClass().getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.0", violations, exclusions).check(cr);
+                new Modernizer("1.2", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -148,7 +148,7 @@ public final class ModernizerTest {
     }
 
     private static class ArrayListTestClass {
-        private final Object object = new Vector<Object>();
+        private final Object object = new ArrayList<Object>();
     }
 
     private static class VectorTestClass {
