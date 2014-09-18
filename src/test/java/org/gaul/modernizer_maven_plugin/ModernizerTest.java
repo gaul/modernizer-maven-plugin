@@ -18,14 +18,30 @@ package org.gaul.modernizer_maven_plugin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Objects;
+import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
+import com.google.common.io.Files;
+import com.google.common.primitives.Chars;
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.Longs;
+import com.google.common.primitives.Shorts;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -140,6 +156,33 @@ public final class ModernizerTest {
         assertThat(occurrences).hasSize(0);
     }
 
+    @Test
+    public void testAllViolations() throws Exception {
+        int numViolations = 0;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                Modernizer.class.getResourceAsStream("/modernizer.xml")));
+        try {
+            String line;
+            while (true) {
+                line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
+                if (line.indexOf("<violation>") != -1) {
+                    ++numViolations;
+                }
+            }
+        } finally {
+            Utils.closeQuietly(reader);
+        }
+
+        ClassReader cr = new ClassReader(
+                new AllViolations().getClass().getName());
+        Collection<ViolationOccurrence> occurrences =
+                new Modernizer("1.8", violations, exclusions).check(cr);
+        assertThat(occurrences).hasSize(numViolations);
+    }
+
     private static class CharsetsTestClass {
         private final Object object = Charsets.UTF_8;
     }
@@ -164,5 +207,59 @@ public final class ModernizerTest {
 
     private static class StringGetBytesCharset {
         private final Object object = "".getBytes(StandardCharsets.UTF_8);
+    }
+
+    private static class AllViolations {
+        private static void method() throws Exception {
+            Object object;
+            object = Charsets.ISO_8859_1;
+            object = Charsets.US_ASCII;
+            object = Charsets.UTF_8;
+            object = Charsets.UTF_16BE;
+            object = Charsets.UTF_16LE;
+            object = Charsets.UTF_16;
+            Objects.equal(null, null);
+            Objects.hashCode(null);
+            Optional.absent();
+            Optional.of((Object) null);
+            Optional.fromNullable(null);
+            Lists.newArrayList();
+            Lists.newArrayList((Iterable) null);
+            Lists.newArrayListWithCapacity(0);
+            Lists.newLinkedList();
+            Lists.newLinkedList((Iterable) null);
+            Files.toByteArray((File) null);
+            Chars.compare((char) 0, (char) 0);
+            Ints.compare(0, 0);
+            Longs.compare(0L, 0L);
+            Shorts.compare((short) 0, (short) 0);
+            new InputStreamReader((InputStream) null, "");
+            new OutputStreamWriter((OutputStream) null, "");
+            new Byte((byte) 0);
+            new Character((char) 0);
+            new Double(0.0);
+            new Float(0.0);
+            new Float(0.0F);
+            new Integer(0);
+            new Long(0L);
+            new Short((short) 0);
+            "".getBytes("UTF-8");
+            new String((byte[]) null, 0, 0, "");
+            new String((byte[]) null, "");
+            new StringBuffer();
+            new StringBuffer(0);
+            new StringBuffer("");
+            new StringBuffer((CharSequence) "");
+            ((HttpURLConnection) null).setFixedLengthStreamingMode(0);
+            new Hashtable(0, 0.0F);
+            new Hashtable(0);
+            new Hashtable();
+            new Hashtable((Map) null);
+            new Vector();
+            new Vector(1);
+            new Vector(0, 0);
+            new Vector((Collection) null);
+            FileUtils.readFileToByteArray((File) null);
+        }
     }
 }
