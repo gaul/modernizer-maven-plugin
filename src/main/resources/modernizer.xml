@@ -294,4 +294,22 @@ violation names use the same format that javap emits.
     <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
   </violation>
 
+  <violation>
+    <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;)Ljava/util/List;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/util/List;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;Ljava/lang/String;)Ljava/util/List;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+  </violation>
+
 </modernizer>

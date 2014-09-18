@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -260,6 +261,9 @@ public final class ModernizerTest {
             new Vector(0, 0);
             new Vector((Collection) null);
             FileUtils.readFileToByteArray((File) null);
+            FileUtils.readLines((File) null);
+            FileUtils.readLines((File) null, (Charset) null);
+            FileUtils.readLines((File) null, "");
         }
     }
 }
