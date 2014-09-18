@@ -10,9 +10,6 @@ Guava `Objects.equal` instead of Java 8 `Objects.equals`.
 
 Configuration
 -------------
-*Presently Maven Central does not host a Modernizer release.  For now,
-`git clone` the project then `mvn install`.*
-
 To enable Modernizer during the compilation phase of your project, add the
 following to the `<plugins>` stanza in your pom.xml:
 
@@ -20,7 +17,7 @@ following to the `<plugins>` stanza in your pom.xml:
 <plugin>
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <configuration>
     <javaVersion>1.8</javaVersion>
   </configuration>
