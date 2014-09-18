@@ -67,8 +67,7 @@ public final class ModernizerTest {
 
     @Test
     public void testConstructorCurrentApi() throws Exception {
-        ClassReader cr = new ClassReader(
-                new ArrayListTestClass().getClass().getName());
+        ClassReader cr = new ClassReader(ArrayListTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.2", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(0);
@@ -76,8 +75,7 @@ public final class ModernizerTest {
 
     @Test
     public void testConstructorLegacyApiLegacyJava() throws Exception {
-        ClassReader cr = new ClassReader(
-                new VectorTestClass().getClass().getName());
+        ClassReader cr = new ClassReader(VectorTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.0", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(0);
@@ -85,8 +83,7 @@ public final class ModernizerTest {
 
     @Test
     public void testConstructorLegacyApiCurrentJava() throws Exception {
-        ClassReader cr = new ClassReader(
-                new VectorTestClass().getClass().getName());
+        ClassReader cr = new ClassReader(VectorTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.2", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(1);
@@ -95,7 +92,7 @@ public final class ModernizerTest {
     @Test
     public void testFieldCurrentApi() throws Exception {
         ClassReader cr = new ClassReader(
-                new StandardCharsetsTestClass().getClass().getName());
+                StandardCharsetsTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.0", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(0);
@@ -103,8 +100,7 @@ public final class ModernizerTest {
 
     @Test
     public void testFieldLegacyApiLegacyJava() throws Exception {
-        ClassReader cr = new ClassReader(
-                new CharsetsTestClass().getClass().getName());
+        ClassReader cr = new ClassReader(CharsetsTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.0", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(0);
@@ -112,8 +108,7 @@ public final class ModernizerTest {
 
     @Test
     public void testFieldLegacyApiCurrentJava() throws Exception {
-        ClassReader cr = new ClassReader(
-                new CharsetsTestClass().getClass().getName());
+        ClassReader cr = new ClassReader(CharsetsTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.7", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(1);
@@ -121,8 +116,7 @@ public final class ModernizerTest {
 
     @Test
     public void testMethodCurrentApi() throws Exception {
-        ClassReader cr = new ClassReader(
-                new StringGetBytesCharset().getClass().getName());
+        ClassReader cr = new ClassReader(StringGetBytesCharset.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.0", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(0);
@@ -130,8 +124,7 @@ public final class ModernizerTest {
 
     @Test
     public void testMethodLegacyApiLegacyJava() throws Exception {
-        ClassReader cr = new ClassReader(
-                new StringGetBytesString().getClass().getName());
+        ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.0", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(0);
@@ -139,8 +132,7 @@ public final class ModernizerTest {
 
     @Test
     public void testMethodLegacyApiCurrentJava() throws Exception {
-        ClassReader cr = new ClassReader(
-                new StringGetBytesString().getClass().getName());
+        ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.6", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(1);
@@ -148,8 +140,7 @@ public final class ModernizerTest {
 
     @Test
     public void testMethodLegacyApiCurrentJavaWithExclusion() throws Exception {
-        ClassReader cr = new ClassReader(
-                new StringGetBytesString().getClass().getName());
+        ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
         exclusions = Collections.singleton(
                 "java/lang/String.getBytes:(Ljava/lang/String;)[B");
         Collection<ViolationOccurrence> occurrences =
@@ -177,8 +168,7 @@ public final class ModernizerTest {
             Utils.closeQuietly(reader);
         }
 
-        ClassReader cr = new ClassReader(
-                new AllViolations().getClass().getName());
+        ClassReader cr = new ClassReader(AllViolations.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.8", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(numViolations);
