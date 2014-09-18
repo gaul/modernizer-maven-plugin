@@ -56,7 +56,7 @@ final class Modernizer {
         Utils.checkArgument(version >= 0);
         this.javaVersion = version;
         this.violations = Utils.checkNotNull(violations);
-        this.exclusions = new HashSet(Utils.checkNotNull(exclusions));
+        this.exclusions = new HashSet<String>(Utils.checkNotNull(exclusions));
     }
 
     Collection<ViolationOccurrence> check(ClassReader classReader)
