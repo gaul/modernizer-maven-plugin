@@ -35,8 +35,11 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.google.common.primitives.Chars;
@@ -115,6 +118,22 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testInterfaceLegacyApiLegacyJava() throws Exception {
+        ClassReader cr = new ClassReader(VoidSupplier.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                new Modernizer("1.7", violations, exclusions).check(cr);
+        assertThat(occurrences).hasSize(0);
+    }
+
+    @Test
+    public void testInterfaceLegacyApiCurrentJava() throws Exception {
+        ClassReader cr = new ClassReader(VoidSupplier.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                new Modernizer("1.8", violations, exclusions).check(cr);
+        assertThat(occurrences).hasSize(1);
+    }
+
+    @Test
     public void testMethodCurrentApi() throws Exception {
         ClassReader cr = new ClassReader(StringGetBytesCharset.class.getName());
         Collection<ViolationOccurrence> occurrences =
@@ -168,9 +187,16 @@ public final class ModernizerTest {
             Utils.closeQuietly(reader);
         }
 
-        ClassReader cr = new ClassReader(AllViolations.class.getName());
-        Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.8", violations, exclusions).check(cr);
+        Modernizer modernizer = new Modernizer("1.8", violations, exclusions);
+        Collection<ViolationOccurrence> occurrences = modernizer.check(
+                new ClassReader(AllViolations.class.getName()));
+        // must visit inner classes manually
+        occurrences.addAll(modernizer.check(
+                new ClassReader(VoidFunction.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(VoidPredicate.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(VoidSupplier.class.getName())));
         assertThat(occurrences).hasSize(numViolations);
     }
 
@@ -198,6 +224,27 @@ public final class ModernizerTest {
 
     private static class StringGetBytesCharset {
         private final Object object = "".getBytes(StandardCharsets.UTF_8);
+    }
+
+    private static class VoidFunction implements Function<Void, Void> {
+        @Override
+        public Void apply(Void input) {
+            return null;
+        }
+    }
+
+    private static class VoidPredicate implements Predicate<Void> {
+        @Override
+        public boolean apply(Void input) {
+            return true;
+        }
+    };
+
+    private static class VoidSupplier implements Supplier<Void> {
+        @Override
+        public Void get() {
+            return null;
+        }
     }
 
     private static class AllViolations {

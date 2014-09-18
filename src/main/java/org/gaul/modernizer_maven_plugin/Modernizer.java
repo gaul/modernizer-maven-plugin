@@ -19,6 +19,7 @@ package org.gaul.modernizer_maven_plugin;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -120,6 +121,19 @@ final class ModernizerClassVisitor extends ClassVisitor {
         this.javaVersion = javaVersion;
         this.violations = Utils.checkNotNull(violations);
         this.exclusions = Utils.checkNotNull(exclusions);
+    }
+
+    @Override
+    public void visit(int version, int access, String name, String signature,
+            String superName, String[] interfaces) {
+        for (String itr : interfaces) {
+            Violation violation = violations.get(itr);
+            if (violation != null && !exclusions.contains(itr) &&
+                    javaVersion >= violation.getVersion()) {
+                occurrences.add(new ViolationOccurrence(
+                        name, /*lineNumber=*/ -1, violation));
+            }
+        }
     }
 
     @Override
