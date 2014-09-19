@@ -97,12 +97,6 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
-    <name>com/google/common/collect/Lists.newArrayList:(Ljava/lang/Iterable;)Ljava/util/ArrayList;</name>
-    <version>1.7</version>
-    <comment>Prefer java.util.ArrayList&lt;&gt;(java.lang.Iterable)</comment>
-  </violation>
-
-  <violation>
     <name>com/google/common/collect/Lists.newArrayListWithCapacity:(I)Ljava/util/ArrayList;</name>
     <version>1.7</version>
     <comment>Prefer java.util.ArrayList&lt;&gt;(int)</comment>
@@ -112,12 +106,6 @@ violation names use the same format that javap emits.
     <name>com/google/common/collect/Lists.newLinkedList:()Ljava/util/LinkedList;</name>
     <version>1.7</version>
     <comment>Prefer java.util.LinkedList&lt;&gt;()</comment>
-  </violation>
-
-  <violation>
-    <name>com/google/common/collect/Lists.newLinkedList:(Ljava/lang/Iterable;)Ljava/util/LinkedList;</name>
-    <version>1.7</version>
-    <comment>Prefer java.util.LinkedList&lt;&gt;(java.lang.Iterable)</comment>
   </violation>
 
   <violation>

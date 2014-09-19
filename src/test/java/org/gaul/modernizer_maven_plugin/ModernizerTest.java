@@ -262,10 +262,8 @@ public final class ModernizerTest {
             Optional.of((Object) null);
             Optional.fromNullable(null);
             Lists.newArrayList();
-            Lists.newArrayList((Iterable<Object>) null);
             Lists.newArrayListWithCapacity(0);
             Lists.newLinkedList();
-            Lists.newLinkedList((Iterable<Object>) null);
             Files.toByteArray((File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
