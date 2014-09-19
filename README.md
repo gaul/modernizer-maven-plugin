@@ -7,6 +7,10 @@ legacy equivalents.
 For example, Modernizer can detect uses of `Vector` instead of `ArrayList`,
 `String.getBytes(String)` instead of `String.getBytes(Charset)`, and
 Guava `Objects.equal` instead of Java 8 `Objects.equals`.
+The default configuration detects
+[over 50 legacy APIs](https://github.com/andrewgaul/modernizer-maven-plugin/blob/master/src/main/resources/modernizer.xml),
+including third-party libraries like
+[Guava](https://code.google.com/p/guava-libraries/).
 
 Configuration
 -------------
@@ -47,7 +51,7 @@ Modernizer's checks.
 `javac -Xlint:deprecated` can detect uses of interfaces with @Deprecated
 annotations.
 [Overstock.com library-detectors](https://github.com/overstock/library-detectors)
-can detect use of interfaces with @Beta annotations.
+can detect uses of interfaces with @Beta annotations.
 [Checkstyle](http://checkstyle.sourceforge.net/) IllegalInstantiation and
 Regexp checks can mimic some of Modernizer's functionality.
 
