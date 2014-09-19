@@ -30,8 +30,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.Vector;
 
 import com.google.common.base.Charsets;
@@ -41,6 +43,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
@@ -264,6 +267,17 @@ public final class ModernizerTest {
             Lists.newArrayList();
             Lists.newArrayListWithCapacity(0);
             Lists.newLinkedList();
+            Maps.newEnumMap((Class<EnumClass>) null);
+            Maps.newEnumMap((Map<EnumClass, Object>) null);
+            Maps.newHashMap();
+            Maps.newHashMap((Map<Object, Object>) null);
+            Maps.newHashMapWithExpectedSize(0);
+            Maps.newIdentityHashMap();
+            Maps.newLinkedHashMap();
+            Maps.newLinkedHashMap((Map<Object, Object>) null);
+            Maps.newTreeMap();
+            Maps.newTreeMap((Comparator<Object>) null);
+            Maps.newTreeMap((SortedMap<Object, Object>) null);
             Files.toByteArray((File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
@@ -300,5 +314,8 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
         }
+    }
+
+    private enum EnumClass {
     }
 }
