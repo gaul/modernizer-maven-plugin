@@ -267,7 +267,9 @@ public final class ModernizerTest {
             Optional.fromNullable(null);
             Lists.newArrayList();
             Lists.newArrayListWithCapacity(0);
+            Lists.newCopyOnWriteArrayList();
             Lists.newLinkedList();
+            Maps.newConcurrentMap();
             Maps.newEnumMap((Class<EnumClass>) null);
             Maps.newEnumMap((Map<EnumClass, Object>) null);
             Maps.newHashMap();
