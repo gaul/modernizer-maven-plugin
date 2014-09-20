@@ -14,8 +14,8 @@ including third-party libraries like
 
 Configuration
 -------------
-To enable Modernizer during the compilation phase of your project, add the
-following to the `<plugins>` stanza in your pom.xml:
+To enable Modernizer during the both compilation and test-compilation phases
+of your project, add the following to the `<plugins>` stanza in your pom.xml:
 
 ```xml
 <plugin>
@@ -33,6 +33,13 @@ following to the `<plugins>` stanza in your pom.xml:
         <goal>modernizer</goal>
       </goals>
     </execution>
+    <execution>
+      <id>modernizer-test</id>
+      <phase>test-compile</phase>
+      <goals>
+        <goal>modernizer</goal>
+      </goals>
+    </execution>
   </executions>
 </plugin>
 ```
@@ -41,6 +48,7 @@ The `<configuration>` stanza can contain several elements:
 
 * `<javaVersion>` enables violations based on target Java version, e.g., 1.8.  For example, Modernizer will detect uses of `Vector` as violations when targeting Java 1.2 but not when targeting Java 1.1.  Required parameter.
 * `<failOnViolations>` fail phase if Modernizer detects any violations.  Defaults to true.
+* `<includeTestClasses>` run Modernizer on test classes.  Defaults to true.
 * `<violationsFile>` user-specified violation file.  Also disables standard violation checks.
 * `<exclusionsFile>` disables user-specified violations.  This is a text file with one exclusion per line in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
 
