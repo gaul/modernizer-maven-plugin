@@ -46,11 +46,17 @@ public final class ModernizerMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.outputDirectory}")
     private File classFilesDirectory;
 
+    @Parameter(defaultValue = "${project.build.testOutputDirectory}")
+    private File testClassFilesDirectory;
+
     @Parameter(defaultValue = "${javaVersion}", required = true)
     private String javaVersion;
 
     @Parameter(defaultValue = "${failOnViolations}")
     private boolean failOnViolations = true;
+
+    @Parameter(defaultValue = "${includeTestClasses}")
+    private boolean includeTestClasses = true;
 
     @Parameter(defaultValue = "${violationsFile}")
     private String violationsFile;
@@ -105,6 +111,9 @@ public final class ModernizerMojo extends AbstractMojo {
 
         try {
             long count = recurseFiles(classFilesDirectory);
+            if (includeTestClasses) {
+                count += recurseFiles(testClassFilesDirectory);
+            }
             if (failOnViolations && count != 0) {
                 throw new MojoExecutionException("Found " + count +
                         " violations");
