@@ -103,9 +103,21 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Lists.newCopyOnWriteArrayList:()Ljava/util/concurrent/CopyOnWriteArrayList;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.concurrent.CopyOnWriteArrayList&lt;&gt;()</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Lists.newLinkedList:()Ljava/util/LinkedList;</name>
     <version>1.7</version>
     <comment>Prefer java.util.LinkedList&lt;&gt;()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Maps.newConcurrentMap:()Ljava/util/concurrent/ConcurrentMap;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.concurrent.ConcurrentHashMap&lt;&gt;() or customize the map using com.google.common.collect.MapMaker</comment>
   </violation>
 
   <violation>
