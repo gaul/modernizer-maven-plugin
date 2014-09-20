@@ -14,8 +14,8 @@ including third-party libraries like
 
 Configuration
 -------------
-To enable Modernizer during the compilation phase of your project, add the
-following to the `<plugins>` stanza in your pom.xml:
+To run Modernizer, add the following to the `<plugins>` stanza in your pom.xml
+then invoke `mvn modernizer:modernizer`:
 
 ```xml
 <plugin>
@@ -25,15 +25,6 @@ following to the `<plugins>` stanza in your pom.xml:
   <configuration>
     <javaVersion>1.8</javaVersion>
   </configuration>
-  <executions>
-    <execution>
-      <id>modernizer</id>
-      <phase>compile</phase>
-      <goals>
-        <goal>modernizer</goal>
-      </goals>
-    </execution>
-  </executions>
 </plugin>
 ```
 
@@ -43,6 +34,21 @@ The `<configuration>` stanza can contain several elements:
 * `<failOnViolations>` fail phase if Modernizer detects any violations.  Defaults to true.
 * `<violationsFile>` user-specified violation file.  Also disables standard violation checks.
 * `<exclusionsFile>` disables user-specified violations.  This is a text file with one exclusion per line in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
+
+To run Modernizer during the compile phase of your build, add the following to
+the modernizer `<plugin>` stanza in your pom.xml:
+
+```xml
+<executions>
+  <execution>
+    <id>modernizer</id>
+    <phase>compile</phase>
+    <goals>
+      <goal>modernizer</goal>
+    </goals>
+  </execution>
+</executions>
+```
 
 References
 ----------
