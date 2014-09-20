@@ -62,13 +62,13 @@ violation names use the same format that javap emits.
 
   <violation>
     <name>com/google/common/base/Objects.equal:(Ljava/lang/Object;Ljava/lang/Object;)Z</name>
-    <version>1.8</version>
-    <comment>Prefer java.util.Objects.equal(Object, Object)</comment>
+    <version>1.7</version>
+    <comment>Prefer java.util.Objects.equals(Object, Object)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Objects.hashCode:([Ljava/lang/Object;)I</name>
-    <version>1.8</version>
+    <version>1.7</version>
     <comment>Prefer java.util.Objects.hash(Object...)</comment>
   </violation>
 
