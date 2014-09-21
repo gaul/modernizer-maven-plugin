@@ -98,12 +98,26 @@ public final class ModernizerMojo extends AbstractMojo {
 
         Set<String> exclusions = new HashSet<String>();
         if (exclusionsFile != null) {
-            File file = new File(exclusionsFile);
+            is = null;
             try {
-                exclusions.addAll(Utils.readAllLines(file));
+                File file = new File(exclusionsFile);
+                if (file.exists()) {
+                    is = new FileInputStream(file);
+                } else {
+                    is = this.getClass().getClassLoader().getResourceAsStream(
+                            exclusionsFile);
+                }
+                if (is == null) {
+                    throw new MojoExecutionException(
+                            "Could not find exclusion file: " + exclusionsFile);
+                }
+
+                exclusions.addAll(Utils.readAllLines(is));
             } catch (IOException ioe) {
                 throw new MojoExecutionException(
-                        "Error reading exclusion file: " + file, ioe);
+                        "Error reading exclusion file: " + exclusionsFile, ioe);
+            } finally {
+                Utils.closeQuietly(is);
             }
         }
 

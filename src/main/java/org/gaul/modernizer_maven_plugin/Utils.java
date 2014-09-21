@@ -18,9 +18,9 @@ package org.gaul.modernizer_maven_plugin;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -49,20 +49,15 @@ final class Utils {
         }
     }
 
-    static Collection<String> readAllLines(File file) throws IOException {
+    static Collection<String> readAllLines(InputStream is) throws IOException {
         Collection<String> lines = new ArrayList<String>();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            while (true) {
-                String line = reader.readLine();
-                if (line == null) {
-                    break;
-                }
-                lines.add(line);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        while (true) {
+            String line = reader.readLine();
+            if (line == null) {
+                break;
             }
-        } finally {
-            Utils.closeQuietly(reader);
+            lines.add(line);
         }
         return lines;
     }
