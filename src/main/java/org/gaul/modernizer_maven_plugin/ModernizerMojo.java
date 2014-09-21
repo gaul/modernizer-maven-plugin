@@ -43,11 +43,17 @@ public final class ModernizerMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
+    @Parameter(defaultValue = "${project.build.sourceDirectory}")
+    private File sourceDirectory;
+
+    @Parameter(defaultValue = "${project.build.testSourceDirectory}")
+    private File testSourceDirectory;
+
     @Parameter(defaultValue = "${project.build.outputDirectory}")
-    private File classFilesDirectory;
+    private File outputDirectory;
 
     @Parameter(defaultValue = "${project.build.testOutputDirectory}")
-    private File testClassFilesDirectory;
+    private File testOutputDirectory;
 
     @Parameter(defaultValue = "${javaVersion}", required = true)
     private String javaVersion;
@@ -124,9 +130,9 @@ public final class ModernizerMojo extends AbstractMojo {
         modernizer = new Modernizer(javaVersion, violations, exclusions);
 
         try {
-            long count = recurseFiles(classFilesDirectory);
+            long count = recurseFiles(outputDirectory);
             if (includeTestClasses) {
-                count += recurseFiles(testClassFilesDirectory);
+                count += recurseFiles(testOutputDirectory);
             }
             if (failOnViolations && count != 0) {
                 throw new MojoExecutionException("Found " + count +
@@ -155,8 +161,19 @@ public final class ModernizerMojo extends AbstractMojo {
                 Collection<ViolationOccurrence> occurrences =
                         modernizer.check(is);
                 for (ViolationOccurrence occurrence : occurrences) {
-                    // TODO: map back to source file and column number?
-                    getLog().error(file.toString() + ":" +
+                    String name = file.getPath();
+                    if (name.startsWith(outputDirectory.getPath())) {
+                        name = sourceDirectory.getPath() + name.substring(
+                                outputDirectory.getPath().length());
+                        name = name.substring(0,
+                                name.length() - ".class".length()) + ".java";
+                    } else if (name.startsWith(testOutputDirectory.getPath())) {
+                        name = testSourceDirectory.getPath() + name.substring(
+                                testOutputDirectory.getPath().length());
+                        name = name.substring(0,
+                                name.length() - ".class".length()) + ".java";
+                    }
+                    getLog().error(name + ":" +
                             occurrence.getLineNumber() + ": " +
                             occurrence.getViolation().getComment());
                     ++count;
