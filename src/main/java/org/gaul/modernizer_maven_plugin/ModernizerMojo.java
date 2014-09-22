@@ -16,18 +16,6 @@
 
 package org.gaul.modernizer_maven_plugin;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Execute;
@@ -36,6 +24,13 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Mojo(name = "modernizer")
 @Execute(phase = LifecyclePhase.PROCESS_TEST_CLASSES)
@@ -69,6 +64,9 @@ public final class ModernizerMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${exclusionsFile}")
     private String exclusionsFile;
+
+    @Parameter
+    private HashSet<String> ignorePackages;
 
     private Modernizer modernizer;
 
@@ -155,7 +153,7 @@ public final class ModernizerMojo extends AbstractMojo {
                     count += recurseFiles(new File(file, child));
                 }
             }
-        } else if (file.getPath().endsWith(".class")) {
+        } else if (fileMatches(file)) {
             InputStream is = new FileInputStream(file);
             try {
                 Collection<ViolationOccurrence> occurrences =
@@ -183,5 +181,20 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
         return count;
+    }
+
+    private boolean fileMatches(File file) {
+        String path = file.getPath();
+        if (path.endsWith(".class")) {
+            if (ignorePackages != null) {
+                for (String ignoredPrefix : ignorePackages) {
+                    if (path.replace(File.separatorChar, '.').contains(ignoredPrefix)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }
