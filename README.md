@@ -6,7 +6,7 @@ These modern APIs are often more performant, safer, and idiomatic than the
 legacy equivalents.
 For example, Modernizer can detect uses of `Vector` instead of `ArrayList`,
 `String.getBytes(String)` instead of `String.getBytes(Charset)`, and
-Guava `Objects.equal` instead of Java 8 `Objects.equals`.
+Guava `Objects.equal` instead of Java 7 `Objects.equals`.
 The default configuration detects
 [over 70 legacy APIs](https://github.com/andrewgaul/modernizer-maven-plugin/blob/master/src/main/resources/modernizer.xml),
 including third-party libraries like
