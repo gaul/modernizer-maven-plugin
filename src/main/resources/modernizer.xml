@@ -265,6 +265,30 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/util/concurrent/Atomics.newReference:()Ljava/util/concurrent/atomic/AtomicReference;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.concurrent.atomic.AtomicReference&lt;&gt;()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/util/concurrent/Atomics.newReference:(Ljava/lang/Object;)Ljava/util/concurrent/atomic/AtomicReference;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.concurrent.atomic.AtomicReference&lt;&gt;(Object)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/util/concurrent/Atomics.newReferenceArray:(I)Ljava/util/concurrent/atomic/AtomicReferenceArray;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.concurrent.atomic.AtomicReferenceArray&lt;&gt;(int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/util/concurrent/Atomics.newReferenceArray:([Ljava/lang/Object;)Ljava/util/concurrent/atomic/AtomicReferenceArray;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.concurrent.atomic.AtomicReferenceArray&lt;&gt;(Object[])</comment>
+  </violation>
+
+  <violation>
     <name>java/io/InputStreamReader."&lt;init&gt;":(Ljava/io/InputStream;Ljava/lang/String;)V</name>
     <version>1.4</version>
     <comment>Prefer java.io.InputStreamReader(java.io.InputStream, java.nio.charset.Charset)</comment>

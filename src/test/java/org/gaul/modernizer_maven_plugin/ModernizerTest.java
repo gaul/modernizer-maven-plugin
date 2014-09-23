@@ -50,6 +50,7 @@ import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
+import com.google.common.util.concurrent.Atomics;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -294,6 +295,10 @@ public final class ModernizerTest {
             Ints.compare(0, 0);
             Longs.compare(0L, 0L);
             Shorts.compare((short) 0, (short) 0);
+            Atomics.newReference();
+            Atomics.newReference((Object) null);
+            Atomics.newReferenceArray(0);
+            Atomics.newReference((Object[]) null);
             new InputStreamReader((InputStream) null, "");
             new OutputStreamWriter((OutputStream) null, "");
             new Byte((byte) 0);
