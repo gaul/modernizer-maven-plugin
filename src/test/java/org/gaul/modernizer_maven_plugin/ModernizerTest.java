@@ -44,6 +44,7 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.io.BaseEncoding;
 import com.google.common.io.Files;
 import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
@@ -51,10 +52,14 @@ import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
 import com.google.common.util.concurrent.Atomics;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 public final class ModernizerTest {
     private Map<String, Violation> violations;
@@ -285,6 +290,7 @@ public final class ModernizerTest {
             Sets.newSetFromMap((Map<Object, Boolean>) null);
             Sets.newTreeSet();
             Sets.newTreeSet((Comparator<Object>) null);
+            BaseEncoding.base64();
             Files.toByteArray((File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
@@ -320,10 +326,14 @@ public final class ModernizerTest {
             new Vector<Object>(1);
             new Vector<Object>(0, 0);
             new Vector<Object>((Collection<Object>) null);
+            Base64.decodeBase64("");
+            Base64.encodeBase64String((byte[]) null);
             FileUtils.readFileToByteArray((File) null);
             FileUtils.readLines((File) null);
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
+            new BASE64Decoder().decodeBuffer("");
+            new BASE64Encoder().encode((byte[]) null);
         }
     }
 

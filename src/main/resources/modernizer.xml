@@ -235,6 +235,12 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/io/BaseEncoding.base64:()Lcom/google/common/io/BaseEncoding;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Base64.Decoder or java.util.Base64.Encoder</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/io/Files.toByteArray:(Ljava/io/File;)[B</name>
     <version>1.7</version>
     <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
@@ -445,6 +451,19 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>org/apache/commons/codec/binary/Base64.decodeBase64:(Ljava/lang/String;)[B</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Base64.Decoder.decode(String)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/codec/binary/Base64.encodeBase64String:([B)Ljava/lang/String;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[])</comment>
+  </violation>
+
+
+  <violation>
     <name>org/apache/commons/io/FileUtils.readFileToByteArray:(Ljava/io/File;)[B</name>
     <version>1.7</version>
     <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
@@ -466,6 +485,18 @@ violation names use the same format that javap emits.
     <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;Ljava/lang/String;)Ljava/util/List;</name>
     <version>1.7</version>
     <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>sun/misc/BASE64Decoder.decodeBuffer:(Ljava/lang/String;)[B</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Base64.Decoder.decode(String)</comment>
+  </violation>
+
+  <violation>
+    <name>sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[])</comment>
   </violation>
 
 </modernizer>

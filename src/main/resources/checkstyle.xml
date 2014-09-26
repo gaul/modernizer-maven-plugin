@@ -28,7 +28,6 @@
       <property name="ignoreSetter" value="true"/>
     </module>
     <module name="HideUtilityClassConstructor"/>
-    <module name="IllegalImport"/>
     <module name="IllegalInstantiation"/>
     <module name="ImportOrder">
       <property name="groups" value="java,javax,com,org"/>
