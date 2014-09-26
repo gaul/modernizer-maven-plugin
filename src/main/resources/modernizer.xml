@@ -271,6 +271,66 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/primitives/UnsignedInts.compare:(II)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Integer.compareUnsigned(int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedInts.divide:(II)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Integer.divideUnsigned(int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedInts.parseUnsignedInt:(Ljava/lang/String;)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Integer.parseUnsignedInt(String)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedInts.parseUnsignedInt:(Ljava/lang/String;I)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Integer.parseUnsignedInt(String, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedInts.remainder:(II)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Integer.remainderUnsigned(int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedLongs.compare:(JJ)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Long.compareUnsigned(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedLongs.divide:(JJ)J</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Long.divideUnsigned(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedLongs.parseUnsignedLong:(Ljava/lang/String;)J</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.UnsignedLongs.parseUnsignedLong(String)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedLongs.parseUnsignedLong:(Ljava/lang/String;I)J</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.UnsignedLongs.parseUnsignedLong(String, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedLongs.remainder:(JJ)J</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Long.remainderUnsigned(long, long)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/util/concurrent/Atomics.newReference:()Ljava/util/concurrent/atomic/AtomicReference;</name>
     <version>1.7</version>
     <comment>Prefer java.util.concurrent.atomic.AtomicReference&lt;&gt;()</comment>

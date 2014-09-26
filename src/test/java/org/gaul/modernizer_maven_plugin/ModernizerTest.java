@@ -50,6 +50,8 @@ import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
+import com.google.common.primitives.UnsignedInts;
+import com.google.common.primitives.UnsignedLongs;
 import com.google.common.util.concurrent.Atomics;
 
 import org.apache.commons.codec.binary.Base64;
@@ -296,6 +298,16 @@ public final class ModernizerTest {
             Ints.compare(0, 0);
             Longs.compare(0L, 0L);
             Shorts.compare((short) 0, (short) 0);
+            UnsignedInts.compare(0, 0);
+            UnsignedInts.divide(0, 0);
+            UnsignedInts.parseUnsignedInt("0");
+            UnsignedInts.parseUnsignedInt("0", 10);
+            UnsignedInts.remainder(0, 0);
+            UnsignedLongs.compare(0, 0);
+            UnsignedLongs.divide(0, 0);
+            UnsignedLongs.parseUnsignedLong("0");
+            UnsignedLongs.parseUnsignedLong("0", 10);
+            UnsignedLongs.remainder(0, 0);
             Atomics.newReference();
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);
