@@ -94,6 +94,8 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.2", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getName())
+                .isEqualTo("java/util/Vector.\"<init>\":()V");
     }
 
     @Test
@@ -119,6 +121,9 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.7", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getName())
+                .isEqualTo("com/google/common/base/Charsets.UTF_8" +
+                        ":Ljava/nio/charset/Charset;");
     }
 
     @Test
@@ -135,6 +140,8 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.8", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getName())
+                .isEqualTo("com/google/common/base/Supplier");
     }
 
     @Test
@@ -159,6 +166,8 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.6", violations, exclusions).check(cr);
         assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getName())
+                .isEqualTo("java/lang/String.getBytes:(Ljava/lang/String;)[B");
     }
 
     @Test
