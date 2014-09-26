@@ -18,7 +18,6 @@ package org.gaul.modernizer_maven_plugin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -174,24 +173,6 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        int numViolations = 0;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                Modernizer.class.getResourceAsStream("/modernizer.xml")));
-        try {
-            String line;
-            while (true) {
-                line = reader.readLine();
-                if (line == null) {
-                    break;
-                }
-                if (line.indexOf("<violation>") != -1) {
-                    ++numViolations;
-                }
-            }
-        } finally {
-            Utils.closeQuietly(reader);
-        }
-
         Modernizer modernizer = new Modernizer("1.8", violations, exclusions);
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
@@ -202,7 +183,12 @@ public final class ModernizerTest {
                 new ClassReader(VoidPredicate.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidSupplier.class.getName())));
-        assertThat(occurrences).hasSize(numViolations);
+
+        Collection<Violation> actualViolations = Lists.newArrayList();
+        for (ViolationOccurrence occurrence : occurrences) {
+            actualViolations.add(occurrence.getViolation());
+        }
+        assertThat(actualViolations).containsAll(violations.values());
     }
 
     private static class CharsetsTestClass {
@@ -298,7 +284,7 @@ public final class ModernizerTest {
             Atomics.newReference();
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);
-            Atomics.newReference((Object[]) null);
+            Atomics.newReferenceArray((Object[]) null);
             new InputStreamReader((InputStream) null, "");
             new OutputStreamWriter((OutputStream) null, "");
             new Byte((byte) 0);
