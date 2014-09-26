@@ -50,7 +50,7 @@
       <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="MemberName">
-        <property name="applyToPublic" value="false"/>
+      <property name="applyToPublic" value="false"/>
     </module>
     <module name="MethodName"/>
     <module name="MethodParamPad"/>
