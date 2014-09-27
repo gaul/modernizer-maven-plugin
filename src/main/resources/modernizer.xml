@@ -522,6 +522,41 @@ violation names use the same format that javap emits.
     <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[])</comment>
   </violation>
 
+  <violation>
+    <name>org/apache/commons/io/Charsets.ISO_8859_1:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/Charsets.US_ASCII:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/Charsets.UTF_8:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/Charsets.UTF_16BE:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/Charsets.UTF_16LE:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/Charsets.UTF_16:Ljava/nio/charset/Charset;</name>
+    <version>1.7</version>
+    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+  </violation>
 
   <violation>
     <name>org/apache/commons/io/FileUtils.readFileToByteArray:(Ljava/io/File;)[B</name>

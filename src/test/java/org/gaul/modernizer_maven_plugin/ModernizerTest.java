@@ -340,6 +340,12 @@ public final class ModernizerTest {
             new Vector<Object>((Collection<Object>) null);
             Base64.decodeBase64("");
             Base64.encodeBase64String((byte[]) null);
+            object = org.apache.commons.io.Charsets.ISO_8859_1;
+            object = org.apache.commons.io.Charsets.US_ASCII;
+            object = org.apache.commons.io.Charsets.UTF_8;
+            object = org.apache.commons.io.Charsets.UTF_16BE;
+            object = org.apache.commons.io.Charsets.UTF_16LE;
+            object = org.apache.commons.io.Charsets.UTF_16;
             FileUtils.readFileToByteArray((File) null);
             FileUtils.readLines((File) null);
             FileUtils.readLines((File) null, (Charset) null);
