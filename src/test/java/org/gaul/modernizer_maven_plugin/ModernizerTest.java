@@ -67,6 +67,8 @@ public final class ModernizerTest {
     private Map<String, Violation> violations;
     private static final Collection<String> NO_EXCLUSIONS =
             Collections.<String>emptySet();
+    private static final Collection<String> NO_IGNORED_PACKAGES =
+            Collections.<String>emptySet();
 
     @Before
     public void setUp() throws Exception {
@@ -182,9 +184,50 @@ public final class ModernizerTest {
         ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
         Collection<String> exclusions = Collections.singleton(
                 "java/lang/String.getBytes:(Ljava/lang/String;)[B");
-        Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.6", violations, exclusions).check(cr);
+        Collection<ViolationOccurrence> occurrences = new Modernizer(
+                "1.6", violations, exclusions, NO_IGNORED_PACKAGES).check(cr);
         assertThat(occurrences).hasSize(0);
+    }
+
+    @Test
+    public void testMethodLegacyApiCurrentJavaWithIgnorePackages()
+            throws Exception {
+        ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
+        Collection<String> ignorePackages = Collections.singleton(
+                StringGetBytesString.class.getPackage().getName());
+        Collection<ViolationOccurrence> occurrences = new Modernizer(
+                "1.6", violations, NO_EXCLUSIONS, ignorePackages).check(cr);
+        assertThat(occurrences).hasSize(0);
+    }
+
+    @Test
+    public void testMethodLegacyApiCurrentJavaWithIgnorePackagesPrefix()
+            throws Exception {
+        ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
+        Collection<String> ignorePackages = Collections.singleton("org.gaul");
+        Collection<ViolationOccurrence> occurrences = new Modernizer(
+                "1.6", violations, NO_EXCLUSIONS, ignorePackages).check(cr);
+        assertThat(occurrences).hasSize(0);
+    }
+
+    @Test
+    public void testMethodLegacyApiCurrentJavaWithIgnorePackagesSubprefix()
+            throws Exception {
+        ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
+        Collection<String> ignorePackages = Collections.singleton("org");
+        Collection<ViolationOccurrence> occurrences = new Modernizer(
+                "1.6", violations, NO_EXCLUSIONS, ignorePackages).check(cr);
+        assertThat(occurrences).hasSize(0);
+    }
+
+    @Test
+    public void testMethodLegacyApiCurrentJavaWithIgnorePackagesPartialPrefix()
+            throws Exception {
+        ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
+        Collection<String> ignorePackages = Collections.singleton("org.gau");
+        Collection<ViolationOccurrence> occurrences = new Modernizer(
+                "1.6", violations, NO_EXCLUSIONS, ignorePackages).check(cr);
+        assertThat(occurrences).hasSize(1);
     }
 
     @Test
@@ -209,7 +252,8 @@ public final class ModernizerTest {
 
     /** Helper to create Modernizer object with default parameters. */
     private Modernizer createModernizer(String javaVersion) {
-        return new Modernizer(javaVersion, violations, NO_EXCLUSIONS);
+        return new Modernizer(javaVersion, violations, NO_EXCLUSIONS,
+                NO_IGNORED_PACKAGES);
     }
 
     private static class CharsetsTestClass {

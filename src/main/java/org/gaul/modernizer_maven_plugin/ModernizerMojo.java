@@ -69,6 +69,9 @@ public final class ModernizerMojo extends AbstractMojo {
     @Parameter(defaultValue = "${exclusionsFile}")
     private String exclusionsFile;
 
+    @Parameter
+    private Set<String> ignorePackages;
+
     private Modernizer modernizer;
 
     @Override
@@ -126,7 +129,8 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
-        modernizer = new Modernizer(javaVersion, violations, exclusions);
+        modernizer = new Modernizer(javaVersion, violations, exclusions,
+                ignorePackages);
 
         try {
             long count = recurseFiles(outputDirectory);

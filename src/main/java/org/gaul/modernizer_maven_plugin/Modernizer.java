@@ -43,9 +43,10 @@ final class Modernizer {
     private final long javaVersion;
     private final Map<String, Violation> violations;
     private final Collection<String> exclusions;
+    private final Collection<String> ignorePackages;
 
     Modernizer(String javaVersion, Map<String, Violation> violations,
-            Collection<String> exclusions) {
+            Collection<String> exclusions, Collection<String> ignorePackages) {
         if (!javaVersion.startsWith("1.")) {
             throw new IllegalArgumentException(
                     "Invalid version, must have the form 1.6");
@@ -55,12 +56,13 @@ final class Modernizer {
         this.javaVersion = version;
         this.violations = Utils.createImmutableMap(violations);
         this.exclusions = Utils.createImmutableSet(exclusions);
+        this.ignorePackages = Utils.createImmutableSet(ignorePackages);
     }
 
     Collection<ViolationOccurrence> check(ClassReader classReader)
             throws IOException {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
-                javaVersion, violations, exclusions);
+                javaVersion, violations, exclusions, ignorePackages);
         classReader.accept(classVisitor, 0);
         return classVisitor.getOccurrences();
     }
@@ -108,28 +110,30 @@ final class ModernizerClassVisitor extends ClassVisitor {
     private final long javaVersion;
     private final Map<String, Violation> violations;
     private final Collection<String> exclusions;
+    private final Collection<String> ignorePackages;
     private final Collection<ViolationOccurrence> occurrences =
             new ArrayList<ViolationOccurrence>();
+    private String packageName;
 
     ModernizerClassVisitor(long javaVersion,
-            Map<String, Violation> violations, Collection<String> exclusions) {
+            Map<String, Violation> violations, Collection<String> exclusions,
+            Collection<String> ignorePackages) {
         super(Opcodes.ASM5);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
         this.violations = Utils.checkNotNull(violations);
         this.exclusions = Utils.checkNotNull(exclusions);
+        this.ignorePackages = Utils.checkNotNull(ignorePackages);
     }
 
     @Override
     public void visit(int version, int access, String name, String signature,
             String superName, String[] interfaces) {
+        packageName = name.substring(0, name.lastIndexOf('/')).replace('/',
+                '.');
         for (String itr : interfaces) {
             Violation violation = violations.get(itr);
-            if (violation != null && !exclusions.contains(itr) &&
-                    javaVersion >= violation.getVersion()) {
-                occurrences.add(new ViolationOccurrence(
-                        name, /*lineNumber=*/ -1, violation));
-            }
+            checkToken(itr, violation, name, /*lineNumber=*/ -1);
         }
     }
 
@@ -164,11 +168,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     String desc) {
                 String token = owner + "." + name + ":" + desc;
                 Violation violation = violations.get(token);
-                if (violation != null && !exclusions.contains(token) &&
-                        javaVersion >= violation.getVersion()) {
-                    occurrences.add(new ViolationOccurrence(
-                            name, lineNumber, violation));
-                }
+                checkToken(token, violation, name, lineNumber);
             }
 
             @Override
@@ -177,6 +177,21 @@ final class ModernizerClassVisitor extends ClassVisitor {
             }
         };
         return adapter;
+    }
+
+    private void checkToken(String token, Violation violation, String name,
+            int lineNumber) {
+        if (violation != null && !exclusions.contains(token) &&
+                javaVersion >= violation.getVersion() &&
+                !ignorePackages.contains(packageName)) {
+            for (String prefix : ignorePackages) {
+                if (packageName.startsWith(prefix + ".")) {
+                    return;
+                }
+            }
+            occurrences.add(new ViolationOccurrence(name, lineNumber,
+                    violation));
+        }
     }
 
     Collection<ViolationOccurrence> getOccurrences() {
