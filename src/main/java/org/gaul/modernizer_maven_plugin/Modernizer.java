@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,7 +42,7 @@ import org.xml.sax.SAXException;
 final class Modernizer {
     private final long javaVersion;
     private final Map<String, Violation> violations;
-    private final Set<String> exclusions;
+    private final Collection<String> exclusions;
 
     Modernizer(String javaVersion, Map<String, Violation> violations,
             Collection<String> exclusions) {
