@@ -65,7 +65,8 @@ import sun.misc.BASE64Encoder;
 
 public final class ModernizerTest {
     private Map<String, Violation> violations;
-    private Collection<String> exclusions;
+    private static final Collection<String> NO_EXCLUSIONS =
+            Collections.<String>emptySet();
 
     @Before
     public void setUp() throws Exception {
@@ -76,14 +77,13 @@ public final class ModernizerTest {
         } finally {
             Utils.closeQuietly(is);
         }
-        exclusions = Collections.<String>emptySet();
     }
 
     @Test
     public void testConstructorCurrentApi() throws Exception {
         ClassReader cr = new ClassReader(ArrayListTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.2", violations, exclusions).check(cr);
+                createModernizer("1.2").check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -91,7 +91,7 @@ public final class ModernizerTest {
     public void testConstructorLegacyApiLegacyJava() throws Exception {
         ClassReader cr = new ClassReader(VectorTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.0", violations, exclusions).check(cr);
+                createModernizer("1.0").check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -99,7 +99,7 @@ public final class ModernizerTest {
     public void testConstructorLegacyApiCurrentJava() throws Exception {
         ClassReader cr = new ClassReader(VectorTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.2", violations, exclusions).check(cr);
+                createModernizer("1.2").check(cr);
         assertThat(occurrences).hasSize(1);
         assertThat(occurrences.iterator().next().getViolation().getName())
                 .isEqualTo("java/util/Vector.\"<init>\":()V");
@@ -110,7 +110,7 @@ public final class ModernizerTest {
         ClassReader cr = new ClassReader(
                 StandardCharsetsTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.0", violations, exclusions).check(cr);
+                createModernizer("1.0").check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -118,7 +118,7 @@ public final class ModernizerTest {
     public void testFieldLegacyApiLegacyJava() throws Exception {
         ClassReader cr = new ClassReader(CharsetsTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.0", violations, exclusions).check(cr);
+                createModernizer("1.0").check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -126,7 +126,7 @@ public final class ModernizerTest {
     public void testFieldLegacyApiCurrentJava() throws Exception {
         ClassReader cr = new ClassReader(CharsetsTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.7", violations, exclusions).check(cr);
+                createModernizer("1.7").check(cr);
         assertThat(occurrences).hasSize(1);
         assertThat(occurrences.iterator().next().getViolation().getName())
                 .isEqualTo("com/google/common/base/Charsets.UTF_8" +
@@ -137,7 +137,7 @@ public final class ModernizerTest {
     public void testInterfaceLegacyApiLegacyJava() throws Exception {
         ClassReader cr = new ClassReader(VoidSupplier.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.7", violations, exclusions).check(cr);
+                createModernizer("1.7").check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -145,7 +145,7 @@ public final class ModernizerTest {
     public void testInterfaceLegacyApiCurrentJava() throws Exception {
         ClassReader cr = new ClassReader(VoidSupplier.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.8", violations, exclusions).check(cr);
+                createModernizer("1.8").check(cr);
         assertThat(occurrences).hasSize(1);
         assertThat(occurrences.iterator().next().getViolation().getName())
                 .isEqualTo("com/google/common/base/Supplier");
@@ -155,7 +155,7 @@ public final class ModernizerTest {
     public void testMethodCurrentApi() throws Exception {
         ClassReader cr = new ClassReader(StringGetBytesCharset.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.0", violations, exclusions).check(cr);
+                createModernizer("1.0").check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -163,7 +163,7 @@ public final class ModernizerTest {
     public void testMethodLegacyApiLegacyJava() throws Exception {
         ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.0", violations, exclusions).check(cr);
+                createModernizer("1.0").check(cr);
         assertThat(occurrences).hasSize(0);
     }
 
@@ -171,7 +171,7 @@ public final class ModernizerTest {
     public void testMethodLegacyApiCurrentJava() throws Exception {
         ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
         Collection<ViolationOccurrence> occurrences =
-                new Modernizer("1.6", violations, exclusions).check(cr);
+                createModernizer("1.6").check(cr);
         assertThat(occurrences).hasSize(1);
         assertThat(occurrences.iterator().next().getViolation().getName())
                 .isEqualTo("java/lang/String.getBytes:(Ljava/lang/String;)[B");
@@ -180,7 +180,7 @@ public final class ModernizerTest {
     @Test
     public void testMethodLegacyApiCurrentJavaWithExclusion() throws Exception {
         ClassReader cr = new ClassReader(StringGetBytesString.class.getName());
-        exclusions = Collections.singleton(
+        Collection<String> exclusions = Collections.singleton(
                 "java/lang/String.getBytes:(Ljava/lang/String;)[B");
         Collection<ViolationOccurrence> occurrences =
                 new Modernizer("1.6", violations, exclusions).check(cr);
@@ -189,7 +189,7 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = new Modernizer("1.8", violations, exclusions);
+        Modernizer modernizer = createModernizer("1.8");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         // must visit inner classes manually
@@ -205,6 +205,11 @@ public final class ModernizerTest {
             actualViolations.add(occurrence.getViolation());
         }
         assertThat(actualViolations).containsAll(violations.values());
+    }
+
+    /** Helper to create Modernizer object with default parameters. */
+    private Modernizer createModernizer(String javaVersion) {
+        return new Modernizer(javaVersion, violations, NO_EXCLUSIONS);
     }
 
     private static class CharsetsTestClass {
