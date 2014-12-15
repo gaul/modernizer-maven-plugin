@@ -23,6 +23,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 final class Utils {
     static <T> T checkNotNull(T reference) {
@@ -36,6 +41,16 @@ final class Utils {
         if (!expression) {
             throw new IllegalArgumentException();
         }
+    }
+
+    static <T> Set<T> createImmutableSet(Collection<T> collection) {
+        return Collections.unmodifiableSet(new HashSet<T>(
+                Utils.checkNotNull(collection)));
+    }
+
+    static <T, U> Map<T, U> createImmutableMap(Map<T, U> map) {
+        return Collections.unmodifiableMap(new HashMap<T, U>(
+                Utils.checkNotNull(map)));
     }
 
     static void closeQuietly(Closeable closeable) {

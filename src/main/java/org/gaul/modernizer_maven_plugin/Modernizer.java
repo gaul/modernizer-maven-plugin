@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,8 +54,8 @@ final class Modernizer {
         long version = Long.parseLong(javaVersion.substring(2));
         Utils.checkArgument(version >= 0);
         this.javaVersion = version;
-        this.violations = Utils.checkNotNull(violations);
-        this.exclusions = new HashSet<String>(Utils.checkNotNull(exclusions));
+        this.violations = Utils.createImmutableMap(violations);
+        this.exclusions = Utils.createImmutableSet(exclusions);
     }
 
     Collection<ViolationOccurrence> check(ClassReader classReader)
@@ -109,12 +108,12 @@ final class Modernizer {
 final class ModernizerClassVisitor extends ClassVisitor {
     private final long javaVersion;
     private final Map<String, Violation> violations;
-    private final Set<String> exclusions;
+    private final Collection<String> exclusions;
     private final Collection<ViolationOccurrence> occurrences =
             new ArrayList<ViolationOccurrence>();
 
     ModernizerClassVisitor(long javaVersion,
-            Map<String, Violation> violations, Set<String> exclusions) {
+            Map<String, Violation> violations, Collection<String> exclusions) {
         super(Opcodes.ASM5);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
