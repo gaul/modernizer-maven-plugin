@@ -70,7 +70,7 @@ public final class ModernizerMojo extends AbstractMojo {
     private String exclusionsFile;
 
     @Parameter
-    private Set<String> ignorePackages;
+    private Set<String> ignorePackages = new HashSet<String>();
 
     private Modernizer modernizer;
 
