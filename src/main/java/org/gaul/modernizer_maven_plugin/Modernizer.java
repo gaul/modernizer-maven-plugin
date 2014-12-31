@@ -129,8 +129,12 @@ final class ModernizerClassVisitor extends ClassVisitor {
     @Override
     public void visit(int version, int access, String name, String signature,
             String superName, String[] interfaces) {
-        packageName = name.substring(0, name.lastIndexOf('/')).replace('/',
-                '.');
+        if (name.contains("/")) {
+            packageName = name.substring(0, name.lastIndexOf('/'))
+                    .replace('/', '.');
+        } else {
+            packageName = "";
+        }
         for (String itr : interfaces) {
             Violation violation = violations.get(itr);
             checkToken(itr, violation, name, /*lineNumber=*/ -1);
