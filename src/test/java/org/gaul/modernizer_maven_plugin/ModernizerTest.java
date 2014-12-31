@@ -231,6 +231,15 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testHandlingOfDefaultPackageClass() throws Exception {
+        ClassReader cr = new ClassReader(
+                Class.forName("DefaultPackageClass").getName());
+        Collection<ViolationOccurrence> occurrences = new Modernizer(
+            "1.6", violations, NO_EXCLUSIONS, NO_IGNORED_PACKAGES).check(cr);
+        assertThat(occurrences).hasSize(0);
+    }
+
+    @Test
     public void testAllViolations() throws Exception {
         Modernizer modernizer = createModernizer("1.8");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
