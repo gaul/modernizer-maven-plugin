@@ -39,13 +39,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-final class Modernizer {
+public final class Modernizer {
     private final long javaVersion;
     private final Map<String, Violation> violations;
     private final Collection<String> exclusions;
     private final Collection<String> ignorePackages;
 
-    Modernizer(String javaVersion, Map<String, Violation> violations,
+    public Modernizer(String javaVersion, Map<String, Violation> violations,
             Collection<String> exclusions, Collection<String> ignorePackages) {
         if (!javaVersion.startsWith("1.")) {
             throw new IllegalArgumentException(
@@ -59,7 +59,7 @@ final class Modernizer {
         this.ignorePackages = Utils.createImmutableSet(ignorePackages);
     }
 
-    Collection<ViolationOccurrence> check(ClassReader classReader)
+    public Collection<ViolationOccurrence> check(ClassReader classReader)
             throws IOException {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
                 javaVersion, violations, exclusions, ignorePackages);
@@ -71,7 +71,7 @@ final class Modernizer {
         return check(new ClassReader(is));
     }
 
-    static Map<String, Violation> parseFromXml(InputStream is)
+    public static Map<String, Violation> parseFromXml(InputStream is)
             throws IOException, ParserConfigurationException, SAXException {
         Map<String, Violation> map =
                 new HashMap<String, Violation>();

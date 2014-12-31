@@ -16,7 +16,7 @@
 
 package org.gaul.modernizer_maven_plugin;
 
-final class Violation {
+public final class Violation {
     private final String name;
     private final int version;
     private final String comment;

@@ -16,7 +16,7 @@
 
 package org.gaul.modernizer_maven_plugin;
 
-final class ViolationOccurrence {
+public final class ViolationOccurrence {
     private final String owner;
     private final int lineNumber;
     private final Violation violation;

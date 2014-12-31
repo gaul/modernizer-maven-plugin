@@ -29,7 +29,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-final class Utils {
+public final class Utils {
     static <T> T checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();
@@ -53,7 +53,7 @@ final class Utils {
                 Utils.checkNotNull(map)));
     }
 
-    static void closeQuietly(Closeable closeable) {
+    public static void closeQuietly(Closeable closeable) {
         if (closeable == null) {
             return;
         }
