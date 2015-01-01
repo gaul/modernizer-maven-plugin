@@ -240,6 +240,17 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testConstructorLegacyApiCurrentJavaWithVersionShorthand()
+            throws Exception {
+        ClassReader cr = new ClassReader(VectorTestClass.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                createModernizer("2").check(cr);
+        assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getName())
+                .isEqualTo("java/util/Vector.\"<init>\":()V");
+    }
+
+    @Test
     public void testAllViolations() throws Exception {
         Modernizer modernizer = createModernizer("1.8");
         Collection<ViolationOccurrence> occurrences = modernizer.check(

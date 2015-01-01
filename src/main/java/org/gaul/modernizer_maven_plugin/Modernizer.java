@@ -47,11 +47,12 @@ final class Modernizer {
 
     Modernizer(String javaVersion, Map<String, Violation> violations,
             Collection<String> exclusions, Collection<String> ignorePackages) {
-        if (!javaVersion.startsWith("1.")) {
-            throw new IllegalArgumentException(
-                    "Invalid version, must have the form 1.6");
+        long version;
+        if (javaVersion.startsWith("1.")) {
+            version = Long.parseLong(javaVersion.substring(2));
+        } else {
+            version = Long.parseLong(javaVersion);
         }
-        long version = Long.parseLong(javaVersion.substring(2));
         Utils.checkArgument(version >= 0);
         this.javaVersion = version;
         this.violations = Utils.createImmutableMap(violations);
