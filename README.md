@@ -1,6 +1,6 @@
 Modernizer Maven Plugin
 =======================
-Modernizer Maven Plugin detects use of legacy APIs which modern Java versions
+Modernizer Maven Plugin detects uses of legacy APIs which modern Java versions
 supersede.
 These modern APIs are often more performant, safer, and idiomatic than the
 legacy equivalents.
