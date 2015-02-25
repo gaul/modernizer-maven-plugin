@@ -251,6 +251,22 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testAnnotationViolation() throws Exception {
+        String name = TestAnnotation.class.getName().replace('.', '/');
+        Map<String, Violation> testViolations = Maps.newHashMap();
+        testViolations.put(name,
+                new Violation(name, 5, ""));
+        Modernizer modernizer = new Modernizer("1.5", testViolations,
+                NO_EXCLUSIONS, NO_IGNORED_PACKAGES);
+        ClassReader cr = new ClassReader(AnnotatedMethod.class.getName());
+        Collection<ViolationOccurrence> occurences =
+                modernizer.check(cr);
+        assertThat(occurences).hasSize(1);
+        assertThat(occurences.iterator().next().getViolation().getName())
+                .isEqualTo(name);
+    }
+
+    @Test
     public void testAllViolations() throws Exception {
         Modernizer modernizer = createModernizer("1.8");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
@@ -320,6 +336,17 @@ public final class ModernizerTest {
         @Override
         public Void get() {
             return null;
+        }
+    }
+
+    private @interface TestAnnotation {
+        // Nothing
+    }
+
+    private static class AnnotatedMethod {
+        @TestAnnotation
+        public void annotatedMethod() {
+            // Nothing
         }
     }
 

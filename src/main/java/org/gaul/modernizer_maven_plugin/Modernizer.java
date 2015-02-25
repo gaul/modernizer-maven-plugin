@@ -27,11 +27,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.InstructionAdapter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -167,6 +169,16 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     name = "\"<init>\"";
                 }
                 visitFieldOrMethod(owner, name, desc);
+            }
+
+            @Override
+            public AnnotationVisitor visitAnnotation(String desc,
+                    boolean visible) {
+                String name = Type.getType(desc).getInternalName();
+                Violation violation = violations.get(name);
+                checkToken(name, violation, name, lineNumber);
+
+                return super.visitAnnotation(desc, visible);
             }
 
             private void visitFieldOrMethod(String owner, String name,
