@@ -53,6 +53,8 @@ import com.google.common.primitives.Shorts;
 import com.google.common.primitives.UnsignedInts;
 import com.google.common.primitives.UnsignedLongs;
 import com.google.common.util.concurrent.Atomics;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
@@ -278,6 +280,10 @@ public final class ModernizerTest {
                 new ClassReader(VoidPredicate.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidSupplier.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(InjectMethod.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(ObjectProvider.class.getName())));
 
         Collection<Violation> actualViolations = Lists.newArrayList();
         for (ViolationOccurrence occurrence : occurrences) {
@@ -347,6 +353,20 @@ public final class ModernizerTest {
         @TestAnnotation
         public void annotatedMethod() {
             // Nothing
+        }
+    }
+
+    private static class InjectMethod {
+        @Inject
+        public InjectMethod() {
+            // Nothing
+        }
+    }
+
+    private static class ObjectProvider implements Provider<Object> {
+        @Override
+        public Object get() {
+            return new Object();
         }
     }
 
