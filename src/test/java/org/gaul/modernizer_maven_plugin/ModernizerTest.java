@@ -39,6 +39,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
@@ -468,6 +469,8 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null, "");
             new BASE64Decoder().decodeBuffer("");
             new BASE64Encoder().encode((byte[]) null);
+            Preconditions.checkNotNull(new Object());
+            Preconditions.checkNotNull(new Object(), new Object());
         }
     }
 

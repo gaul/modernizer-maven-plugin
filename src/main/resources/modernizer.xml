@@ -595,6 +595,18 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/base/Preconditions.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.Objects.requireNonNull(Object)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Preconditions.checkNotNull:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Objects.requireNonNull(Object, String) or java.util.Objects.requireNonNull(Object, Supplier&lt;String&gt;)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/inject/Inject</name>
     <version>1.5</version>
     <comment>Prefer javax.inject.Inject</comment>
