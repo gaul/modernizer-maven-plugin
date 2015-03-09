@@ -8,7 +8,7 @@ For example, Modernizer can detect uses of `Vector` instead of `ArrayList`,
 `String.getBytes(String)` instead of `String.getBytes(Charset)`, and
 Guava `Objects.equal` instead of Java 7 `Objects.equals`.
 The default configuration detects
-[over 90 legacy APIs](https://github.com/andrewgaul/modernizer-maven-plugin/blob/master/src/main/resources/modernizer.xml),
+[over 100 legacy APIs](https://github.com/andrewgaul/modernizer-maven-plugin/blob/master/src/main/resources/modernizer.xml),
 including third-party libraries like
 [Guava](https://code.google.com/p/guava-libraries/).
 
@@ -21,7 +21,7 @@ then invoke `mvn modernizer:modernizer`:
 <plugin>
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
-  <version>1.2.2</version>
+  <version>1.3.0</version>
   <configuration>
     <javaVersion>1.8</javaVersion>
   </configuration>
