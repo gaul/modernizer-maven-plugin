@@ -74,7 +74,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>2.12.1</version>
+        <version>2.15</version>
         <executions>
           <execution>
             <id>checkstyle</id>
@@ -87,6 +87,13 @@
         <configuration>
           <configLocation>src/main/resources/checkstyle.xml</configLocation>
           <headerLocation>src/main/resources/copyright_header.txt</headerLocation>
+          <!--
+          TODO: cannot ignore generated files
+          https://jira.codehaus.org/browse/MCHECKSTYLE-260
+          <sourceDirectories>
+            <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+          </sourceDirectories>
+          -->
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <violationSeverity>warning</violationSeverity>
         </configuration>

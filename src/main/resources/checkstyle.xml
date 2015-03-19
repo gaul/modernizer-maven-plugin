@@ -9,6 +9,9 @@
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
   </module>
   <module name="NewlineAtEndOfFile"/>
+  <module name="SuppressionFilter">
+    <property name="file" value="src/main/resources/suppressions.xml"/>
+  </module>
   <module name="Translation"/>
   <module name="TreeWalker">
     <property name="cacheFile" value="target/cachefile"/>
