@@ -37,14 +37,14 @@ The `<configuration>` stanza can contain several elements:
 * `<exclusionsFile>` disables user-specified violations.  This is a text file with one exclusion per line in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
 * `<ignorePackages>` package prefixes to ignore, specified using `<ignorePackage>` child elements. Specifying `foo.bar` subsequently ignores `foo.bar.*`, `foo.bar.baz.*` and so on.
 
-To run Modernizer during the compile phase of your build, add the following to
+To run Modernizer during the verify phase of your build, add the following to
 the modernizer `<plugin>` stanza in your pom.xml:
 
 ```xml
 <executions>
   <execution>
     <id>modernizer</id>
-    <phase>compile</phase>
+    <phase>verify</phase>
     <goals>
       <goal>modernizer</goal>
     </goals>
