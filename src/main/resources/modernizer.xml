@@ -618,4 +618,10 @@ violation names use the same format that javap emits.
     <comment>Prefer javax.inject.Provider</comment>
   </violation>
 
+  <violation>
+    <name>org/springframework/beans/factory/annotation/Autowired</name>
+    <version>1.5</version>
+    <comment>Prefer javax.inject.Inject</comment>
+  </violation>
+
 </modernizer>
