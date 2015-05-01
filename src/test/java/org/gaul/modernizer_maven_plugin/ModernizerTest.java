@@ -62,6 +62,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -284,6 +285,8 @@ public final class ModernizerTest {
         occurrences.addAll(modernizer.check(
                 new ClassReader(InjectMethod.class.getName())));
         occurrences.addAll(modernizer.check(
+                new ClassReader(AutowiredMethod.class.getName())));
+        occurrences.addAll(modernizer.check(
                 new ClassReader(ObjectProvider.class.getName())));
 
         Collection<Violation> actualViolations = Lists.newArrayList();
@@ -360,6 +363,13 @@ public final class ModernizerTest {
     private static class InjectMethod {
         @Inject
         public InjectMethod() {
+            // Nothing
+        }
+    }
+
+    private static class AutowiredMethod {
+        @Autowired
+        public AutowiredMethod() {
             // Nothing
         }
     }
