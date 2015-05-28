@@ -74,10 +74,23 @@ public final class ModernizerMojo extends AbstractMojo {
 
     private Modernizer modernizer;
 
+    /**
+     * Skips the plugin execution.
+     *
+     * @since 1.4.0
+     */
+    @Parameter(defaultValue = "false", property = "modernizer.skip")
+    protected boolean skip = false;
+
     @Override
     public void execute() throws MojoExecutionException {
         Map<String, Violation> violations;
         InputStream is;
+        if (skip) {
+            getLog().info("Skipping modernizer execution!");
+            return;
+        }
+
         if (violationsFile == null) {
             is = Modernizer.class.getResourceAsStream("/modernizer.xml");
         } else {
