@@ -42,32 +42,33 @@ public final class ModernizerMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
-    @Parameter(defaultValue = "${project.build.sourceDirectory}")
+    @Parameter(property = "project.build.sourceDirectory")
     private File sourceDirectory;
 
-    @Parameter(defaultValue = "${project.build.testSourceDirectory}")
+    @Parameter(property = "project.build.testSourceDirectory")
     private File testSourceDirectory;
 
-    @Parameter(defaultValue = "${project.build.outputDirectory}")
+    @Parameter(property = "project.build.outputDirectory")
     private File outputDirectory;
 
-    @Parameter(defaultValue = "${project.build.testOutputDirectory}")
+    @Parameter(property = "project.build.testOutputDirectory")
     private File testOutputDirectory;
 
-    @Parameter(defaultValue = "${javaVersion}", required = true)
-    private String javaVersion;
+    @Parameter(required = true, property = "modernizer.javaVersion")
+    private String javaVersion = null;
 
-    @Parameter(defaultValue = "${failOnViolations}")
+    @Parameter(defaultValue = "true", property = "modernizer.failOnViolations")
     private boolean failOnViolations = true;
 
-    @Parameter(defaultValue = "${includeTestClasses}")
+    @Parameter(defaultValue = "true",
+               property = "modernizer.includeTestClasses")
     private boolean includeTestClasses = true;
 
-    @Parameter(defaultValue = "${violationsFile}")
-    private String violationsFile;
+    @Parameter(property = "modernizer.violationsFile")
+    private String violationsFile = null;
 
-    @Parameter(defaultValue = "${exclusionsFile}")
-    private String exclusionsFile;
+    @Parameter(property = "modernizer.exclusionsFile")
+    private String exclusionsFile = null;
 
     @Parameter
     private Set<String> ignorePackages = new HashSet<String>();
