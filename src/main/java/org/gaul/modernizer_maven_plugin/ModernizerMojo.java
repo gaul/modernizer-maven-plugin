@@ -39,37 +39,63 @@ import org.xml.sax.SAXException;
 @Mojo(name = "modernizer", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES,
         threadSafe = true)
 public final class ModernizerMojo extends AbstractMojo {
+    /** The maven project (effective pom). */
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
+    /** The output directory into which to find the source code. */
     @Parameter(property = "project.build.sourceDirectory")
     private File sourceDirectory;
 
+    /** The output directory into which to find the test source code. */
     @Parameter(property = "project.build.testSourceDirectory")
     private File testSourceDirectory;
 
+    /** The output directory into which to find the resources. */
     @Parameter(property = "project.build.outputDirectory")
     private File outputDirectory;
 
+    /** The output directory into which to find the test resources. */
     @Parameter(property = "project.build.testOutputDirectory")
     private File testOutputDirectory;
 
+    /**
+     * Enables violations based on target Java version, e.g., 1.8. For example,
+     * Modernizer will detect uses of Vector as violations when targeting Java
+     * 1.2 but not when targeting Java 1.1.
+     */
     @Parameter(required = true, property = "modernizer.javaVersion")
     private String javaVersion = null;
 
+    /** Fail phase if Modernizer detects any violations. */
     @Parameter(defaultValue = "true", property = "modernizer.failOnViolations")
     private boolean failOnViolations = true;
 
+    /** Run Modernizer on test classes. */
     @Parameter(defaultValue = "true",
                property = "modernizer.includeTestClasses")
     private boolean includeTestClasses = true;
 
+    /**
+     * User-specified violation file. Also disables standard violation checks.
+     */
     @Parameter(property = "modernizer.violationsFile")
     private String violationsFile = null;
 
+    /**
+     * Disables user-specified violations. This is a text file with one
+     * exclusion per line in the javap format:
+     *
+     * java/lang/String.getBytes:(Ljava/lang/String;)[B.
+     */
     @Parameter(property = "modernizer.exclusionsFile")
     private String exclusionsFile = null;
 
+    /**
+     * Package prefixes to ignore, specified using &lt;ignorePackage&gt; child
+     * elements. Specifying foo.bar subsequently ignores foo.bar.*,
+     * foo.bar.baz.* and so on.
+     */
     @Parameter
     private Set<String> ignorePackages = new HashSet<String>();
 
