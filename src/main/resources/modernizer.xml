@@ -624,4 +624,130 @@ violation names use the same format that javap emits.
     <comment>Prefer javax.inject.Inject</comment>
   </violation>
 
+  <violation>
+    <name>org/joda/time/DateTime.now:()Lorg/joda/time/DateTime;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.ZonedDateTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/DateTime.parse:(Ljava/lang/String;)Lorg/joda/time/DateTime;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.ZonedDateTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/DateTime."&lt;init&gt;":(J)V</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.ZonedDateTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/Instant.now:()Lorg/joda/time/Instant;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.Instant</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/Instant.parse:(Ljava/lang/String;)Lorg/joda/time/Instant;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.Instant</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/Instant."&lt;init&gt;":(J)V</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.Instant</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/DateTimeZone.forID:(Ljava/lang/String;)Lorg/joda/time/DateTimeZone;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.ZoneId</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalDate.now:()Lorg/joda/time/LocalDate;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalDate</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalDate.parse:(Ljava/lang/String;)Lorg/joda/time/LocalDate;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalDate</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalDate."&lt;init&gt;":(J)V</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalDate</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalTime.now:()Lorg/joda/time/LocalTime;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalTime.parse:(Ljava/lang/String;)Lorg/joda/time/LocalTime;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalTime."&lt;init&gt;":(J)V</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalDateTime.now:()Lorg/joda/time/LocalDateTime;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalDateTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalDateTime.parse:(Ljava/lang/String;)Lorg/joda/time/LocalDateTime;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalDateTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/LocalDateTime."&lt;init&gt;":(J)V</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.LocalDateTime</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/Duration.millis:(J)Lorg/joda/time/Duration;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.Duration</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/Duration."&lt;init&gt;":(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableInstant;)V</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.Duration</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/Period.parse:(Ljava/lang/String;)Lorg/joda/time/Period;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.Period</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/Period."&lt;init&gt;":(Lorg/joda/time/ReadableInstant;Lorg/joda/time/ReadableInstant;)V</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.Period</comment>
+  </violation>
+
+  <violation>
+    <name>org/joda/time/format/DateTimeFormat.forPattern:(Ljava/lang/String;)Lorg/joda/time/format/DateTimeFormatter;</name>
+    <version>1.8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter</comment>
+  </violation>
+
 </modernizer>

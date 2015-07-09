@@ -59,6 +59,15 @@ import com.google.inject.Provider;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.Duration;
+import org.joda.time.Instant;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;
@@ -340,7 +349,7 @@ public final class ModernizerTest {
         public boolean apply(Void input) {
             return true;
         }
-    };
+    }
 
     private static class VoidSupplier implements Supplier<Void> {
         @Override
@@ -481,6 +490,27 @@ public final class ModernizerTest {
             new BASE64Encoder().encode((byte[]) null);
             Preconditions.checkNotNull(new Object());
             Preconditions.checkNotNull(new Object(), new Object());
+            DateTime.now();
+            DateTime.parse("");
+            new DateTime(50L);
+            LocalDate.now();
+            LocalDate.parse("");
+            new LocalDate(50L);
+            LocalTime.now();
+            LocalTime.parse("");
+            new LocalTime(50L);
+            LocalDateTime.now();
+            LocalDateTime.parse("");
+            new LocalDateTime(50L);
+            Instant.now();
+            Instant.parse("");
+            new Instant(50L);
+            DateTimeZone.forID("Europe/Oslo");
+            Duration.millis(50L);
+            new Duration(DateTime.now(), DateTime.now());
+            Period.parse("");
+            new Period(DateTime.now(), DateTime.now());
+            DateTimeFormat.forPattern("");
         }
     }
 
