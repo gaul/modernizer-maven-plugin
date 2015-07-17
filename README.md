@@ -54,14 +54,10 @@ the modernizer `<plugin>` stanza in your pom.xml:
 
 References
 ----------
-[ASM](http://asm.ow2.org/) provides Java bytecode introspection which enables
-Modernizer's checks.
-`javac -Xlint:deprecated` can detect uses of interfaces with @Deprecated
-annotations.
-[Overstock.com library-detectors](https://github.com/overstock/library-detectors)
-can detect uses of interfaces with @Beta annotations.
-[Checkstyle](http://checkstyle.sourceforge.net/) IllegalInstantiation and
-Regexp checks can mimic some of Modernizer's functionality.
+* [ASM](http://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
+* `javac -Xlint:deprecated` detects uses of interfaces with @Deprecated annotations
+* [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
+* [Checkstyle](http://checkstyle.sourceforge.net/) IllegalInstantiation and Regexp checks can mimic some of Modernizer's functionality
 
 License
 -------
