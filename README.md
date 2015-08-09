@@ -21,7 +21,7 @@ then invoke `mvn modernizer:modernizer`:
 <plugin>
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
   <configuration>
     <javaVersion>1.8</javaVersion>
   </configuration>
