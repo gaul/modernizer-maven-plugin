@@ -92,6 +92,14 @@ public final class ModernizerMojo extends AbstractMojo {
     private String exclusionsFile = null;
 
     /**
+     * Violations to disable. Each exclusion should be in the javap format:
+     *
+     * java/lang/String.getBytes:(Ljava/lang/String;)[B.
+     */
+    @Parameter
+    private Set<String> exclusions = new HashSet<String>();
+
+    /**
      * Package prefixes to ignore, specified using &lt;ignorePackage&gt; child
      * elements. Specifying foo.bar subsequently ignores foo.bar.*,
      * foo.bar.baz.* and so on.
@@ -144,7 +152,8 @@ public final class ModernizerMojo extends AbstractMojo {
             Utils.closeQuietly(is);
         }
 
-        Set<String> exclusions = new HashSet<String>();
+        Set<String> allExclusions = new HashSet<String>();
+        allExclusions.addAll(exclusions);
         if (exclusionsFile != null) {
             is = null;
             try {
@@ -160,7 +169,7 @@ public final class ModernizerMojo extends AbstractMojo {
                             "Could not find exclusion file: " + exclusionsFile);
                 }
 
-                exclusions.addAll(Utils.readAllLines(is));
+                allExclusions.addAll(Utils.readAllLines(is));
             } catch (IOException ioe) {
                 throw new MojoExecutionException(
                         "Error reading exclusion file: " + exclusionsFile, ioe);
@@ -169,7 +178,7 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
-        modernizer = new Modernizer(javaVersion, violations, exclusions,
+        modernizer = new Modernizer(javaVersion, violations, allExclusions,
                 ignorePackages);
 
         try {
