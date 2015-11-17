@@ -58,7 +58,6 @@ import com.google.common.primitives.Shorts;
 import com.google.common.primitives.UnsignedInts;
 import com.google.common.primitives.UnsignedLongs;
 import com.google.common.util.concurrent.Atomics;
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 import org.apache.commons.codec.binary.Base64;
@@ -342,8 +341,6 @@ public final class ModernizerTest {
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidSupplier.class.getName())));
         occurrences.addAll(modernizer.check(
-                new ClassReader(InjectMethod.class.getName())));
-        occurrences.addAll(modernizer.check(
                 new ClassReader(AutowiredMethod.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(ObjectProvider.class.getName())));
@@ -470,13 +467,6 @@ public final class ModernizerTest {
     private static class AnnotatedMethod {
         @TestAnnotation
         public void annotatedMethod() {
-            // Nothing
-        }
-    }
-
-    private static class InjectMethod {
-        @Inject
-        InjectMethod() {
             // Nothing
         }
     }

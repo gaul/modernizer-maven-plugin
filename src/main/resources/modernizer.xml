@@ -763,12 +763,6 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
-    <name>com/google/inject/Inject</name>
-    <version>1.5</version>
-    <comment>Prefer javax.inject.Inject</comment>
-  </violation>
-
-  <violation>
     <name>com/google/inject/Provider</name>
     <version>1.5</version>
     <comment>Prefer javax.inject.Provider</comment>
