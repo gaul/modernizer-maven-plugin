@@ -371,14 +371,14 @@ public final class ModernizerTest {
 
     private static class InjectMethod {
         @Inject
-        public InjectMethod() {
+        InjectMethod() {
             // Nothing
         }
     }
 
     private static class AutowiredMethod {
         @Autowired
-        public AutowiredMethod() {
+        AutowiredMethod() {
             // Nothing
         }
     }

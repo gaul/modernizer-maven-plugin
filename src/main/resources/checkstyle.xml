@@ -73,9 +73,6 @@
     <module name="ParenPad"/>
     <module name="RedundantImport"/>
     <module name="RedundantModifier"/>
-    <module name="RedundantThrows">
-      <property name="suppressLoadErrors" value="true"/>
-    </module>
     <module name="RightCurly"/>
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
