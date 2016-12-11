@@ -59,6 +59,7 @@ References
 * `javac -Xlint:deprecated` detects uses of interfaces with @Deprecated annotations
 * [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
 * [Checkstyle](http://checkstyle.sourceforge.net/) IllegalInstantiation and Regexp checks can mimic some of Modernizer's functionality
+* [Gradle Modernizer Plugin](https://github.com/simonharrer/gradle-modernizer-plugin) is a thin wrapper around this maven modernizer plugin.
 
 License
 -------
