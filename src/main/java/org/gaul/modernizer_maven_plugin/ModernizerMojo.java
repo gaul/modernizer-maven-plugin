@@ -94,6 +94,13 @@ public final class ModernizerMojo extends AbstractMojo {
     private String exclusionsFile = null;
 
     /**
+     * Log level to emit violations at, e.g., error, warn, info, debug.
+     */
+    @Parameter(defaultValue = "error",
+               property = "modernizer.violationLogLevel")
+    private String violationLogLevel;
+
+    /**
      * Violations to disable. Each exclusion should be in the javap format:
      *
      * java/lang/String.getBytes:(Ljava/lang/String;)[B.
@@ -246,9 +253,7 @@ public final class ModernizerMojo extends AbstractMojo {
                         name = name.substring(0,
                                 name.length() - ".class".length()) + ".java";
                     }
-                    getLog().error(name + ":" +
-                            occurrence.getLineNumber() + ": " +
-                            occurrence.getViolation().getComment());
+                    emitViolation(name, occurrence);
                     ++count;
                 }
             } finally {
@@ -256,5 +261,23 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
         return count;
+    }
+
+    private void emitViolation(String name, ViolationOccurrence occurrence) {
+        String message = name + ":" +
+                occurrence.getLineNumber() + ": " +
+                occurrence.getViolation().getComment();
+        if (violationLogLevel.equals("error")) {
+            getLog().error(message);
+        } else if (violationLogLevel.equals("warn")) {
+            getLog().warn(message);
+        } else if (violationLogLevel.equals("info")) {
+            getLog().info(message);
+        } else if (violationLogLevel.equals("debug")) {
+            getLog().debug(message);
+        } else {
+            throw new IllegalStateException("unexpected log level, was: " +
+                    violationLogLevel);
+        }
     }
 }
