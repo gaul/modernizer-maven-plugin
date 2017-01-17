@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,10 +46,13 @@ final class Modernizer {
     private final long javaVersion;
     private final Map<String, Violation> violations;
     private final Collection<String> exclusions;
+    private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
 
     Modernizer(String javaVersion, Map<String, Violation> violations,
-            Collection<String> exclusions, Collection<String> ignorePackages) {
+            Collection<String> exclusions,
+            Collection<Pattern> exclusionPatterns,
+            Collection<String> ignorePackages) {
         long version;
         if (javaVersion.startsWith("1.")) {
             version = Long.parseLong(javaVersion.substring(2));
@@ -59,13 +63,15 @@ final class Modernizer {
         this.javaVersion = version;
         this.violations = Utils.createImmutableMap(violations);
         this.exclusions = Utils.createImmutableSet(exclusions);
+        this.exclusionPatterns = Utils.createImmutableSet(exclusionPatterns);
         this.ignorePackages = Utils.createImmutableSet(ignorePackages);
     }
 
     Collection<ViolationOccurrence> check(ClassReader classReader)
             throws IOException {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
-                javaVersion, violations, exclusions, ignorePackages);
+                javaVersion, violations, exclusions, exclusionPatterns,
+                ignorePackages);
         classReader.accept(classVisitor, 0);
         return classVisitor.getOccurrences();
     }
@@ -113,6 +119,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
     private final long javaVersion;
     private final Map<String, Violation> violations;
     private final Collection<String> exclusions;
+    private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
     private final Collection<ViolationOccurrence> occurrences =
             new ArrayList<ViolationOccurrence>();
@@ -120,12 +127,14 @@ final class ModernizerClassVisitor extends ClassVisitor {
 
     ModernizerClassVisitor(long javaVersion,
             Map<String, Violation> violations, Collection<String> exclusions,
+            Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages) {
         super(Opcodes.ASM5);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
         this.violations = Utils.checkNotNull(violations);
         this.exclusions = Utils.checkNotNull(exclusions);
+        this.exclusionPatterns = Utils.checkNotNull(exclusionPatterns);
         this.ignorePackages = Utils.checkNotNull(ignorePackages);
     }
 
@@ -201,6 +210,11 @@ final class ModernizerClassVisitor extends ClassVisitor {
         if (violation != null && !exclusions.contains(token) &&
                 javaVersion >= violation.getVersion() &&
                 !ignorePackages.contains(packageName)) {
+            for (Pattern pattern : exclusionPatterns) {
+                if (pattern.matcher(token).matches()) {
+                    return;
+                }
+            }
             for (String prefix : ignorePackages) {
                 if (packageName.startsWith(prefix + ".")) {
                     return;

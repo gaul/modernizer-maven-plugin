@@ -25,6 +25,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -98,6 +100,15 @@ public final class ModernizerMojo extends AbstractMojo {
      */
     @Parameter
     private Set<String> exclusions = new HashSet<String>();
+
+    /**
+     * Violation patterns to disable. Each exclusion should be a
+     * regular expression that matches the javap format:
+     *
+     * java/lang/.*
+     */
+    @Parameter
+    private Set<String> exclusionPatterns = new HashSet<String>();
 
     /**
      * Package prefixes to ignore, specified using &lt;ignorePackage&gt; child
@@ -178,8 +189,18 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
+        Set<Pattern> allExclusionPatterns = new HashSet<Pattern>();
+        for (String pattern : exclusionPatterns) {
+            try {
+                allExclusionPatterns.add(Pattern.compile(pattern));
+            } catch (PatternSyntaxException pse) {
+                throw new MojoExecutionException(
+                        "Invalid exclusion pattern", pse);
+            }
+        }
+
         modernizer = new Modernizer(javaVersion, violations, allExclusions,
-                ignorePackages);
+                allExclusionPatterns, ignorePackages);
 
         try {
             long count = recurseFiles(outputDirectory);
