@@ -53,6 +53,13 @@ the modernizer `<plugin>` stanza in your pom.xml:
 </executions>
 ```
 
+Command-line flags can override Modernizer configuration and
+[ModernizerMojo](https://github.com/andrewgaul/modernizer-maven-plugin/blob/master/src/main/java/org/gaul/modernizer_maven_plugin/ModernizerMojo.java)
+documents all of these.  The most commonly used flags:
+
+* `-Dmodernizer.failOnViolations` - fail phase if violations detected, defaults to true
+* `-Dmodernizer.skip` - skip plugin execution, defaults to false
+
 References
 ----------
 * [ASM](http://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
