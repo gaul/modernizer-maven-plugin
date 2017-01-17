@@ -42,6 +42,9 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -280,8 +283,35 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testImmutableList() throws Exception {
+        ClassReader cr = new ClassReader(
+                ImmutableListTestClass.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                createModernizer("1.9").check(cr);
+        assertThat(occurrences).hasSize(14);
+    }
+
+    @Test
+    public void testImmutableMap() throws Exception {
+        ClassReader cr = new ClassReader(
+                ImmutableMapTestClass.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                createModernizer("1.9").check(cr);
+        assertThat(occurrences).hasSize(6);
+    }
+
+    @Test
+    public void testImmutableSet() throws Exception {
+        ClassReader cr = new ClassReader(
+                ImmutableSetTestClass.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                createModernizer("1.9").check(cr);
+        assertThat(occurrences).hasSize(7);
+    }
+
+    @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("1.8");
+        Modernizer modernizer = createModernizer("1.9");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         // must visit inner classes manually
@@ -297,6 +327,12 @@ public final class ModernizerTest {
                 new ClassReader(AutowiredMethod.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(ObjectProvider.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(ImmutableListTestClass.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(ImmutableMapTestClass.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(ImmutableSetTestClass.class.getName())));
 
         Collection<Violation> actualViolations = Lists.newArrayList();
         for (ViolationOccurrence occurrence : occurrences) {
@@ -325,6 +361,55 @@ public final class ModernizerTest {
 
     private static class VectorTestClass {
         private final Object object = new Vector<Object>();
+    }
+
+    private static final class ImmutableListTestClass {
+        static {
+            ImmutableList.<String>of();
+            ImmutableList.of("1");
+            ImmutableList.of("1", "2");
+            ImmutableList.of("1", "2", "3");
+            ImmutableList.of("1", "2", "3", "4");
+            ImmutableList.of("1", "2", "3", "4", "5");
+            ImmutableList.of("1", "2", "3", "4", "5", "6");
+            ImmutableList.of("1", "2", "3", "4", "5", "6",
+                    "7");
+            ImmutableList.of("1", "2", "3", "4", "5", "6",
+                    "7", "8");
+            ImmutableList.of("1", "2", "3", "4", "5", "6",
+                    "7", "8", "9");
+            ImmutableList.of("1", "2", "3", "4", "5", "6",
+                    "7", "8", "9", "10");
+            ImmutableList.of("1", "2", "3", "4", "5", "6",
+                    "7", "8", "9", "10", "11");
+            ImmutableList.of("1", "2", "3", "4", "5", "6",
+                    "7", "8", "9", "10", "11", "12");
+            ImmutableList.of("1", "2", "3", "4", "5", "6",
+                    "7", "8", "9", "10", "11", "12", "13");
+        }
+    }
+
+    private static final class ImmutableMapTestClass {
+        static {
+            ImmutableMap.<String, String>of();
+            ImmutableMap.of("1", "a");
+            ImmutableMap.of("1", "a", "2", "b");
+            ImmutableMap.of("1", "a", "2", "b", "3", "c");
+            ImmutableMap.of("1", "a", "2", "b", "3", "c", "4", "d");
+            ImmutableMap.of("1", "a", "2", "b", "3", "c", "4", "d", "5", "e");
+        }
+    }
+
+    private static final class ImmutableSetTestClass {
+        static {
+            ImmutableSet.<String>of();
+            ImmutableSet.of("1");
+            ImmutableSet.of("1", "2");
+            ImmutableSet.of("1", "2", "3");
+            ImmutableSet.of("1", "2", "3", "4");
+            ImmutableSet.of("1", "2", "3", "4", "5");
+            ImmutableSet.of("1", "2", "3", "4", "5", "6");
+        }
     }
 
     private static class StringGetBytesString {
