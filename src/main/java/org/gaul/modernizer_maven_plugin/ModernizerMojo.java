@@ -149,7 +149,6 @@ public final class ModernizerMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
-        InputStream is;
         if (skip) {
             getLog().info("Skipping modernizer execution!");
             return;
@@ -160,27 +159,7 @@ public final class ModernizerMojo extends AbstractMojo {
         Set<String> allExclusions = new HashSet<String>();
         allExclusions.addAll(exclusions);
         if (exclusionsFile != null) {
-            is = null;
-            try {
-                File file = new File(exclusionsFile);
-                if (file.exists()) {
-                    is = new FileInputStream(file);
-                } else {
-                    is = this.getClass().getClassLoader().getResourceAsStream(
-                            exclusionsFile);
-                }
-                if (is == null) {
-                    throw new MojoExecutionException(
-                            "Could not find exclusion file: " + exclusionsFile);
-                }
-
-                allExclusions.addAll(Utils.readAllLines(is));
-            } catch (IOException ioe) {
-                throw new MojoExecutionException(
-                        "Error reading exclusion file: " + exclusionsFile, ioe);
-            } finally {
-                Utils.closeQuietly(is);
-            }
+            allExclusions.addAll(readExclusionsFile(exclusionsFile));
         }
 
         Set<Pattern> allExclusionPatterns = new HashSet<Pattern>();
@@ -240,6 +219,33 @@ public final class ModernizerMojo extends AbstractMojo {
         } catch (SAXException saxe) {
             throw new MojoExecutionException(
                     "Error parsing violation data", saxe);
+        } finally {
+            Utils.closeQuietly(is);
+        }
+    }
+
+    private Collection<String> readExclusionsFile(String exclusionsFilePath)
+            throws MojoExecutionException {
+        InputStream is = null;
+        try {
+            File file = new File(exclusionsFilePath);
+            if (file.exists()) {
+                is = new FileInputStream(exclusionsFilePath);
+            } else {
+                is = this.getClass().getClassLoader().getResourceAsStream(
+                        exclusionsFilePath);
+            }
+            if (is == null) {
+                throw new MojoExecutionException(
+                        "Could not find exclusion file: " +
+                        exclusionsFilePath);
+            }
+
+            return Utils.readAllLines(is);
+        } catch (IOException ioe) {
+            throw new MojoExecutionException(
+                    "Error reading exclusion file: " +
+                    exclusionsFilePath, ioe);
         } finally {
             Utils.closeQuietly(is);
         }
