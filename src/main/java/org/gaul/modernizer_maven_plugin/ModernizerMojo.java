@@ -17,6 +17,7 @@
 package org.gaul.modernizer_maven_plugin;
 
 import static java.lang.String.format;
+import static java.util.Collections.emptyList;
 
 import static org.gaul.modernizer_maven_plugin.Utils.checkArgument;
 
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -97,6 +99,21 @@ public final class ModernizerMojo extends AbstractMojo {
     private String violationsFile = "classpath:/modernizer.xml";
 
     /**
+     * User-specified violation files. The violations loaded from
+     * violationsFiles override the ones specified in violationsFile (or the
+     * default violations file if no violationsFile is given). Violations from
+     * the latter files override violations from the former files.
+     *
+     * Can point to files from classpath using an absolute path, e.g.:
+     *
+     * classpath:/modernizer.xml
+     *
+     * for the default violations file.
+     */
+    @Parameter(property = "modernizer.violationsFiles")
+    private List<String> violationsFiles = emptyList();
+
+    /**
      * Disables user-specified violations. This is a text file with one
      * exclusion per line in the javap format:
      *
@@ -154,7 +171,10 @@ public final class ModernizerMojo extends AbstractMojo {
             return;
         }
 
-        Map<String, Violation> violations = parseViolations(violationsFile);
+        Map<String, Violation> allViolations = parseViolations(violationsFile);
+        for (String violationsFilePath : violationsFiles) {
+            allViolations.putAll(parseViolations(violationsFilePath));
+        }
 
         Set<String> allExclusions = new HashSet<String>();
         allExclusions.addAll(exclusions);
@@ -172,7 +192,7 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
-        modernizer = new Modernizer(javaVersion, violations, allExclusions,
+        modernizer = new Modernizer(javaVersion, allViolations, allExclusions,
                 allExclusionPatterns, ignorePackages);
 
         try {
