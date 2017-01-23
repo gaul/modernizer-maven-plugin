@@ -41,8 +41,12 @@ final class Utils {
     }
 
     static void checkArgument(boolean expression) {
+        checkArgument(expression, null);
+    }
+
+    static void checkArgument(boolean expression, String message) {
         if (!expression) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(message);
         }
     }
 
