@@ -149,43 +149,13 @@ public final class ModernizerMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
-        Map<String, Violation> violations;
         InputStream is;
         if (skip) {
             getLog().info("Skipping modernizer execution!");
             return;
         }
 
-        if (violationsFile.startsWith(CLASSPATH_PREFIX)) {
-            String classpath =
-                    violationsFile.substring(CLASSPATH_PREFIX.length());
-            checkArgument(classpath.startsWith("/"), format(
-                    "Only absolute classpath references are allowed, got [%s]",
-                    classpath));
-            is = Modernizer.class.getResourceAsStream(classpath);
-        } else {
-            File file = new File(violationsFile);
-            try {
-                is = new FileInputStream(file);
-            } catch (FileNotFoundException fnfe) {
-                throw new MojoExecutionException(
-                        "Error opening violation file: " + file, fnfe);
-            }
-        }
-        try {
-            violations = Modernizer.parseFromXml(is);
-        } catch (IOException ioe) {
-            throw new MojoExecutionException(
-                    "Error reading violation data", ioe);
-        } catch (ParserConfigurationException pce) {
-            throw new MojoExecutionException(
-                    "Error parsing violation data", pce);
-        } catch (SAXException saxe) {
-            throw new MojoExecutionException(
-                    "Error parsing violation data", saxe);
-        } finally {
-            Utils.closeQuietly(is);
-        }
+        Map<String, Violation> violations = parseViolations(violationsFile);
 
         Set<String> allExclusions = new HashSet<String>();
         allExclusions.addAll(exclusions);
@@ -237,6 +207,41 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         } catch (IOException ioe) {
             throw new MojoExecutionException("Error reading Java classes", ioe);
+        }
+    }
+
+    private Map<String, Violation> parseViolations(String violationsFilePath)
+            throws MojoExecutionException {
+        InputStream is;
+        if (violationsFilePath.startsWith(CLASSPATH_PREFIX)) {
+            String classpath =
+                    violationsFilePath.substring(CLASSPATH_PREFIX.length());
+            checkArgument(classpath.startsWith("/"), format(
+                    "Only absolute classpath references are allowed, got [%s]",
+                    classpath));
+            is = Modernizer.class.getResourceAsStream(classpath);
+        } else {
+            File file = new File(violationsFilePath);
+            try {
+                is = new FileInputStream(file);
+            } catch (FileNotFoundException fnfe) {
+                throw new MojoExecutionException(
+                        "Error opening violation file: " + file, fnfe);
+            }
+        }
+        try {
+            return Modernizer.parseFromXml(is);
+        } catch (IOException ioe) {
+            throw new MojoExecutionException(
+                    "Error reading violation data", ioe);
+        } catch (ParserConfigurationException pce) {
+            throw new MojoExecutionException(
+                    "Error parsing violation data", pce);
+        } catch (SAXException saxe) {
+            throw new MojoExecutionException(
+                    "Error parsing violation data", saxe);
+        } finally {
+            Utils.closeQuietly(is);
         }
     }
 
