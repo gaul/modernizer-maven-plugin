@@ -16,6 +16,10 @@
 
 package org.gaul.modernizer_maven_plugin;
 
+import static java.lang.String.format;
+
+import static org.gaul.modernizer_maven_plugin.Utils.checkArgument;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,6 +45,9 @@ import org.xml.sax.SAXException;
 @Mojo(name = "modernizer", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES,
         threadSafe = true)
 public final class ModernizerMojo extends AbstractMojo {
+
+    private static final String CLASSPATH_PREFIX = "classpath:";
+
     /** The maven project (effective pom). */
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
@@ -80,9 +87,14 @@ public final class ModernizerMojo extends AbstractMojo {
 
     /**
      * User-specified violation file. Also disables standard violation checks.
+     * Can point to files from classpath using an absolute path, e.g.:
+     *
+     * classpath:/modernizer.xml
+     *
+     * for the default violations file.
      */
     @Parameter(property = "modernizer.violationsFile")
-    private String violationsFile = null;
+    private String violationsFile = "classpath:/modernizer.xml";
 
     /**
      * Disables user-specified violations. This is a text file with one
@@ -144,8 +156,13 @@ public final class ModernizerMojo extends AbstractMojo {
             return;
         }
 
-        if (violationsFile == null) {
-            is = Modernizer.class.getResourceAsStream("/modernizer.xml");
+        if (violationsFile.startsWith(CLASSPATH_PREFIX)) {
+            String classpath =
+                    violationsFile.substring(CLASSPATH_PREFIX.length());
+            checkArgument(classpath.startsWith("/"), format(
+                    "Only absolute classpath references are allowed, got [%s]",
+                    classpath));
+            is = Modernizer.class.getResourceAsStream(classpath);
         } else {
             File file = new File(violationsFile);
             try {
