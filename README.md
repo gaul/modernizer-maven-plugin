@@ -72,6 +72,6 @@ References
 
 License
 -------
-Copyright (C) 2014-2015 Andrew Gaul
+Copyright (C) 2014-2017 Andrew Gaul
 
 Licensed under the Apache License, Version 2.0
