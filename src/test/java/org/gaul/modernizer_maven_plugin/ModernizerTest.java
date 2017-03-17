@@ -606,6 +606,9 @@ public final class ModernizerTest {
             Period.parse("");
             new Period(DateTime.now(), DateTime.now());
             DateTimeFormat.forPattern("");
+            object = Collections.EMPTY_LIST;
+            object = Collections.EMPTY_MAP;
+            object = Collections.EMPTY_SET;
         }
     }
 

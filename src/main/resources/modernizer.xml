@@ -619,6 +619,24 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/util/Collections.EMPTY_LIST:Ljava/util/List;</name>
+    <version>1.5</version>
+    <comment>Prefer java.util.Collections.emptyList()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Collections.EMPTY_MAP:Ljava/util/Map;</name>
+    <version>1.5</version>
+    <comment>Prefer java.util.Collections.emptyMap()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Collections.EMPTY_SET:Ljava/util/Set;</name>
+    <version>1.5</version>
+    <comment>Prefer java.util.Collections.emptySet()</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(IF)V</name>
     <version>1.2</version>
     <comment>Prefer java.util.HashMap</comment>
