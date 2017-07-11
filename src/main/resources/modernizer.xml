@@ -471,13 +471,13 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/primitives/UnsignedLongs.parseUnsignedLong:(Ljava/lang/String;)J</name>
     <version>1.8</version>
-    <comment>Prefer java.lang.UnsignedLongs.parseUnsignedLong(String)</comment>
+    <comment>Prefer java.lang.Long.parseUnsignedLong(String)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/primitives/UnsignedLongs.parseUnsignedLong:(Ljava/lang/String;I)J</name>
     <version>1.8</version>
-    <comment>Prefer java.lang.UnsignedLongs.parseUnsignedLong(String, int)</comment>
+    <comment>Prefer java.lang.Long.parseUnsignedLong(String, int)</comment>
   </violation>
 
   <violation>
