@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.SortedMap;
 import java.util.Vector;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
 import com.google.common.base.Charsets;
