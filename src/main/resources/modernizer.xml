@@ -661,6 +661,18 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/util/Random."&lt;init&gt;":()V</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.ThreadLocalRandom.current()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Random."&lt;init&gt;":(J)V</name>
+    <version>1.7</version>
+    <comment>Prefer java.util.ThreadLocalRandom.current()</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Vector."&lt;init&gt;":()V</name>
     <version>1.2</version>
     <comment>Prefer java.util.ArrayList</comment>

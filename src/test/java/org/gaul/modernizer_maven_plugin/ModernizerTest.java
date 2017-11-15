@@ -32,8 +32,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Random;
 import java.util.SortedMap;
 import java.util.Vector;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
 import com.google.common.base.Charsets;
@@ -609,6 +611,8 @@ public final class ModernizerTest {
             object = Collections.EMPTY_LIST;
             object = Collections.EMPTY_MAP;
             object = Collections.EMPTY_SET;
+            object = new Random();
+            object = new Random(50L);
         }
     }
 
