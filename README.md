@@ -37,7 +37,7 @@ The `<configuration>` stanza can contain several elements:
 * `<violationsFiles>` user-specified violations file.  The latter files override violations from the former ones, including `violationsFile` and the default violations. Can point to classpath using absolute paths, e.g. `classpath:/your/file.xml`.
 * `<exclusionsFile>` disables user-specified violations.  This is a text file with one exclusion per line in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
 * `<exclusions>` violations to disable. Each exclusion should be in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
-* `<exclusionPatterns>` violation patterns to disable. Each exclusion should be a regular expression that matches the javap format: `java/lang/.*`.
+* `<exclusionPatterns>` violation patterns to disable. Each exclusion should be a regular expression inside an `<exclusionPattern>` that matches the javap format: `java/lang/.*` of a _token_ (e.g. method name, but **NOT** a checked class name).
 * `<ignorePackages>` package prefixes to ignore, specified using `<ignorePackage>` child elements. Specifying `foo.bar` subsequently ignores `foo.bar.*`, `foo.bar.baz.*` and so on.
 
 To run Modernizer during the verify phase of your build, add the following to
