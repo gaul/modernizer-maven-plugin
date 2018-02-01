@@ -1,3 +1,12 @@
+# Maven
 target/
+
+# IntelliJ
 .idea/
 *.iml
+
+# Eclipse
+.checkstyle
+.classpath
+.project
+.settings/
