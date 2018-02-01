@@ -50,6 +50,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.BaseEncoding;
+import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
 import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
@@ -524,6 +525,7 @@ public final class ModernizerTest {
             Sets.newTreeSet();
             Sets.newTreeSet((Comparator<Object>) null);
             BaseEncoding.base64();
+            ByteStreams.copy((InputStream) null, (OutputStream) null);
             Files.toByteArray((File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
