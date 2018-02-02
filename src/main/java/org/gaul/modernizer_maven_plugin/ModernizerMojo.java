@@ -76,16 +76,16 @@ public final class ModernizerMojo extends AbstractMojo {
      * 1.2 but not when targeting Java 1.1.
      */
     @Parameter(required = true, property = "modernizer.javaVersion")
-    private String javaVersion = null;
+    private String javaVersion;
 
     /** Fail phase if Modernizer detects any violations. */
     @Parameter(defaultValue = "true", property = "modernizer.failOnViolations")
-    private boolean failOnViolations = true;
+    protected boolean failOnViolations = true;
 
     /** Run Modernizer on test classes. */
     @Parameter(defaultValue = "true",
                property = "modernizer.includeTestClasses")
-    private boolean includeTestClasses = true;
+    protected boolean includeTestClasses = true;
 
     /**
      * User-specified violation file. Also disables standard violation checks.
@@ -96,7 +96,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * for the default violations file.
      */
     @Parameter(property = "modernizer.violationsFile")
-    private String violationsFile = "classpath:/modernizer.xml";
+    protected String violationsFile = "classpath:/modernizer.xml";
 
     /**
      * User-specified violation files. The violations loaded from
@@ -111,7 +111,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * for the default violations file.
      */
     @Parameter(property = "modernizer.violationsFiles")
-    private List<String> violationsFiles = emptyList();
+    protected List<String> violationsFiles = emptyList();
 
     /**
      * Disables user-specified violations. This is a text file with one
@@ -120,7 +120,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * java/lang/String.getBytes:(Ljava/lang/String;)[B.
      */
     @Parameter(property = "modernizer.exclusionsFile")
-    private String exclusionsFile = null;
+    private String exclusionsFile;
 
     /**
      * Log level to emit violations at, e.g., error, warn, info, debug.
@@ -135,7 +135,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * java/lang/String.getBytes:(Ljava/lang/String;)[B.
      */
     @Parameter
-    private Set<String> exclusions = new HashSet<String>();
+    protected Set<String> exclusions = new HashSet<String>();
 
     /**
      * Violation patterns to disable. Each exclusion should be a
@@ -144,7 +144,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * java/lang/.*
      */
     @Parameter
-    private Set<String> exclusionPatterns = new HashSet<String>();
+    protected Set<String> exclusionPatterns = new HashSet<String>();
 
     /**
      * Package prefixes to ignore, specified using &lt;ignorePackage&gt; child
@@ -152,7 +152,17 @@ public final class ModernizerMojo extends AbstractMojo {
      * foo.bar.baz.* and so on.
      */
     @Parameter
-    private Set<String> ignorePackages = new HashSet<String>();
+    protected Set<String> ignorePackages = new HashSet<String>();
+
+    /**
+     * Fully qualified class names (incl. package) to ignore by regular
+     * expression, specified using &lt;ignoreClassNamePattern&gt; child
+     * elements.  Specifying .*.bar.* ignores foo.bar.*, foo.bar.baz.* but
+     * also bar.* and so on; or .*Immutable ignores all class with names
+     * ending in Immutable in all packages.
+     */
+    @Parameter
+    protected Set<String> ignoreClassNamePatterns = new HashSet<String>();
 
     private Modernizer modernizer;
 
@@ -192,8 +202,19 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
+        Set<Pattern> allIgnoreFullClassNamePatterns = new HashSet<Pattern>();
+        for (String pattern : ignoreClassNamePatterns) {
+            try {
+                allIgnoreFullClassNamePatterns.add(Pattern.compile(pattern));
+            } catch (PatternSyntaxException pse) {
+                throw new MojoExecutionException(
+                        "Invalid exclusion pattern", pse);
+            }
+        }
+
         modernizer = new Modernizer(javaVersion, allViolations, allExclusions,
-                allExclusionPatterns, ignorePackages);
+                allExclusionPatterns, ignorePackages,
+                allIgnoreFullClassNamePatterns);
 
         try {
             long count = recurseFiles(outputDirectory);

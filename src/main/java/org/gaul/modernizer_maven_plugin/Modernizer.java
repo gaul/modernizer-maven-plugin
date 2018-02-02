@@ -48,11 +48,13 @@ final class Modernizer {
     private final Collection<String> exclusions;
     private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
+    private final Collection<Pattern> ignoreFullClassNamePatterns;
 
     Modernizer(String javaVersion, Map<String, Violation> violations,
             Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
-            Collection<String> ignorePackages) {
+            Collection<String> ignorePackages,
+            Collection<Pattern> ignoreClassNamePatterns) {
         long version;
         if (javaVersion.startsWith("1.")) {
             version = Long.parseLong(javaVersion.substring(2));
@@ -65,13 +67,15 @@ final class Modernizer {
         this.exclusions = Utils.createImmutableSet(exclusions);
         this.exclusionPatterns = Utils.createImmutableSet(exclusionPatterns);
         this.ignorePackages = Utils.createImmutableSet(ignorePackages);
+        this.ignoreFullClassNamePatterns
+            = Utils.createImmutableSet(ignoreClassNamePatterns);
     }
 
     Collection<ViolationOccurrence> check(ClassReader classReader)
             throws IOException {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
                 javaVersion, violations, exclusions, exclusionPatterns,
-                ignorePackages);
+                ignorePackages, ignoreFullClassNamePatterns);
         classReader.accept(classVisitor, 0);
         return classVisitor.getOccurrences();
     }
@@ -121,14 +125,17 @@ final class ModernizerClassVisitor extends ClassVisitor {
     private final Collection<String> exclusions;
     private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
+    private final Collection<Pattern> ignoreFullClassNamePatterns;
     private final Collection<ViolationOccurrence> occurrences =
             new ArrayList<ViolationOccurrence>();
     private String packageName;
+    private String className;
 
     ModernizerClassVisitor(long javaVersion,
             Map<String, Violation> violations, Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
-            Collection<String> ignorePackages) {
+            Collection<String> ignorePackages,
+            Collection<Pattern> ignoreFullClassNamePatterns) {
         super(Opcodes.ASM5);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
@@ -136,16 +143,22 @@ final class ModernizerClassVisitor extends ClassVisitor {
         this.exclusions = Utils.checkNotNull(exclusions);
         this.exclusionPatterns = Utils.checkNotNull(exclusionPatterns);
         this.ignorePackages = Utils.checkNotNull(ignorePackages);
+        this.ignoreFullClassNamePatterns =
+                Utils.checkNotNull(ignoreFullClassNamePatterns);
     }
 
     @Override
     public void visit(int version, int access, String name, String signature,
             String superName, String[] interfaces) {
+        className = name;
         if (name.contains("/")) {
             packageName = name.substring(0, name.lastIndexOf('/'))
                     .replace('/', '.');
         } else {
             packageName = "";
+        }
+        if (ignoreClass()) {
+            return;
         }
         for (String itr : interfaces) {
             Violation violation = violations.get(itr);
@@ -210,6 +223,9 @@ final class ModernizerClassVisitor extends ClassVisitor {
         if (violation != null && !exclusions.contains(token) &&
                 javaVersion >= violation.getVersion() &&
                 !ignorePackages.contains(packageName)) {
+            if (ignoreClass()) {
+                return;
+            }
             for (Pattern pattern : exclusionPatterns) {
                 if (pattern.matcher(token).matches()) {
                     return;
@@ -223,6 +239,15 @@ final class ModernizerClassVisitor extends ClassVisitor {
             occurrences.add(new ViolationOccurrence(name, lineNumber,
                     violation));
         }
+    }
+
+    private boolean ignoreClass() {
+        for (Pattern pattern : ignoreFullClassNamePatterns) {
+            if (pattern.matcher(className).matches()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     Collection<ViolationOccurrence> getOccurrences() {
