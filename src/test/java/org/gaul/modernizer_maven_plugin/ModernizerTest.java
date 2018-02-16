@@ -392,6 +392,7 @@ public final class ModernizerTest {
     }
 
     private static class VectorTestClass {
+        @SuppressWarnings("JdkObsolete")
         private final Object object = new Vector<Object>();
     }
 
@@ -501,6 +502,8 @@ public final class ModernizerTest {
     }
 
     private static class AllViolations {
+        @SuppressWarnings(value = {"BoxedPrimitiveConstructor",
+                "CheckReturnValue", "JdkObsolete"})
         private static void method() throws Exception {
             Object object;
             object = Charsets.ISO_8859_1;

@@ -230,8 +230,8 @@ public final class ModernizerMojo extends AbstractMojo {
         }
     }
 
-    private Map<String, Violation> parseViolations(String violationsFilePath)
-            throws MojoExecutionException {
+    private static Map<String, Violation> parseViolations(
+            String violationsFilePath) throws MojoExecutionException {
         InputStream is;
         if (violationsFilePath.startsWith(CLASSPATH_PREFIX)) {
             String classpath =
