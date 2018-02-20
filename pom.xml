@@ -8,9 +8,9 @@
   </parent>
 
   <groupId>org.gaul</groupId>
-  <artifactId>modernizer-maven-plugin</artifactId>
+  <artifactId>modernizer-maven-parent</artifactId>
   <version>1.7.0-SNAPSHOT</version>
-  <packaging>maven-plugin</packaging>
+  <packaging>pom</packaging>
 
   <name>Modernizer Maven Plugin</name>
   <url>https://github.com/andrewgaul/modernizer-maven-plugin</url>
@@ -38,12 +38,18 @@
     </developer>
   </developers>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
+  <modules>
+    <module>modernizer-maven-plugin</module>
+    <module>modernizer-maven-policy</module>
+    <module>modernizer-annotation-processor</module>
+  </modules>
+
+<distributionManagement>
+  <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+</distributionManagement>
 
   <profiles>
     <profile>
@@ -85,8 +91,8 @@
           </execution>
         </executions>
         <configuration>
-          <configLocation>src/main/resources/checkstyle.xml</configLocation>
-          <headerLocation>src/main/resources/copyright_header.txt</headerLocation>
+          <configLocation>checkstyle/checkstyle.xml</configLocation>
+          <headerLocation>checkstyle/copyright_header.txt</headerLocation>
           <!--
           TODO: cannot ignore generated files
           https://jira.codehaus.org/browse/MCHECKSTYLE-260
@@ -97,6 +103,13 @@
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <violationSeverity>warning</violationSeverity>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.gaul</groupId>
+            <artifactId>modernizer-maven-policy</artifactId>
+            <version>1.7.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -248,84 +261,18 @@
     <asm.version>6.1.1</asm.version>
   </properties>
 
-  <prerequisites>
-    <maven>3.0.5</maven>
-  </prerequisites>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>18.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.inject</groupId>
-      <artifactId>guice</artifactId>
-      <version>4.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <version>1.10</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>2.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-plugin-api</artifactId>
-      <version>2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugin-tools</groupId>
-      <artifactId>maven-plugin-annotations</artifactId>
-      <version>3.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-project</artifactId>
-      <version>2.0.9</version>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>1.7.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.ow2.asm</groupId>
-      <artifactId>asm</artifactId>
-      <version>${asm.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.ow2.asm</groupId>
-      <artifactId>asm-commons</artifactId>
-      <version>${asm.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>4.1.6.RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>${asm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm-commons</artifactId>
+        <version>${asm.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
