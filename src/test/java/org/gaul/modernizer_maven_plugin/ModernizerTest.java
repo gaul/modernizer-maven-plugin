@@ -18,20 +18,32 @@ package org.gaul.modernizer_maven_plugin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Formatter;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.Vector;
 import java.util.regex.Pattern;
@@ -344,9 +356,11 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("1.9");
+        Modernizer modernizer = createModernizer("1.10");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(Java10Violations.class.getName())));
         // must visit inner classes manually
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidFunction.class.getName())));
@@ -628,6 +642,31 @@ public final class ModernizerTest {
             object = Collections.EMPTY_LIST;
             object = Collections.EMPTY_MAP;
             object = Collections.EMPTY_SET;
+        }
+    }
+
+    private static class Java10Violations {
+        private static void method() throws Exception {
+            new PrintStream((File) null, "");
+            new PrintStream("", "");
+            new PrintWriter((File) null, "");
+            new PrintWriter("", "");
+            new ByteArrayOutputStream().toString("");
+            URLDecoder.decode("", "");
+            URLEncoder.encode("", "");
+            ImmutableList.copyOf((List) null);
+            ImmutableMap.copyOf((Map) null);
+            ImmutableSet.copyOf((Set) null);
+            new Formatter((File) null, "");
+            new Formatter((File) null, "", (Locale) null);
+            new Formatter((OutputStream) null, "");
+            new Formatter((OutputStream) null, "", (Locale) null);
+            new Formatter("", "");
+            new Formatter("", "", (Locale) null);
+            new Scanner((File) null, "");
+            new Scanner((InputStream) null, "");
+            new Scanner((Path) null, "");
+            new Scanner((ReadableByteChannel) null, "");
         }
     }
 

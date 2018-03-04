@@ -918,4 +918,124 @@ violation names use the same format that javap emits.
     <comment>Prefer java.time.format.DateTimeFormatter</comment>
   </violation>
 
+  <violation>
+    <name>java/io/PrintStream."&lt;init&gt;":(Ljava/io/File;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.io.PrintStream(File, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/PrintStream."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.io.PrintStream(String, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/PrintWriter."&lt;init&gt;":(Ljava/io/File;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.io.PrintWriter(File, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/PrintWriter."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.io.PrintWriter(String, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/ByteArrayOutputStream.toString:(Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>1.10</version>
+    <comment>Prefer java.io.ByteArrayOutputStream.toString(Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URLDecoder.decode:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>1.10</version>
+    <comment>Prefer java.net.URLDecoder.decode(String, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URLEncoder.encode:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>1.10</version>
+    <comment>Prefer java.net.URLEncoder.encode(String, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/ImmutableList.copyOf:(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableList;</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.List.copyOf(Collection)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/ImmutableMap.copyOf:(Ljava/util/Map;)Lcom/google/common/collect/ImmutableMap;</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Map.copyOf(Map)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/ImmutableSet.copyOf:(Ljava/util/Collection;)Lcom/google/common/collect/ImmutableSet;</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Set.copyOf(Collection)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Formatter."&lt;init&gt;":(Ljava/io/File;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Formatter(File, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Formatter."&lt;init&gt;":(Ljava/io/File;Ljava/lang/String;Ljava/util/Locale;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Formatter(File, Charset, Locale)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Formatter."&lt;init&gt;":(Ljava/io/OutputStream;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Formatter(OutputStream, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Formatter."&lt;init&gt;":(Ljava/io/OutputStream;Ljava/lang/String;Ljava/util/Locale;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Formatter(OutputStream, Charset, Locale)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Formatter."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Formatter(String, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Formatter."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;Ljava/util/Locale;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Formatter(String, Charset, Locale)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Scanner."&lt;init&gt;":(Ljava/io/File;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Scanner(File, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Scanner."&lt;init&gt;":(Ljava/io/InputStream;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Scanner(InputStream, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Scanner."&lt;init&gt;":(Ljava/nio/file/Path;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Scanner(Path, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Scanner."&lt;init&gt;":(Ljava/nio/channels/ReadableByteChannel;Ljava/lang/String;)V</name>
+    <version>1.10</version>
+    <comment>Prefer java.util.Scanner(ReadableByteChannel, Charset)</comment>
+  </violation>
+
 </modernizer>
