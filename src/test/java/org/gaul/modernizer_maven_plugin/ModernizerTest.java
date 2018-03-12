@@ -654,9 +654,9 @@ public final class ModernizerTest {
             new ByteArrayOutputStream().toString("");
             URLDecoder.decode("", "");
             URLEncoder.encode("", "");
-            ImmutableList.copyOf((List) null);
-            ImmutableMap.copyOf((Map) null);
-            ImmutableSet.copyOf((Set) null);
+            ImmutableList.copyOf((List<Object>) null);
+            ImmutableMap.copyOf((Map<Object, Object>) null);
+            ImmutableSet.copyOf((Set<Object>) null);
             new Formatter((File) null, "");
             new Formatter((File) null, "", (Locale) null);
             new Formatter((OutputStream) null, "");
