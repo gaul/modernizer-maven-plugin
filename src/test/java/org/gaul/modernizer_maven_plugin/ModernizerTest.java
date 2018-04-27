@@ -544,6 +544,7 @@ public final class ModernizerTest {
             Maps.newIdentityHashMap();
             Maps.newLinkedHashMap();
             Maps.newLinkedHashMap((Map<Object, Object>) null);
+            Maps.newLinkedHashMapWithExpectedSize(0);
             Maps.newTreeMap();
             Maps.newTreeMap((Comparator<Object>) null);
             Maps.newTreeMap((SortedMap<Object, Object>) null);
