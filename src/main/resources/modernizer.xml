@@ -301,12 +301,6 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
-    <name>com/google/common/collect/Maps.newHashMapWithExpectedSize:(I)Ljava/util/HashMap;</name>
-    <version>1.7</version>
-    <comment>Prefer java.util.HashMap&lt;&gt;(int)</comment>
-  </violation>
-
-  <violation>
     <name>com/google/common/collect/Maps.newIdentityHashMap:()Ljava/util/IdentityHashMap;</name>
     <version>1.7</version>
     <comment>Prefer java.util.IdentityHashMap&lt;&gt;()</comment>
@@ -322,12 +316,6 @@ violation names use the same format that javap emits.
     <name>com/google/common/collect/Maps.newLinkedHashMap:(Ljava/util/Map;)Ljava/util/LinkedHashMap;</name>
     <version>1.7</version>
     <comment>Prefer java.util.LinkedHashMap&lt;&gt;(java.util.Map)</comment>
-  </violation>
-
-  <violation>
-    <name>com/google/common/collect/Maps.newLinkedHashMapWithExpectedSize:(I)Ljava/util/LinkedHashMap;</name>
-    <version>1.7</version>
-    <comment>Prefer java.util.LinkedHashMap&lt;&gt;(int)</comment>
   </violation>
 
   <violation>
@@ -361,21 +349,9 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
-    <name>com/google/common/collect/Sets.newHashSetWithExpectedSize:(I)Ljava/util/HashSet;</name>
-    <version>1.7</version>
-    <comment>Prefer java.util.HashSet&lt;&gt;(int)</comment>
-  </violation>
-
-  <violation>
     <name>com/google/common/collect/Sets.newLinkedHashSet:()Ljava/util/LinkedHashSet;</name>
     <version>1.7</version>
     <comment>Prefer java.util.LinkedHashSet&lt;&gt;()</comment>
-  </violation>
-
-  <violation>
-    <name>com/google/common/collect/Sets.newLinkedHashSetWithExpectedSize:(I)Ljava/util/LinkedHashSet;</name>
-    <version>1.7</version>
-    <comment>Prefer java.util.LinkedHashSet&lt;&gt;(int)</comment>
   </violation>
 
   <violation>
