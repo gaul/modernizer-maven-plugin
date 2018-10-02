@@ -85,6 +85,18 @@ final class Utils {
         return lines;
     }
 
+    static Collection<String> filterCommentLines(Collection<String> lines) {
+        Collection<String> result = new ArrayList<String>();
+        for (String line : lines) {
+            String trimmedLine = line.trim();
+            if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {
+                continue;
+            }
+            result.add(line);
+        }
+        return result;
+    }
+
     private Utils() {
         throw new AssertionError("Intentionally not implemented");
     }
