@@ -337,6 +337,18 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Maps.unmodifiableNavigableMap:(Ljava/util/NavigableMap;)Ljava/util/NavigableMap;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Collections.unmodifiableNavigableMap&lt;&gt;(java.util.NavigableMap)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Maps.synchronizedNavigableMap:(Ljava/util/NavigableMap;)Ljava/util/NavigableMap;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Collections.synchronizedNavigableMap&lt;&gt;(java.util.NavigableMap)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Sets.newCopyOnWriteArraySet:()Ljava/util/concurrent/CopyOnWriteArraySet;</name>
     <version>1.7</version>
     <comment>Prefer java.util.concurrent.CopyOnWriteArraySet&lt;&gt;()</comment>
@@ -370,6 +382,18 @@ violation names use the same format that javap emits.
     <name>com/google/common/collect/Sets.newTreeSet:(Ljava/util/Comparator;)Ljava/util/TreeSet;</name>
     <version>1.7</version>
     <comment>Prefer java.util.TreeSet&lt;&gt;(java.util.Comparator)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Sets.unmodifiableNavigableSet:(Ljava/util/NavigableSet;)Ljava/util/NavigableSet;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Collections.unmodifiableNavigableSet&lt;&gt;(java.util.NavigableSet)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Sets.synchronizedNavigableSet:(Ljava/util/NavigableSet;)Ljava/util/NavigableSet;</name>
+    <version>1.8</version>
+    <comment>Prefer java.util.Collections.synchronizedNavigableSet&lt;&gt;(java.util.NavigableSet)</comment>
   </violation>
 
   <violation>
