@@ -45,6 +45,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
@@ -546,12 +548,16 @@ public final class ModernizerTest {
             Maps.newTreeMap();
             Maps.newTreeMap((Comparator<Object>) null);
             Maps.newTreeMap((SortedMap<Object, Object>) null);
+            Maps.unmodifiableNavigableMap(new TreeMap<Object, Object>());
+            Maps.synchronizedNavigableMap(new TreeMap<Object, Object>());
             Sets.newCopyOnWriteArraySet();
             Sets.newHashSet();
             Sets.newLinkedHashSet();
             Sets.newSetFromMap((Map<Object, Boolean>) null);
             Sets.newTreeSet();
             Sets.newTreeSet((Comparator<Object>) null);
+            Sets.unmodifiableNavigableSet(new TreeSet<Object>());
+            Sets.synchronizedNavigableSet(new TreeSet<Object>());
             BaseEncoding.base64();
             ByteStreams.copy((InputStream) null, (OutputStream) null);
             Files.toByteArray((File) null);
