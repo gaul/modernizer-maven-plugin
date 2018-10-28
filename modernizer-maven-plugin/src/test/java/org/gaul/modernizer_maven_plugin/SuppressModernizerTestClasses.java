@@ -22,7 +22,10 @@ import com.google.common.base.Charsets;
 
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 
-public class SuppressModernizerTestClasses {
+public final class SuppressModernizerTestClasses {
+    private SuppressModernizerTestClasses() {
+        throw new AssertionError("intentionally not implemented");
+    }
 
     @SuppressModernizer
     public static final class SuppressedOnClass {

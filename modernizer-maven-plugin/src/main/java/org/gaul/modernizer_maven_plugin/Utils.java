@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -88,8 +89,8 @@ final class Utils {
         return lines;
     }
 
-    static Collection<String> filterCommentLines(Collection<String> lines) {
-        Collection<String> result = new ArrayList<String>();
+    static List<String> filterCommentLines(Collection<String> lines) {
+        List<String> result = new ArrayList<String>();
         for (String line : lines) {
             String trimmedLine = line.trim();
             if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {

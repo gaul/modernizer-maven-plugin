@@ -41,7 +41,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.StringUtils;
 import org.xml.sax.SAXException;
 
@@ -50,10 +49,6 @@ import org.xml.sax.SAXException;
 public final class ModernizerMojo extends AbstractMojo {
 
     private static final String CLASSPATH_PREFIX = "classpath:";
-
-    /** The maven project (effective pom). */
-    @Parameter(defaultValue = "${project}", readonly = true)
-    private MavenProject project;
 
     /** The output directory into which to find the source code. */
     @Parameter(property = "project.build.sourceDirectory")

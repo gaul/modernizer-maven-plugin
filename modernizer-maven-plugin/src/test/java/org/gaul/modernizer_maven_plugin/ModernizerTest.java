@@ -105,6 +105,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+@SuppressWarnings(value = {"CheckReturnValue", "UnusedMethod",
+        "UnusedVariable"})
 public final class ModernizerTest {
     private Map<String, Violation> violations;
     private static final Collection<String> NO_EXCLUSIONS =

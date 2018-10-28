@@ -19,16 +19,14 @@ package org.gaul.modernizer_maven_plugin;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 import org.junit.Test;
 
-
 public class UtilsTest {
-
     @Test
     public final void testFilterComments() {
-        Collection<String> lines = Arrays.asList(
+        List<String> lines = Arrays.asList(
                 "foo", "", " # comment", " bar ");
         assertEquals(Arrays.asList("foo", " bar "),
                 Utils.filterCommentLines(lines));
