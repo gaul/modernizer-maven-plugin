@@ -63,6 +63,23 @@ documents all of these.  The most commonly used flags:
 * `-Dmodernizer.failOnViolations` - fail phase if violations detected, defaults to true
 * `-Dmodernizer.skip` - skip plugin execution, defaults to false
 
+Ignoring elements
+-----------------
+
+You can indicate that a violations with a class or method should be ignored by
+the plugin by adding `@SuppressWarnings("modernizer")` to the element you'd like
+to ignore and adding the following dependency to your pom:
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.gaul</groupId>
+    <artifactId>modernizer-annotation-processor</artifactId>
+    <scope>provided</scope>
+  </dependency>
+</dependencies>
+```
+
 References
 ----------
 * [ASM](http://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
