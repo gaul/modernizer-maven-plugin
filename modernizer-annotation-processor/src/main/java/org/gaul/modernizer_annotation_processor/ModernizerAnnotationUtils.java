@@ -19,8 +19,6 @@ package org.gaul.modernizer_annotation_processor;
 import java.io.File;
 import java.util.List;
 
-import com.google.common.base.Joiner;
-
 public final class ModernizerAnnotationUtils {
 
     public static final String IGNORE_CLASSES_FILE_NAME =
@@ -51,10 +49,13 @@ public final class ModernizerAnnotationUtils {
         String returnType,
         List<String> params
     ) {
-        String returnTypeAndArguments = returnType +
-            (!params.isEmpty() ? " " + Joiner.on(" ").join(params) : "");
-        returnTypeAndArguments =
-            returnTypeAndArguments.replace('$', '.').replace('/', '.');
+        StringBuilder sb = new StringBuilder(returnType);
+        for (String param : params) {
+            sb.append(' ').append(param);
+        }
+        String returnTypeAndArguments =
+            sb.toString().replace('$', '.').replace('/', '.');
+
         return className.replace('.', '/') + " " +
             methodName + " " + returnTypeAndArguments;
     }

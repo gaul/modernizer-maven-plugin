@@ -45,7 +45,6 @@ import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 
 import com.google.auto.service.AutoService;
-import com.google.common.base.Strings;
 
 @SupportedAnnotationTypes("java.lang.SuppressWarnings")
 @AutoService(Processor.class)
@@ -310,14 +309,13 @@ public class ModernizerAnnotationProcessor extends AbstractProcessor {
     public final String getRepresentation(TypeMirror param) {
         switch (param.getKind()) {
         case ARRAY:
-            int arrayLength = 0;
+            StringBuilder brackets = new StringBuilder();
             TypeMirror paramType = param;
             while (paramType.getKind().equals(TypeKind.ARRAY)) {
                 paramType = ((ArrayType) paramType).getComponentType();
-                arrayLength++;
+                brackets.append("[]");
             }
-            return getRepresentation(paramType) +
-                Strings.repeat("[]", arrayLength);
+            return getRepresentation(paramType) + brackets.toString();
         case TYPEVAR:
             return Object.class.getName();
         default:
