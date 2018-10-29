@@ -85,15 +85,18 @@ public class ModernizerAnnotationProcessor extends AbstractProcessor {
         for (TypeElement annotation : annotations) {
             AnnotatedElements annotatedElements =
                 getAnnotatedElements(roundEnv, annotation);
-            if (!(annotatedElements.getAnnotatedClasses().isEmpty() &&
-                annotatedElements.getAnnotatedMethods().isEmpty())
+            if (!annotatedElements.getAnnotatedClasses().isEmpty() ||
+                !annotatedElements.getAnnotatedMethods().isEmpty()
             ) {
                 File outputDir = getOutputDirectory();
                 outputDir.mkdirs();
-                makeFile(new File(outputDir,
+                // Output the annotated classes and methods to respective files
+                // (one entity per line) so that the plugin will know which
+                // elements to ignore.
+                writeLines(new File(outputDir,
                     ModernizerAnnotationUtils.IGNORE_CLASSES_FILE_NAME),
                     annotatedElements.getAnnotatedClasses());
-                makeFile(new File(outputDir,
+                writeLines(new File(outputDir,
                     ModernizerAnnotationUtils.IGNORE_METHODS_FILE_NAME),
                     annotatedElements.getAnnotatedMethods());
             }
@@ -124,20 +127,20 @@ public class ModernizerAnnotationProcessor extends AbstractProcessor {
     }
 
 
-    private void makeFile(
+    private void writeLines(
         File file,
-        List<String> annotatedElements
+        List<String> lines
     ) {
-        if (annotatedElements.isEmpty()) {
+        if (lines.isEmpty()) {
             return;
         }
         Writer writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(file));
-            for (String element : annotatedElements) {
-                writer.write(element + "\n");
+            for (String line : lines) {
+                writer.write(line);
+                writer.write('\n');
             }
-            writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {

@@ -85,6 +85,10 @@ final class Utils {
         return lines;
     }
 
+    static boolean isNullOrEmpty(String s) {
+        return s == null || s.isEmpty();
+    }
+
     private Utils() {
         throw new AssertionError("Intentionally not implemented");
     }

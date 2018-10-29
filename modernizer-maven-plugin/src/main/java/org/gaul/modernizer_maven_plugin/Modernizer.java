@@ -29,8 +29,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.google.common.base.Strings;
-
 import org.gaul.modernizer_annotation_processor.ModernizerAnnotationUtils;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
@@ -262,8 +260,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
                 return true;
             }
         }
-        if (!Strings.isNullOrEmpty(methodName) &&
-            !Strings.isNullOrEmpty(methodDescriptor) &&
+        if (!Utils.isNullOrEmpty(methodName) &&
+            !Utils.isNullOrEmpty(methodDescriptor) &&
             ignoreMethod(methodName, methodDescriptor)) {
             return true;
         }
