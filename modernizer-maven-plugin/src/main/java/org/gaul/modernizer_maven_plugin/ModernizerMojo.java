@@ -316,7 +316,7 @@ public final class ModernizerMojo extends AbstractMojo {
                         exclusionsFilePath);
             }
 
-            return Utils.readAllLines(is);
+            return Utils.filterCommentLines(Utils.readAllLines(is));
         } catch (IOException ioe) {
             throw new MojoExecutionException(
                     "Error reading exclusion file: " +

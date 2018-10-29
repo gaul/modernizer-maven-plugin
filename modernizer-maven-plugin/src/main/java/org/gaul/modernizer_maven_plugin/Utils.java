@@ -85,6 +85,18 @@ final class Utils {
         return lines;
     }
 
+    static Collection<String> filterCommentLines(Collection<String> lines) {
+        Collection<String> result = new ArrayList<String>();
+        for (String line : lines) {
+            String trimmedLine = line.trim();
+            if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {
+                continue;
+            }
+            result.add(line);
+        }
+        return result;
+    }
+
     static boolean isNullOrEmpty(String s) {
         return s == null || s.isEmpty();
     }
