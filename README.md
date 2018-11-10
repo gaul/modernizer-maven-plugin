@@ -1,5 +1,8 @@
 Modernizer Maven Plugin
 =======================
+
+[![Maven Central](https://img.shields.io/maven-central/v/org.gaul/modernizer-maven-plugin.svg)](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22modernizer-maven-plugin%22)
+
 Modernizer Maven Plugin detects uses of legacy APIs which modern Java versions
 supersede.
 These modern APIs are often more performant, safer, and idiomatic than the
@@ -21,7 +24,7 @@ then invoke `mvn modernizer:modernizer`:
 <plugin>
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
-  <version>1.6.0</version>
+  <version>1.7.0</version>
   <configuration>
     <javaVersion>1.8</javaVersion>
   </configuration>
