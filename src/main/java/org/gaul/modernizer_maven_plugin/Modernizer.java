@@ -136,7 +136,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
             Collection<Pattern> ignoreFullClassNamePatterns) {
-        super(Opcodes.ASM5);
+        super(Opcodes.ASM7);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
         this.violations = Utils.checkNotNull(violations);
@@ -172,9 +172,9 @@ final class ModernizerClassVisitor extends ClassVisitor {
             String[] exceptions) {
         MethodVisitor base = super.visitMethod(access, methodName,
                 methodDescriptor, methodSignature, exceptions);
-        MethodVisitor origVisitor = new MethodVisitor(Opcodes.ASM5, base) {
+        MethodVisitor origVisitor = new MethodVisitor(Opcodes.ASM7, base) {
         };
-        InstructionAdapter adapter = new InstructionAdapter(Opcodes.ASM5,
+        InstructionAdapter adapter = new InstructionAdapter(Opcodes.ASM7,
                 origVisitor) {
             private int lineNumber = -1;
 
