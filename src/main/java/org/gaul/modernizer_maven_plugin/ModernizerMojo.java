@@ -42,6 +42,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.util.StringUtils;
 import org.xml.sax.SAXException;
 
 @Mojo(name = "modernizer", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES,
@@ -75,7 +76,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * Modernizer will detect uses of Vector as violations when targeting Java
      * 1.2 but not when targeting Java 1.1.
      */
-    @Parameter(required = true, property = "modernizer.javaVersion")
+    @Parameter(property = "modernizer.javaVersion")
     private String javaVersion;
 
     /** Fail phase if Modernizer detects any violations. */
@@ -179,6 +180,11 @@ public final class ModernizerMojo extends AbstractMojo {
         if (skip) {
             getLog().info("Skipping modernizer execution!");
             return;
+        }
+
+        if (StringUtils.isEmpty(javaVersion)) {
+            throw new MojoExecutionException(
+                    "javaVersion is not set but is required for execution.");
         }
 
         Map<String, Violation> allViolations = parseViolations(violationsFile);
