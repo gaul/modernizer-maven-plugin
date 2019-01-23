@@ -218,9 +218,22 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
+        Set<String> ignoreClassNames = new HashSet<String>();
+        try {
+            ignoreClassNames.addAll(
+                SuppressModernizerAnnotationDetector.detect(outputDirectory));
+            if (includeTestClasses) {
+                ignoreClassNames.addAll(
+                    SuppressModernizerAnnotationDetector.detect(
+                        testOutputDirectory));
+            }
+        } catch (IOException e) {
+            throw new MojoExecutionException("Error reading suppressions", e);
+        }
+
         modernizer = new Modernizer(javaVersion, allViolations, allExclusions,
                 allExclusionPatterns, ignorePackages,
-                allIgnoreFullClassNamePatterns);
+                ignoreClassNames, allIgnoreFullClassNamePatterns);
 
         try {
             long count = recurseFiles(outputDirectory);
