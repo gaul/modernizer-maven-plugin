@@ -16,24 +16,27 @@
 
 package org.gaul.modernizer_maven_plugin;
 
+import static org.gaul.modernizer_maven_plugin.Utils.ASM_API;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.InstructionAdapter;
 import org.w3c.dom.Document;
@@ -48,12 +51,14 @@ final class Modernizer {
     private final Collection<String> exclusions;
     private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
+    private final Set<String> ignoreClassNames;
     private final Collection<Pattern> ignoreFullClassNamePatterns;
 
     Modernizer(String javaVersion, Map<String, Violation> violations,
             Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
+            Set<String> ignoreClassNames,
             Collection<Pattern> ignoreClassNamePatterns) {
         long version;
         if (javaVersion.startsWith("1.")) {
@@ -67,6 +72,7 @@ final class Modernizer {
         this.exclusions = Utils.createImmutableSet(exclusions);
         this.exclusionPatterns = Utils.createImmutableSet(exclusionPatterns);
         this.ignorePackages = Utils.createImmutableSet(ignorePackages);
+        this.ignoreClassNames =  Utils.createImmutableSet(ignoreClassNames);
         this.ignoreFullClassNamePatterns
             = Utils.createImmutableSet(ignoreClassNamePatterns);
     }
@@ -75,7 +81,7 @@ final class Modernizer {
             throws IOException {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
                 javaVersion, violations, exclusions, exclusionPatterns,
-                ignorePackages, ignoreFullClassNamePatterns);
+                ignorePackages, ignoreClassNames, ignoreFullClassNamePatterns);
         classReader.accept(classVisitor, 0);
         return classVisitor.getOccurrences();
     }
@@ -125,6 +131,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
     private final Collection<String> exclusions;
     private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
+    private final Set<String> ignoreClassNames;
     private final Collection<Pattern> ignoreFullClassNamePatterns;
     private final Collection<ViolationOccurrence> occurrences =
             new ArrayList<ViolationOccurrence>();
@@ -135,14 +142,16 @@ final class ModernizerClassVisitor extends ClassVisitor {
             Map<String, Violation> violations, Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
+            Set<String> ignoreClassNames,
             Collection<Pattern> ignoreFullClassNamePatterns) {
-        super(Opcodes.ASM7);
+        super(ASM_API);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
         this.violations = Utils.checkNotNull(violations);
         this.exclusions = Utils.checkNotNull(exclusions);
         this.exclusionPatterns = Utils.checkNotNull(exclusionPatterns);
         this.ignorePackages = Utils.checkNotNull(ignorePackages);
+        this.ignoreClassNames = Utils.checkNotNull(ignoreClassNames);
         this.ignoreFullClassNamePatterns =
                 Utils.checkNotNull(ignoreFullClassNamePatterns);
     }
@@ -172,11 +181,12 @@ final class ModernizerClassVisitor extends ClassVisitor {
             String[] exceptions) {
         MethodVisitor base = super.visitMethod(access, methodName,
                 methodDescriptor, methodSignature, exceptions);
-        MethodVisitor origVisitor = new MethodVisitor(Opcodes.ASM7, base) {
+        MethodVisitor origVisitor = new MethodVisitor(ASM_API, base) {
         };
-        InstructionAdapter adapter = new InstructionAdapter(Opcodes.ASM7,
+        InstructionAdapter adapter = new InstructionAdapter(ASM_API,
                 origVisitor) {
             private int lineNumber = -1;
+            private boolean methodSuppressed = false;
 
             @Override
             public void visitFieldInsn(int opcode, String owner, String name,
@@ -196,6 +206,9 @@ final class ModernizerClassVisitor extends ClassVisitor {
             @Override
             public AnnotationVisitor visitAnnotation(String desc,
                     boolean visible) {
+                methodSuppressed |= Type.getType(desc).getClassName()
+                    .equals(SuppressModernizer.class.getName());
+
                 String name = Type.getType(desc).getInternalName();
                 Violation violation = violations.get(name);
                 checkToken(name, violation, name, lineNumber);
@@ -213,6 +226,21 @@ final class ModernizerClassVisitor extends ClassVisitor {
             @Override
             public void visitLineNumber(int lineNumber, Label start) {
                 this.lineNumber = lineNumber;
+            }
+
+            private void checkToken(
+                String token,
+                Violation violation,
+                String name,
+                int lineNumber
+            ) {
+                if (methodSuppressed) {
+                    return;
+                } else {
+                    ModernizerClassVisitor.this
+                        .checkToken(token, violation, name, lineNumber);
+                }
+
             }
         };
         return adapter;
@@ -242,6 +270,9 @@ final class ModernizerClassVisitor extends ClassVisitor {
     }
 
     private boolean ignoreClass() {
+        if (ignoreClassNames.contains(className)) {
+            return true;
+        }
         for (Pattern pattern : ignoreFullClassNamePatterns) {
             if (pattern.matcher(className).matches()) {
                 return true;
