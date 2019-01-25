@@ -1044,4 +1044,28 @@ violation names use the same format that javap emits.
     <comment>Prefer java.util.Scanner(ReadableByteChannel, Charset)</comment>
   </violation>
 
+  <violation>
+    <name>com/google/common/collect/Streams.stream:(Ljava/util/Optional;)Ljava/util/stream/Stream;</name>
+    <version>1.9</version>
+    <comment>Prefer java.util.Optional.stream()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Streams.stream:(Ljava/util/OptionalInt;)Ljava/util/stream/IntStream;</name>
+    <version>1.9</version>
+    <comment>Prefer java.util.OptionalInt.stream()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Streams.stream:(Ljava/util/OptionalLong;)Ljava/util/stream/LongStream;</name>
+    <version>1.9</version>
+    <comment>Prefer java.util.OptionalLong.stream()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Streams.stream:(Ljava/util/OptionalDouble;)Ljava/util/stream/DoubleStream;</name>
+    <version>1.9</version>
+    <comment>Prefer java.util.OptionalDouble.stream()</comment>
+  </violation>
+
 </modernizer>

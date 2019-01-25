@@ -42,6 +42,9 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.OptionalLong;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
@@ -63,6 +66,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Streams;
 import com.google.common.io.BaseEncoding;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
@@ -483,6 +487,11 @@ public final class ModernizerTest {
         public boolean apply(Void input) {
             return true;
         }
+
+        @Override
+        public boolean test(Void input) {
+            return true;
+        }
     }
 
     private static class VoidSupplier implements Supplier<Void> {
@@ -645,6 +654,10 @@ public final class ModernizerTest {
             object = Collections.EMPTY_LIST;
             object = Collections.EMPTY_MAP;
             object = Collections.EMPTY_SET;
+            Streams.stream(java.util.Optional.empty());
+            Streams.stream(OptionalInt.empty());
+            Streams.stream(OptionalLong.empty());
+            Streams.stream(OptionalDouble.empty());
         }
     }
 
