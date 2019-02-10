@@ -1068,4 +1068,10 @@ violation names use the same format that javap emits.
     <comment>Prefer java.util.OptionalDouble.stream()</comment>
   </violation>
 
+  <violation>
+    <name>com/google/common/collect/Iterators.forEnumeration:(Ljava/util/Enumeration;)Lcom/google/common/collect/UnmodifiableIterator;</name>
+    <version>1.9</version>
+    <comment>Prefer java.util.Enumeration.asIterator()</comment>
+  </violation>
+
 </modernizer>
