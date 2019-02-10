@@ -11,9 +11,9 @@ For example, Modernizer can detect uses of `Vector` instead of `ArrayList`,
 `String.getBytes(String)` instead of `String.getBytes(Charset)`, and
 Guava `Objects.equal` instead of Java 7 `Objects.equals`.
 The default configuration detects
-[over 100 legacy APIs](https://github.com/andrewgaul/modernizer-maven-plugin/blob/master/src/main/resources/modernizer.xml),
+[over 100 legacy APIs](https://github.com/gaul/modernizer-maven-plugin/blob/master/src/main/resources/modernizer.xml),
 including third-party libraries like
-[Guava](https://code.google.com/p/guava-libraries/).
+[Guava](https://github.com/google/guava).
 
 Configuration
 -------------
@@ -60,7 +60,7 @@ the modernizer `<plugin>` stanza in your pom.xml:
 ```
 
 Command-line flags can override Modernizer configuration and
-[ModernizerMojo](https://github.com/andrewgaul/modernizer-maven-plugin/blob/master/src/main/java/org/gaul/modernizer_maven_plugin/ModernizerMojo.java)
+[ModernizerMojo](https://github.com/gaul/modernizer-maven-plugin/blob/master/src/main/java/org/gaul/modernizer_maven_plugin/ModernizerMojo.java)
 documents all of these.  The most commonly used flags:
 
 * `-Dmodernizer.failOnViolations` - fail phase if violations detected, defaults to true
@@ -85,11 +85,11 @@ to ignore and adding the following dependency to your pom:
 
 References
 ----------
-* [ASM](http://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
+* [ASM](https://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
 * `javac -Xlint:deprecated` detects uses of interfaces with @Deprecated annotations
 * [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
-* [Checkstyle](http://checkstyle.sourceforge.net/) IllegalInstantiation and Regexp checks can mimic some of Modernizer's functionality
-* [Google Error Prone](http://errorprone.info/) JdkObsolete can mimic some of Modernizer's functionality
+* [Checkstyle](https://checkstyle.org/) IllegalInstantiation and Regexp checks can mimic some of Modernizer's functionality
+* [Google Error Prone](https://errorprone.info/) JdkObsolete can mimic some of Modernizer's functionality
 * [Gradle Modernizer Plugin](https://github.com/simonharrer/gradle-modernizer-plugin) is a thin wrapper around this maven modernizer plugin.
 
 License
