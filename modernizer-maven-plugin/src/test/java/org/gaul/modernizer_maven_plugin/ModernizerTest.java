@@ -27,6 +27,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.NetworkInterface;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.channels.ReadableByteChannel;
@@ -63,6 +64,7 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -708,6 +710,7 @@ public final class ModernizerTest {
             Streams.stream(OptionalInt.empty());
             Streams.stream(OptionalLong.empty());
             Streams.stream(OptionalDouble.empty());
+            Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
         }
     }
 
