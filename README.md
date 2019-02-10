@@ -17,6 +17,7 @@ including third-party libraries like
 
 Configuration
 -------------
+
 To run Modernizer, add the following to the `<plugins>` stanza in your pom.xml
 then invoke `mvn modernizer:modernizer`:
 
@@ -85,12 +86,13 @@ to ignore and adding the following dependency to your pom:
 
 References
 ----------
+
 * [ASM](https://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
-* `javac -Xlint:deprecated` detects uses of interfaces with @Deprecated annotations
-* [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
 * [Checkstyle](https://checkstyle.org/) IllegalInstantiation and Regexp checks can mimic some of Modernizer's functionality
 * [Google Error Prone](https://errorprone.info/) JdkObsolete can mimic some of Modernizer's functionality
-* [Gradle Modernizer Plugin](https://github.com/simonharrer/gradle-modernizer-plugin) is a thin wrapper around this maven modernizer plugin.
+* [Gradle Modernizer Plugin](https://github.com/simonharrer/gradle-modernizer-plugin) provides a Gradle interface to Modernizer
+* `javac -Xlint:deprecated` detects uses of interfaces with @Deprecated annotations
+* [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
 
 License
 -------
