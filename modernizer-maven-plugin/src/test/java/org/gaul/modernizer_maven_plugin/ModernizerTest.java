@@ -56,6 +56,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -711,6 +712,7 @@ public final class ModernizerTest {
             Streams.stream(OptionalLong.empty());
             Streams.stream(OptionalDouble.empty());
             Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
+            MoreObjects.firstNonNull("", "");
         }
     }
 

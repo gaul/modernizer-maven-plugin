@@ -1074,4 +1074,10 @@ violation names use the same format that javap emits.
     <comment>Prefer java.util.Enumeration.asIterator()</comment>
   </violation>
 
+  <violation>
+    <name>com/google/common/base/MoreObjects.firstNonNull:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.9</version>
+    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object)</comment>
+  </violation>
+
 </modernizer>
