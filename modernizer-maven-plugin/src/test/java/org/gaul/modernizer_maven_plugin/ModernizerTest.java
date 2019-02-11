@@ -683,6 +683,8 @@ public final class ModernizerTest {
             new BASE64Encoder().encode((byte[]) null);
             Preconditions.checkNotNull(new Object());
             Preconditions.checkNotNull(new Object(), new Object());
+            Preconditions.checkElementIndex(0, 0);
+            Preconditions.checkPositionIndexes(0, 0, 0);
             DateTime.now();
             DateTime.parse("");
             new DateTime(50L);
