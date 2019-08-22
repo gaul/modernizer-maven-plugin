@@ -26,11 +26,29 @@
         </dependencies>
       </plugin>
       <plugin>
+        <groupId>codes.rafael.modulemaker</groupId>
+        <artifactId>modulemaker-maven-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>inject-module</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <name>org.gaul.modernizer_maven_annotations</name>
+          <exports>org.gaul.modernizer_maven_annotations</exports>
+          <multirelease>true</multirelease>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <archive>
             <manifestEntries combine.children="append">
-              <Automatic-Module-Name>org.gaul.modernizer_maven_annotations</Automatic-Module-Name>
+              <Multi-Release>true</Multi-Release>
             </manifestEntries>
           </archive>
         </configuration>
