@@ -20,6 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -72,6 +74,7 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import com.google.common.io.BaseEncoding;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
@@ -381,11 +384,13 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("1.10");
+        Modernizer modernizer = createModernizer("1.11");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java10Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(Java11Violations.class.getName())));
         // must visit inner classes manually
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidFunction.class.getName())));
@@ -740,6 +745,22 @@ public final class ModernizerTest {
             new Scanner((InputStream) null, "");
             new Scanner((Path) null, "");
             new Scanner((ReadableByteChannel) null, "");
+        }
+    }
+
+    private static class Java11Violations {
+        private static void method() throws Exception {
+            ByteStreams.nullOutputStream();
+            ByteStreams.skipFully(null, 0L);
+            CharStreams.nullWriter();
+            Files.toString((File) null, (Charset) null);
+            Files.write("", (File) null, (Charset) null);
+            new FileReader((File) null);
+            new FileReader((String) null);
+            new FileWriter((File) null);
+            new FileWriter((File) null, true);
+            new FileWriter("");
+            new FileWriter("", true);
         }
     }
 
