@@ -72,9 +72,8 @@ documents all of these.  The most commonly used flags:
 Ignoring elements
 -----------------
 
-You can indicate that a violations with a class or method should be ignored by
-the plugin by adding `@SuppressModernizer` to the element you'd like
-to ignore and adding the following dependency to your pom:
+Code can suppress violations within a class or method via an annotation.  First
+add the following dependency to your `pom.xml`:
 
 ```xml
 <dependencies>
@@ -84,6 +83,17 @@ to ignore and adding the following dependency to your pom:
     <version>1.8.0</version>
   </dependency>
 </dependencies>
+```
+
+Then add `@SuppressModernizer` to the element to ignore:
+
+```java
+import org.gaul.modernizer_maven_annotations.SuppressModernizer;
+
+public class Example {
+    @SuppressModernizer
+    public static void method() { ... }
+}
 ```
 
 References
