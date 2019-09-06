@@ -27,7 +27,7 @@ then invoke `mvn modernizer:modernizer`:
 <plugin>
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
-  <version>1.8.0</version>
+  <version>1.9.0</version>
   <configuration>
     <javaVersion>1.8</javaVersion>
   </configuration>
@@ -80,7 +80,7 @@ add the following dependency to your `pom.xml`:
   <dependency>
     <groupId>org.gaul</groupId>
     <artifactId>modernizer-maven-annotations</artifactId>
-    <version>1.8.0</version>
+    <version>1.9.0</version>
   </dependency>
 </dependencies>
 ```
