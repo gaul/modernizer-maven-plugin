@@ -1095,7 +1095,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/io/ByteStreams.nullOutputStream:()Ljava/io/OutputStream;</name>
     <version>1.11</version>
-    <comment>Prefer java.io.nullOutputStream()</comment>
+    <comment>Prefer java.io.OutputStream.nullOutputStream()</comment>
   </violation>
 
   <violation>
@@ -1107,55 +1107,55 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/io/CharStreams.nullWriter:()Ljava/io/Writer;</name>
     <version>1.11</version>
-    <comment>Prefer java.io.nullWriter()</comment>
+    <comment>Prefer java.io.Writer.nullWriter()</comment>
   </violation>
 
   <violation>
     <name>com/google/common/io/Files.toString:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/lang/String;</name>
     <version>1.11</version>
-    <comment>Prefer java.io.readString(Path, Charset)</comment>
+    <comment>Prefer java.nio.file.Files.readString(Path, Charset)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/io/Files.write:(Ljava/lang/CharSequence;Ljava/io/File;Ljava/nio/charset/Charset;)V</name>
     <version>1.11</version>
-    <comment>Prefer java.io.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/io/File;)V</name>
     <version>1.11</version>
-    <comment>Prefer java.io.FileReader(File, Charset)</comment>
+    <comment>Prefer java.io.FileReader.&lt;init&gt;(File, Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>1.11</version>
-    <comment>Prefer java.io.FileReader(String, Charset)</comment>
+    <comment>Prefer java.io.FileReader.&lt;init&gt;(String, Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/io/File;)V</name>
     <version>1.11</version>
-    <comment>Prefer java.io.FileWriter(File, Charset)</comment>
+    <comment>Prefer java.io.FileWriter.&lt;init&gt;(File, Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/io/File;Z)V</name>
     <version>1.11</version>
-    <comment>Prefer java.io.FileWriter(File, Charset, boolean)</comment>
+    <comment>Prefer java.io.FileWriter.&lt;init&gt;(File, Charset, boolean)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>1.11</version>
-    <comment>Prefer java.io.FileWriter(String, Charset)</comment>
+    <comment>Prefer java.io.FileWriter.&lt;init&gt;(String, Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
     <version>1.11</version>
-    <comment>Prefer java.io.FileWriter(String, Charset, boolean)</comment>
+    <comment>Prefer java.io.FileWriter.&lt;init&gt;(String, Charset, boolean)</comment>
   </violation>
 
 </modernizer>
