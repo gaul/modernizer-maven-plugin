@@ -63,7 +63,7 @@ the modernizer `<plugin>` stanza in your pom.xml:
 ```
 
 Command-line flags can override Modernizer configuration and
-[ModernizerMojo](https://github.com/gaul/modernizer-maven-plugin/blob/master/src/main/java/org/gaul/modernizer_maven_plugin/ModernizerMojo.java)
+[ModernizerMojo](https://github.com/gaul/modernizer-maven-plugin/blob/master/modernizer-maven-plugin/src/main/java/org/gaul/modernizer_maven_plugin/ModernizerMojo.java) 
 documents all of these.  The most commonly used flags:
 
 * `-Dmodernizer.failOnViolations` - fail phase if violations detected, defaults to true
