@@ -131,6 +131,14 @@ public final class ModernizerMojo extends AbstractMojo {
     private String violationLogLevel;
 
     /**
+     * Classes annotated with {@code @Generated} will be excluded from
+     * scanning.
+     * */
+    @Parameter(defaultValue = "true",
+               property = "modernizer.ignoreGeneratedClasses")
+    private Boolean ignoreGeneratedClasses;
+
+    /**
      * Violations to disable. Each exclusion should be in the javap format:
      *
      * java/lang/String.getBytes:(Ljava/lang/String;)[B.
@@ -222,10 +230,37 @@ public final class ModernizerMojo extends AbstractMojo {
         try {
             ignoreClassNames.addAll(
                 SuppressModernizerAnnotationDetector.detect(outputDirectory));
+            if (ignoreGeneratedClasses) {
+                Set<String> ignore =
+                    SuppressGeneratedAnnotationDetector.detect(
+                        outputDirectory);
+                if (getLog().isDebugEnabled()) {
+                    getLog().debug(
+                        "The following generated classes will be ignored");
+                    for (String s : ignore) {
+                        getLog().debug(s);
+                    }
+                }
+                ignoreClassNames.addAll(ignore);
+            }
             if (includeTestClasses) {
                 ignoreClassNames.addAll(
                     SuppressModernizerAnnotationDetector.detect(
                         testOutputDirectory));
+                if (ignoreGeneratedClasses) {
+                    Set<String> ignore =
+                        SuppressGeneratedAnnotationDetector.detect(
+                            testOutputDirectory);
+                    if (getLog().isDebugEnabled()) {
+                        getLog().debug(
+                            "The following generated test classes " +
+                            "will be ignored");
+                        for (String s : ignore) {
+                            getLog().debug(s);
+                        }
+                    }
+                    ignoreClassNames.addAll(ignore);
+                }
             }
         } catch (IOException e) {
             throw new MojoExecutionException("Error reading suppressions", e);
