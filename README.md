@@ -46,6 +46,7 @@ The `<configuration>` stanza can contain several elements:
 * `<exclusionPatterns>` violation patterns to disable, specified using `<exclusionPattern>` child elements. Each exclusion should be a regular expression that matches the javap format: `java/lang/.*` of a violation.
 * `<ignorePackages>` package prefixes to ignore, specified using `<ignorePackage>` child elements. Specifying `foo.bar` subsequently ignores `foo.bar.*`, `foo.bar.baz.*` and so on.
 * `<ignoreClassNamePatterns>` full qualified class names (incl. package) to ignore, specified using `<ignoreClassNamePattern>` child elements. Each exclusion should be a regular expression that matches a package and/or class; the package will be / not . separated (ASM's format).
+* `<ignoreGeneratedClasses>` classes annotated with annotations that contain "Generated" in their name will be ignored.
 
 To run Modernizer during the verify phase of your build, add the following to
 the modernizer `<plugin>` stanza in your pom.xml:
