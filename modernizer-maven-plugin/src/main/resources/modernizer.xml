@@ -1100,7 +1100,7 @@ violation names use the same format that javap emits.
 
   <violation>
     <name>com/google/common/io/ByteStreams.skipFully:(Ljava/io/InputStream;J)V</name>
-    <version>1.11</version>
+    <version>1.12</version>
     <comment>Prefer java.io.InputStream.skipNBytes(long)</comment>
   </violation>
 

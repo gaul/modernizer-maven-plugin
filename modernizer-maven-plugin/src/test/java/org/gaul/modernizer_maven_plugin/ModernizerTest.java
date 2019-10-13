@@ -384,13 +384,15 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("1.11");
+        Modernizer modernizer = createModernizer("1.12");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java10Violations.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java11Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(Java12Violations.class.getName())));
         // must visit inner classes manually
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidFunction.class.getName())));
@@ -751,7 +753,6 @@ public final class ModernizerTest {
     private static class Java11Violations {
         private static void method() throws Exception {
             ByteStreams.nullOutputStream();
-            ByteStreams.skipFully(null, 0L);
             CharStreams.nullWriter();
             Files.toString((File) null, (Charset) null);
             Files.write("", (File) null, (Charset) null);
@@ -761,6 +762,12 @@ public final class ModernizerTest {
             new FileWriter((File) null, true);
             new FileWriter("");
             new FileWriter("", true);
+        }
+    }
+
+    private static class Java12Violations {
+        private static void method() throws Exception {
+            ByteStreams.skipFully(null, 0L);
         }
     }
 
