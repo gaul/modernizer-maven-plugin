@@ -76,6 +76,7 @@ import com.google.common.io.BaseEncoding;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
+import com.google.common.math.IntMath;
 import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
@@ -644,6 +645,8 @@ public final class ModernizerTest {
             UnsignedLongs.parseUnsignedLong("0");
             UnsignedLongs.parseUnsignedLong("0", 10);
             UnsignedLongs.remainder(0, 0);
+            Ints.checkedCast(0);
+            IntMath.checkedSubtract(0, 0);
             Atomics.newReference();
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);

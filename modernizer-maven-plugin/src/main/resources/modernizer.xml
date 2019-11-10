@@ -499,6 +499,18 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/primitives/Ints.checkedCast:(J)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Math.toIntExact(long); note that it throws an ArithmeticException instead of an IllegalArgumentException</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/IntMath.checkedSubtract:(II)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Math.checkedSubtract(int, int)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/util/concurrent/Atomics.newReference:()Ljava/util/concurrent/atomic/AtomicReference;</name>
     <version>1.7</version>
     <comment>Prefer java.util.concurrent.atomic.AtomicReference&lt;&gt;()</comment>
