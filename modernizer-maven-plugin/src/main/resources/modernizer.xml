@@ -505,9 +505,39 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/math/IntMath.checkedAdd:(II)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Math.addExact(int, int)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/math/IntMath.checkedSubtract:(II)I</name>
     <version>1.8</version>
-    <comment>Prefer java.lang.Math.checkedSubtract(int, int)</comment>
+    <comment>Prefer java.lang.Math.subtractExact(int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/IntMath.checkedMultiply:(II)I</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Math.multiplyExact(int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/LongMath.checkedAdd:(JJ)J</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Math.addExact(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/LongMath.checkedSubtract:(JJ)J</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Math.subtractExact(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/LongMath.checkedMultiply:(JJ)J</name>
+    <version>1.8</version>
+    <comment>Prefer java.lang.Math.multiplyExact(long, long)</comment>
   </violation>
 
   <violation>
