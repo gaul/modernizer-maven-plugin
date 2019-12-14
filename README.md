@@ -106,6 +106,7 @@ References
 * [Gradle Modernizer Plugin](https://github.com/simonharrer/gradle-modernizer-plugin) provides a Gradle interface to Modernizer
 * `javac -Xlint:deprecated` detects uses of interfaces with @Deprecated annotations
 * [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
+* [Policeman's Forbidden API Checker](https://github.com/policeman-tools/forbidden-apis) provides similar functionality to Modernizer
 
 License
 -------
