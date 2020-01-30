@@ -107,9 +107,6 @@ import org.junit.Test;
 import org.objectweb.asm.ClassReader;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 public final class ModernizerTest {
     private Map<String, Violation> violations;
     private static final Collection<String> NO_EXCLUSIONS =
@@ -695,8 +692,8 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null);
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
-            new BASE64Decoder().decodeBuffer("");
-            new BASE64Encoder().encode((byte[]) null);
+            Base64.decodeBase64("");
+            Base64.encodeBase64((byte[]) null);
             Preconditions.checkNotNull(new Object());
             Preconditions.checkNotNull(new Object(), new Object());
             Preconditions.checkElementIndex(0, 0);
