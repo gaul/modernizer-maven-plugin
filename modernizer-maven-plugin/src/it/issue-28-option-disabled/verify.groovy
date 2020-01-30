@@ -15,4 +15,5 @@
  */
 
 log = new File(basedir, 'build.log')
-assert log.text.contains('/src/main/java/org/gaul/it/TestClass.java:25: Prefer java.util.ArrayList')
+assert log.text.contains(File.separator + 'src' + File.separator + 'main' + File.separator + 'java' + File.separator + 'org' + File.separator + 'gaul' + File.separator + 'it' + File.separator + 'TestClass.java:25: Prefer java.util.ArrayList')
+
