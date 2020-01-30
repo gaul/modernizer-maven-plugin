@@ -104,8 +104,6 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.6.1</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
           <compilerArguments>
@@ -247,6 +245,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <asm.version>8.0.1</asm.version>
+
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.testSource>1.8</maven.compiler.testSource>
+    <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
   </properties>
 
   <dependencyManagement>
