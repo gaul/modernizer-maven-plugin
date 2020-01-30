@@ -20,6 +20,10 @@
     <maven>3.0.5</maven>
   </prerequisites>
 
+  <properties>
+    <groovy.version>3.0.0-rc-3</groovy.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -119,7 +123,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.1</version>
         <configuration>
           <mavenOpts>${argLine}</mavenOpts>
           <debug>true</debug>
@@ -135,6 +139,14 @@
             <goal>test-compile</goal>
           </goals>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+            <type>pom</type>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>integration-test</id>
