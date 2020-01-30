@@ -246,8 +246,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <asm.version>8.0.1</asm.version>
 
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
     <maven.compiler.testSource>1.8</maven.compiler.testSource>
     <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
   </properties>
