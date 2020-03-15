@@ -21,7 +21,7 @@
   </prerequisites>
 
   <properties>
-    <groovy.version>3.0.0-rc-3</groovy.version>
+    <groovy.version>3.0.2</groovy.version>
   </properties>
 
   <dependencies>
