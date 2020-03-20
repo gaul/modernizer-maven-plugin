@@ -16,7 +16,7 @@
 
 package org.gaul.modernizer_maven_plugin;
 
-final class Violation {
+public final class Violation {
     private final String name;
     private final int version;
     private final String comment;
@@ -28,15 +28,15 @@ final class Violation {
         this.comment = Utils.checkNotNull(comment);
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    int getVersion() {
+    public int getVersion() {
         return version;
     }
 
-    String getComment() {
+    public String getComment() {
         return comment;
     }
 
