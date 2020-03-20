@@ -35,7 +35,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-final class Modernizer {
+public final class Modernizer {
     private final long javaVersion;
     private final Map<String, Violation> violations;
     private final Collection<String> exclusions;
@@ -44,7 +44,7 @@ final class Modernizer {
     private final Set<String> ignoreClassNames;
     private final Collection<Pattern> ignoreFullClassNamePatterns;
 
-    Modernizer(String javaVersion, Map<String, Violation> violations,
+    public Modernizer(String javaVersion, Map<String, Violation> violations,
             Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
@@ -67,7 +67,7 @@ final class Modernizer {
             = Utils.createImmutableSet(ignoreClassNamePatterns);
     }
 
-    Collection<ViolationOccurrence> check(ClassReader classReader)
+    public Collection<ViolationOccurrence> check(ClassReader classReader)
             throws IOException {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
                 javaVersion, violations, exclusions, exclusionPatterns,
@@ -76,11 +76,12 @@ final class Modernizer {
         return classVisitor.getOccurrences();
     }
 
-    Collection<ViolationOccurrence> check(InputStream is) throws IOException {
+    public Collection<ViolationOccurrence> check(InputStream is)
+          throws IOException {
         return check(new ClassReader(is));
     }
 
-    static Map<String, Violation> parseFromXml(InputStream is)
+    public static Map<String, Violation> parseFromXml(InputStream is)
             throws IOException, ParserConfigurationException, SAXException {
         Map<String, Violation> map =
                 new HashMap<String, Violation>();
