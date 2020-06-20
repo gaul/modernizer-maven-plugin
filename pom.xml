@@ -246,7 +246,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <asm.version>7.3.1</asm.version>
+    <asm.version>8.0.1</asm.version>
   </properties>
 
   <dependencyManagement>
