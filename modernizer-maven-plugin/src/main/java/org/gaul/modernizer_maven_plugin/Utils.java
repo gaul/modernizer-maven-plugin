@@ -34,7 +34,7 @@ import org.objectweb.asm.Opcodes;
 
 final class Utils {
     static final Charset UTF_8 = Charset.forName("UTF-8");
-    static final int ASM_API = Opcodes.ASM7;
+    static final int ASM_API = Opcodes.ASM9;
 
     static <T> T checkNotNull(T reference) {
         if (reference == null) {
