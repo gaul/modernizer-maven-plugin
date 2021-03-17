@@ -107,9 +107,6 @@ import org.junit.Test;
 import org.objectweb.asm.ClassReader;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 public final class ModernizerTest {
     private Map<String, Violation> violations;
     private static final Collection<String> NO_EXCLUSIONS =
@@ -417,6 +414,13 @@ public final class ModernizerTest {
         for (ViolationOccurrence occurrence : occurrences) {
             actualViolations.add(occurrence.getViolation());
         }
+
+        // Not testing these since modern JDK have removed them.
+        violations.remove(
+                "sun/misc/BASE64Decoder.decodeBuffer:(Ljava/lang/String;)[B");
+        violations.remove(
+                "sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;");
+
         assertThat(actualViolations).containsAll(violations.values());
     }
 
@@ -695,8 +699,6 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null);
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
-            new BASE64Decoder().decodeBuffer("");
-            new BASE64Encoder().encode((byte[]) null);
             Preconditions.checkNotNull(new Object());
             Preconditions.checkNotNull(new Object(), new Object());
             Preconditions.checkElementIndex(0, 0);
