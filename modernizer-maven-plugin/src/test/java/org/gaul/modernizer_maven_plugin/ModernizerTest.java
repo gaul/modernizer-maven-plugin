@@ -67,6 +67,7 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -386,6 +387,8 @@ public final class ModernizerTest {
         Modernizer modernizer = createModernizer("1.12");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
+        occurrences.addAll(modernizer.check(
+                new ClassReader(Java8Violations.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java10Violations.class.getName())));
         occurrences.addAll(modernizer.check(
@@ -733,6 +736,38 @@ public final class ModernizerTest {
             Streams.stream(OptionalDouble.empty());
             Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
             MoreObjects.firstNonNull("", "");
+        }
+    }
+
+    // TODO: move more methods from AllViolations to here
+    private static class Java8Violations {
+        private static void method() throws Exception {
+            Iterables.getOnlyElement(null);
+            Iterables.getOnlyElement(null, null);
+            Iterables.frequency(null, null);
+            Iterables.cycle((Iterable) null);
+            Iterables.cycle();
+            Iterables.concat(null, null);
+            Iterables.concat(null, null, null);
+            Iterables.concat(null, null, null, null);
+            Iterables.concat((Iterable) null);
+            Iterables.concat((Iterable<Iterable>) null);
+            Iterables.filter(null, (Predicate) null);
+            Iterables.filter(null, (Class) null);
+            Iterables.any(null, null);
+            Iterables.all(null, null);
+            Iterables.find(null, null);
+            Iterables.find(null, null, null);
+            Iterables.tryFind(null, null);
+            Iterables.transform(null, null);
+            Iterables.get(null, 0);
+            Iterables.get(null, 0, null);
+            Iterables.getFirst(null, null);
+            Iterables.getLast(null);
+            Iterables.getLast(null, null);
+            Iterables.skip(null, 0);
+            Iterables.limit(null, 0);
+            Iterables.isEmpty(null);
         }
     }
 

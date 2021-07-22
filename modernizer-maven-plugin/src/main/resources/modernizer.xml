@@ -1123,6 +1123,162 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Iterables.getOnlyElement:(Ljava/lang/Iterable;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.collect(MoreCollectors.onlyElement())</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.getOnlyElement:(Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.collect(MoreCollectors.toOptional()).orElse(defaultValue)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.frequency:(Ljava/lang/Iterable;Ljava/lang/Object;)I</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.filter(element::equals).count() or Stream.filter(Predicate.isEqual(element)).count()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.cycle:(Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.generate(() -> iterable).flatMap(Streams::stream)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.cycle:([Ljava/lang/Object;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream equivalent of this method is Stream.generate(() -> e) or Stream.generate(() -> collection).flatMap(Collection::stream)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.concat:(Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.concat(a, b)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.concat:(Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Streams.concat(a, b, c)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.concat:(Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Streams.concat(a, b, c, d)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.concat:(Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Streams.concat(...)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.concat:([Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.flatMap(s -> s)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.filter:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.filter(java.util.function.Predicate&lt;? super T&gt;)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.filter:(Ljava/lang/Iterable;Ljava/lang/Class;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.filter(type::isInstance).map(type::cast)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.any:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Z</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.anyMatch(java.util.function.Predicate&lt;? super T&gt;)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.all:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Z</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.allMatch(java.util.function.Predicate&lt;? super T&gt;)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.find:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.filter(predicate).findFirst().get()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.find:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.filter(predicate).findFirst().orElse(defaultValue)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.tryFind:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Lcom/google/common/base/Optional;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.filter(predicate).findFirst()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.transform:(Ljava/lang/Iterable;Lcom/google/common/base/Function;)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.map(java.util.function.Function&lt;? super T, ? extends R&gt;)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.get:(Ljava/lang/Iterable;I)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.skip(position).findFirst().get()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.get:(Ljava/lang/Iterable;ILjava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.skip(position).findFirst().orElse(defaultValue)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.getFirst:(Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.findFirst().orElse(defaultValue)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.getLast:(Ljava/lang/Iterable;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Streams.findLast(stream).get()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.getLast:(Ljava/lang/Iterable;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>1.8</version>
+    <comment>Prefer Streams.findLast(stream).orElse(defaultValue)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.skip:(Ljava/lang/Iterable;I)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.skip(long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.limit:(Ljava/lang/Iterable;I)Ljava/lang/Iterable;</name>
+    <version>1.8</version>
+    <comment>Prefer Stream.limit(long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.isEmpty:(Ljava/lang/Iterable;)Z</name>
+    <version>1.8</version>
+    <comment>Prefer !stream.findAny().isPresent()</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Iterators.forEnumeration:(Ljava/util/Enumeration;)Lcom/google/common/collect/UnmodifiableIterator;</name>
     <version>1.9</version>
     <comment>Prefer java.util.Enumeration.asIterator()</comment>

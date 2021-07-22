@@ -11,7 +11,7 @@ For example, Modernizer can detect uses of `Vector` instead of `ArrayList`,
 `String.getBytes(String)` instead of `String.getBytes(Charset)`, and
 Guava `Objects.equal` instead of Java 7 `Objects.equals`.
 The default configuration detects
-[roughly 200 legacy APIs](https://github.com/gaul/modernizer-maven-plugin/blob/master/modernizer-maven-plugin/src/main/resources/modernizer.xml),
+[over 200 legacy APIs](https://github.com/gaul/modernizer-maven-plugin/blob/master/modernizer-maven-plugin/src/main/resources/modernizer.xml),
 including third-party libraries like
 [Apache Commons](https://commons.apache.org/),
 [Guava](https://github.com/google/guava),
