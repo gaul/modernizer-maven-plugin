@@ -39,6 +39,11 @@ public class SuppressModernizerTestClasses {
 
     public static final class SuppressedOnMembers {
         @SuppressModernizer
+        SuppressedOnMembers() {
+            System.out.println(Charsets.UTF_8);
+        }
+
+        @SuppressModernizer
         public Charset getCharset() {
             return Charsets.UTF_8;
         }
