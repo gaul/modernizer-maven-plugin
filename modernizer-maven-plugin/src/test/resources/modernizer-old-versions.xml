@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<modernizer>
+    <!-- just for testing reading of old java version numbers -->
+    <violation>
+        <name>com/google/common/base/Function</name>
+        <version>1.8</version>
+        <comment>Prefer java.util.function.Function</comment>
+    </violation>
+</modernizer>

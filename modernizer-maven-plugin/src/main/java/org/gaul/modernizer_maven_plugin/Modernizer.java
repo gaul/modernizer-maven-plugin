@@ -99,14 +99,16 @@ public final class Modernizer {
             Element element = (Element) nNode;
             String version = element.getElementsByTagName("version").item(0)
                     .getTextContent();
-            if (!version.startsWith("1.")) {
-                throw new IllegalArgumentException(
-                        "Invalid version, must have the form 1.6");
+            int versionNum;
+            if (version.startsWith("1.")) {
+                versionNum = Integer.parseInt(version.substring(2));
+            } else {
+                versionNum = Integer.parseInt(version);
             }
             Violation violation = new Violation(
                     element.getElementsByTagName("name").item(0)
                             .getTextContent(),
-                    Integer.parseInt(version.substring(2)),
+                    versionNum,
                     element.getElementsByTagName("comment").item(0)
                             .getTextContent());
             map.put(violation.getName(), violation);
