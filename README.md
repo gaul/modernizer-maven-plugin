@@ -29,14 +29,14 @@ then invoke `mvn modernizer:modernizer`:
   <artifactId>modernizer-maven-plugin</artifactId>
   <version>2.3.0</version>
   <configuration>
-    <javaVersion>1.8</javaVersion>
+    <javaVersion>8</javaVersion>
   </configuration>
 </plugin>
 ```
 
 The `<configuration>` stanza can contain several elements:
 
-* `<javaVersion>` enables violations based on target Java version, e.g., 1.8.  For example, Modernizer will detect uses of `Vector` as violations when targeting Java 1.2 but not when targeting Java 1.1.  Required parameter.
+* `<javaVersion>` enables violations based on target Java version, e.g., 8.  For example, Modernizer will detect uses of `Vector` as violations when targeting Java 1.2 but not when targeting Java 1.1.  Required parameter.
 * `<failOnViolations>` fail phase if Modernizer detects any violations.  Defaults to true.
 * `<includeTestClasses>` run Modernizer on test classes.  Defaults to true.
 * `<violationsFile>` user-specified violation file.  Also disables standard violation checks. Can point to classpath using absolute paths, e.g. `classpath:/your/file.xml`.
