@@ -103,7 +103,7 @@ References
 * [ASM](https://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
 * [Checkstyle](https://checkstyle.org/) IllegalInstantiation and Regexp checks can mimic some of Modernizer's functionality
 * [Google Error Prone](https://errorprone.info/) JdkObsolete can mimic some of Modernizer's functionality
-* [Gradle Modernizer Plugin](https://github.com/simonharrer/gradle-modernizer-plugin) provides a Gradle interface to Modernizer
+* [Gradle Modernizer Plugin](https://github.com/andygoossens/gradle-modernizer-plugin) provides a Gradle interface to Modernizer
 * `javac -Xlint:deprecated` detects uses of interfaces with @Deprecated annotations
 * [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
 * [Policeman's Forbidden API Checker](https://github.com/policeman-tools/forbidden-apis) provides similar functionality to Modernizer
