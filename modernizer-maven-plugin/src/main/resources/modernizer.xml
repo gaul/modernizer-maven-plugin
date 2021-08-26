@@ -5,7 +5,6 @@
 This file contains the standard set of violations for Modernizer.  The
 violation names use the same format that javap emits.
 -->
-
   <violation>
     <name>com/google/common/base/Function</name>
     <version>1.8</version>
@@ -1355,5 +1354,65 @@ violation names use the same format that javap emits.
     <version>1.11</version>
     <comment>Prefer java.io.FileWriter.&lt;init&gt;(String, Charset, boolean)</comment>
   </violation>
+
+    <violation>
+      <name>org/apache/commons/lang3/StringUtils.join:(Ljava/lang/Iterable;C)Ljava/lang/String;</name>
+      <version>1.8</version>
+      <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+    </violation>
+
+    <violation>
+        <name>org/apache/commons/lang3/StringUtils.join:(Ljava/lang/Iterable;Ljava/lang/String;)Ljava/lang/String;</name>
+        <version>1.8</version>
+        <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+    </violation>
+
+    <violation>
+      <name>java/lang/Byte."&lt;init&gt;":(Ljava/lang/String;)V</name>
+      <version>1.9</version>
+      <comment>Prefer java.lang.Byte.valueOf(String) or java.lang.Byte.parseByte(String)</comment>
+    </violation>
+
+    <violation>
+      <name>java/lang/Double."&lt;init&gt;":(Ljava/lang/String;)V</name>
+      <version>1.9</version>
+      <comment>Prefer java.lang.Double.valueOf(String) or java.lang.Double.parseDouble(String)</comment>
+    </violation>
+
+    <violation>
+      <name>java/lang/Float."&lt;init&gt;":(Ljava/lang/String;)V</name>
+      <version>1.9</version>
+      <comment>Prefer java.lang.Float.valueOf(String) or java.lang.Float.parseFloat(String)</comment>
+    </violation>
+
+    <violation>
+      <name>java/lang/Integer."&lt;init&gt;":(Ljava/lang/String;)V</name>
+      <version>1.9</version>
+      <comment>Prefer java.lang.Integer.valueOf(String) or java.lang.Integer.parseInt(String)</comment>
+    </violation>
+
+    <violation>
+      <name>java/lang/Long."&lt;init&gt;":(Ljava/lang/String;)V</name>
+      <version>1.9</version>
+      <comment>Prefer java.lang.Long.valueOf(String) or java.lang.Long.parseLong(String)</comment>
+    </violation>
+
+    <violation>
+      <name>java/lang/Short."&lt;init&gt;":(Ljava/lang/String;)V</name>
+      <version>1.9</version>
+      <comment>Prefer java.lang.Short.valueOf(String) or java.lang.Short.parseShort(String)</comment>
+    </violation>
+
+    <violation>
+        <name>org/apache/commons/codec/binary/Base64.encodeBase64:([B)[B</name>
+        <version>1.8</version>
+        <comment>Prefer java.util.Base64.Encoder</comment>
+    </violation>
+
+    <violation>
+        <name>org/apache/commons/codec/binary/Base64.decodeBase64:([B)[B</name>
+        <version>1.8</version>
+        <comment>Prefer java.util.Base64.Decoder</comment>
+    </violation>
 
 </modernizer>

@@ -90,6 +90,7 @@ import com.google.inject.Provider;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.gaul.modernizer_maven_plugin
     .SuppressModernizerTestClasses.SuppressedOnClass;
 import org.gaul.modernizer_maven_plugin
@@ -389,6 +390,8 @@ public final class ModernizerTest {
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java8Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
+            new ClassReader(Java9Violations.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java10Violations.class.getName())));
         occurrences.addAll(modernizer.check(
@@ -690,8 +693,6 @@ public final class ModernizerTest {
             new Vector<Object>(1);
             new Vector<Object>(0, 0);
             new Vector<Object>((Collection<Object>) null);
-            Base64.decodeBase64("");
-            Base64.encodeBase64String((byte[]) null);
             object = org.apache.commons.io.Charsets.ISO_8859_1;
             object = org.apache.commons.io.Charsets.US_ASCII;
             object = org.apache.commons.io.Charsets.UTF_8;
@@ -768,6 +769,23 @@ public final class ModernizerTest {
             Iterables.skip(null, 0);
             Iterables.limit(null, 0);
             Iterables.isEmpty(null);
+            StringUtils.join((Iterable<String>) null, ',');
+            StringUtils.join((Iterable<String>) null, null);
+            Base64.decodeBase64("");
+            Base64.decodeBase64((byte[]) null);
+            Base64.encodeBase64String((byte[]) null);
+            Base64.encodeBase64((byte[]) null);
+        }
+    }
+
+    private static class Java9Violations {
+        private static void method() throws Exception {
+            new Byte((String) null);
+            new Double((String) null);
+            new Short((String) null);
+            new Float((String) null);
+            new Integer((String) null);
+            new Long((String) null);
         }
     }
 
