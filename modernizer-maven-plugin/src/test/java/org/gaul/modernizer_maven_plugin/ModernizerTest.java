@@ -132,6 +132,18 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void readsOldJavaVersionFormat() throws Exception {
+        InputStream is = Modernizer.class.getResourceAsStream(
+            "/modernizer-old-versions.xml");
+        try {
+            Map<String, Violation> old = Modernizer.parseFromXml(is);
+            assertThat(old).hasSize(1);
+        } finally {
+            Utils.closeQuietly(is);
+        }
+    }
+
+    @Test
     public void testConstructorCurrentApi() throws Exception {
         ClassReader cr = new ClassReader(ArrayListTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
