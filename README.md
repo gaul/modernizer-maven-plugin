@@ -81,7 +81,7 @@ add the following dependency to your `pom.xml`:
   <dependency>
     <groupId>org.gaul</groupId>
     <artifactId>modernizer-maven-annotations</artifactId>
-    <version>2.1.0</version>
+    <version>2.3.0</version>
   </dependency>
 </dependencies>
 ```
