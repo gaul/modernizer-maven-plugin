@@ -1,0 +1,40 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 https://maven.apache.org/xsd/decoration-1.8.0.xsd"
+         xmlns="http://maven.apache.org/DECORATION/1.8.0"
+         name="${this.name} ${this.version}">
+    <publishDate format="dd-MMMM-yyyy"/>
+    <version/>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.9</version>
+    </skin>
+    <bannerLeft>
+        <name>${this.organization.name}</name>
+        <!--        <src>images/logo.png</src>-->
+        <href>${this.organization.url}</href>
+    </bannerLeft>
+    <bannerRight>
+        <name>${this.name}</name>
+        <href>${this.url}</href>
+    </bannerRight>
+    <body>
+        <head/>
+        <links>
+            <item name="Wiki" href="https://github.com/gaul/modernizer-maven-plugin/wiki"/>
+            <item name="Issues dashboard" href="${this.issueManagement.url}"/>
+        </links>
+        <menu name="Information" inherit="top">
+            <item name="Home" href="/index.html"/>
+            <item name="Plugin documentation" href="modernizer-maven-plugin/plugin-info.html"/>
+            <item name="Wiki" href="https://github.com/gaul/modernizer-maven-plugin/wiki"/>
+        </menu>
+        <menu ref="modules"/>
+        <menu ref="reports"/>
+    </body>
+    <poweredBy>
+        <logo href="https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22modernizer-maven-plugin%22"
+              img="https://img.shields.io/maven-central/v/org.gaul/modernizer-maven-plugin.svg" alt="search"/>
+        <logo img="https://avatars.githubusercontent.com/u/848247?v=4" name="gaul" alt="logo"/>
+    </poweredBy>
+</project>
