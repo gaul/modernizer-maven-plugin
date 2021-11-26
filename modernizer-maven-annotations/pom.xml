@@ -8,6 +8,7 @@
   </parent>
 
   <artifactId>modernizer-maven-annotations</artifactId>
+  <name>Modernizer Maven Plugin annotations</name>
 
   <build>
     <plugins>
