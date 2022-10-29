@@ -17,12 +17,11 @@
   <description>Detect use of legacy APIs which modern Java versions supersede.</description>
 
   <prerequisites>
-    <maven>3.2.5</maven>
+    <maven>${mavenVersion}</maven>
   </prerequisites>
 
   <properties>
-    <groovy.version>3.0.2</groovy.version>
-    <maven.version>3.2.5</maven.version>
+    <mavenVersion>3.2.5</mavenVersion>
   </properties>
 
   <dependencies>
@@ -65,7 +64,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -157,7 +156,7 @@
           <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>${groovy.version}</version>
+            <version>3.0.2</version>
             <type>pom</type>
           </dependency>
         </dependencies>
