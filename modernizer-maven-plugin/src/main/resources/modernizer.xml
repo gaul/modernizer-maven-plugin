@@ -1241,4 +1241,10 @@ violation names use the same format that javap emits.
         <comment>Prefer java.util.Base64.Decoder</comment>
     </violation>
 
+    <violation>
+      <name>java/util/Optional.get:()Ljava/lang/Object;</name>
+        <version>10</version>
+        <comment>Prefer java.util.Optional.orElseThrow</comment>
+    </violation>
+
 </modernizer>

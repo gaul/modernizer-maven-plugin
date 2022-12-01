@@ -44,6 +44,7 @@ import java.util.Formatter;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
@@ -59,7 +60,6 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
@@ -538,9 +538,9 @@ public final class ModernizerTest {
             object = Charsets.UTF_16;
             Objects.equal(null, null);
             Objects.hashCode(null, null);
-            Optional.absent();
-            Optional.of((Object) null);
-            Optional.fromNullable(null);
+            com.google.common.base.Optional.absent();
+            com.google.common.base.Optional.of((Object) null);
+            com.google.common.base.Optional.fromNullable(null);
             Lists.newArrayList();
             Lists.newArrayListWithCapacity(0);
             Lists.newCopyOnWriteArrayList();
@@ -658,7 +658,7 @@ public final class ModernizerTest {
             object = Collections.EMPTY_LIST;
             object = Collections.EMPTY_MAP;
             object = Collections.EMPTY_SET;
-            Streams.stream(java.util.Optional.empty());
+            Streams.stream(Optional.empty());
             Streams.stream(OptionalInt.empty());
             Streams.stream(OptionalLong.empty());
             Streams.stream(OptionalDouble.empty());
@@ -735,6 +735,7 @@ public final class ModernizerTest {
             new Scanner((InputStream) null, "");
             new Scanner((Path) null, "");
             new Scanner((ReadableByteChannel) null, "");
+            Optional.empty().get();
         }
     }
 
