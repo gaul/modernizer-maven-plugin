@@ -86,6 +86,7 @@ import com.google.common.util.concurrent.Atomics;
 import com.google.inject.Provider;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.gaul.modernizer_maven_plugin
@@ -367,7 +368,7 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("1.12");
+        Modernizer modernizer = createModernizer("19");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
@@ -380,6 +381,12 @@ public final class ModernizerTest {
                 new ClassReader(Java11Violations.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java12Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
+            new ClassReader(Java17Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
+            new ClassReader(Java18Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
+            new ClassReader(Java19Violations.class.getName())));
         // must visit inner classes manually
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidFunction.class.getName())));
@@ -757,6 +764,29 @@ public final class ModernizerTest {
     private static class Java12Violations {
         private static void method() throws Exception {
             ByteStreams.skipFully(null, 0L);
+        }
+    }
+
+    private static class Java17Violations {
+        private static void method() throws Exception {
+            Hex.encodeHexString(new byte[]{});
+        }
+    }
+
+    private static class Java18Violations {
+        private static void method() throws Exception {
+            Runtime.getRuntime().exec("");
+            Runtime.getRuntime().exec("", new String[]{});
+            Runtime.getRuntime().exec("", new String[]{}, new File(""));
+        }
+    }
+
+    private static class Java19Violations {
+        private static void method() throws Exception {
+            new Locale("");
+            new Locale("", "");
+            new Locale("", "", "");
+            new Thread().getId();
         }
     }
 

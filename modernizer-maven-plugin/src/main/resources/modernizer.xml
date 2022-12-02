@@ -1247,4 +1247,53 @@ violation names use the same format that javap emits.
         <comment>Prefer java.util.Optional.orElseThrow</comment>
     </violation>
 
+    <violation>
+        <name>org/apache/commons/codec/binary/Hex.encodeHexString:([B)Ljava/lang/String;</name>
+        <version>17</version>
+        <comment>Prefer java.util.HexFormat.formatHex()</comment>
+    </violation>
+
+    <violation>
+        <name>java/lang/Runtime.exec:(Ljava/lang/String;)Ljava/lang/Process;</name>
+        <version>18</version>
+        <comment>Prefer java.lang.Runtime.exec(String[], String[]) or java.lang.ProcessBuilder</comment>
+    </violation>
+
+    <violation>
+        <name>java/lang/Runtime.exec:(Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Process;</name>
+        <version>18</version>
+        <comment>Prefer java.lang.Runtime.exec(String[], String[]) or java.lang.ProcessBuilder</comment>
+    </violation>
+
+    <violation>
+        <name>java/lang/Runtime.exec:(Ljava/lang/String;[Ljava/lang/String;Ljava/io/File;)Ljava/lang/Process;</name>
+        <version>18</version>
+        <comment>Prefer java.lang.Runtime.exec(String[], String[]) or java.lang.ProcessBuilder</comment>
+    </violation>
+
+    <violation>
+        <name>java/util/Locale."&lt;init&gt;":(Ljava/lang/String;)V</name>
+        <version>19</version>
+        <comment>Prefer java.util.Locale.of</comment>
+    </violation>
+
+    <violation>
+        <name>java/util/Locale."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
+        <version>19</version>
+        <comment>Prefer java.util.Locale.of</comment>
+    </violation>
+
+    <violation>
+        <name>java/util/Locale."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V</name>
+        <version>19</version>
+        <comment>Prefer java.util.Locale.of</comment>
+    </violation>
+
+    <violation>
+        <name>java/lang/Thread.getId:()J</name>
+        <version>19</version>
+        <comment>Prefer java.lang.Thread.threadId</comment>
+    </violation>
+
+
 </modernizer>
