@@ -42,7 +42,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.codehaus.plexus.util.StringUtils;
 import org.xml.sax.SAXException;
 
 @Mojo(name = "modernizer", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES,
@@ -190,7 +189,7 @@ public final class ModernizerMojo extends AbstractMojo {
             return;
         }
 
-        if (StringUtils.isEmpty(javaVersion)) {
+        if (javaVersion == null || javaVersion.isEmpty()) {
             throw new MojoExecutionException(
                     "javaVersion is not set but is required for execution.");
         }
