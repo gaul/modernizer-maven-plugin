@@ -654,18 +654,6 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
-    <name>sun/misc/BASE64Decoder.decodeBuffer:(Ljava/lang/String;)[B</name>
-    <version>8</version>
-    <comment>Prefer java.util.Base64.Decoder.decode(String)</comment>
-  </violation>
-
-  <violation>
-    <name>sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;</name>
-    <version>8</version>
-    <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[])</comment>
-  </violation>
-
-  <violation>
     <name>com/google/common/base/Preconditions.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object;</name>
     <version>7</version>
     <comment>Prefer java.util.Objects.requireNonNull(Object)</comment>
