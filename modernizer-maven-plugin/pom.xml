@@ -154,9 +154,9 @@
         </configuration>
         <dependencies>
           <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>3.0.15</version>
+            <version>4.0.10</version>
             <type>pom</type>
           </dependency>
         </dependencies>
