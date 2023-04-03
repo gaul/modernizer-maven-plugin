@@ -558,6 +558,12 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/util/Stack."&lt;init&gt;":()V</name>
+    <version>6</version>
+    <comment>Prefer java.util.Deque</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Vector."&lt;init&gt;":()V</name>
     <version>2</version>
     <comment>Prefer java.util.ArrayList</comment>

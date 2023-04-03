@@ -51,6 +51,7 @@ import java.util.OptionalLong;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
+import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
@@ -149,8 +150,26 @@ public final class ModernizerTest {
         assertThat(occurrences).hasSize(0);
     }
 
+  @Test
+  public void testStackConstructorLegacyApiLegacyJava() throws Exception {
+    ClassReader cr = new ClassReader(StackTestClass.class.getName());
+    Collection<ViolationOccurrence> occurrences =
+            createModernizer("1.0").check(cr);
+    assertThat(occurrences).hasSize(0);
+  }
+
+  @Test
+  public void testStackConstructorLegacyApiCurrentJava() throws Exception {
+    ClassReader cr = new ClassReader(StackTestClass.class.getName());
+    Collection<ViolationOccurrence> occurrences =
+            createModernizer("1.6").check(cr);
+    assertThat(occurrences).hasSize(1);
+    assertThat(occurrences.iterator().next().getViolation().getName())
+            .isEqualTo("java/util/Stack.\"<init>\":()V");
+  }
+
     @Test
-    public void testConstructorLegacyApiLegacyJava() throws Exception {
+    public void testVectorConstructorLegacyApiLegacyJava() throws Exception {
         ClassReader cr = new ClassReader(VectorTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 createModernizer("1.0").check(cr);
@@ -158,7 +177,7 @@ public final class ModernizerTest {
     }
 
     @Test
-    public void testConstructorLegacyApiCurrentJava() throws Exception {
+    public void testVectorConstructorLegacyApiCurrentJava() throws Exception {
         ClassReader cr = new ClassReader(VectorTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
                 createModernizer("1.2").check(cr);
@@ -338,8 +357,19 @@ public final class ModernizerTest {
         assertThat(occurrences).hasSize(0);
     }
 
+  @Test
+  public void testStackConstructorLegacyApiCurrentJavaWithVersionShorthand()
+          throws Exception {
+    ClassReader cr = new ClassReader(StackTestClass.class.getName());
+    Collection<ViolationOccurrence> occurrences =
+            createModernizer("6").check(cr);
+    assertThat(occurrences).hasSize(1);
+    assertThat(occurrences.iterator().next().getViolation().getName())
+            .isEqualTo("java/util/Stack.\"<init>\":()V");
+  }
+
     @Test
-    public void testConstructorLegacyApiCurrentJavaWithVersionShorthand()
+    public void testVectorConstructorLegacyApiCurrentJavaWithVersionShorthand()
             throws Exception {
         ClassReader cr = new ClassReader(VectorTestClass.class.getName());
         Collection<ViolationOccurrence> occurrences =
@@ -464,6 +494,11 @@ public final class ModernizerTest {
 
     private static class ArrayListTestClass {
         private final Object object = new ArrayList<Object>();
+    }
+
+    private static class StackTestClass {
+      @SuppressWarnings("JdkObsolete")
+      private final Object object = new Stack<Object>();
     }
 
     private static class VectorTestClass {
@@ -623,6 +658,7 @@ public final class ModernizerTest {
             new Hashtable<Object, Object>(0);
             new Hashtable<Object, Object>();
             new Hashtable<Object, Object>((Map<Object, Object>) null);
+            new Stack<Object>();
             new Vector<Object>();
             new Vector<Object>(1);
             new Vector<Object>(0, 0);
