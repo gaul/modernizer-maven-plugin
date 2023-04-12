@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.Formatter;
 import java.util.Hashtable;
 import java.util.Locale;
@@ -419,6 +420,8 @@ public final class ModernizerTest {
             new ClassReader(Java19Violations.class.getName())));
         // must visit inner classes manually
         occurrences.addAll(modernizer.check(
+                new ClassReader(EnumerationTestClass.class.getName())));
+        occurrences.addAll(modernizer.check(
                 new ClassReader(VoidFunction.class.getName())));
         occurrences.addAll(modernizer.check(
                 new ClassReader(VoidPredicate.class.getName())));
@@ -514,6 +517,14 @@ public final class ModernizerTest {
 
     private static class StringGetBytesCharset {
         private final Object object = "".getBytes(StandardCharsets.UTF_8);
+    }
+
+    private static class EnumerationTestClass implements Enumeration<Object> {
+        @Override
+        public boolean hasMoreElements() { return false; }
+
+        @Override
+        public Object nextElement() { return null; }
     }
 
     private static class VoidFunction implements Function<Void, Void> {

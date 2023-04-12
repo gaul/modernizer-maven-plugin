@@ -534,6 +534,12 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/util/Enumeration</name>
+    <version>2</version>
+    <comment>Prefer java.util.Iterator</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(IF)V</name>
     <version>2</version>
     <comment>Prefer java.util.HashMap</comment>
