@@ -1,17 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.gaul</groupId>
     <artifactId>modernizer-maven-parent</artifactId>
     <version>2.7.0-SNAPSHOT</version>
   </parent>
-
   <artifactId>modernizer-maven-annotations</artifactId>
   <name>Modernizer Maven Plugin annotations</name>
-
   <build>
     <plugins>
+      <plugin>
+        <groupId>codes.rafael.modulemaker</groupId>
+        <artifactId>modulemaker-maven-plugin</artifactId>
+        <version>1.9</version>
+        <configuration>
+          <name>org.gaul.modernizer_maven_annotations</name>
+          <exports>org.gaul.modernizer_maven_annotations</exports>
+          <multirelease>true</multirelease>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>inject-module</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>
@@ -25,24 +41,6 @@
             <version>${project.version}</version>
           </dependency>
         </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>codes.rafael.modulemaker</groupId>
-        <artifactId>modulemaker-maven-plugin</artifactId>
-        <version>1.9</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>inject-module</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <name>org.gaul.modernizer_maven_annotations</name>
-          <exports>org.gaul.modernizer_maven_annotations</exports>
-          <multirelease>true</multirelease>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>

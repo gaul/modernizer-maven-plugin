@@ -1,19 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.sonatype.oss</groupId>
     <artifactId>oss-parent</artifactId>
     <version>7</version>
-    <relativePath />
+    <relativePath/>
   </parent>
-
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-parent</artifactId>
   <version>2.7.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-
   <name>Modernizer Maven Plugin parent</name>
+  <organization>
+    <name>Gaul</name>
+    <url>https://github.com/gaul/</url>
+  </organization>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -21,37 +23,27 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <organization>
-    <name>Gaul</name>
-    <url>https://github.com/gaul/</url>
-  </organization>
-
-  <scm>
-    <connection>scm:git:git@github.com:gaul/modernizer-maven-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:gaul/modernizer-maven-plugin.git</developerConnection>
-    <url>git@github.com:gaul/modernizer-maven-plugin.git</url>
-  </scm>
-
-  <issueManagement>
-    <system>Github</system>
-    <url>https://github.com/gaul/modernizer-maven-plugin/issues</url>
-  </issueManagement>
-
   <developers>
     <developer>
-      <name>Andrew Gaul</name>
       <id>gaul</id>
+      <name>Andrew Gaul</name>
       <email>andrew@gaul.org</email>
     </developer>
   </developers>
-
   <modules>
     <module>modernizer-maven-annotations</module>
     <module>modernizer-maven-plugin</module>
     <module>modernizer-maven-policy</module>
   </modules>
-
+  <scm>
+    <connection>scm:git:git@github.com:gaul/modernizer-maven-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:gaul/modernizer-maven-plugin.git</developerConnection>
+    <url>git@github.com:gaul/modernizer-maven-plugin.git</url>
+  </scm>
+  <issueManagement>
+    <system>Github</system>
+    <url>https://github.com/gaul/modernizer-maven-plugin/issues</url>
+  </issueManagement>
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
@@ -63,73 +55,40 @@
       <url>scm:git:ssh://git@github.com/gaul/modernizer-maven-plugin.git</url>
     </site>
   </distributionManagement>
-
-  <profiles>
-    <profile>
-      <id>release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-    <id>m2e-only</id>
-    <activation>
-      <property>
-        <!-- this property is set in Eclipse only, thus activating the profile automatically
-        and not annoying people that don't use Eclipse with the fake plugin -->
-        <name>m2e.version</name>
-      </property>
-    </activation>
-    <build>
-      <pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.m2e</groupId>
-            <artifactId>lifecycle-mapping</artifactId>
-            <version>1.0.0</version>
-            <configuration>
-              <lifecycleMappingMetadata>
-                <pluginExecutions>
-                  <pluginExecution>
-                    <pluginExecutionFilter>
-                      <groupId>org.apache.maven.plugins</groupId>
-                      <artifactId>maven-plugin-plugin</artifactId>
-                      <versionRange>[0,)</versionRange>
-                      <goals>
-                        <goal>descriptor</goal>
-                        <goal>helpmojo</goal>
-                      </goals>
-                    </pluginExecutionFilter>
-                    <action>
-                      <ignore />
-                    </action>
-                  </pluginExecution>
-                </pluginExecutions>
-              </lifecycleMappingMetadata>
-            </configuration>
-          </plugin>
-        </plugins>
-      </pluginManagement>
-    </build>
-    </profile>
-  </profiles>
-
+  <properties>
+    <asm.version>9.4</asm.version>
+    <maven-plugin-plugin.version>3.5</maven-plugin-plugin.version>
+    <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>${asm.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm-commons</artifactId>
+        <version>${asm.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.9.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>com.github.ekryd.sortpom</groupId>
@@ -157,18 +116,17 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.6.0.0</version>
+        <configuration>
+          <effort>Max</effort>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>2.17</version>
-        <executions>
-          <execution>
-            <id>checkstyle</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
         <configuration>
           <!--
           TODO: cannot ignore generated files
@@ -180,6 +138,15 @@
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <violationSeverity>warning</violationSeverity>
         </configuration>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -191,7 +158,7 @@
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
           <compilerArguments>
-            <Xlint />
+            <Xlint/>
           </compilerArguments>
         </configuration>
       </plugin>
@@ -233,6 +200,37 @@
         </executions>
       </plugin>
       <plugin>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+          <scmBranch>gh-pages</scmBranch>
+          <tryUpdate>true</tryUpdate>
+          <addUniqueDirectory>true</addUniqueDirectory>
+          <content>${java.io.tmpdir}/staging</content>
+        </configuration>
+        <executions>
+          <execution>
+            <id>scm-publish</id>
+            <goals>
+              <goal>publish-scm</goal>
+            </goals>
+            <phase>site-deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <skipDeploy>true</skipDeploy>
+          <generateSitemap>true</generateSitemap>
+          <attach>false</attach>
+          <locales>en</locales>
+          <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
+          <relativizeDecorationLinks>false</relativizeDecorationLinks>
+          <stagingDirectory>${java.io.tmpdir}/staging</stagingDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>3.2.1</version>
@@ -258,30 +256,22 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.6.0.0</version>
-        <configuration>
-          <effort>Max</effort>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.gaul</groupId>
         <artifactId>modernizer-maven-plugin</artifactId>
         <version>1.9.0</version>
-        <executions>
-          <execution>
-            <id>modernizer</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>modernizer</goal>
-            </goals>
-          </execution>
-        </executions>
         <configuration>
           <javaVersion>1.6</javaVersion>
           <includeTestClasses>false</includeTestClasses>
         </configuration>
+        <executions>
+          <execution>
+            <id>modernizer</id>
+            <goals>
+              <goal>modernizer</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
@@ -294,53 +284,8 @@
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-site-plugin</artifactId>
-        <configuration>
-          <skipDeploy>true</skipDeploy>
-          <generateSitemap>true</generateSitemap>
-          <attach>false</attach>
-          <locales>en</locales>
-          <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
-          <relativizeDecorationLinks>false</relativizeDecorationLinks>
-          <stagingDirectory>${java.io.tmpdir}/staging</stagingDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-scm-publish-plugin</artifactId>
-        <version>3.2.1</version>
-        <configuration>
-          <scmBranch>gh-pages</scmBranch>
-          <tryUpdate>true</tryUpdate>
-          <addUniqueDirectory>true</addUniqueDirectory>
-          <content>${java.io.tmpdir}/staging</content>
-        </configuration>
-        <executions>
-          <execution>
-            <id>scm-publish</id>
-            <phase>site-deploy</phase>
-            <goals>
-              <goal>publish-scm</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.9.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
-
   <reporting>
     <plugins>
       <plugin>
@@ -350,6 +295,9 @@
       <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>${maven-project-info-reports-plugin.version}</version>
+        <configuration>
+          <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
+        </configuration>
         <reportSets>
           <reportSet>
             <reports>
@@ -371,32 +319,71 @@
             </reports>
           </reportSet>
         </reportSets>
-        <configuration>
-          <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
-        </configuration>
       </plugin>
     </plugins>
   </reporting>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <asm.version>9.4</asm.version>
-    <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
-    <maven-plugin-plugin.version>3.5</maven-plugin-plugin.version>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.ow2.asm</groupId>
-        <artifactId>asm</artifactId>
-        <version>${asm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.ow2.asm</groupId>
-        <artifactId>asm-commons</artifactId>
-        <version>${asm.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>m2e-only</id>
+      <activation>
+        <property>
+          <!-- this property is set in Eclipse only, thus activating the profile automatically
+        and not annoying people that don't use Eclipse with the fake plugin -->
+          <name>m2e.version</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.eclipse.m2e</groupId>
+              <artifactId>lifecycle-mapping</artifactId>
+              <version>1.0.0</version>
+              <configuration>
+                <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-plugin-plugin</artifactId>
+                        <versionRange>[0,)</versionRange>
+                        <goals>
+                          <goal>descriptor</goal>
+                          <goal>helpmojo</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore/>
+                      </action>
+                    </pluginExecution>
+                  </pluginExecutions>
+                </lifecycleMappingMetadata>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 </project>
