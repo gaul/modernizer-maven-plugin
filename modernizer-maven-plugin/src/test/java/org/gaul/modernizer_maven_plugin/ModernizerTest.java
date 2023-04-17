@@ -569,7 +569,7 @@ public final class ModernizerTest {
 
     private static class AllViolations {
         @SuppressWarnings(value = {"BoxedPrimitiveConstructor",
-                "CheckReturnValue", "JdkObsolete"})
+                "CheckReturnValue", "deprecation", "JdkObsolete"})
         private static void method() throws Exception {
             Object object;
             object = Charsets.ISO_8859_1;
@@ -749,6 +749,7 @@ public final class ModernizerTest {
     }
 
     private static class Java9Violations {
+        @SuppressWarnings("deprecation")
         private static void method() throws Exception {
             new Byte((String) null);
             new Double((String) null);
@@ -783,6 +784,7 @@ public final class ModernizerTest {
     }
 
     private static class Java11Violations {
+        @SuppressWarnings("deprecation")
         private static void method() throws Exception {
             ByteStreams.nullOutputStream();
             CharStreams.nullWriter();
