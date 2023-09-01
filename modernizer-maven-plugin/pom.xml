@@ -21,7 +21,7 @@
   </prerequisites>
 
   <properties>
-    <mavenVersion>3.2.5</mavenVersion>
+    <mavenVersion>3.9.4</mavenVersion>
   </properties>
 
   <dependencies>
