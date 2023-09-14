@@ -77,7 +77,7 @@ public final class Modernizer {
     }
 
     public Collection<ViolationOccurrence> check(InputStream is)
-          throws IOException {
+            throws IOException {
         return check(new ClassReader(is));
     }
 

@@ -18,7 +18,6 @@ package org.gaul.modernizer_maven_plugin;
 
 import static java.lang.String.format;
 import static java.util.Collections.emptyList;
-
 import static org.gaul.modernizer_maven_plugin.Utils.checkArgument;
 
 import java.io.File;

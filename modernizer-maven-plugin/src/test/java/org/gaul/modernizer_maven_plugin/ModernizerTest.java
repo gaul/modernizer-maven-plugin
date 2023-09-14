@@ -151,23 +151,23 @@ public final class ModernizerTest {
         assertThat(occurrences).hasSize(0);
     }
 
-  @Test
-  public void testStackConstructorLegacyApiLegacyJava() throws Exception {
-    ClassReader cr = new ClassReader(StackTestClass.class.getName());
-    Collection<ViolationOccurrence> occurrences =
-            createModernizer("1.0").check(cr);
-    assertThat(occurrences).hasSize(0);
-  }
+    @Test
+    public void testStackConstructorLegacyApiLegacyJava() throws Exception {
+        ClassReader cr = new ClassReader(StackTestClass.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                createModernizer("1.0").check(cr);
+        assertThat(occurrences).hasSize(0);
+    }
 
-  @Test
-  public void testStackConstructorLegacyApiCurrentJava() throws Exception {
-    ClassReader cr = new ClassReader(StackTestClass.class.getName());
-    Collection<ViolationOccurrence> occurrences =
-            createModernizer("1.6").check(cr);
-    assertThat(occurrences).hasSize(1);
-    assertThat(occurrences.iterator().next().getViolation().getName())
-            .isEqualTo("java/util/Stack.\"<init>\":()V");
-  }
+    @Test
+    public void testStackConstructorLegacyApiCurrentJava() throws Exception {
+        ClassReader cr = new ClassReader(StackTestClass.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                createModernizer("1.6").check(cr);
+        assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getName())
+                .isEqualTo("java/util/Stack.\"<init>\":()V");
+    }
 
     @Test
     public void testVectorConstructorLegacyApiLegacyJava() throws Exception {
@@ -358,16 +358,16 @@ public final class ModernizerTest {
         assertThat(occurrences).hasSize(0);
     }
 
-  @Test
-  public void testStackConstructorLegacyApiCurrentJavaWithVersionShorthand()
-          throws Exception {
-    ClassReader cr = new ClassReader(StackTestClass.class.getName());
-    Collection<ViolationOccurrence> occurrences =
-            createModernizer("6").check(cr);
-    assertThat(occurrences).hasSize(1);
-    assertThat(occurrences.iterator().next().getViolation().getName())
-            .isEqualTo("java/util/Stack.\"<init>\":()V");
-  }
+    @Test
+    public void testStackConstructorLegacyApiCurrentJavaWithVersionShorthand()
+            throws Exception {
+        ClassReader cr = new ClassReader(StackTestClass.class.getName());
+        Collection<ViolationOccurrence> occurrences =
+                createModernizer("6").check(cr);
+        assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getName())
+                .isEqualTo("java/util/Stack.\"<init>\":()V");
+    }
 
     @Test
     public void testVectorConstructorLegacyApiCurrentJavaWithVersionShorthand()
@@ -500,8 +500,8 @@ public final class ModernizerTest {
     }
 
     private static class StackTestClass {
-      @SuppressWarnings("JdkObsolete")
-      private final Object object = new Stack<Object>();
+        @SuppressWarnings("JdkObsolete")
+        private final Object object = new Stack<Object>();
     }
 
     private static class VectorTestClass {
@@ -521,10 +521,14 @@ public final class ModernizerTest {
 
     private static class EnumerationTestClass implements Enumeration<Object> {
         @Override
-        public boolean hasMoreElements() { return false; }
+        public boolean hasMoreElements() {
+            return false;
+        }
 
         @Override
-        public Object nextElement() { return null; }
+        public Object nextElement() {
+            return null;
+        }
     }
 
     private static class VoidFunction implements Function<Void, Void> {
@@ -579,8 +583,11 @@ public final class ModernizerTest {
     }
 
     private static class AllViolations {
-        @SuppressWarnings(value = {"BoxedPrimitiveConstructor",
-                "CheckReturnValue", "deprecation", "JdkObsolete"})
+        @SuppressWarnings(value = {
+            "BoxedPrimitiveConstructor",
+            "CheckReturnValue",
+            "deprecation",
+            "JdkObsolete"})
         private static void method() throws Exception {
             Object object;
             object = Charsets.ISO_8859_1;
