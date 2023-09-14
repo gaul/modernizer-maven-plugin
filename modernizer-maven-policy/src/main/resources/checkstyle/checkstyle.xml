@@ -2,12 +2,14 @@
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
+  <property name="cacheFile" value="target/cachefile"/>
   <property name="severity" value="warning"/>
   <module name="FileTabCharacter"/>
   <module name="JavadocPackage">
     <property name="severity" value="ignore"/>
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
   </module>
+  <module name="LineLength"/>
   <module name="NewlineAtEndOfFile">
     <property name="lineSeparator" value="lf" />
   </module>
@@ -16,7 +18,6 @@
   </module>
   <module name="Translation"/>
   <module name="TreeWalker">
-    <property name="cacheFile" value="target/cachefile"/>
     <module name="ArrayTypeStyle"/>
     <module name="AvoidNestedBlocks"/>
     <module name="AvoidStarImport"/>
@@ -47,7 +48,6 @@
     <module name="InterfaceIsType"/>
     <module name="JavadocStyle"/>
     <module name="LeftCurly"/>
-    <module name="LineLength"/>
     <module name="LocalFinalVariableName"/>
     <module name="LocalVariableName"/>
     <module name="MagicNumber">
