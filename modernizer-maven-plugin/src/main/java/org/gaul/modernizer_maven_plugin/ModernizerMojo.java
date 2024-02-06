@@ -25,10 +25,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -41,6 +43,11 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.gaul.modernizer_maven_plugin.output.CodeClimateOutputer;
+import org.gaul.modernizer_maven_plugin.output.LoggerOutputer;
+import org.gaul.modernizer_maven_plugin.output.OutputEntry;
+import org.gaul.modernizer_maven_plugin.output.OutputFormat;
+import org.gaul.modernizer_maven_plugin.output.Outputer;
 import org.xml.sax.SAXException;
 
 @Mojo(name = "modernizer", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES,
@@ -122,7 +129,29 @@ public final class ModernizerMojo extends AbstractMojo {
     private String exclusionsFile;
 
     /**
+     * Format to output violations in.
+     */
+    @Parameter(defaultValue = "CONSOLE", property = "modernizer.outputFormat")
+    private OutputFormat outputFormat;
+
+    /**
+     * Path to the file to output violations to.
+     * Ignored if {@code modernizer.outputFormat} is {@code CONSOLE}.
+     */
+    @Parameter(property = "modernizer.outputFile")
+    private String outputFile;
+
+    /**
+     * Severity of modernizer violations for CodeClimate.
+     * Ignored if {@code modernizer.outputFormat} is not {@code CODECLIMATE}.
+     */
+    @Parameter(defaultValue = "MINOR",
+            property = "modernizer.codeclimateSeverity")
+    private CodeClimateOutputer.Severity codeClimateSeverity;
+
+    /**
      * Log level to emit violations at, e.g., error, warn, info, debug.
+     * Ignored if {@code modernizer.outputFormat} is not {@code CONSOLE}.
      */
     @Parameter(defaultValue = "error",
                property = "modernizer.violationLogLevel")
@@ -180,6 +209,8 @@ public final class ModernizerMojo extends AbstractMojo {
      */
     @Parameter(defaultValue = "false", property = "modernizer.skip")
     protected boolean skip = false;
+
+    private List<OutputEntry> outputEntries = new ArrayList<>();
 
     @Override
     public void execute() throws MojoExecutionException {
@@ -268,17 +299,26 @@ public final class ModernizerMojo extends AbstractMojo {
                 allExclusionPatterns, ignorePackages,
                 ignoreClassNames, allIgnoreFullClassNamePatterns);
 
+        long count;
         try {
-            long count = recurseFiles(outputDirectory);
+            count = recurseFiles(outputDirectory);
             if (includeTestClasses) {
                 count += recurseFiles(testOutputDirectory);
             }
-            if (failOnViolations && count != 0) {
-                throw new MojoExecutionException("Found " + count +
-                        " violations");
-            }
         } catch (IOException ioe) {
             throw new MojoExecutionException("Error reading Java classes", ioe);
+        }
+
+        try {
+            buildOutputer().output(outputEntries);
+        } catch (IOException ioe) {
+            throw new MojoExecutionException(
+                    "Error outputting violations", ioe);
+        }
+
+        if (failOnViolations && count != 0) {
+            throw new MojoExecutionException("Found " + count +
+                    " violations");
         }
     }
 
@@ -374,7 +414,7 @@ public final class ModernizerMojo extends AbstractMojo {
                         name = name.substring(0,
                                 name.length() - ".class".length()) + ".java";
                     }
-                    emitViolation(name, occurrence);
+                    outputEntries.add(new OutputEntry(name, occurrence));
                     ++count;
                 }
             } finally {
@@ -384,21 +424,16 @@ public final class ModernizerMojo extends AbstractMojo {
         return count;
     }
 
-    private void emitViolation(String name, ViolationOccurrence occurrence) {
-        String message = name + ":" +
-                occurrence.getLineNumber() + ": " +
-                occurrence.getViolation().getComment();
-        if (violationLogLevel.equals("error")) {
-            getLog().error(message);
-        } else if (violationLogLevel.equals("warn")) {
-            getLog().warn(message);
-        } else if (violationLogLevel.equals("info")) {
-            getLog().info(message);
-        } else if (violationLogLevel.equals("debug")) {
-            getLog().debug(message);
-        } else {
-            throw new IllegalStateException("unexpected log level, was: " +
-                    violationLogLevel);
+    private Outputer buildOutputer() throws MojoExecutionException {
+        String baseDir = project.getBuild().getDirectory();
+        if (Objects.requireNonNull(outputFormat) == OutputFormat.CONSOLE) {
+            return new LoggerOutputer(getLog(), violationLogLevel);
+        } else if (outputFormat == OutputFormat.CODE_CLIMATE) {
+            return new CodeClimateOutputer(
+                    baseDir + "/" + CodeClimateOutputer.DEFAULT_FILENAME,
+                    codeClimateSeverity);
         }
+        throw new MojoExecutionException(
+                "Invalid output format: " + outputFormat);
     }
 }
