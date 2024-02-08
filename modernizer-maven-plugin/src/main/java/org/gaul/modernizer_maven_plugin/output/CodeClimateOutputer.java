@@ -59,11 +59,11 @@ public final class CodeClimateOutputer implements Outputer {
         }
         TypeToken<List<Entry>> type = new TypeToken<List<Entry>>() {
         };
-        OutputStreamWriter writer = new OutputStreamWriter(
+        try (OutputStreamWriter writer = new OutputStreamWriter(
                 Files.newOutputStream(Paths.get(outputFile)),
-                StandardCharsets.UTF_8);
-        new Gson().toJson(toOutput, type.getType(), writer);
-        writer.close();
+                StandardCharsets.UTF_8)) {
+            new Gson().toJson(toOutput, type.getType(), writer);
+        }
     }
 
     public enum Severity {
