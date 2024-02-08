@@ -43,8 +43,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.xml.sax.SAXException;
 
-@Mojo(name = "modernizer", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES,
-        threadSafe = true)
+@Mojo(name = "modernizer", defaultPhase = LifecyclePhase.PROCESS_TEST_CLASSES, threadSafe = true)
 public final class ModernizerMojo extends AbstractMojo {
 
     private static final String CLASSPATH_PREFIX = "classpath:";
@@ -82,8 +81,7 @@ public final class ModernizerMojo extends AbstractMojo {
     protected boolean failOnViolations = true;
 
     /** Run Modernizer on test classes. */
-    @Parameter(defaultValue = "true",
-               property = "modernizer.includeTestClasses")
+    @Parameter(defaultValue = "true", property = "modernizer.includeTestClasses")
     protected boolean includeTestClasses = true;
 
     /**
@@ -124,16 +122,13 @@ public final class ModernizerMojo extends AbstractMojo {
     /**
      * Log level to emit violations at, e.g., error, warn, info, debug.
      */
-    @Parameter(defaultValue = "error",
-               property = "modernizer.violationLogLevel")
+    @Parameter(defaultValue = "error", property = "modernizer.violationLogLevel")
     private String violationLogLevel;
 
     /**
-     * Classes annotated with {@code @Generated} will be excluded from
-     * scanning.
-     * */
-    @Parameter(defaultValue = "true",
-               property = "modernizer.ignoreGeneratedClasses")
+     * Classes annotated with {@code @Generated} will be excluded from scanning.
+     */
+    @Parameter(defaultValue = "true", property = "modernizer.ignoreGeneratedClasses")
     private Boolean ignoreGeneratedClasses;
 
     /**
@@ -145,8 +140,8 @@ public final class ModernizerMojo extends AbstractMojo {
     protected Set<String> exclusions = new HashSet<String>();
 
     /**
-     * Violation patterns to disable. Each exclusion should be a
-     * regular expression that matches the javap format:
+     * Violation patterns to disable. Each exclusion should be a regular
+     * expression that matches the javap format:
      *
      * java/lang/.*
      */
@@ -164,9 +159,9 @@ public final class ModernizerMojo extends AbstractMojo {
     /**
      * Fully qualified class names (incl. package) to ignore by regular
      * expression, specified using &lt;ignoreClassNamePattern&gt; child
-     * elements.  Specifying .*.bar.* ignores foo.bar.*, foo.bar.baz.* but
-     * also bar.* and so on; or .*Immutable ignores all class with names
-     * ending in Immutable in all packages.
+     * elements. Specifying .*.bar.* ignores foo.bar.*, foo.bar.baz.* but also
+     * bar.* and so on; or .*Immutable ignores all class with names ending in
+     * Immutable in all packages.
      */
     @Parameter
     protected Set<String> ignoreClassNamePatterns = new HashSet<String>();
@@ -209,8 +204,8 @@ public final class ModernizerMojo extends AbstractMojo {
             try {
                 allExclusionPatterns.add(Pattern.compile(pattern));
             } catch (PatternSyntaxException pse) {
-                throw new MojoExecutionException(
-                        "Invalid exclusion pattern", pse);
+                throw new MojoExecutionException("Invalid exclusion pattern",
+                        pse);
             }
         }
 
@@ -219,22 +214,21 @@ public final class ModernizerMojo extends AbstractMojo {
             try {
                 allIgnoreFullClassNamePatterns.add(Pattern.compile(pattern));
             } catch (PatternSyntaxException pse) {
-                throw new MojoExecutionException(
-                        "Invalid exclusion pattern", pse);
+                throw new MojoExecutionException("Invalid exclusion pattern",
+                        pse);
             }
         }
 
         Set<String> ignoreClassNames = new HashSet<String>();
         try {
-            ignoreClassNames.addAll(
-                SuppressModernizerAnnotationDetector.detect(outputDirectory));
+            ignoreClassNames.addAll(SuppressModernizerAnnotationDetector
+                    .detect(outputDirectory));
             if (ignoreGeneratedClasses) {
-                Set<String> ignore =
-                    SuppressGeneratedAnnotationDetector.detect(
-                        outputDirectory);
+                Set<String> ignore = SuppressGeneratedAnnotationDetector
+                        .detect(outputDirectory);
                 if (getLog().isDebugEnabled()) {
                     getLog().debug(
-                        "The following generated classes will be ignored");
+                            "The following generated classes will be ignored");
                     for (String s : ignore) {
                         getLog().debug(s);
                     }
@@ -242,17 +236,14 @@ public final class ModernizerMojo extends AbstractMojo {
                 ignoreClassNames.addAll(ignore);
             }
             if (includeTestClasses) {
-                ignoreClassNames.addAll(
-                    SuppressModernizerAnnotationDetector.detect(
-                        testOutputDirectory));
+                ignoreClassNames.addAll(SuppressModernizerAnnotationDetector
+                        .detect(testOutputDirectory));
                 if (ignoreGeneratedClasses) {
-                    Set<String> ignore =
-                        SuppressGeneratedAnnotationDetector.detect(
-                            testOutputDirectory);
+                    Set<String> ignore = SuppressGeneratedAnnotationDetector
+                            .detect(testOutputDirectory);
                     if (getLog().isDebugEnabled()) {
-                        getLog().debug(
-                            "The following generated test classes " +
-                            "will be ignored");
+                        getLog().debug("The following generated test classes "
+                                + "will be ignored");
                         for (String s : ignore) {
                             getLog().debug(s);
                         }
@@ -265,8 +256,8 @@ public final class ModernizerMojo extends AbstractMojo {
         }
 
         modernizer = new Modernizer(javaVersion, allViolations, allExclusions,
-                allExclusionPatterns, ignorePackages,
-                ignoreClassNames, allIgnoreFullClassNamePatterns);
+                allExclusionPatterns, ignorePackages, ignoreClassNames,
+                allIgnoreFullClassNamePatterns);
 
         try {
             long count = recurseFiles(outputDirectory);
@@ -274,8 +265,8 @@ public final class ModernizerMojo extends AbstractMojo {
                 count += recurseFiles(testOutputDirectory);
             }
             if (failOnViolations && count != 0) {
-                throw new MojoExecutionException("Found " + count +
-                        " violations");
+                throw new MojoExecutionException(
+                        "Found " + count + " violations");
             }
         } catch (IOException ioe) {
             throw new MojoExecutionException("Error reading Java classes", ioe);
@@ -286,8 +277,8 @@ public final class ModernizerMojo extends AbstractMojo {
             String violationsFilePath) throws MojoExecutionException {
         InputStream is;
         if (violationsFilePath.startsWith(CLASSPATH_PREFIX)) {
-            String classpath =
-                    violationsFilePath.substring(CLASSPATH_PREFIX.length());
+            String classpath = violationsFilePath
+                    .substring(CLASSPATH_PREFIX.length());
             checkArgument(classpath.startsWith("/"), format(
                     "Only absolute classpath references are allowed, got [%s]",
                     classpath));
@@ -304,14 +295,14 @@ public final class ModernizerMojo extends AbstractMojo {
         try {
             return Modernizer.parseFromXml(is);
         } catch (IOException ioe) {
-            throw new MojoExecutionException(
-                    "Error reading violation data", ioe);
+            throw new MojoExecutionException("Error reading violation data",
+                    ioe);
         } catch (ParserConfigurationException pce) {
-            throw new MojoExecutionException(
-                    "Error parsing violation data", pce);
+            throw new MojoExecutionException("Error parsing violation data",
+                    pce);
         } catch (SAXException saxe) {
-            throw new MojoExecutionException(
-                    "Error parsing violation data", saxe);
+            throw new MojoExecutionException("Error parsing violation data",
+                    saxe);
         } finally {
             Utils.closeQuietly(is);
         }
@@ -325,20 +316,18 @@ public final class ModernizerMojo extends AbstractMojo {
             if (file.exists()) {
                 is = new FileInputStream(exclusionsFilePath);
             } else {
-                is = this.getClass().getClassLoader().getResourceAsStream(
-                        exclusionsFilePath);
+                is = this.getClass().getClassLoader()
+                        .getResourceAsStream(exclusionsFilePath);
             }
             if (is == null) {
                 throw new MojoExecutionException(
-                        "Could not find exclusion file: " +
-                        exclusionsFilePath);
+                        "Could not find exclusion file: " + exclusionsFilePath);
             }
 
             return Utils.filterCommentLines(Utils.readAllLines(is));
         } catch (IOException ioe) {
             throw new MojoExecutionException(
-                    "Error reading exclusion file: " +
-                    exclusionsFilePath, ioe);
+                    "Error reading exclusion file: " + exclusionsFilePath, ioe);
         } finally {
             Utils.closeQuietly(is);
         }
@@ -359,13 +348,13 @@ public final class ModernizerMojo extends AbstractMojo {
         } else if (file.getPath().endsWith(".class")) {
             InputStream is = new FileInputStream(file);
             try {
-                Collection<ViolationOccurrence> occurrences =
-                        modernizer.check(is);
+                Collection<ViolationOccurrence> occurrences = modernizer
+                        .check(is);
                 for (ViolationOccurrence occurrence : occurrences) {
                     String name = file.getPath();
                     if (name.startsWith(outputDirectory.getPath())) {
-                        name = sourceDirectory.getPath() + name.substring(
-                                outputDirectory.getPath().length());
+                        name = sourceDirectory.getPath() + name
+                                .substring(outputDirectory.getPath().length());
                         name = name.substring(0,
                                 name.length() - ".class".length()) + ".java";
                     } else if (name.startsWith(testOutputDirectory.getPath())) {
@@ -385,9 +374,8 @@ public final class ModernizerMojo extends AbstractMojo {
     }
 
     private void emitViolation(String name, ViolationOccurrence occurrence) {
-        String message = name + ":" +
-                occurrence.getLineNumber() + ": " +
-                occurrence.getViolation().getComment();
+        String message = name + ":" + occurrence.getLineNumber() + ": "
+                + occurrence.getViolation().getComment();
         if (violationLogLevel.equals("error")) {
             getLog().error(message);
         } else if (violationLogLevel.equals("warn")) {
@@ -397,8 +385,8 @@ public final class ModernizerMojo extends AbstractMojo {
         } else if (violationLogLevel.equals("debug")) {
             getLog().debug(message);
         } else {
-            throw new IllegalStateException("unexpected log level, was: " +
-                    violationLogLevel);
+            throw new IllegalStateException(
+                    "unexpected log level, was: " + violationLogLevel);
         }
     }
 }

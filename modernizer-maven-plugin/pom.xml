@@ -160,16 +160,18 @@
             <type>pom</type>
           </dependency>
         </dependencies>
-        <executions>
-          <execution>
-            <id>integration-test</id>
-            <goals>
-              <goal>install</goal>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
+      </plugin>
+      <plugin>
+        <groupId>net.revelc.code.formatter</groupId>
+        <artifactId>formatter-maven-plugin</artifactId>
+        <version>2.23.0</version>
+        <configuration>
+          <directories>
+            <directory>${project.build.sourceDirectory}</directory>
+            <directory>${project.build.directory}/generated-sources</directory>
+          </directories>
+          <configFile>src/main/resources/eclipse/formatter.xml</configFile>
+        </configuration>
       </plugin>
     </plugins>
   </build>

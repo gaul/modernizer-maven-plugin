@@ -40,16 +40,15 @@ final class ModernizerClassVisitor extends ClassVisitor {
     private final Collection<String> ignorePackages;
     private final Set<String> ignoreClassNames;
     private final Collection<Pattern> ignoreFullClassNamePatterns;
-    private final Collection<ViolationOccurrence> occurrences =
-            new ArrayList<ViolationOccurrence>();
+    // TODO: why not wrap this?
+    private final Collection<ViolationOccurrence> occurrences = new ArrayList<ViolationOccurrence>();
     private String packageName;
     private String className;
 
-    ModernizerClassVisitor(long javaVersion,
-            Map<String, Violation> violations, Collection<String> exclusions,
+    ModernizerClassVisitor(long javaVersion, Map<String, Violation> violations,
+            Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
-            Collection<String> ignorePackages,
-            Set<String> ignoreClassNames,
+            Collection<String> ignorePackages, Set<String> ignoreClassNames,
             Collection<Pattern> ignoreFullClassNamePatterns) {
         super(ASM_API);
         Utils.checkArgument(javaVersion >= 0);
@@ -59,8 +58,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
         this.exclusionPatterns = Utils.checkNotNull(exclusionPatterns);
         this.ignorePackages = Utils.checkNotNull(ignorePackages);
         this.ignoreClassNames = Utils.checkNotNull(ignoreClassNames);
-        this.ignoreFullClassNamePatterns =
-                Utils.checkNotNull(ignoreFullClassNamePatterns);
+        this.ignoreFullClassNamePatterns = Utils
+                .checkNotNull(ignoreFullClassNamePatterns);
     }
 
     @Override
@@ -68,8 +67,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
             String superName, String[] interfaces) {
         className = name;
         if (name.contains("/")) {
-            packageName = name.substring(0, name.lastIndexOf('/'))
-                    .replace('/', '.');
+            packageName = name.substring(0, name.lastIndexOf('/')).replace('/',
+                    '.');
         } else {
             packageName = "";
         }
@@ -78,7 +77,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
         }
         for (String itr : interfaces) {
             Violation violation = violations.get(itr);
-            checkToken(itr, violation, name, /*lineNumber=*/ -1);
+            checkToken(itr, violation, name, /* lineNumber= */ -1);
         }
     }
 
@@ -114,7 +113,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
             public AnnotationVisitor visitAnnotation(String desc,
                     boolean visible) {
                 methodSuppressed |= Type.getType(desc).getClassName()
-                    .equals(SuppressModernizer.class.getName());
+                        .equals(SuppressModernizer.class.getName());
 
                 String name = Type.getType(desc).getInternalName();
                 Violation violation = violations.get(name);
@@ -135,17 +134,13 @@ final class ModernizerClassVisitor extends ClassVisitor {
                 this.lineNumber = lineNumber;
             }
 
-            private void checkToken(
-                String token,
-                Violation violation,
-                String name,
-                int lineNumber
-            ) {
+            private void checkToken(String token, Violation violation,
+                    String name, int lineNumber) {
                 if (methodSuppressed) {
                     return;
                 } else {
-                    ModernizerClassVisitor.this
-                        .checkToken(token, violation, name, lineNumber);
+                    ModernizerClassVisitor.this.checkToken(token, violation,
+                            name, lineNumber);
                 }
 
             }
@@ -155,9 +150,9 @@ final class ModernizerClassVisitor extends ClassVisitor {
 
     private void checkToken(String token, Violation violation, String name,
             int lineNumber) {
-        if (violation != null && !exclusions.contains(token) &&
-                javaVersion >= violation.getVersion() &&
-                !ignorePackages.contains(packageName)) {
+        if (violation != null && !exclusions.contains(token)
+                && javaVersion >= violation.getVersion()
+                && !ignorePackages.contains(packageName)) {
             if (ignoreClass()) {
                 return;
             }
@@ -171,8 +166,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     return;
                 }
             }
-            occurrences.add(new ViolationOccurrence(name, lineNumber,
-                    violation));
+            occurrences
+                    .add(new ViolationOccurrence(name, lineNumber, violation));
         }
     }
 

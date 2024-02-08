@@ -54,13 +54,13 @@ final class Utils {
     }
 
     static <T> Set<T> createImmutableSet(Collection<T> collection) {
-        return Collections.unmodifiableSet(new HashSet<T>(
-                Utils.checkNotNull(collection)));
+        return Collections.unmodifiableSet(
+                new HashSet<T>(Utils.checkNotNull(collection)));
     }
 
     static <T, U> Map<T, U> createImmutableMap(Map<T, U> map) {
-        return Collections.unmodifiableMap(new HashMap<T, U>(
-                Utils.checkNotNull(map)));
+        return Collections
+                .unmodifiableMap(new HashMap<T, U>(Utils.checkNotNull(map)));
     }
 
     static void closeQuietly(Closeable closeable) {
@@ -76,8 +76,8 @@ final class Utils {
 
     static Collection<String> readAllLines(InputStream is) throws IOException {
         Collection<String> lines = new ArrayList<String>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is,
-                UTF_8));
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, UTF_8));
         while (true) {
             String line = reader.readLine();
             if (line == null) {

@@ -30,23 +30,21 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 
 public final class SuppressGeneratedAnnotationDetector {
-    private final Set<String> annotatedClassNames =
-        new HashSet<String>();
-    private final Set<String> allClassNames =
-        new HashSet<String>();
+    private final Set<String> annotatedClassNames = new HashSet<String>();
+    private final Set<String> allClassNames = new HashSet<String>();
 
-    private SuppressGeneratedAnnotationDetector() { }
+    private SuppressGeneratedAnnotationDetector() {
+    }
 
     public static Set<String> detect(File file) throws IOException {
-        SuppressGeneratedAnnotationDetector detector =
-            new SuppressGeneratedAnnotationDetector();
+        SuppressGeneratedAnnotationDetector detector = new SuppressGeneratedAnnotationDetector();
         detector.detectInternal(file);
         return detector.computeSuppressedClassNames();
     }
 
     private Set<String> computeSuppressedClassNames() {
-        Set<String> suppressedClassNames =
-            new HashSet<String>(annotatedClassNames);
+        Set<String> suppressedClassNames = new HashSet<String>(
+                annotatedClassNames);
         for (String className : allClassNames) {
             if (suppressedClassNames.contains(className)) {
                 continue;
@@ -57,8 +55,8 @@ public final class SuppressGeneratedAnnotationDetector {
                 if (index == -1) {
                     break;
                 }
-                boolean outerSuppressed =
-                    annotatedClassNames.contains(className.substring(0, index));
+                boolean outerSuppressed = annotatedClassNames
+                        .contains(className.substring(0, index));
                 if (outerSuppressed) {
                     suppressedClassNames.add(className);
                     break;
@@ -103,19 +101,17 @@ public final class SuppressGeneratedAnnotationDetector {
 
         @Override
         public void visit(int version, int access, String name,
-                          String signature, String superName,
-                          String[] interfaces) {
+                String signature, String superName, String[] interfaces) {
             this.className = name;
             allClassNames.add(className);
-            super.visit(version, access, name,
-                        signature, superName,
-                        interfaces);
+            super.visit(version, access, name, signature, superName,
+                    interfaces);
         }
 
         @Override
         public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-            final String name = desc.substring(Math.max(desc.lastIndexOf('/'),
-                    desc.lastIndexOf('$')) + 1);
+            final String name = desc.substring(
+                    Math.max(desc.lastIndexOf('/'), desc.lastIndexOf('$')) + 1);
             boolean isGenerated = name.contains("Generated");
             if (isGenerated) {
                 annotatedClassNames.add(className);

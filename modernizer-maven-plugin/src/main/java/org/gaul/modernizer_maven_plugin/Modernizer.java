@@ -47,8 +47,7 @@ public final class Modernizer {
     public Modernizer(String javaVersion, Map<String, Violation> violations,
             Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
-            Collection<String> ignorePackages,
-            Set<String> ignoreClassNames,
+            Collection<String> ignorePackages, Set<String> ignoreClassNames,
             Collection<Pattern> ignoreClassNamePatterns) {
         long version;
         if (javaVersion.startsWith("1.")) {
@@ -62,9 +61,9 @@ public final class Modernizer {
         this.exclusions = Utils.createImmutableSet(exclusions);
         this.exclusionPatterns = Utils.createImmutableSet(exclusionPatterns);
         this.ignorePackages = Utils.createImmutableSet(ignorePackages);
-        this.ignoreClassNames =  Utils.createImmutableSet(ignoreClassNames);
-        this.ignoreFullClassNamePatterns
-            = Utils.createImmutableSet(ignoreClassNamePatterns);
+        this.ignoreClassNames = Utils.createImmutableSet(ignoreClassNames);
+        this.ignoreFullClassNamePatterns = Utils
+                .createImmutableSet(ignoreClassNamePatterns);
     }
 
     public Collection<ViolationOccurrence> check(ClassReader classReader)
@@ -83,8 +82,7 @@ public final class Modernizer {
 
     public static Map<String, Violation> parseFromXml(InputStream is)
             throws IOException, ParserConfigurationException, SAXException {
-        Map<String, Violation> map =
-                new HashMap<String, Violation>();
+        Map<String, Violation> map = new HashMap<String, Violation>();
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(is);
@@ -108,8 +106,7 @@ public final class Modernizer {
             Violation violation = new Violation(
                     element.getElementsByTagName("name").item(0)
                             .getTextContent(),
-                    versionNum,
-                    element.getElementsByTagName("comment").item(0)
+                    versionNum, element.getElementsByTagName("comment").item(0)
                             .getTextContent());
             map.put(violation.getName(), violation);
         }
