@@ -82,7 +82,7 @@ Default is `error`.
 * `CODE_CLIMATE` Write the violations according to [Code Climate's Spec](https://github.com/codeclimate/platform/blob/master/spec/analyzers/SPEC.md). 
 GitLab uses this format for its code quality as shown [here](https://docs.gitlab.com/ee/ci/testing/code_quality.html#implement-a-custom-tool).
   * `<outputFile>` The full path the file to output to. Default is `${project.build.directory}/code-quality.json`
-  * `<codeClimateSeverity>` Severity of Modernizer violations for CodeClimate: `INFO`, `MINOR`, `MAJOR`, `CRITIAL` or `BLOCKER`.
+  * `<codeClimateSeverity>` Severity of Modernizer violations for CodeClimate: `INFO`, `MINOR`, `MAJOR`, `CRITICAL` or `BLOCKER`.
 Default is `MINOR`.
 
 Ignoring elements
