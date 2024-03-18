@@ -17,11 +17,11 @@
   <description>Detect use of legacy APIs which modern Java versions supersede.</description>
 
   <prerequisites>
-    <maven>${mavenVersion}</maven>
+    <maven>3.2.5</maven>
   </prerequisites>
 
   <properties>
-    <mavenVersion>3.2.5</mavenVersion>
+    <mavenVersion>3.9.6</mavenVersion>
   </properties>
 
   <dependencies>
