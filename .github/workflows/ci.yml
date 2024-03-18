@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         java: [ '8' ]
-        maven: [ '3.6.3', '3.9.6' ]
+        maven: [ '3.2.5', '3.6.3', '3.9.6' ]
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK
