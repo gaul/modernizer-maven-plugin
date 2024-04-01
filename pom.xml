@@ -383,7 +383,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <asm.version>9.6</asm.version>
+    <asm.version>9.7</asm.version>
     <maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
     <maven-plugin-plugin.version>3.11.0</maven-plugin-plugin.version>
   </properties>
