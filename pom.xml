@@ -150,13 +150,6 @@
           </execution>
         </executions>
         <configuration>
-          <!--
-          TODO: cannot ignore generated files
-          https://jira.codehaus.org/browse/MCHECKSTYLE-260
-          <sourceDirectories>
-            <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-          </sourceDirectories>
-          -->
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <violationSeverity>warning</violationSeverity>
         </configuration>
@@ -234,7 +227,6 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.8.5.0</version>
         <configuration>
           <effort>Max</effort>
         </configuration>
@@ -242,7 +234,6 @@
       <plugin>
         <groupId>org.gaul</groupId>
         <artifactId>modernizer-maven-plugin</artifactId>
-        <version>2.9.0</version>
         <executions>
           <execution>
             <id>modernizer</id>
@@ -255,17 +246,6 @@
         <configuration>
           <javaVersion>${maven.compiler.source}</javaVersion>
           <includeTestClasses>false</includeTestClasses>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.13</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
       <plugin>
@@ -404,6 +384,16 @@
           <groupId>codes.rafael.modulemaker</groupId>
           <artifactId>modulemaker-maven-plugin</artifactId>
           <version>1.11</version>
+        </plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>4.8.5.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.gaul</groupId>
+          <artifactId>modernizer-maven-plugin</artifactId>
+          <version>2.9.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
