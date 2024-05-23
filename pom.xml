@@ -336,7 +336,7 @@
                     <version>3.6.3</version>
                   </requireMavenVersion>
                   <requireJavaVersion>
-                    <version>${maven.compiler.source}</version>
+                    <version>1.${maven.compiler.source}</version>
                   </requireJavaVersion>
                 </rules>
               </configuration>
