@@ -17,7 +17,7 @@
   <description>Detect use of legacy APIs which modern Java versions supersede.</description>
 
   <prerequisites>
-    <maven>3.2.5</maven>
+    <maven>3.6.3</maven>
   </prerequisites>
 
   <properties>
@@ -125,6 +125,7 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>
           <configLocation>checkstyle/checkstyle.xml</configLocation>
@@ -141,7 +142,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
-        <version>3.6.1</version>
         <configuration>
           <mavenOpts>${argLine}</mavenOpts>
           <debug>true</debug>
@@ -161,7 +161,7 @@
           <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>4.0.20</version>
+            <version>4.0.21</version>
             <type>pom</type>
           </dependency>
         </dependencies>
