@@ -769,6 +769,7 @@ public final class ModernizerTest {
     private static class Java9Violations {
         @SuppressWarnings("deprecation")
         private static void method() throws Exception {
+            ByteStreams.toByteArray((InputStream) null);
             new Byte((String) null);
             new Double((String) null);
             new Short((String) null);

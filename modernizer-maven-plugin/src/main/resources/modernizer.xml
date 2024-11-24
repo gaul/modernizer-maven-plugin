@@ -252,6 +252,12 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/io/ByteStreams.toByteArray:(Ljava/io/InputStream;)[B</name>
+    <version>9</version>
+    <comment>Prefer java.io.InputStream.readAllBytes</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/io/Files.toByteArray:(Ljava/io/File;)[B</name>
     <version>7</version>
     <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
