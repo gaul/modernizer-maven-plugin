@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
 import java.net.URLDecoder;
@@ -399,7 +400,7 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("19");
+        Modernizer modernizer = createModernizer("24");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
@@ -418,6 +419,8 @@ public final class ModernizerTest {
             new ClassReader(Java18Violations.class.getName())));
         occurrences.addAll(modernizer.check(
             new ClassReader(Java19Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
+            new ClassReader(Java24Violations.class.getName())));
         // must visit inner classes manually
         occurrences.addAll(modernizer.check(
                 new ClassReader(EnumerationTestClass.class.getName())));
@@ -844,6 +847,12 @@ public final class ModernizerTest {
             new Locale("", "");
             new Locale("", "", "");
             new Thread().getId();
+        }
+    }
+
+    private static class Java24Violations {
+        private static void method() throws Exception {
+            new StringReader("");
         }
     }
 

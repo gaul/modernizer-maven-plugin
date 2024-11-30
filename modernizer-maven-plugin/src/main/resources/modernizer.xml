@@ -426,6 +426,12 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/io/StringReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>24</version>
+    <comment>Prefer java.io.Reader.of(java.lang.CharSequence)</comment>
+  </violation>
+
+  <violation>
     <name>java/lang/Byte."&lt;init&gt;":(B)V</name>
     <version>5</version>
     <comment>Prefer java.lang.Byte.valueOf(byte)</comment>
