@@ -33,7 +33,7 @@
 
     <asm.version>9.7.1</asm.version>
     <maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
-    <maven-plugin-plugin.version>3.13.1</maven-plugin-plugin.version>
+    <maven-plugin-plugin.version>3.15.1</maven-plugin-plugin.version>
   </properties>
 
   <issueManagement>
