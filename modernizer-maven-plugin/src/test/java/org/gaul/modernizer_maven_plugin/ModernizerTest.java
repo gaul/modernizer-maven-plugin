@@ -847,6 +847,10 @@ public final class ModernizerTest {
             new Locale("", "");
             new Locale("", "", "");
             new Thread().getId();
+            Maps.newHashMapWithExpectedSize(0);
+            Maps.newLinkedHashMapWithExpectedSize(0);
+            Sets.newHashSetWithExpectedSize(0);
+            Sets.newLinkedHashSetWithExpectedSize(0);
         }
     }
 
