@@ -1242,6 +1242,30 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Paths.get(String))</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Paths.get(String), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.CREATE)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Path)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/io/File;Z)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Path, java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.CREATE)</comment>
+  </violation>
+
+  <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/io/File;)V</name>
     <version>11</version>
     <comment>Prefer java.io.FileReader.&lt;init&gt;(File, Charset)</comment>
