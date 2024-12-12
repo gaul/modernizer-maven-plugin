@@ -1194,6 +1194,30 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/io/File."&lt;init&gt;":(Ljava/io/File;Ljava/lang/String;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Path.resolve(String)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Paths.get(String)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Paths.get(String, String...)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File."&lt;init&gt;":(Ljava/net/URI;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Paths.get(URI)</comment>
+  </violation>
+
+  <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/io/File;)V</name>
     <version>11</version>
     <comment>Prefer java.io.FileReader.&lt;init&gt;(File, Charset)</comment>
