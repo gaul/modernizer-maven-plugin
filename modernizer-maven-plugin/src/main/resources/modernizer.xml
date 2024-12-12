@@ -1267,6 +1267,18 @@ violation names use the same format that javap emits.
 
   <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newBufferedReader.&lt;init&gt;(java.nio.file.Path)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newBufferedReader.&lt;init&gt;(java.nio.file.Paths.get(String))</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileReader."&lt;init&gt;":(Ljava/io/File;)V</name>
     <version>11</version>
     <comment>Prefer java.io.FileReader.&lt;init&gt;(File, Charset)</comment>
   </violation>
@@ -1275,6 +1287,18 @@ violation names use the same format that javap emits.
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>11</version>
     <comment>Prefer java.io.FileReader.&lt;init&gt;(String, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileReader."&lt;init&gt;":(Ljava/io/File;Ljava/nio/Charset;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newBufferedReader.&lt;init&gt;(Path, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;Ljava/nio/Charset;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newBufferedReader.&lt;init&gt;(Paths.get(String), Charset)</comment>
   </violation>
 
   <violation>
