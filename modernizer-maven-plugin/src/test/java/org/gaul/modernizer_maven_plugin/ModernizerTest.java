@@ -20,6 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
@@ -31,12 +33,14 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -802,6 +806,22 @@ public final class ModernizerTest {
             new Scanner((Path) null, "");
             new Scanner((ReadableByteChannel) null, "");
             Optional.empty().get();
+            new File(new File(""), "");
+            new File("");
+            new File("", "");
+            new File(URI.create("file://name"));
+            new FileInputStream("");
+            new FileInputStream(new File(""));
+            new FileOutputStream("");
+            new FileOutputStream("", true);
+            new FileOutputStream(new File(""));
+            new FileOutputStream(new File(""), true);
+            new FileReader((File) null);
+            new FileReader((String) null);
+            new FileWriter((File) null);
+            new FileWriter((File) null, true);
+            new FileWriter("");
+            new FileWriter("", true);
         }
     }
 
@@ -812,12 +832,14 @@ public final class ModernizerTest {
             CharStreams.nullWriter();
             Files.toString((File) null, (Charset) null);
             Files.write("", (File) null, (Charset) null);
-            new FileReader((File) null);
-            new FileReader((String) null);
-            new FileWriter((File) null);
-            new FileWriter((File) null, true);
-            new FileWriter("");
-            new FileWriter("", true);
+            new FileReader((File) null, (Charset) null);
+            new FileReader((String) null, (Charset) null);
+            new FileWriter((File) null, (Charset) null);
+            new FileWriter((File) null, (Charset) null, true);
+            new FileWriter("", (Charset) null);
+            new FileWriter("", (Charset) null, true);
+            Paths.get(URI.create("file://name"));
+            Paths.get("", "");
         }
     }
 
