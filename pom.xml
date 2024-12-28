@@ -7,6 +7,9 @@
   <packaging>pom</packaging>
 
   <name>Modernizer Maven Plugin parent</name>
+  <url>https://github.com/gaul/modernizer-maven-plugin</url>
+  <description>Detect use of legacy APIs which modern Java versions supersede.</description>
+
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
