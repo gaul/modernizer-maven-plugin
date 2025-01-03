@@ -1250,7 +1250,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Paths.get(String), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.CREATE)</comment>
+    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Paths.get(String), CREATE, APPEND, WRITE)</comment>
   </violation>
 
   <violation>
@@ -1262,7 +1262,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/io/File;Z)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Path, java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.CREATE)</comment>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path, CREATE, APPEND, WRITE)</comment>
   </violation>
 
   <violation>
