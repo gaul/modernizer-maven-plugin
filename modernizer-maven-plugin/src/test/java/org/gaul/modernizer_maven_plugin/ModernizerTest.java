@@ -67,6 +67,7 @@ import java.util.TreeSet;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -134,7 +135,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @SuppressWarnings("deprecation")
 public final class ModernizerTest {
-    private Map<String, Violation> violations;
+    private Map<String, Collection<Violation>> violations;
     private static final Collection<String> NO_EXCLUSIONS =
             Collections.<String>emptySet();
     private static final Collection<Pattern> NO_EXCLUSION_PATTERNS =
@@ -156,7 +157,7 @@ public final class ModernizerTest {
     public void readsOldJavaVersionFormat() throws Exception {
         try (InputStream is = Modernizer.class.getResourceAsStream(
                 "/modernizer-old-versions.xml")) {
-            Map<String, Violation> old = Modernizer.parseFromXml(is);
+            Map<String, Collection<Violation>> old = Modernizer.parseFromXml(is);
             assertThat(old).hasSize(1);
         }
     }
@@ -401,9 +402,9 @@ public final class ModernizerTest {
     @Test
     public void testAnnotationViolation() throws Exception {
         String name = TestAnnotation.class.getName().replace('.', '/');
-        Map<String, Violation> testViolations = new HashMap<>();
+        Map<String, Collection<Violation>> testViolations = new HashMap<>();
         testViolations.put(name,
-                new Violation(name, 5, ""));
+                Collections.singleton(new Violation(name, 5, OptionalInt.empty(), "")));
         Modernizer modernizer = new Modernizer("1.5", testViolations,
                 NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS, NO_IGNORED_PACKAGES,
                 NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS);
@@ -417,7 +418,8 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("24");
+        int maxVersion = 24;
+        Modernizer modernizer = createModernizer(String.valueOf(maxVersion));
         List<Class<?>> fixtures = List.of(
                 Java2Violations.class,
                 Java4Violations.class,
@@ -458,7 +460,13 @@ public final class ModernizerTest {
         violations.remove(
                 "sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;");
 
-        assertThat(actualViolations).containsAll(violations.values());
+        Collection<Violation> expectedViolations = violations.values().stream()
+                .flatMap(Collection::stream)
+                .filter(violation -> !violation.getUntil().isPresent() ||
+                        violation.getUntil().getAsInt() > maxVersion)
+                .collect(Collectors.toList());
+
+        assertThat(actualViolations).containsAll(expectedViolations);
     }
 
     @Test

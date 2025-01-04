@@ -236,7 +236,8 @@ public final class ModernizerMojo extends AbstractMojo {
 
         LogLevel logLevel = parseLogLevel(violationLogLevel);
 
-        Map<String, Violation> allViolations = parseViolations(violationsFile);
+        Map<String, Collection<Violation>> allViolations =
+                parseViolations(violationsFile);
         for (String violationsFilePath : violationsFiles) {
             allViolations.putAll(parseViolations(violationsFilePath));
         }
@@ -292,7 +293,7 @@ public final class ModernizerMojo extends AbstractMojo {
         }
     }
 
-    private static Map<String, Violation> parseViolations(
+    private static Map<String, Collection<Violation>> parseViolations(
             String violationsFilePath) throws MojoExecutionException {
         try (InputStream is = openViolations(violationsFilePath)) {
             return Modernizer.parseFromXml(is);

@@ -17,16 +17,19 @@
 package org.gaul.modernizer_maven_plugin;
 
 import java.util.Objects;
+import java.util.OptionalInt;
 
 public final class Violation {
     private final String name;
     private final int version;
+    private final OptionalInt until; // ignoring violation since this version
     private final String comment;
 
-    Violation(String name, int version, String comment) {
+    Violation(String name, int version, OptionalInt until, String comment) {
         this.name = Objects.requireNonNull(name);
         Utils.checkArgument(version >= 0);
         this.version = version;
+        this.until = Objects.requireNonNull(until);
         this.comment = Objects.requireNonNull(comment);
     }
 
@@ -36,6 +39,10 @@ public final class Violation {
 
     public int getVersion() {
         return version;
+    }
+
+    public OptionalInt getUntil() {
+        return until;
     }
 
     public String getComment() {
@@ -53,16 +60,19 @@ public final class Violation {
         Violation that = (Violation) o;
         return version == that.version &&
                 name.equals(that.name) &&
+                until.equals(that.until) &&
                 comment.equals(that.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, version, comment);
+        return Objects.hash(name, version, until, comment);
     }
 
     @Override
     public String toString() {
-        return name + " " + version + " " + comment;
+        return name + " " + version +
+                (until.isPresent() ? " " + until.getAsInt() : "") +
+                " " + comment;
     }
 }

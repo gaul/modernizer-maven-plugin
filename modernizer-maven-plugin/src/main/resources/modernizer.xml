@@ -1588,25 +1588,53 @@
   <violation>
     <name>java/io/File."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Paths.get(String)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Path.of(String)</comment>
   </violation>
 
   <violation>
     <name>java/io/File."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Paths.get(String, String...)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Path.of(String, String...)</comment>
   </violation>
 
   <violation>
     <name>java/io/File."&lt;init&gt;":(Ljava/net/URI;)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Paths.get(URI)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File."&lt;init&gt;":(Ljava/net/URI;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Path.of(URI)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileInputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.newInputStream(Paths.get(String))</comment>
+    <until>11</until>
+    <comment>Prefer java.nio.file.Files.newInputStream(java.nio.file.Paths.get(String))</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileInputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newInputStream(java.nio.file.Path.of(String))</comment>
   </violation>
 
   <violation>
@@ -1618,13 +1646,27 @@
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Files.newOutputStream(Paths.get(String))</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path.of(String))</comment>
   </violation>
 
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Files.newOutputStream(Paths.get(String), OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path.of(String), CREATE, APPEND, WRITE)</comment>
   </violation>
 
   <violation>
@@ -1648,7 +1690,14 @@
   <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Files.newBufferedReader(Paths.get(String), Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newBufferedReader(Path.of(String), Charset)</comment>
   </violation>
 
   <violation>
@@ -1678,13 +1727,27 @@
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Files.newBufferedWriter(Paths.get(String), Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newBufferedWriter(Path.of(String), Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
     <version>7</version>
+    <until>11</until>
     <comment>Prefer java.nio.file.Files.newBufferedWriter(Paths.get(String), Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.newBufferedWriter(Path.of(String), Charset, OpenOption...)</comment>
   </violation>
 
   <violation>
