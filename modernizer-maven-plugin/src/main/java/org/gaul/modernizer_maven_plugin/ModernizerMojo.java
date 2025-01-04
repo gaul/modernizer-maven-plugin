@@ -229,7 +229,7 @@ public final class ModernizerMojo extends AbstractMojo {
                     "javaVersion is not set but is required for execution.");
         }
 
-        Map<String, Violation> allViolations = parseViolations(violationsFile);
+        Map<String, Collection<Violation>> allViolations = parseViolations(violationsFile);
         for (String violationsFilePath : violationsFiles) {
             allViolations.putAll(parseViolations(violationsFilePath));
         }
@@ -328,7 +328,7 @@ public final class ModernizerMojo extends AbstractMojo {
         }
     }
 
-    private static Map<String, Violation> parseViolations(
+    private static Map<String, Collection<Violation>> parseViolations(
             String violationsFilePath) throws MojoExecutionException {
         InputStream is;
         if (violationsFilePath.startsWith(CLASSPATH_PREFIX)) {
