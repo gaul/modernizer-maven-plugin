@@ -24,6 +24,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target({
     ElementType.TYPE,
+    ElementType.TYPE_USE,
     ElementType.METHOD,
     ElementType.CONSTRUCTOR,
 })

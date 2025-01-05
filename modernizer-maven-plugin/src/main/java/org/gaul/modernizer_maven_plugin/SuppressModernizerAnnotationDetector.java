@@ -30,7 +30,10 @@ import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Label;
+import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
+import org.objectweb.asm.TypePath;
 
 public final class SuppressModernizerAnnotationDetector {
     private final Set<String> annotatedClassNames =
@@ -129,6 +132,30 @@ public final class SuppressModernizerAnnotationDetector {
                 annotatedClassNames.add(className);
             }
             return super.visitAnnotation(desc, visible);
+        }
+
+        @Override
+        public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
+            MethodVisitor methodvisitor = super.visitMethod(access, name, descriptor, signature, exceptions);
+            return new SimpleMethodVisitor(ASM_API, methodvisitor, className);
+        }
+    }
+
+    private final class SimpleMethodVisitor extends MethodVisitor {
+        private final String className;
+
+        SimpleMethodVisitor(int api, MethodVisitor methodVisitor, String className) {
+            super(api, methodVisitor);
+            this.className = className;
+        }
+
+        @Override
+        public AnnotationVisitor visitLocalVariableAnnotation(int typeRef, TypePath typePath, Label[] start, Label[] end, int[] index, String descriptor, boolean visible) {
+            boolean isSuppressModernizer = Type.getType(descriptor).getClassName().equals(SuppressModernizer.class.getName());
+            if (isSuppressModernizer) {
+                annotatedClassNames.add(className);
+            }
+            return super.visitLocalVariableAnnotation(typeRef, typePath, start, end, index, descriptor, visible);
         }
     }
 }

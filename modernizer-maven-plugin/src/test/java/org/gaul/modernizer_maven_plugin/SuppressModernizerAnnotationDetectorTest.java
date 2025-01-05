@@ -22,10 +22,10 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.gaul.modernizer_maven_plugin
-    .SuppressModernizerTestClasses.SuppressedOnClass;
-import org.gaul.modernizer_maven_plugin
-    .SuppressModernizerTestClasses.SuppressedOnMembers;
+import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnClass;
+import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnLocal;
+import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnLocalAnonymousInnerClass;
+import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnMembers;
 import org.junit.Test;
 
 public final class SuppressModernizerAnnotationDetectorTest {
@@ -35,6 +35,8 @@ public final class SuppressModernizerAnnotationDetectorTest {
         Set<String> actual = SuppressModernizerAnnotationDetector.detect(
             SuppressedOnClass.class,
             SuppressedOnClass.InnerClass.class,
+            SuppressedOnLocal.class,
+            SuppressedOnLocalAnonymousInnerClass.class,
             SuppressedOnMembers.class,
             SuppressedOnMembers.InnerClass.class
         );
@@ -42,6 +44,8 @@ public final class SuppressModernizerAnnotationDetectorTest {
         assertThat(new TreeSet<String>(actual)).containsExactly(
             SuppressedOnClass.class.getName().replace('.', '/'),
             SuppressedOnClass.InnerClass.class.getName().replace('.', '/'),
+            SuppressedOnLocal.class.getName().replace('.', '/'),
+            SuppressedOnLocalAnonymousInnerClass.class.getName().replace('.', '/'),
             SuppressedOnMembers.InnerClass.class.getName().replace('.', '/')
         );
     }

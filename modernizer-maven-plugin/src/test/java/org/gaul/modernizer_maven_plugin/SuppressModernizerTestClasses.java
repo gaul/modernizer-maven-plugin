@@ -17,6 +17,7 @@
 package org.gaul.modernizer_maven_plugin;
 
 import java.nio.charset.Charset;
+import java.util.Vector;
 
 import com.google.common.base.Charsets;
 
@@ -53,6 +54,25 @@ public class SuppressModernizerTestClasses {
             public Charset getCharset() {
                 return Charsets.UTF_8;
             }
+        }
+    }
+
+    public static final class SuppressedOnLocal {
+        public SuppressedOnLocal() {
+            @SuppressModernizer
+            Charset charset = Charsets.UTF_8;
+        }
+    }
+
+    public static final class SuppressedOnLocalAnonymousInnerClass {
+        public SuppressedOnLocalAnonymousInnerClass() {
+            @SuppressModernizer
+            Vector vector = new Vector() {
+                @Override
+                public boolean isEmpty() {
+                    return false;
+                }
+            };
         }
     }
 }

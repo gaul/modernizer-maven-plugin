@@ -9,7 +9,6 @@
     <property name="severity" value="ignore"/>
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
   </module>
-  <module name="LineLength"/>
   <module name="NewlineAtEndOfFile">
     <property name="lineSeparator" value="lf" />
   </module>
