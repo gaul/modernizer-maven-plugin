@@ -21,10 +21,11 @@ import static java.util.Collections.emptyList;
 import static org.gaul.modernizer_maven_plugin.Utils.checkArgument;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,6 +35,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import java.util.stream.Stream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -62,6 +64,8 @@ public final class ModernizerMojo extends AbstractMojo {
 
     /** The output directory into which to find the source code. */
     @Parameter(property = "project.build.sourceDirectory")
+    // TODO: cannnot convert to Path:
+    // https://lists.apache.org/thread/b4gz60c5v5oz7khczs4nozywbkfbmhjf
     private File sourceDirectory;
 
     /** The output directory into which to find the test source code. */
@@ -258,11 +262,12 @@ public final class ModernizerMojo extends AbstractMojo {
         Set<String> ignoreClassNames = new HashSet<String>();
         try {
             ignoreClassNames.addAll(
-                SuppressModernizerAnnotationDetector.detect(outputDirectory));
+                SuppressModernizerAnnotationDetector.detect(
+                    outputDirectory.toPath()));
             if (ignoreGeneratedClasses) {
                 Set<String> ignore =
                     SuppressGeneratedAnnotationDetector.detect(
-                        outputDirectory);
+                        outputDirectory.toPath());
                 if (getLog().isDebugEnabled()) {
                     getLog().debug(
                         "The following generated classes will be ignored");
@@ -275,11 +280,11 @@ public final class ModernizerMojo extends AbstractMojo {
             if (includeTestClasses) {
                 ignoreClassNames.addAll(
                     SuppressModernizerAnnotationDetector.detect(
-                        testOutputDirectory));
+                        testOutputDirectory.toPath()));
                 if (ignoreGeneratedClasses) {
                     Set<String> ignore =
                         SuppressGeneratedAnnotationDetector.detect(
-                            testOutputDirectory);
+                            testOutputDirectory.toPath());
                     if (getLog().isDebugEnabled()) {
                         getLog().debug(
                             "The following generated test classes " +
@@ -301,9 +306,9 @@ public final class ModernizerMojo extends AbstractMojo {
 
         long count;
         try {
-            count = recurseFiles(outputDirectory);
+            count = recurseFiles(outputDirectory.toPath());
             if (includeTestClasses) {
-                count += recurseFiles(testOutputDirectory);
+                count += recurseFiles(testOutputDirectory.toPath());
             }
         } catch (IOException ioe) {
             throw new MojoExecutionException("Error reading Java classes", ioe);
@@ -333,12 +338,12 @@ public final class ModernizerMojo extends AbstractMojo {
                     classpath));
             is = Modernizer.class.getResourceAsStream(classpath);
         } else {
-            File file = new File(violationsFilePath);
+            Path path = FileSystems.getDefault().getPath(violationsFilePath);
             try {
-                is = new FileInputStream(file);
-            } catch (FileNotFoundException fnfe) {
+                is = Files.newInputStream(path);
+            } catch (IOException fnfe) {
                 throw new MojoExecutionException(
-                        "Error opening violation file: " + file, fnfe);
+                        "Error opening violation file: " + path, fnfe);
             }
         }
         try {
@@ -361,9 +366,9 @@ public final class ModernizerMojo extends AbstractMojo {
             throws MojoExecutionException {
         InputStream is = null;
         try {
-            File file = new File(exclusionsFilePath);
-            if (file.exists()) {
-                is = new FileInputStream(exclusionsFilePath);
+            Path path = FileSystems.getDefault().getPath(exclusionsFilePath);
+            if (Files.exists(path)) {
+                is = Files.newInputStream(path);
             } else {
                 is = this.getClass().getClassLoader().getResourceAsStream(
                         exclusionsFilePath);
@@ -384,25 +389,24 @@ public final class ModernizerMojo extends AbstractMojo {
         }
     }
 
-    private long recurseFiles(File file) throws IOException {
+    private long recurseFiles(Path path) throws IOException {
         long count = 0;
-        if (!file.exists()) {
+        if (!Files.exists(path)) {
             return count;
         }
-        if (file.isDirectory()) {
-            String[] children = file.list();
-            if (children != null) {
-                for (String child : children) {
-                    count += recurseFiles(new File(file, child));
-                }
+        if (Files.isDirectory(path)) {
+            Stream<Path> stream = Files.list(path);
+            Iterable<Path> children = stream::iterator;
+            for (Path child : children) {
+                count += recurseFiles(path.resolve(child));
             }
-        } else if (file.getPath().endsWith(".class")) {
-            InputStream is = new FileInputStream(file);
+        } else if (path.toString().endsWith(".class")) {
+            InputStream is = Files.newInputStream(path);
             try {
                 Collection<ViolationOccurrence> occurrences =
                         modernizer.check(is);
                 for (ViolationOccurrence occurrence : occurrences) {
-                    String name = file.getPath();
+                    String name = path.toString();
                     if (name.startsWith(outputDirectory.getPath())) {
                         name = sourceDirectory.getPath() + name.substring(
                                 outputDirectory.getPath().length());

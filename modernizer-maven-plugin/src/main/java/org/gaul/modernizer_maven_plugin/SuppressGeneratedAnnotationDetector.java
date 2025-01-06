@@ -18,12 +18,13 @@ package org.gaul.modernizer_maven_plugin;
 
 import static org.gaul.modernizer_maven_plugin.Utils.ASM_API;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
@@ -37,10 +38,10 @@ public final class SuppressGeneratedAnnotationDetector {
 
     private SuppressGeneratedAnnotationDetector() { }
 
-    public static Set<String> detect(File file) throws IOException {
+    public static Set<String> detect(Path path) throws IOException {
         SuppressGeneratedAnnotationDetector detector =
             new SuppressGeneratedAnnotationDetector();
-        detector.detectInternal(file);
+        detector.detectInternal(path);
         return detector.computeSuppressedClassNames();
     }
 
@@ -69,20 +70,19 @@ public final class SuppressGeneratedAnnotationDetector {
         return suppressedClassNames;
     }
 
-    private void detectInternal(File file) throws IOException {
-        if (!file.exists()) {
+    private void detectInternal(Path path) throws IOException {
+        if (!Files.exists(path)) {
             return;
-        } else if (file.isDirectory()) {
-            String[] children = file.list();
-            if (children != null) {
-                for (String child : children) {
-                    detectInternal(new File(file, child));
-                }
+        } else if (Files.isDirectory(path)) {
+            Stream<Path> stream = Files.list(path);
+            Iterable<Path> children = stream::iterator;
+            for (Path child : children) {
+                detectInternal(path.resolve(child));
             }
-        } else if (file.getPath().endsWith(".class")) {
+        } else if (path.toString().endsWith(".class")) {
             InputStream inputStream = null;
             try {
-                inputStream = new FileInputStream(file);
+                inputStream = Files.newInputStream(path);
                 detectInternal(new ClassReader(inputStream));
             } finally {
                 Utils.closeQuietly(inputStream);
