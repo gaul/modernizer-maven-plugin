@@ -401,8 +401,7 @@ public final class ModernizerMojo extends AbstractMojo {
                 count += recurseFiles(path.resolve(child));
             }
         } else if (path.toString().endsWith(".class")) {
-            InputStream is = Files.newInputStream(path);
-            try {
+            try (InputStream is = Files.newInputStream(path)) {
                 Collection<ViolationOccurrence> occurrences =
                         modernizer.check(is);
                 for (ViolationOccurrence occurrence : occurrences) {
@@ -421,8 +420,6 @@ public final class ModernizerMojo extends AbstractMojo {
                     outputEntries.add(new OutputEntry(name, occurrence));
                     ++count;
                 }
-            } finally {
-                Utils.closeQuietly(is);
             }
         }
         return count;

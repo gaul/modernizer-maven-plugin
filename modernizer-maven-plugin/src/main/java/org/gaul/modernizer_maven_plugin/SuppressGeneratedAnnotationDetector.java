@@ -80,12 +80,8 @@ public final class SuppressGeneratedAnnotationDetector {
                 detectInternal(path.resolve(child));
             }
         } else if (path.toString().endsWith(".class")) {
-            InputStream inputStream = null;
-            try {
-                inputStream = Files.newInputStream(path);
+            try (InputStream inputStream = Files.newInputStream(path)) {
                 detectInternal(new ClassReader(inputStream));
-            } finally {
-                Utils.closeQuietly(inputStream);
             }
         }
     }

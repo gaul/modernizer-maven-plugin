@@ -127,24 +127,18 @@ public final class ModernizerTest {
 
     @Before
     public void setUp() throws Exception {
-        InputStream is = Modernizer.class.getResourceAsStream(
-                "/modernizer.xml");
-        try {
+        try (InputStream is = Modernizer.class.getResourceAsStream(
+                "/modernizer.xml")) {
             violations = Modernizer.parseFromXml(is);
-        } finally {
-            Utils.closeQuietly(is);
         }
     }
 
     @Test
     public void readsOldJavaVersionFormat() throws Exception {
-        InputStream is = Modernizer.class.getResourceAsStream(
-            "/modernizer-old-versions.xml");
-        try {
+        try (InputStream is = Modernizer.class.getResourceAsStream(
+                "/modernizer-old-versions.xml")) {
             Map<String, Violation> old = Modernizer.parseFromXml(is);
             assertThat(old).hasSize(1);
-        } finally {
-            Utils.closeQuietly(is);
         }
     }
 
