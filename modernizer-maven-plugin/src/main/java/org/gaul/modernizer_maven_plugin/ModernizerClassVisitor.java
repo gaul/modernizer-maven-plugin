@@ -157,7 +157,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
             int lineNumber) {
         if (violation != null && !exclusions.contains(token) &&
                 javaVersion >= violation.getVersion() &&
-                (!violation.getUntil().isPresent() || javaVersion < violation.getUntil().getAsInt()) &&
+                (!violation.getUntil().isPresent() ||
+                        javaVersion < violation.getUntil().getAsInt()) &&
                 !ignorePackages.contains(packageName)) {
             if (ignoreClass()) {
                 return;
