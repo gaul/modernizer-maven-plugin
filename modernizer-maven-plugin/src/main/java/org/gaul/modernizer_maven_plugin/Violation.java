@@ -16,7 +16,6 @@
 
 package org.gaul.modernizer_maven_plugin;
 
-import java.util.Optional;
 import java.util.OptionalInt;
 
 public final class Violation {
