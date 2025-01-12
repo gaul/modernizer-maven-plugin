@@ -1279,7 +1279,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Path.of(String))</comment>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path.of(String))</comment>
   </violation>
 
   <violation>
@@ -1292,7 +1292,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Path.of(String), CREATE, APPEND, WRITE)</comment>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path.of(String), CREATE, APPEND, WRITE)</comment>
   </violation>
 
   <violation>
@@ -1323,7 +1323,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newBufferedReader.&lt;init&gt;(java.nio.file.Path.of(String))</comment>
+    <comment>Prefer java.nio.file.Files.newBufferedReader.&lt;init&gt;(Path.of(String))</comment>
   </violation>
 
   <violation>
@@ -1373,7 +1373,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newBufferedWriter.&lt;init&gt;(Path.of(String), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.WRITE)</comment>
+    <comment>Prefer java.nio.file.Files.newBufferedWriter.&lt;init&gt;(Path.of(String), CREATE, WRITE)</comment>
   </violation>
 
   <violation>
