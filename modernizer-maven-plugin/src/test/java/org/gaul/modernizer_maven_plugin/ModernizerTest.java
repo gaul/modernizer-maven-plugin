@@ -397,6 +397,20 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testUntil() throws Exception {
+        ClassReader cr = new ClassReader(UntilTest.class.getName());
+        Collection<ViolationOccurrence> occurrences = createModernizer("10").check(cr);
+        assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getComment())
+                .isEqualTo("Prefer java.nio.file.Files.newInputStream(java.nio.file.Paths.get(String))");
+
+        occurrences = createModernizer("11").check(cr);
+        assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getComment())
+                .isEqualTo("Prefer java.nio.file.Files.newInputStream(java.nio.file.Path.of(String))");
+    }
+
+    @Test
     public void testAllViolations() throws Exception {
         Modernizer modernizer = createModernizer("24");
         Collection<ViolationOccurrence> occurrences = modernizer.check(
@@ -580,6 +594,12 @@ public final class ModernizerTest {
         @Override
         public Object get() {
             return new Object();
+        }
+    }
+
+    private static class UntilTest {
+        public static void method() throws Exception {
+            new FileInputStream("");
         }
     }
 
