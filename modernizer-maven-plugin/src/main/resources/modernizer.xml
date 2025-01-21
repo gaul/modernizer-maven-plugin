@@ -272,7 +272,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/io/ByteStreams.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)J</name>
     <version>9</version>
-    <comment>Prefer java.io.InputStream.transferTo</comment>
+    <comment>Prefer java.io.InputStream.transferTo(InputStream, OutputStream)</comment>
   </violation>
 
   <violation>
@@ -711,6 +711,66 @@ violation names use the same format that javap emits.
     <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;Ljava/lang/String;)Ljava/util/List;</name>
     <version>7</version>
     <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/IOUtils.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)I</name>
+    <version>9</version>
+    <comment>Prefer java.io.InputStream.transferTo(InputStream, OutputStream)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/IOUtils.copyLarge:(Ljava/io/InputStream;Ljava/io/OutputStream;)J</name>
+    <version>9</version>
+    <comment>Prefer java.io.InputStream.transferTo(InputStream, OutputStream)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/IOUtils.copy:(Ljava/io/Reader;Ljava/io/Writer;)I</name>
+    <version>9</version>
+    <comment>Prefer java.io.InputStream.transferTo(Reader, Writer)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/IOUtils.copyLarge:(Ljava/io/Reader;Ljava/io/Writer;)J</name>
+    <version>9</version>
+    <comment>Prefer java.io.InputStream.transferTo(Reader, Writer)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/IOUtils.skipFully:(Ljava/io/InputStream;J)V</name>
+    <version>12</version>
+    <comment>Prefer java.io.InputStream.skipNBytes(long)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/IOUtils.toByteArray:(Ljava/io/InputStream;)[B</name>
+    <version>9</version>
+    <comment>Prefer java.io.InputStream.readAllBytes(InputStream)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/output/NullOutputStream.NULL_OUTPUT_STREAM:Lorg/apache/commons/io/output/NullOutputStream;</name>
+    <version>11</version>
+    <comment>Prefer java.io.OutputStream.nullOutputStream()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/output/NullOutputStream."&lt;init&gt;":()V</name>
+    <version>11</version>
+    <comment>Prefer java.io.OutputStream.nullOutputStream()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/output/NullWriter.NULL_WRITER:Lorg/apache/commons/io/output/NullWriter;</name>
+    <version>11</version>
+    <comment>Prefer java.io.Writer.nullWriter()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/output/NullWriter."&lt;init&gt;":()V</name>
+    <version>11</version>
+    <comment>Prefer java.io.Writer.nullWriter()</comment>
   </violation>
 
   <violation>
@@ -1191,6 +1251,12 @@ violation names use the same format that javap emits.
     <name>com/google/common/io/CharStreams.nullWriter:()Ljava/io/Writer;</name>
     <version>11</version>
     <comment>Prefer java.io.Writer.nullWriter()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/CharStreams.skipFully:(Ljava/io/Reader;J)V</name>
+    <version>12</version>
+    <comment>Prefer java.io.InputStream.skipNBytes(long)</comment>
   </violation>
 
   <violation>

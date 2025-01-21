@@ -30,7 +30,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.io.StringReader;
+import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
 import java.net.URI;
@@ -95,6 +97,9 @@ import com.google.inject.Provider;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.NullOutputStream;
+import org.apache.commons.io.output.NullWriter;
 import org.apache.commons.lang3.StringUtils;
 import org.gaul.modernizer_maven_plugin
     .SuppressModernizerTestClasses.SuppressedOnClass;
@@ -628,7 +633,6 @@ public final class ModernizerTest {
             Sets.unmodifiableNavigableSet(new TreeSet<Object>());
             Sets.synchronizedNavigableSet(new TreeSet<Object>());
             BaseEncoding.base64();
-            ByteStreams.copy((InputStream) null, (OutputStream) null);
             Files.toByteArray((File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
@@ -771,6 +775,12 @@ public final class ModernizerTest {
         @SuppressWarnings("deprecation")
         private static void method() throws Exception {
             ByteStreams.toByteArray((InputStream) null);
+            ByteStreams.copy((InputStream) null, (OutputStream) null);
+            IOUtils.copy((InputStream) null, (OutputStream) null);
+            IOUtils.copyLarge((InputStream) null, (OutputStream) null);
+            IOUtils.copy((Reader) null, (Writer) null);
+            IOUtils.copyLarge((Reader) null, (Writer) null);
+            IOUtils.toByteArray((InputStream) null);
             new Byte((String) null);
             new Double((String) null);
             new Short((String) null);
@@ -822,8 +832,13 @@ public final class ModernizerTest {
     private static class Java11Violations {
         @SuppressWarnings("deprecation")
         private static void method() throws Exception {
+            Object object;
             ByteStreams.nullOutputStream();
             CharStreams.nullWriter();
+            object = NullOutputStream.NULL_OUTPUT_STREAM;
+            new NullOutputStream();
+            object = NullWriter.NULL_WRITER;
+            new NullWriter();
             Files.toString((File) null, (Charset) null);
             Files.write("", (File) null, (Charset) null);
             new FileReader((File) null, (Charset) null);
@@ -840,6 +855,8 @@ public final class ModernizerTest {
     private static class Java12Violations {
         private static void method() throws Exception {
             ByteStreams.skipFully(null, 0L);
+            CharStreams.skipFully(null, 0L);
+            IOUtils.skipFully((InputStream) null, 0L);
         }
     }
 
