@@ -90,10 +90,11 @@ public final class SuppressModernizerAnnotationDetector {
         if (!Files.exists(path)) {
             return;
         } else if (Files.isDirectory(path)) {
-            Stream<Path> stream = Files.list(path);
-            Iterable<Path> children = stream::iterator;
-            for (Path child : children) {
-                detectInternal(path.resolve(child));
+            try (Stream<Path> stream = Files.list(path)) {
+                Iterable<Path> children = stream::iterator;
+                for (Path child : children) {
+                    detectInternal(path.resolve(child));
+                }
             }
         } else if (path.toString().endsWith(".class")) {
             try (InputStream inputStream = Files.newInputStream(path)) {
