@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         java: [ '11' ]
-        maven: [ '3.6.3', '3.8.8', '3.9.6' ]
+        maven: [ '3.6.3', '3.8.8', '3.9.9' ]
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK
@@ -23,6 +23,6 @@ jobs:
         distribution: 'zulu'
         java-version: ${{ matrix.java }}
     - name: Set up Maven
-      run: mvn -e -B -V org.apache.maven.plugins:maven-wrapper-plugin:3.3.1:wrapper "-Dmaven=${{ matrix.maven }}" -Dtype=only-script
+      run: mvn -e -B -V org.apache.maven.plugins:maven-wrapper-plugin:3.3.2:wrapper "-Dmaven=${{ matrix.maven }}"
     - name: Build with Maven
       run: ./mvnw -e -B -V clean verify
