@@ -25,4 +25,4 @@ jobs:
     - name: Set up Maven
       run: mvn -e -B -V org.apache.maven.plugins:maven-wrapper-plugin:3.3.2:wrapper "-Dmaven=${{ matrix.maven }}"
     - name: Build with Maven
-      run: ./mvnw -e -B -V clean verify
+      run: ./mvnw -e -B -V clean verify -Dnjord.enabled=false
