@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  Add these two your own user settings.xml
+-->
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0">
+  <!-- (optional) Add plugin group to not have to type G -->
+  <pluginGroups>
+    <pluginGroup>eu.maveniverse.maven.plugins</pluginGroup>
+  </pluginGroups>
+
+  <servers>
+    <!-- mandatory: token auth for Sonatype Central Portal -->
+    <server>
+      <id>sonatype-central-portal</id>
+      <username>$TOKEN1</username>
+      <password>$TOKEN2</password>
+      <configuration>
+        <!-- mandatory: Njord publisher -->
+        <njord.publisher>sonatype-cp</njord.publisher>
+        <!-- mandatory: njord template to use for releases -->
+        <njord.releaseUrl>njord:template:release-sca</njord.releaseUrl>
+        <!-- optional: njord template to use for snapshots -->
+        <!-- njord.snapshotUrl>njord:template:release-sca</njord.snapshotUrl -->
+      </configuration>
+    </server>
+  </servers>
+</settings>
