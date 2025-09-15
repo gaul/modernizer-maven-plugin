@@ -21,7 +21,10 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Set;
+import java.util.function.ToIntFunction;
 import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -99,21 +102,34 @@ public final class Modernizer {
             Element element = (Element) nNode;
             String version = element.getElementsByTagName("version").item(0)
                     .getTextContent();
-            int versionNum;
-            if (version.startsWith("1.")) {
-                versionNum = Integer.parseInt(version.substring(2));
-            } else {
-                versionNum = Integer.parseInt(version);
-            }
+            int versionNum = parseVersion(version);
+            Optional<String> versionLimit = Optional.ofNullable(
+                    element.getElementsByTagName("until").item(0))
+                    .map(Node::getTextContent);
+            OptionalInt versionLimitNum = mapToInt(versionLimit,
+                    Modernizer::parseVersion);
             Violation violation = new Violation(
                     element.getElementsByTagName("name").item(0)
                             .getTextContent(),
                     versionNum,
+                    versionLimitNum,
                     element.getElementsByTagName("comment").item(0)
                             .getTextContent());
             map.put(violation.getName(), violation);
         }
 
         return map;
+    }
+
+    private static int parseVersion(final String version) {
+        return Integer.parseInt(
+                version.startsWith("1.") ? version.substring(2) : version);
+    }
+
+    private static <T> OptionalInt mapToInt(final Optional<T> optional,
+            final ToIntFunction<T> mapper) {
+        return optional.isPresent() ?
+                OptionalInt.of(mapper.applyAsInt(optional.get())) :
+                OptionalInt.empty();
     }
 }
