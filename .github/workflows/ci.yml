@@ -19,7 +19,7 @@ jobs:
         java: [ '11' ]
         maven: [ '3.6.3', '3.8.8', '3.9.9' ]
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: Set up JDK
       uses: actions/setup-java@v5
       with:
