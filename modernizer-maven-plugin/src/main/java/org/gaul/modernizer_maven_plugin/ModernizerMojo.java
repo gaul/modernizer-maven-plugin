@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -431,6 +432,17 @@ public final class ModernizerMojo extends AbstractMojo {
         if (Objects.requireNonNull(outputFormat) == OutputFormat.CONSOLE) {
             return new LoggerOutputer(getLog(), violationLogLevel);
         } else if (outputFormat == OutputFormat.CODE_CLIMATE) {
+            // make sure the output directory exists
+            if (!Files.exists(Paths.get(baseDir))) {
+                getLog().debug("Create the missing target directory: " + Paths.get(baseDir));
+                try {
+                    Files.createDirectories(Paths.get(baseDir));
+                } catch (IOException ioe) {
+                    throw new MojoExecutionException(
+                            "Create missing output directory failed: " + ioe.getMessage());
+                }
+            }
+
             return new CodeClimateOutputer(
                     baseDir + "/" + CodeClimateOutputer.DEFAULT_FILENAME,
                     codeClimateSeverity);
