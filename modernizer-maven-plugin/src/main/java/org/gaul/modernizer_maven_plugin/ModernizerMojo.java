@@ -428,15 +428,15 @@ public final class ModernizerMojo extends AbstractMojo {
     }
 
     private Outputer buildOutputer() throws MojoExecutionException {
-        String baseDir = project.getBuild().getDirectory();
+        Path baseDir = Paths.get(project.getBuild().getDirectory());
         if (Objects.requireNonNull(outputFormat) == OutputFormat.CONSOLE) {
             return new LoggerOutputer(getLog(), violationLogLevel);
         } else if (outputFormat == OutputFormat.CODE_CLIMATE) {
             // make sure the output directory exists
-            if (!Files.exists(Paths.get(baseDir))) {
-                getLog().debug("Create the missing target directory: " + Paths.get(baseDir));
+            if (!Files.exists(baseDir)) {
+                getLog().debug("Create the missing target directory: " + baseDir);
                 try {
-                    Files.createDirectories(Paths.get(baseDir));
+                    Files.createDirectories(baseDir);
                 } catch (IOException ioe) {
                     throw new MojoExecutionException(
                             "Create missing output directory failed: " + ioe.getMessage());
@@ -444,7 +444,7 @@ public final class ModernizerMojo extends AbstractMojo {
             }
 
             return new CodeClimateOutputer(
-                    baseDir + "/" + CodeClimateOutputer.DEFAULT_FILENAME,
+                    baseDir.resolve(CodeClimateOutputer.DEFAULT_FILENAME),
                     codeClimateSeverity);
         }
         throw new MojoExecutionException(

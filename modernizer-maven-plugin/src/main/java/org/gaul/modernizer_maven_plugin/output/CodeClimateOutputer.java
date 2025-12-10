@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,10 +34,10 @@ import org.gaul.modernizer_maven_plugin.Violation;
 public final class CodeClimateOutputer implements Outputer {
     public static final String DEFAULT_FILENAME = "code-quality.json";
 
-    private final String outputFile;
+    private final Path outputFile;
     private final Severity severity;
 
-    public CodeClimateOutputer(String outputFile, Severity severity) {
+    public CodeClimateOutputer(Path outputFile, Severity severity) {
         this.outputFile = outputFile;
         this.severity = severity;
     }
@@ -60,7 +60,7 @@ public final class CodeClimateOutputer implements Outputer {
         TypeToken<List<Entry>> type = new TypeToken<List<Entry>>() {
         };
         try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(outputFile)),
+                Files.newOutputStream(outputFile),
                 StandardCharsets.UTF_8)) {
             new Gson().toJson(toOutput, type.getType(), writer);
         }
