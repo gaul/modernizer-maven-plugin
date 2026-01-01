@@ -35,7 +35,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <njord.version>0.7.5</njord.version>
 
-    <asm.version>9.9</asm.version>
+    <asm.version>9.9.1</asm.version>
     <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
     <maven-plugin-plugin.version>3.15.2</maven-plugin-plugin.version>
   </properties>
