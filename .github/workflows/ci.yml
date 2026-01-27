@@ -23,7 +23,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v5
       with:
-        distribution: 'zulu'
+        distribution: "temurin"
         java-version: ${{ matrix.java }}
     - name: Set up Maven
       run: mvn -e -B -V org.apache.maven.plugins:maven-wrapper-plugin:3.3.2:wrapper "-Dmaven=${{ matrix.maven }}"
