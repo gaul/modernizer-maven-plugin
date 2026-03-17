@@ -338,6 +338,10 @@ public final class ModernizerMojo extends AbstractMojo {
                     "Only absolute classpath references are allowed, got [%s]",
                     classpath));
             is = Modernizer.class.getResourceAsStream(classpath);
+            if (is == null) {
+                throw new MojoExecutionException(
+                        "Error opening violation file: " + classpath);
+            }
         } else {
             Path path = FileSystems.getDefault().getPath(violationsFilePath);
             try {
@@ -373,11 +377,11 @@ public final class ModernizerMojo extends AbstractMojo {
             } else {
                 is = this.getClass().getClassLoader().getResourceAsStream(
                         exclusionsFilePath);
-            }
-            if (is == null) {
-                throw new MojoExecutionException(
-                        "Could not find exclusion file: " +
-                        exclusionsFilePath);
+                if (is == null) {
+                    throw new MojoExecutionException(
+                            "Could not find exclusion file: " +
+                            exclusionsFilePath);
+                }
             }
 
             return Utils.filterCommentLines(Utils.readAllLines(is));
