@@ -36,10 +36,8 @@ import org.objectweb.asm.Type;
 import org.objectweb.asm.TypePath;
 
 public final class SuppressModernizerAnnotationDetector {
-    private final Set<String> annotatedClassNames =
-        new HashSet<String>();
-    private final Set<String> allClassNames =
-        new HashSet<String>();
+    private final Set<String> annotatedClassNames = new HashSet<>();
+    private final Set<String> allClassNames = new HashSet<>();
 
     private SuppressModernizerAnnotationDetector() { }
 
@@ -62,8 +60,7 @@ public final class SuppressModernizerAnnotationDetector {
     }
 
     private Set<String> computeSuppressedClassNames() {
-        Set<String> suppressedClassNames =
-            new HashSet<String>(annotatedClassNames);
+        Set<String> suppressedClassNames = new HashSet<>(annotatedClassNames);
         for (String className : allClassNames) {
             if (suppressedClassNames.contains(className)) {
                 continue;

@@ -176,7 +176,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * java/lang/String.getBytes:(Ljava/lang/String;)[B.
      */
     @Parameter
-    protected Set<String> exclusions = new HashSet<String>();
+    protected Set<String> exclusions = new HashSet<>();
 
     /**
      * Violation patterns to disable. Each exclusion should be a
@@ -185,7 +185,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * java/lang/.*
      */
     @Parameter
-    protected Set<String> exclusionPatterns = new HashSet<String>();
+    protected Set<String> exclusionPatterns = new HashSet<>();
 
     /**
      * Package prefixes to ignore, specified using &lt;ignorePackage&gt; child
@@ -193,7 +193,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * foo.bar.baz.* and so on.
      */
     @Parameter
-    protected Set<String> ignorePackages = new HashSet<String>();
+    protected Set<String> ignorePackages = new HashSet<>();
 
     /**
      * Fully qualified class names (incl. package) to ignore by regular
@@ -203,7 +203,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * ending in Immutable in all packages.
      */
     @Parameter
-    protected Set<String> ignoreClassNamePatterns = new HashSet<String>();
+    protected Set<String> ignoreClassNamePatterns = new HashSet<>();
 
     private Modernizer modernizer;
 
@@ -234,13 +234,13 @@ public final class ModernizerMojo extends AbstractMojo {
             allViolations.putAll(parseViolations(violationsFilePath));
         }
 
-        Set<String> allExclusions = new HashSet<String>();
+        Set<String> allExclusions = new HashSet<>();
         allExclusions.addAll(exclusions);
         if (exclusionsFile != null) {
             allExclusions.addAll(readExclusionsFile(exclusionsFile));
         }
 
-        Set<Pattern> allExclusionPatterns = new HashSet<Pattern>();
+        Set<Pattern> allExclusionPatterns = new HashSet<>();
         for (String pattern : exclusionPatterns) {
             try {
                 allExclusionPatterns.add(Pattern.compile(pattern));
@@ -250,7 +250,7 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
-        Set<Pattern> allIgnoreFullClassNamePatterns = new HashSet<Pattern>();
+        Set<Pattern> allIgnoreFullClassNamePatterns = new HashSet<>();
         for (String pattern : ignoreClassNamePatterns) {
             try {
                 allIgnoreFullClassNamePatterns.add(Pattern.compile(pattern));
@@ -260,7 +260,7 @@ public final class ModernizerMojo extends AbstractMojo {
             }
         }
 
-        Set<String> ignoreClassNames = new HashSet<String>();
+        Set<String> ignoreClassNames = new HashSet<>();
         try {
             ignoreClassNames.addAll(
                 SuppressModernizerAnnotationDetector.detect(

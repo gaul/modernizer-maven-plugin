@@ -31,10 +31,8 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 
 public final class SuppressGeneratedAnnotationDetector {
-    private final Set<String> annotatedClassNames =
-        new HashSet<String>();
-    private final Set<String> allClassNames =
-        new HashSet<String>();
+    private final Set<String> annotatedClassNames = new HashSet<>();
+    private final Set<String> allClassNames = new HashSet<>();
 
     private SuppressGeneratedAnnotationDetector() { }
 
@@ -46,8 +44,7 @@ public final class SuppressGeneratedAnnotationDetector {
     }
 
     private Set<String> computeSuppressedClassNames() {
-        Set<String> suppressedClassNames =
-            new HashSet<String>(annotatedClassNames);
+        Set<String> suppressedClassNames = new HashSet<>(annotatedClassNames);
         for (String className : allClassNames) {
             if (suppressedClassNames.contains(className)) {
                 continue;
