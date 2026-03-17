@@ -403,7 +403,7 @@ public final class ModernizerMojo extends AbstractMojo {
             try (Stream<Path> stream = Files.list(path)) {
                 Iterable<Path> children = stream::iterator;
                 for (Path child : children) {
-                    count += recurseFiles(path.resolve(child));
+                    count += recurseFiles(child);
                 }
             }
         } else if (path.toString().endsWith(".class")) {
