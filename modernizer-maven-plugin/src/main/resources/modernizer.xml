@@ -582,6 +582,24 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>java/util/Collections.emptyList:()Ljava/util/List;</name>
+    <version>9</version>
+    <comment>Prefer java.util.List.of()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Collections.emptyMap:()Ljava/util/Map;</name>
+    <version>9</version>
+    <comment>Prefer java.util.Map.of()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Collections.emptySet:()Ljava/util/Set;</name>
+    <version>9</version>
+    <comment>Prefer java.util.Set.of()</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Enumeration</name>
     <version>2</version>
     <comment>Prefer java.util.Iterator</comment>

@@ -787,6 +787,9 @@ public final class ModernizerTest {
             new Float((String) null);
             new Integer((String) null);
             new Long((String) null);
+            Collections.emptyList();
+            Collections.emptyMap();
+            Collections.emptySet();
         }
     }
 
