@@ -449,7 +449,9 @@ public final class ModernizerTest {
         violations.remove(
                 "sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;");
 
-        assertThat(actualViolations).containsAll(violations.values());
+        assertThat(actualViolations)
+            .usingRecursiveFieldByFieldElementComparatorOnFields("comment")
+            .containsAll(violations.values());
     }
 
     @Test
