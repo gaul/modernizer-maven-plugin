@@ -55,6 +55,6 @@ public final class Violation {
 
     @Override
     public String toString() {
-        return name + " " + version + " " + comment;
+        return name + " " + version + (until.isPresent() ? " " + until.getAsInt() : "") + " " + comment;
     }
 }

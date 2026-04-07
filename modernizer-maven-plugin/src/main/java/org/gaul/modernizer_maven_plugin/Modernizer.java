@@ -18,6 +18,7 @@ package org.gaul.modernizer_maven_plugin;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,14 +42,14 @@ import org.xml.sax.SAXException;
 
 public final class Modernizer {
     private final long javaVersion;
-    private final Map<String, Violation> violations;
+    private final Map<String, Collection<Violation>> violations;
     private final Collection<String> exclusions;
     private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
     private final Set<String> ignoreClassNames;
     private final Collection<Pattern> ignoreFullClassNamePatterns;
 
-    public Modernizer(String javaVersion, Map<String, Violation> violations,
+    public Modernizer(String javaVersion, Map<String, Collection<Violation>> violations,
             Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
@@ -85,10 +86,10 @@ public final class Modernizer {
         return check(new ClassReader(is));
     }
 
-    public static Map<String, Violation> parseFromXml(InputStream is)
+    public static Map<String, Collection<Violation>> parseFromXml(InputStream is)
             throws IOException, ParserConfigurationException, SAXException {
-        Map<String, Violation> map =
-                new HashMap<String, Violation>();
+        Map<String, Collection<Violation>> map =
+                new HashMap<String, Collection<Violation>>();
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -117,7 +118,7 @@ public final class Modernizer {
                     versionLimitNum,
                     element.getElementsByTagName("comment").item(0)
                             .getTextContent());
-            map.put(violation.getName(), violation);
+            map.computeIfAbsent(violation.getName(), k -> new ArrayList<>()).add(violation);
         }
 
         return map;

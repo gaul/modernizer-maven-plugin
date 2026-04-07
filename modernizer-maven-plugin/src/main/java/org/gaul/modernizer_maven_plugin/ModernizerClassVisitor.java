@@ -34,7 +34,7 @@ import org.objectweb.asm.commons.InstructionAdapter;
 
 final class ModernizerClassVisitor extends ClassVisitor {
     private final long javaVersion;
-    private final Map<String, Violation> violations;
+    private final Map<String, Collection<Violation>> violations;
     private final Collection<String> exclusions;
     private final Collection<Pattern> exclusionPatterns;
     private final Collection<String> ignorePackages;
@@ -46,7 +46,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
     private String className;
 
     ModernizerClassVisitor(long javaVersion,
-            Map<String, Violation> violations, Collection<String> exclusions,
+            Map<String, Collection<Violation>> violations, Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
             Set<String> ignoreClassNames,
@@ -77,8 +77,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
             return;
         }
         for (String itr : interfaces) {
-            Violation violation = violations.get(itr);
-            checkToken(itr, violation, name, /*lineNumber=*/ -1);
+            checkToken(itr, violations.get(itr), name, /*lineNumber=*/ -1);
         }
     }
 
@@ -117,8 +116,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     .equals(SuppressModernizer.class.getName());
 
                 String name = Type.getType(desc).getInternalName();
-                Violation violation = violations.get(name);
-                checkToken(name, violation, name, lineNumber);
+                checkToken(name, violations.get(name), name, lineNumber);
 
                 return super.visitAnnotation(desc, visible);
             }
@@ -126,8 +124,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
             private void visitFieldOrMethod(String owner, String name,
                     String desc) {
                 String token = owner + "." + name + ":" + desc;
-                Violation violation = violations.get(token);
-                checkToken(token, violation, name, lineNumber);
+                checkToken(token, violations.get(token), name, lineNumber);
             }
 
             @Override
@@ -137,7 +134,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
 
             private void checkToken(
                 String token,
-                Violation violation,
+                Collection<Violation> violations,
                 String name,
                 int lineNumber
             ) {
@@ -145,7 +142,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     return;
                 } else {
                     ModernizerClassVisitor.this
-                        .checkToken(token, violation, name, lineNumber);
+                        .checkToken(token, violations, name, lineNumber);
                 }
 
             }
@@ -153,29 +150,30 @@ final class ModernizerClassVisitor extends ClassVisitor {
         return adapter;
     }
 
-    private void checkToken(String token, Violation violation, String name,
+    private void checkToken(String token, Collection<Violation> violations, String name,
             int lineNumber) {
-        if (violation != null && !exclusions.contains(token) &&
-                javaVersion >= violation.getVersion() &&
-                (!violation.getUntil().isPresent() ||
+        if (violations != null && !exclusions.contains(token))
+            for (Violation violation : violations)
+                if (javaVersion >= violation.getVersion() &&
+                        (!violation.getUntil().isPresent() ||
                         javaVersion < violation.getUntil().getAsInt()) &&
-                !ignorePackages.contains(packageName)) {
-            if (ignoreClass()) {
-                return;
-            }
-            for (Pattern pattern : exclusionPatterns) {
-                if (pattern.matcher(token).matches()) {
-                    return;
+                        !ignorePackages.contains(packageName)) {
+                    if (ignoreClass()) {
+                        return;
+                    }
+                    for (Pattern pattern : exclusionPatterns) {
+                        if (pattern.matcher(token).matches()) {
+                            return;
+                        }
+                    }
+                    for (String prefix : ignorePackages) {
+                        if (packageName.startsWith(prefix + ".")) {
+                            return;
+                        }
+                    }
+                    occurrences.add(new ViolationOccurrence(name, lineNumber,
+                            violation));
                 }
-            }
-            for (String prefix : ignorePackages) {
-                if (packageName.startsWith(prefix + ".")) {
-                    return;
-                }
-            }
-            occurrences.add(new ViolationOccurrence(name, lineNumber,
-                    violation));
-        }
     }
 
     private boolean ignoreClass() {
