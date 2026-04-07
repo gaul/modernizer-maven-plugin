@@ -418,7 +418,8 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("24");
+        final int maxVersion = 24;
+        Modernizer modernizer = createModernizer(String.valueOf(maxVersion));
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
@@ -466,6 +467,7 @@ public final class ModernizerTest {
 
         Collection<Violation> expectedViolations = violations.values().stream()
               .flatMap(Collection::stream)
+              .filter(violation -> violation.getUntil().isEmpty() || violation.getUntil().getAsInt() >= maxVersion)
               .collect(Collectors.toList());
 
         assertThat(actualViolations)

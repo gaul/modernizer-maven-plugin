@@ -134,7 +134,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
 
             private void checkToken(
                 String token,
-                Collection<Violation> violations,
+                Collection<Violation> v,
                 String name,
                 int lineNumber
             ) {
@@ -142,7 +142,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     return;
                 } else {
                     ModernizerClassVisitor.this
-                        .checkToken(token, violations, name, lineNumber);
+                        .checkToken(token, v, name, lineNumber);
                 }
 
             }
@@ -150,10 +150,10 @@ final class ModernizerClassVisitor extends ClassVisitor {
         return adapter;
     }
 
-    private void checkToken(String token, Collection<Violation> violations, String name,
+    private void checkToken(String token, Collection<Violation> v, String name,
             int lineNumber) {
-        if (violations != null && !exclusions.contains(token))
-            for (Violation violation : violations)
+        if (v != null && !exclusions.contains(token)) {
+            for (Violation violation : v) {
                 if (javaVersion >= violation.getVersion() &&
                         (!violation.getUntil().isPresent() ||
                         javaVersion < violation.getUntil().getAsInt()) &&
@@ -174,6 +174,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     occurrences.add(new ViolationOccurrence(name, lineNumber,
                             violation));
                 }
+            }
+        }
     }
 
     private boolean ignoreClass() {
