@@ -100,6 +100,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.NullInputStream;
+import org.apache.commons.io.input.NullReader;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.io.output.NullWriter;
 import org.apache.commons.lang3.StringUtils;
@@ -861,6 +863,9 @@ public final class ModernizerTest {
             new NullOutputStream();
             object = NullWriter.NULL_WRITER;
             new NullWriter();
+            new NullInputStream();
+            new NullReader();
+            StringUtils.repeat("", 0);
             Files.toString((File) null, (Charset) null);
             Files.write("", (File) null, (Charset) null);
             new FileReader((File) null, (Charset) null);

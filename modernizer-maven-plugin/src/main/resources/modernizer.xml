@@ -876,6 +876,18 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/input/NullInputStream."&lt;init&gt;":()V</name>
+    <version>11</version>
+    <comment>Prefer java.io.InputStream.nullInputStream()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/input/NullReader."&lt;init&gt;":()V</name>
+    <version>11</version>
+    <comment>Prefer java.io.Reader.nullReader()</comment>
+  </violation>
+
+  <violation>
     <name>sun/misc/BASE64Decoder.decodeBuffer:(Ljava/lang/String;)[B</name>
     <version>8</version>
     <comment>Prefer java.util.Base64.Decoder.decode(String)</comment>
@@ -1521,6 +1533,12 @@ violation names use the same format that javap emits.
         <name>org/apache/commons/lang3/StringUtils.join:(Ljava/lang/Iterable;Ljava/lang/String;)Ljava/lang/String;</name>
         <version>8</version>
         <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+    </violation>
+
+    <violation>
+        <name>org/apache/commons/lang3/StringUtils.repeat:(Ljava/lang/String;I)Ljava/lang/String;</name>
+        <version>11</version>
+        <comment>Prefer java.lang.String.repeat(int)</comment>
     </violation>
 
     <violation>
