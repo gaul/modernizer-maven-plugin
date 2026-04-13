@@ -794,6 +794,9 @@ public final class ModernizerTest {
             Collections.emptyList();
             Collections.emptyMap();
             Collections.emptySet();
+            Collections.singletonList(null);
+            Collections.singleton(null);
+            Collections.singletonMap(null, null);
         }
     }
 
