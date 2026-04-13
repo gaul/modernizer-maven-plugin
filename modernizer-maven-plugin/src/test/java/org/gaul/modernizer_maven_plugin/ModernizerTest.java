@@ -663,6 +663,7 @@ public final class ModernizerTest {
             Atomics.newReferenceArray((Object[]) null);
             new InputStreamReader((InputStream) null, "");
             new OutputStreamWriter((OutputStream) null, "");
+            new Boolean(true);
             new Byte((byte) 0);
             new Character((char) 0);
             new Double(0.0);
@@ -783,6 +784,7 @@ public final class ModernizerTest {
             IOUtils.copy((Reader) null, (Writer) null);
             IOUtils.copyLarge((Reader) null, (Writer) null);
             IOUtils.toByteArray((InputStream) null);
+            new Boolean((String) null);
             new Byte((String) null);
             new Double((String) null);
             new Short((String) null);
