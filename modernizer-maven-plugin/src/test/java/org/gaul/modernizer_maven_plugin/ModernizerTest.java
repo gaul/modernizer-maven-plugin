@@ -417,6 +417,8 @@ public final class ModernizerTest {
         occurrences.addAll(modernizer.check(
                 new ClassReader(Java12Violations.class.getName())));
         occurrences.addAll(modernizer.check(
+            new ClassReader(Java15Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
             new ClassReader(Java17Violations.class.getName())));
         occurrences.addAll(modernizer.check(
             new ClassReader(Java18Violations.class.getName())));
@@ -860,6 +862,12 @@ public final class ModernizerTest {
             ByteStreams.skipFully(null, 0L);
             CharStreams.skipFully(null, 0L);
             IOUtils.skipFully((InputStream) null, 0L);
+        }
+    }
+
+    private static class Java15Violations {
+        private static void method() throws Exception {
+            String.format("%s", "");
         }
     }
 

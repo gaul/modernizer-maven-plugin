@@ -1535,5 +1535,10 @@ violation names use the same format that javap emits.
         <comment>Prefer java.lang.Thread.threadId</comment>
     </violation>
 
+    <violation>
+        <name>java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</name>
+        <version>15</version>
+        <comment>Prefer java.lang.String.formatted</comment>
+    </violation>
 
 </modernizer>
