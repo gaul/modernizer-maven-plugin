@@ -1278,6 +1278,12 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/base/Strings.repeat:(Ljava/lang/String;I)Ljava/lang/String;</name>
+    <version>11</version>
+    <comment>Prefer java.lang.String.repeat(int)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/io/ByteStreams.nullOutputStream:()Ljava/io/OutputStream;</name>
     <version>11</version>
     <comment>Prefer java.io.OutputStream.nullOutputStream()</comment>

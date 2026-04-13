@@ -71,6 +71,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -859,6 +860,7 @@ public final class ModernizerTest {
             new FileWriter("", (Charset) null, true);
             Paths.get(URI.create("file://name"));
             Paths.get("", "");
+            Strings.repeat("", 0);
         }
     }
 
