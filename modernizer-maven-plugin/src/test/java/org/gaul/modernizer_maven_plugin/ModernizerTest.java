@@ -393,7 +393,7 @@ public final class ModernizerTest {
         String name = TestAnnotation.class.getName().replace('.', '/');
         Map<String, Violation> testViolations = Maps.newHashMap();
         testViolations.put(name,
-                new Violation(name, 5, ""));
+                new Violation(name, 5, OptionalInt.empty(), ""));
         Modernizer modernizer = new Modernizer("1.5", testViolations,
                 NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS, NO_IGNORED_PACKAGES,
                 NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS);
@@ -455,7 +455,9 @@ public final class ModernizerTest {
         violations.remove(
                 "sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;");
 
-        assertThat(actualViolations).containsAll(violations.values());
+        assertThat(actualViolations)
+            .usingRecursiveFieldByFieldElementComparatorOnFields("comment")
+            .containsAll(violations.values());
     }
 
     @Test
