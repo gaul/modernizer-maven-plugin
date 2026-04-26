@@ -471,7 +471,7 @@ public final class ModernizerTest {
               .collect(Collectors.toList());
 
         assertThat(actualViolations)
-            .usingRecursiveFieldByFieldElementComparatorOnFields("comment")
+            .usingRecursiveFieldByFieldElementComparatorOnFields("comment", "name", "version", "until")
             .containsAll(expectedViolations);
     }
 
