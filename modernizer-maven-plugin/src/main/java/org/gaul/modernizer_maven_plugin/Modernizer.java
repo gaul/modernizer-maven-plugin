@@ -22,10 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Set;
-import java.util.function.ToIntFunction;
 import java.util.regex.Pattern;
 
 import javax.xml.XMLConstants;
@@ -106,11 +104,8 @@ public final class Modernizer {
             String version = element.getElementsByTagName("version").item(0)
                     .getTextContent();
             int versionNum = parseVersion(version);
-            Optional<String> versionLimit = Optional.ofNullable(
-                    element.getElementsByTagName("until").item(0))
-                    .map(Node::getTextContent);
-            OptionalInt versionLimitNum = mapToInt(versionLimit,
-                    Modernizer::parseVersion);
+            Node until = element.getElementsByTagName("until").item(0);
+            OptionalInt versionLimitNum = until == null ? OptionalInt.empty() : OptionalInt.of(parseVersion(until.getTextContent()));
             Violation violation = new Violation(
                     element.getElementsByTagName("name").item(0)
                             .getTextContent(),
@@ -127,12 +122,5 @@ public final class Modernizer {
     private static int parseVersion(final String version) {
         return Integer.parseInt(
                 version.startsWith("1.") ? version.substring(2) : version);
-    }
-
-    private static <T> OptionalInt mapToInt(final Optional<T> optional,
-            final ToIntFunction<T> mapper) {
-        return optional.isPresent() ?
-                OptionalInt.of(mapper.applyAsInt(optional.get())) :
-                OptionalInt.empty();
     }
 }
