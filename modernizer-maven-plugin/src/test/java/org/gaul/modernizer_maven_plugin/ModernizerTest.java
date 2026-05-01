@@ -64,6 +64,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
@@ -124,7 +125,7 @@ import org.objectweb.asm.ClassReader;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public final class ModernizerTest {
-    private Map<String, Violation> violations;
+    private Map<String, Collection<Violation>> violations;
     private static final Collection<String> NO_EXCLUSIONS =
             Collections.<String>emptySet();
     private static final Collection<Pattern> NO_EXCLUSION_PATTERNS =
@@ -146,7 +147,7 @@ public final class ModernizerTest {
     public void readsOldJavaVersionFormat() throws Exception {
         try (InputStream is = Modernizer.class.getResourceAsStream(
                 "/modernizer-old-versions.xml")) {
-            Map<String, Violation> old = Modernizer.parseFromXml(is);
+            Map<String, Collection<Violation>> old = Modernizer.parseFromXml(is);
             assertThat(old).hasSize(1);
         }
     }
@@ -391,9 +392,9 @@ public final class ModernizerTest {
     @Test
     public void testAnnotationViolation() throws Exception {
         String name = TestAnnotation.class.getName().replace('.', '/');
-        Map<String, Violation> testViolations = Maps.newHashMap();
+        Map<String, Collection<Violation>> testViolations = Maps.newHashMap();
         testViolations.put(name,
-                new Violation(name, 5, ""));
+                Collections.singleton(new Violation(name, 5, OptionalInt.empty(), "")));
         Modernizer modernizer = new Modernizer("1.5", testViolations,
                 NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS, NO_IGNORED_PACKAGES,
                 NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS);
@@ -406,8 +407,23 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testUntil() throws Exception {
+        ClassReader cr = new ClassReader(UntilTest.class.getName());
+        Collection<ViolationOccurrence> occurrences = createModernizer("10").check(cr);
+        assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getComment())
+                .isEqualTo("Prefer java.nio.file.Files.newInputStream(java.nio.file.Paths.get(String))");
+
+        occurrences = createModernizer("11").check(cr);
+        assertThat(occurrences).hasSize(1);
+        assertThat(occurrences.iterator().next().getViolation().getComment())
+                .isEqualTo("Prefer java.nio.file.Files.newInputStream(java.nio.file.Path.of(String))");
+    }
+
+    @Test
     public void testAllViolations() throws Exception {
-        Modernizer modernizer = createModernizer("24");
+        final int maxVersion = 24;
+        Modernizer modernizer = createModernizer(String.valueOf(maxVersion));
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
@@ -455,7 +471,14 @@ public final class ModernizerTest {
         violations.remove(
                 "sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;");
 
-        assertThat(actualViolations).containsAll(violations.values());
+        Collection<Violation> expectedViolations = violations.values().stream()
+              .flatMap(Collection::stream)
+              .filter(violation -> violation.getUntil().isEmpty() || violation.getUntil().getAsInt() >= maxVersion)
+              .collect(Collectors.toList());
+
+        assertThat(actualViolations)
+            .usingRecursiveFieldByFieldElementComparatorOnFields("comment", "name", "version", "until")
+            .containsAll(expectedViolations);
     }
 
     @Test
@@ -591,6 +614,12 @@ public final class ModernizerTest {
         @Override
         public Object get() {
             return new Object();
+        }
+    }
+
+    private static class UntilTest {
+        public static void method() throws Exception {
+            new FileInputStream("");
         }
     }
 

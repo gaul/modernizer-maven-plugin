@@ -16,15 +16,19 @@
 
 package org.gaul.modernizer_maven_plugin;
 
+import java.util.OptionalInt;
+
 public final class Violation {
     private final String name;
     private final int version;
+    private final OptionalInt until; // ignoring violation since this version
     private final String comment;
 
-    Violation(String name, int version, String comment) {
+    Violation(String name, int version, OptionalInt until, String comment) {
         this.name = Utils.checkNotNull(name);
         Utils.checkArgument(version >= 0);
         this.version = version;
+        this.until = Utils.checkNotNull(until);
         this.comment = Utils.checkNotNull(comment);
     }
 
@@ -36,12 +40,16 @@ public final class Violation {
         return version;
     }
 
+    public OptionalInt getUntil() {
+        return until;
+    }
+
     public String getComment() {
         return comment;
     }
 
     @Override
     public String toString() {
-        return name + " " + version + " " + comment;
+        return name + " " + version + (until.isPresent() ? " " + until.getAsInt() : "") + " " + comment;
     }
 }
