@@ -31,7 +31,6 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
-import org.objectweb.asm.commons.InstructionAdapter;
 
 final class ModernizerClassVisitor extends ClassVisitor {
     private final long javaVersion;
@@ -84,15 +83,12 @@ final class ModernizerClassVisitor extends ClassVisitor {
     }
 
     @Override
-    public MethodVisitor visitMethod(int access, final String methodName,
-            final String methodDescriptor, final String methodSignature,
+    public MethodVisitor visitMethod(int access, String methodName,
+            String methodDescriptor, String methodSignature,
             String[] exceptions) {
         MethodVisitor base = super.visitMethod(access, methodName,
                 methodDescriptor, methodSignature, exceptions);
-        MethodVisitor origVisitor = new MethodVisitor(ASM_API, base) {
-        };
-        InstructionAdapter adapter = new InstructionAdapter(ASM_API,
-                origVisitor) {
+        return new MethodVisitor(ASM_API, base) {
             private int lineNumber = -1;
             private boolean methodSuppressed = false;
 
@@ -136,22 +132,15 @@ final class ModernizerClassVisitor extends ClassVisitor {
                 this.lineNumber = lineNumber;
             }
 
-            private void checkToken(
-                String token,
-                Violation violation,
-                String name,
-                int lineNumber
-            ) {
+            private void checkToken(String token, Violation violation,
+                    String name, int lineNumber) {
                 if (methodSuppressed) {
                     return;
-                } else {
-                    ModernizerClassVisitor.this
-                        .checkToken(token, violation, name, lineNumber);
                 }
-
+                ModernizerClassVisitor.this
+                    .checkToken(token, violation, name, lineNumber);
             }
         };
-        return adapter;
     }
 
     private void checkToken(String token, Violation violation, String name,
