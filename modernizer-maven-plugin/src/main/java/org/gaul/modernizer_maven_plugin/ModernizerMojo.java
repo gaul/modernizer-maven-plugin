@@ -168,7 +168,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * */
     @Parameter(defaultValue = "true",
                property = "modernizer.ignoreGeneratedClasses")
-    private Boolean ignoreGeneratedClasses;
+    private boolean ignoreGeneratedClasses;
 
     /**
      * Violations to disable. Each exclusion should be in the javap format:
