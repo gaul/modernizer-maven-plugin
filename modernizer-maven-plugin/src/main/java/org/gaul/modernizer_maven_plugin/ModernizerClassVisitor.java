@@ -21,6 +21,7 @@ import static org.gaul.modernizer_maven_plugin.Utils.ASM_API;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -54,13 +55,13 @@ final class ModernizerClassVisitor extends ClassVisitor {
         super(ASM_API);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
-        this.violations = Utils.checkNotNull(violations);
-        this.exclusions = Utils.checkNotNull(exclusions);
-        this.exclusionPatterns = Utils.checkNotNull(exclusionPatterns);
-        this.ignorePackages = Utils.checkNotNull(ignorePackages);
-        this.ignoreClassNames = Utils.checkNotNull(ignoreClassNames);
+        this.violations = Objects.requireNonNull(violations);
+        this.exclusions = Objects.requireNonNull(exclusions);
+        this.exclusionPatterns = Objects.requireNonNull(exclusionPatterns);
+        this.ignorePackages = Objects.requireNonNull(ignorePackages);
+        this.ignoreClassNames = Objects.requireNonNull(ignoreClassNames);
         this.ignoreFullClassNamePatterns =
-                Utils.checkNotNull(ignoreFullClassNamePatterns);
+                Objects.requireNonNull(ignoreFullClassNamePatterns);
     }
 
     @Override

@@ -28,19 +28,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.objectweb.asm.Opcodes;
 
 final class Utils {
     static final int ASM_API = Opcodes.ASM9;
-
-    static <T> T checkNotNull(T reference) {
-        if (reference == null) {
-            throw new NullPointerException();
-        }
-        return reference;
-    }
 
     static void checkArgument(boolean expression) {
         checkArgument(expression, null);
@@ -54,12 +48,12 @@ final class Utils {
 
     static <T> Set<T> createImmutableSet(Collection<T> collection) {
         return Collections.unmodifiableSet(new HashSet<T>(
-                Utils.checkNotNull(collection)));
+                Objects.requireNonNull(collection)));
     }
 
     static <T, U> Map<T, U> createImmutableMap(Map<T, U> map) {
         return Collections.unmodifiableMap(new HashMap<T, U>(
-                Utils.checkNotNull(map)));
+                Objects.requireNonNull(map)));
     }
 
     static void closeQuietly(Closeable closeable) {

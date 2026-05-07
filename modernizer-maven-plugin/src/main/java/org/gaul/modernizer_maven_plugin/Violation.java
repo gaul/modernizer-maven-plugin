@@ -16,16 +16,18 @@
 
 package org.gaul.modernizer_maven_plugin;
 
+import java.util.Objects;
+
 public final class Violation {
     private final String name;
     private final int version;
     private final String comment;
 
     Violation(String name, int version, String comment) {
-        this.name = Utils.checkNotNull(name);
+        this.name = Objects.requireNonNull(name);
         Utils.checkArgument(version >= 0);
         this.version = version;
-        this.comment = Utils.checkNotNull(comment);
+        this.comment = Objects.requireNonNull(comment);
     }
 
     public String getName() {

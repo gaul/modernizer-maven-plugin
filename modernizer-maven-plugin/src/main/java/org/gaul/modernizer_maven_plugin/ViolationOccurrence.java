@@ -16,15 +16,17 @@
 
 package org.gaul.modernizer_maven_plugin;
 
+import java.util.Objects;
+
 public final class ViolationOccurrence {
     private final String owner;
     private final int lineNumber;
     private final Violation violation;
 
     ViolationOccurrence(String owner, int lineNumber, Violation violation) {
-        this.owner = Utils.checkNotNull(owner);
+        this.owner = Objects.requireNonNull(owner);
         this.lineNumber = lineNumber;
-        this.violation = Utils.checkNotNull(violation);
+        this.violation = Objects.requireNonNull(violation);
     }
 
     public String getOwner() {
