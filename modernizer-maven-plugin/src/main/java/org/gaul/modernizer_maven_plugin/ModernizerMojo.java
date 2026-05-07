@@ -149,7 +149,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * Ignored if {@code modernizer.outputFormat} is {@code CONSOLE}.
      */
     @Parameter(property = "modernizer.outputFile")
-    private String outputFile;
+    private File outputFile;
 
     /**
      * Severity of modernizer violations for CodeClimate.
@@ -473,9 +473,10 @@ public final class ModernizerMojo extends AbstractMojo {
                 }
             }
 
-            return new CodeClimateOutputer(
-                    baseDir.resolve(CodeClimateOutputer.DEFAULT_FILENAME),
-                    codeClimateSeverity);
+            Path destination = outputFile != null ?
+                    outputFile.toPath() :
+                    baseDir.resolve(CodeClimateOutputer.DEFAULT_FILENAME);
+            return new CodeClimateOutputer(destination, codeClimateSeverity);
         }
         throw new MojoExecutionException(
                 "Invalid output format: " + outputFormat);
