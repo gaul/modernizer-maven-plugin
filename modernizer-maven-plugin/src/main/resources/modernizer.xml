@@ -517,7 +517,7 @@ violation names use the same format that javap emits.
 
   <violation>
     <name>java/lang/Boolean."&lt;init&gt;":(Z)V</name>
-    <version>5</version>
+    <version>4</version>
     <comment>Prefer java.lang.Boolean.valueOf(boolean)</comment>
   </violation>
 
