@@ -1368,6 +1368,12 @@ violation names use the same format that javap emits.
   </violation>
 
   <violation>
+    <name>com/google/common/io/CharStreams.copy:(Ljava/lang/Readable;Ljava/lang/Appendable;)J</name>
+    <version>10</version>
+    <comment>Prefer java.io.Reader.transferTo(Writer)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/io/CharStreams.nullWriter:()Ljava/io/Writer;</name>
     <version>11</version>
     <comment>Prefer java.io.Writer.nullWriter()</comment>

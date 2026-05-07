@@ -815,6 +815,7 @@ public final class ModernizerTest {
 
     private static class Java10Violations {
         private static void method() throws Exception {
+            CharStreams.copy((Readable) null, (Appendable) null);
             new PrintStream((File) null, "");
             new PrintStream("", "");
             new PrintWriter((File) null, "");
