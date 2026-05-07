@@ -44,6 +44,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
             new ArrayList<ViolationOccurrence>();
     private String packageName;
     private String className;
+    private boolean classIgnored;
 
     ModernizerClassVisitor(long javaVersion,
             Map<String, Violation> violations, Collection<String> exclusions,
@@ -73,7 +74,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
         } else {
             packageName = "";
         }
-        if (ignoreClass()) {
+        classIgnored = computeClassIgnored();
+        if (classIgnored) {
             return;
         }
         for (String itr : interfaces) {
@@ -86,6 +88,9 @@ final class ModernizerClassVisitor extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String methodName,
             String methodDescriptor, String methodSignature,
             String[] exceptions) {
+        if (classIgnored) {
+            return null;
+        }
         MethodVisitor base = super.visitMethod(access, methodName,
                 methodDescriptor, methodSignature, exceptions);
         return new MethodVisitor(ASM_API, base) {
@@ -145,12 +150,11 @@ final class ModernizerClassVisitor extends ClassVisitor {
 
     private void checkToken(String token, Violation violation, String name,
             int lineNumber) {
+        // classIgnored is checked at visit()/visitMethod() so we never reach
+        // this path on an ignored class.
         if (violation != null && !exclusions.contains(token) &&
                 javaVersion >= violation.getVersion() &&
                 !ignorePackages.contains(packageName)) {
-            if (ignoreClass()) {
-                return;
-            }
             for (Pattern pattern : exclusionPatterns) {
                 if (pattern.matcher(token).matches()) {
                     return;
@@ -166,7 +170,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
         }
     }
 
-    private boolean ignoreClass() {
+    private boolean computeClassIgnored() {
         if (ignoreClassNames.contains(className)) {
             return true;
         }
