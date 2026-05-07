@@ -46,14 +46,16 @@ public final class CodeClimateOutputer implements Outputer {
     public void output(List<OutputEntry> entries) throws IOException {
         List<Entry> toOutput = new ArrayList<>(entries.size());
         for (OutputEntry entry : entries) {
-            Location location = new Location(
-                    entry.getFileName(),
-                    new Location.Lines(entry.getOccurrence().getLineNumber()));
+            int lineNumber = entry.getOccurrence().getLineNumber();
+            Location location = new Location(entry.getFileName(),
+                    new Location.Lines(lineNumber));
             Violation violation = entry.getOccurrence().getViolation();
+            String fingerprint = entry.getFileName() + ":" + lineNumber +
+                    ":" + violation.getName();
             toOutput.add(new Entry(
                     violation.getComment(),
                     violation.getName(),
-                    Integer.toString(entry.hashCode()),
+                    fingerprint,
                     severity,
                     location));
         }
