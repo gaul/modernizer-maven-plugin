@@ -350,7 +350,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/primitives/Chars.compare:(CC)I</name>
     <version>7</version>
-    <comment>Prefer java.lang.Char.compare(char, char)</comment>
+    <comment>Prefer java.lang.Character.compare(char, char)</comment>
   </violation>
 
   <violation>
