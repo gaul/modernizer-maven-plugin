@@ -96,12 +96,12 @@ public final class ModernizerMojo extends AbstractMojo {
 
     /** Fail phase if Modernizer detects any violations. */
     @Parameter(defaultValue = "true", property = "modernizer.failOnViolations")
-    protected boolean failOnViolations = true;
+    private boolean failOnViolations = true;
 
     /** Run Modernizer on test classes. */
     @Parameter(defaultValue = "true",
                property = "modernizer.includeTestClasses")
-    protected boolean includeTestClasses = true;
+    private boolean includeTestClasses = true;
 
     /**
      * User-specified violation file. Also disables standard violation checks.
@@ -112,7 +112,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * for the default violations file.
      */
     @Parameter(property = "modernizer.violationsFile")
-    protected String violationsFile = "classpath:/modernizer.xml";
+    private String violationsFile = "classpath:/modernizer.xml";
 
     /**
      * User-specified violation files. The violations loaded from
@@ -127,7 +127,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * for the default violations file.
      */
     @Parameter(property = "modernizer.violationsFiles")
-    protected List<String> violationsFiles = emptyList();
+    private List<String> violationsFiles = emptyList();
 
     /**
      * Disables user-specified violations. This is a text file with one
@@ -181,7 +181,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * java/lang/String.getBytes:(Ljava/lang/String;)[B.
      */
     @Parameter
-    protected Set<String> exclusions = new HashSet<>();
+    private Set<String> exclusions = new HashSet<>();
 
     /**
      * Violation patterns to disable. Each exclusion should be a
@@ -190,7 +190,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * java/lang/.*
      */
     @Parameter
-    protected Set<String> exclusionPatterns = new HashSet<>();
+    private Set<String> exclusionPatterns = new HashSet<>();
 
     /**
      * Package prefixes to ignore, specified using &lt;ignorePackage&gt; child
@@ -198,7 +198,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * foo.bar.baz.* and so on.
      */
     @Parameter
-    protected Set<String> ignorePackages = new HashSet<>();
+    private Set<String> ignorePackages = new HashSet<>();
 
     /**
      * Fully qualified class names (incl. package) to ignore by regular
@@ -208,7 +208,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * ending in Immutable in all packages.
      */
     @Parameter
-    protected Set<String> ignoreClassNamePatterns = new HashSet<>();
+    private Set<String> ignoreClassNamePatterns = new HashSet<>();
 
     private Modernizer modernizer;
 
@@ -218,7 +218,7 @@ public final class ModernizerMojo extends AbstractMojo {
      * @since 1.4.0
      */
     @Parameter(defaultValue = "false", property = "modernizer.skip")
-    protected boolean skip = false;
+    private boolean skip = false;
 
     @Override
     public void execute() throws MojoExecutionException {
