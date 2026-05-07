@@ -85,7 +85,7 @@ public final class Modernizer {
     public static Map<String, Violation> parseFromXml(InputStream is)
             throws IOException, ParserConfigurationException, SAXException {
         Map<String, Violation> map =
-                new HashMap<String, Violation>();
+                new HashMap<>();
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

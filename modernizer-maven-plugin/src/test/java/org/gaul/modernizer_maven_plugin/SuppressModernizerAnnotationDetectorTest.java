@@ -41,7 +41,7 @@ public final class SuppressModernizerAnnotationDetectorTest {
             SuppressedOnMembers.InnerClass.class
         );
 
-        assertThat(new TreeSet<String>(actual)).containsExactly(
+        assertThat(new TreeSet<>(actual)).containsExactly(
             SuppressedOnClass.class.getName().replace('.', '/'),
             SuppressedOnClass.InnerClass.class.getName().replace('.', '/'),
             SuppressedOnLocal.class.getName().replace('.', '/'),

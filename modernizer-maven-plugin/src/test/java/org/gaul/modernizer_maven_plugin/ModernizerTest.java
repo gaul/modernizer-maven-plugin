@@ -482,8 +482,7 @@ public final class ModernizerTest {
             SuppressedOnMembers.InnerClass.class
         );
 
-        Collection<ViolationOccurrence> occurrences =
-            new ArrayList<ViolationOccurrence>();
+        Collection<ViolationOccurrence> occurrences = new ArrayList<>();
         for (Class<?> clazz : classes) {
             occurrences.addAll(
                 modernizer.check(new ClassReader(clazz.getName())));

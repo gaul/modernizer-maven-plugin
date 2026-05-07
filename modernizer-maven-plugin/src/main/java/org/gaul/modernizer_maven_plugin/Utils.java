@@ -40,12 +40,12 @@ final class Utils {
     }
 
     static <T> Set<T> createImmutableSet(Collection<T> collection) {
-        return Collections.unmodifiableSet(new HashSet<T>(
+        return Collections.unmodifiableSet(new HashSet<>(
                 Objects.requireNonNull(collection)));
     }
 
     static <T, U> Map<T, U> createImmutableMap(Map<T, U> map) {
-        return Collections.unmodifiableMap(new HashMap<T, U>(
+        return Collections.unmodifiableMap(new HashMap<>(
                 Objects.requireNonNull(map)));
     }
 
