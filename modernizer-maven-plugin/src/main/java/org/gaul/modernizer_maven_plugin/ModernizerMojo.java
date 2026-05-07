@@ -20,9 +20,12 @@ import static java.lang.String.format;
 import static java.util.Collections.emptyList;
 import static org.gaul.modernizer_maven_plugin.Utils.checkArgument;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -386,8 +389,18 @@ public final class ModernizerMojo extends AbstractMojo {
                     "Error opening exclusion file: " +
                     exclusionsFilePath, ioe);
         }
-        try (InputStream stream = is) {
-            return Utils.filterCommentLines(Utils.readAllLines(stream));
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, StandardCharsets.UTF_8))) {
+            Collection<String> lines = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (trimmed.isEmpty() || trimmed.startsWith("#")) {
+                    continue;
+                }
+                lines.add(line);
+            }
+            return lines;
         } catch (IOException ioe) {
             throw new MojoExecutionException(
                     "Error reading exclusion file: " +

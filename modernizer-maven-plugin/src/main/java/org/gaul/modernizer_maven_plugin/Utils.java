@@ -16,12 +16,6 @@
 
 package org.gaul.modernizer_maven_plugin;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,32 +47,6 @@ final class Utils {
     static <T, U> Map<T, U> createImmutableMap(Map<T, U> map) {
         return Collections.unmodifiableMap(new HashMap<T, U>(
                 Objects.requireNonNull(map)));
-    }
-
-    static Collection<String> readAllLines(InputStream is) throws IOException {
-        Collection<String> lines = new ArrayList<String>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is,
-                StandardCharsets.UTF_8));
-        while (true) {
-            String line = reader.readLine();
-            if (line == null) {
-                break;
-            }
-            lines.add(line);
-        }
-        return lines;
-    }
-
-    static Collection<String> filterCommentLines(Collection<String> lines) {
-        Collection<String> result = new ArrayList<String>();
-        for (String line : lines) {
-            String trimmedLine = line.trim();
-            if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {
-                continue;
-            }
-            result.add(line);
-        }
-        return result;
     }
 
     private Utils() {
