@@ -883,7 +883,6 @@ public final class ModernizerTest {
     private static class Java12Violations {
         private static void method() throws Exception {
             ByteStreams.skipFully(null, 0L);
-            CharStreams.skipFully(null, 0L);
             IOUtils.skipFully((InputStream) null, 0L);
         }
     }
