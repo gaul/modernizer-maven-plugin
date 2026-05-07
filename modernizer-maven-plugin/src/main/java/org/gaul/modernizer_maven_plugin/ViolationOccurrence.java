@@ -42,6 +42,25 @@ public final class ViolationOccurrence {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ViolationOccurrence)) {
+            return false;
+        }
+        ViolationOccurrence that = (ViolationOccurrence) o;
+        return lineNumber == that.lineNumber &&
+                owner.equals(that.owner) &&
+                violation.equals(that.violation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(owner, lineNumber, violation);
+    }
+
+    @Override
     public String toString() {
         return owner + " " + lineNumber + " " + violation;
     }

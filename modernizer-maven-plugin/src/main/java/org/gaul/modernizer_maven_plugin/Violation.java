@@ -43,6 +43,25 @@ public final class Violation {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Violation)) {
+            return false;
+        }
+        Violation that = (Violation) o;
+        return version == that.version &&
+                name.equals(that.name) &&
+                comment.equals(that.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, version, comment);
+    }
+
+    @Override
     public String toString() {
         return name + " " + version + " " + comment;
     }
