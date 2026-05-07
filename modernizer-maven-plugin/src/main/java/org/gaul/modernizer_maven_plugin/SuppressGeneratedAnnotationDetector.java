@@ -110,8 +110,7 @@ public final class SuppressGeneratedAnnotationDetector {
         public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
             final String name = desc.substring(Math.max(desc.lastIndexOf('/'),
                     desc.lastIndexOf('$')) + 1);
-            boolean isGenerated = name.contains("Generated");
-            if (isGenerated) {
+            if (name.equals("Generated;")) {
                 annotatedClassNames.add(className);
             }
             return super.visitAnnotation(desc, visible);
