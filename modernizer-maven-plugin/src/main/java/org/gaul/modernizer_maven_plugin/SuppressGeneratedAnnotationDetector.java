@@ -43,6 +43,16 @@ public final class SuppressGeneratedAnnotationDetector {
         return detector.computeSuppressedClassNames();
     }
 
+    // For testing
+    static Set<String> detect(Class<?>... classes) throws IOException {
+        SuppressGeneratedAnnotationDetector detector =
+            new SuppressGeneratedAnnotationDetector();
+        for (Class<?> clazz : classes) {
+            detector.detectInternal(new ClassReader(clazz.getName()));
+        }
+        return detector.computeSuppressedClassNames();
+    }
+
     private Set<String> computeSuppressedClassNames() {
         Set<String> suppressedClassNames = new HashSet<>(annotatedClassNames);
         for (String className : allClassNames) {
