@@ -68,8 +68,7 @@ public final class Modernizer {
             = Utils.createImmutableSet(ignoreClassNamePatterns);
     }
 
-    public Collection<ViolationOccurrence> check(ClassReader classReader)
-            throws IOException {
+    public Collection<ViolationOccurrence> check(ClassReader classReader) {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
                 javaVersion, violations, exclusions, exclusionPatterns,
                 ignorePackages, ignoreClassNames, ignoreFullClassNamePatterns);
