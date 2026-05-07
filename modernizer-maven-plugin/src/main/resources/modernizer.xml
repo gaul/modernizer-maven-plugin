@@ -332,13 +332,13 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/io/ByteStreams.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)J</name>
     <version>9</version>
-    <comment>Prefer java.io.InputStream.transferTo(InputStream, OutputStream)</comment>
+    <comment>Prefer java.io.InputStream.transferTo(OutputStream)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/io/ByteStreams.toByteArray:(Ljava/io/InputStream;)[B</name>
     <version>9</version>
-    <comment>Prefer java.io.InputStream.readAllBytes</comment>
+    <comment>Prefer java.io.InputStream.readAllBytes()</comment>
   </violation>
 
   <violation>
@@ -818,13 +818,13 @@ violation names use the same format that javap emits.
   <violation>
     <name>org/apache/commons/io/IOUtils.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)I</name>
     <version>9</version>
-    <comment>Prefer java.io.InputStream.transferTo(InputStream, OutputStream)</comment>
+    <comment>Prefer java.io.InputStream.transferTo(OutputStream)</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/IOUtils.copyLarge:(Ljava/io/InputStream;Ljava/io/OutputStream;)J</name>
     <version>9</version>
-    <comment>Prefer java.io.InputStream.transferTo(InputStream, OutputStream)</comment>
+    <comment>Prefer java.io.InputStream.transferTo(OutputStream)</comment>
   </violation>
 
   <violation>
@@ -848,7 +848,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>org/apache/commons/io/IOUtils.toByteArray:(Ljava/io/InputStream;)[B</name>
     <version>9</version>
-    <comment>Prefer java.io.InputStream.readAllBytes(InputStream)</comment>
+    <comment>Prefer java.io.InputStream.readAllBytes()</comment>
   </violation>
 
   <violation>
