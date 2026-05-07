@@ -542,7 +542,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>java/lang/Float."&lt;init&gt;":(D)V</name>
     <version>5</version>
-    <comment>Prefer java.lang.Float.valueOf(double)</comment>
+    <comment>Prefer java.lang.Float.valueOf((float) value)</comment>
   </violation>
 
   <violation>
