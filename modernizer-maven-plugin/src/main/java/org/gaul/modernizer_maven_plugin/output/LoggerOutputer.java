@@ -22,9 +22,9 @@ import org.apache.maven.plugin.logging.Log;
 
 public final class LoggerOutputer implements Outputer {
     private final Log log;
-    private final String level;
+    private final LogLevel level;
 
-    public LoggerOutputer(Log log, String level) {
+    public LoggerOutputer(Log log, LogLevel level) {
         this.log = log;
         this.level = level;
     }
@@ -35,17 +35,22 @@ public final class LoggerOutputer implements Outputer {
             String message = entry.getFileName() + ":" +
                     entry.getOccurrence().getLineNumber() + ": " +
                     entry.getOccurrence().getViolation().getComment();
-            if (level.equals("error")) {
+            switch (level) {
+            case ERROR:
                 log.error(message);
-            } else if (level.equals("warn")) {
+                break;
+            case WARN:
                 log.warn(message);
-            } else if (level.equals("info")) {
+                break;
+            case INFO:
                 log.info(message);
-            } else if (level.equals("debug")) {
+                break;
+            case DEBUG:
                 log.debug(message);
-            } else {
+                break;
+            default:
                 throw new IllegalStateException(
-                        "unexpected log level, was: " + level);
+                        "unexpected log level: " + level);
             }
         }
     }

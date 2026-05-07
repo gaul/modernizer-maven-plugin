@@ -31,6 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -50,6 +51,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.gaul.modernizer_maven_plugin.output.CodeClimateOutputer;
+import org.gaul.modernizer_maven_plugin.output.LogLevel;
 import org.gaul.modernizer_maven_plugin.output.LoggerOutputer;
 import org.gaul.modernizer_maven_plugin.output.OutputEntry;
 import org.gaul.modernizer_maven_plugin.output.OutputFormat;
@@ -230,6 +232,8 @@ public final class ModernizerMojo extends AbstractMojo {
                     "javaVersion is not set but is required for execution.");
         }
 
+        LogLevel logLevel = parseLogLevel(violationLogLevel);
+
         Map<String, Violation> allViolations = parseViolations(violationsFile);
         for (String violationsFilePath : violationsFiles) {
             allViolations.putAll(parseViolations(violationsFilePath));
@@ -317,7 +321,7 @@ public final class ModernizerMojo extends AbstractMojo {
         }
 
         try {
-            buildOutputer().output(outputEntries);
+            buildOutputer(logLevel).output(outputEntries);
         } catch (IOException ioe) {
             throw new MojoExecutionException(
                     "Error outputting violations", ioe);
@@ -452,10 +456,23 @@ public final class ModernizerMojo extends AbstractMojo {
         }
     }
 
-    private Outputer buildOutputer() throws MojoExecutionException {
+    private static LogLevel parseLogLevel(String value)
+            throws MojoExecutionException {
+        for (LogLevel l : LogLevel.values()) {
+            if (l.name().equalsIgnoreCase(value)) {
+                return l;
+            }
+        }
+        throw new MojoExecutionException("Unknown violationLogLevel: '" +
+                value + "', must be one of " +
+                Arrays.asList(LogLevel.values()));
+    }
+
+    private Outputer buildOutputer(LogLevel logLevel)
+            throws MojoExecutionException {
         Path baseDir = Paths.get(project.getBuild().getDirectory());
         if (Objects.requireNonNull(outputFormat) == OutputFormat.CONSOLE) {
-            return new LoggerOutputer(getLog(), violationLogLevel);
+            return new LoggerOutputer(getLog(), logLevel);
         } else if (outputFormat == OutputFormat.CODE_CLIMATE) {
             // make sure the output directory exists
             if (!Files.exists(baseDir)) {

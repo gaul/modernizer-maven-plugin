@@ -77,8 +77,8 @@ stanza using `<outputFormat>`.
 
 The currently supported formats and their respective configuration options are outlined below:
 * `CONSOLE` List each violation using Maven's logger. This is the **default** format.
-  * `<violationLogLevel>` Specify the log level of the logger: `error`, `warn`, `info` or `debug`.
-Default is `error`.
+  * `<violationLogLevel>` Specify the log level of the logger: `ERROR`, `WARN`, `INFO` or `DEBUG`.
+Default is `ERROR`.
 * `CODE_CLIMATE` Write the violations according to [Code Climate's Spec](https://github.com/codeclimate/platform/blob/master/spec/analyzers/SPEC.md). 
 GitLab uses this format for its code quality as shown [here](https://docs.gitlab.com/ee/ci/testing/code_quality.html#implement-a-custom-tool).
   * `<outputFile>` The full path the file to output to. Default is `${project.build.directory}/code-quality.json`
