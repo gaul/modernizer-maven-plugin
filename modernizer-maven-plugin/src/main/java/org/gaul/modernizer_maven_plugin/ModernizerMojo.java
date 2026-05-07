@@ -267,40 +267,11 @@ public final class ModernizerMojo extends AbstractMojo {
 
         Set<String> ignoreClassNames = new HashSet<>();
         try {
-            ignoreClassNames.addAll(
-                SuppressModernizerAnnotationDetector.detect(
-                    outputDirectory.toPath()));
-            if (ignoreGeneratedClasses) {
-                Set<String> ignore =
-                    SuppressGeneratedAnnotationDetector.detect(
-                        outputDirectory.toPath());
-                if (getLog().isDebugEnabled()) {
-                    getLog().debug(
-                        "The following generated classes will be ignored");
-                    for (String s : ignore) {
-                        getLog().debug(s);
-                    }
-                }
-                ignoreClassNames.addAll(ignore);
-            }
+            collectIgnoredClassNames(outputDirectory.toPath(),
+                    "generated classes", ignoreClassNames);
             if (includeTestClasses) {
-                ignoreClassNames.addAll(
-                    SuppressModernizerAnnotationDetector.detect(
-                        testOutputDirectory.toPath()));
-                if (ignoreGeneratedClasses) {
-                    Set<String> ignore =
-                        SuppressGeneratedAnnotationDetector.detect(
-                            testOutputDirectory.toPath());
-                    if (getLog().isDebugEnabled()) {
-                        getLog().debug(
-                            "The following generated test classes " +
-                            "will be ignored");
-                        for (String s : ignore) {
-                            getLog().debug(s);
-                        }
-                    }
-                    ignoreClassNames.addAll(ignore);
-                }
+                collectIgnoredClassNames(testOutputDirectory.toPath(),
+                        "generated test classes", ignoreClassNames);
             }
         } catch (IOException e) {
             throw new MojoExecutionException("Error reading suppressions", e);
@@ -407,6 +378,23 @@ public final class ModernizerMojo extends AbstractMojo {
             throw new MojoExecutionException(
                     "Error reading exclusion file: " +
                     exclusionsFilePath, ioe);
+        }
+    }
+
+    private void collectIgnoredClassNames(Path classRoot,
+            String generatedLabel, Set<String> sink) throws IOException {
+        sink.addAll(SuppressModernizerAnnotationDetector.detect(classRoot));
+        if (ignoreGeneratedClasses) {
+            Set<String> generated =
+                    SuppressGeneratedAnnotationDetector.detect(classRoot);
+            if (getLog().isDebugEnabled()) {
+                getLog().debug("The following " + generatedLabel +
+                        " will be ignored");
+                for (String s : generated) {
+                    getLog().debug(s);
+                }
+            }
+            sink.addAll(generated);
         }
     }
 
