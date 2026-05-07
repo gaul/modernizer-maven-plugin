@@ -829,14 +829,14 @@ violation names use the same format that javap emits.
 
   <violation>
     <name>org/apache/commons/io/IOUtils.copy:(Ljava/io/Reader;Ljava/io/Writer;)I</name>
-    <version>9</version>
-    <comment>Prefer java.io.InputStream.transferTo(Reader, Writer)</comment>
+    <version>10</version>
+    <comment>Prefer java.io.Reader.transferTo(Writer)</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/IOUtils.copyLarge:(Ljava/io/Reader;Ljava/io/Writer;)J</name>
-    <version>9</version>
-    <comment>Prefer java.io.InputStream.transferTo(Reader, Writer)</comment>
+    <version>10</version>
+    <comment>Prefer java.io.Reader.transferTo(Writer)</comment>
   </violation>
 
   <violation>
