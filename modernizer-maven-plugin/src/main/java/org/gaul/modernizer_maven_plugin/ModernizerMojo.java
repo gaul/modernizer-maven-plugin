@@ -394,6 +394,13 @@ public final class ModernizerMojo extends AbstractMojo {
         }
     }
 
+    private static String mapToSource(Path classFile, Path outputRoot,
+            Path sourceRoot) {
+        Path relative = outputRoot.relativize(classFile);
+        String name = sourceRoot.resolve(relative).toString();
+        return name.substring(0, name.length() - ".class".length()) + ".java";
+    }
+
     private long recurseFiles(Path path) throws IOException {
         long count = 0;
         if (!Files.exists(path)) {
@@ -410,18 +417,22 @@ public final class ModernizerMojo extends AbstractMojo {
             try (InputStream is = Files.newInputStream(path)) {
                 Collection<ViolationOccurrence> occurrences =
                         modernizer.check(is);
+                Path outputPath = outputDirectory.toPath();
+                Path testOutputPath = testOutputDirectory.toPath();
+                Path sourcePath = sourceDirectory.toPath();
+                Path testSourcePath = testSourceDirectory.toPath();
+                // When one output directory is nested inside the other,
+                // match the more specific (longer) one first.
+                boolean testFirst = testOutputPath.startsWith(outputPath) &&
+                        !outputPath.startsWith(testOutputPath);
                 for (ViolationOccurrence occurrence : occurrences) {
                     String name = path.toString();
-                    if (name.startsWith(outputDirectory.getPath())) {
-                        name = sourceDirectory.getPath() + name.substring(
-                                outputDirectory.getPath().length());
-                        name = name.substring(0,
-                                name.length() - ".class".length()) + ".java";
-                    } else if (name.startsWith(testOutputDirectory.getPath())) {
-                        name = testSourceDirectory.getPath() + name.substring(
-                                testOutputDirectory.getPath().length());
-                        name = name.substring(0,
-                                name.length() - ".class".length()) + ".java";
+                    if (testFirst && path.startsWith(testOutputPath)) {
+                        name = mapToSource(path, testOutputPath, testSourcePath);
+                    } else if (path.startsWith(outputPath)) {
+                        name = mapToSource(path, outputPath, sourcePath);
+                    } else if (path.startsWith(testOutputPath)) {
+                        name = mapToSource(path, testOutputPath, testSourcePath);
                     }
                     outputEntries.add(new OutputEntry(name, occurrence));
                     ++count;
