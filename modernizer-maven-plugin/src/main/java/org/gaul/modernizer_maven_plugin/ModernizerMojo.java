@@ -245,25 +245,11 @@ public final class ModernizerMojo extends AbstractMojo {
             allExclusions.addAll(readExclusionsFile(exclusionsFile));
         }
 
-        Set<Pattern> allExclusionPatterns = new HashSet<>();
-        for (String pattern : exclusionPatterns) {
-            try {
-                allExclusionPatterns.add(Pattern.compile(pattern));
-            } catch (PatternSyntaxException pse) {
-                throw new MojoExecutionException(
-                        "Invalid exclusion pattern", pse);
-            }
-        }
-
-        Set<Pattern> allIgnoreFullClassNamePatterns = new HashSet<>();
-        for (String pattern : ignoreClassNamePatterns) {
-            try {
-                allIgnoreFullClassNamePatterns.add(Pattern.compile(pattern));
-            } catch (PatternSyntaxException pse) {
-                throw new MojoExecutionException(
-                        "Invalid exclusion pattern", pse);
-            }
-        }
+        Set<Pattern> allExclusionPatterns =
+                compilePatterns(exclusionPatterns, "exclusion pattern");
+        Set<Pattern> allIgnoreFullClassNamePatterns =
+                compilePatterns(ignoreClassNamePatterns,
+                        "ignoreClassNamePattern");
 
         Set<String> ignoreClassNames = new HashSet<>();
         try {
@@ -379,6 +365,20 @@ public final class ModernizerMojo extends AbstractMojo {
                     "Error reading exclusion file: " +
                     exclusionsFilePath, ioe);
         }
+    }
+
+    private static Set<Pattern> compilePatterns(Collection<String> patterns,
+            String label) throws MojoExecutionException {
+        Set<Pattern> compiled = new HashSet<>();
+        for (String pattern : patterns) {
+            try {
+                compiled.add(Pattern.compile(pattern));
+            } catch (PatternSyntaxException pse) {
+                throw new MojoExecutionException(
+                        "Invalid " + label + ": " + pattern, pse);
+            }
+        }
+        return compiled;
     }
 
     private void collectIgnoredClassNames(Path classRoot,
