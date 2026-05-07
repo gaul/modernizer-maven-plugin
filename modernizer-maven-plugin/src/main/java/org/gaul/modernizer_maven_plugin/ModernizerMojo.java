@@ -218,8 +218,6 @@ public final class ModernizerMojo extends AbstractMojo {
     @Parameter(defaultValue = "false", property = "modernizer.skip")
     protected boolean skip = false;
 
-    private List<OutputEntry> outputEntries = new ArrayList<>();
-
     @Override
     public void execute() throws MojoExecutionException {
         if (skip) {
@@ -308,11 +306,11 @@ public final class ModernizerMojo extends AbstractMojo {
                 allExclusionPatterns, ignorePackages,
                 ignoreClassNames, allIgnoreFullClassNamePatterns);
 
-        long count;
+        List<OutputEntry> outputEntries = new ArrayList<>();
         try {
-            count = recurseFiles(outputDirectory.toPath());
+            recurseFiles(outputDirectory.toPath(), outputEntries);
             if (includeTestClasses) {
-                count += recurseFiles(testOutputDirectory.toPath());
+                recurseFiles(testOutputDirectory.toPath(), outputEntries);
             }
         } catch (IOException ioe) {
             throw new MojoExecutionException("Error reading Java classes", ioe);
@@ -325,8 +323,8 @@ public final class ModernizerMojo extends AbstractMojo {
                     "Error outputting violations", ioe);
         }
 
-        if (failOnViolations && count != 0) {
-            throw new MojoExecutionException("Found " + count +
+        if (failOnViolations && !outputEntries.isEmpty()) {
+            throw new MojoExecutionException("Found " + outputEntries.size() +
                     " violations");
         }
     }
@@ -415,16 +413,16 @@ public final class ModernizerMojo extends AbstractMojo {
         return name.substring(0, name.length() - ".class".length()) + ".java";
     }
 
-    private long recurseFiles(Path path) throws IOException {
-        long count = 0;
+    private void recurseFiles(Path path, List<OutputEntry> outputEntries)
+            throws IOException {
         if (!Files.exists(path)) {
-            return count;
+            return;
         }
         if (Files.isDirectory(path)) {
             try (Stream<Path> stream = Files.list(path)) {
                 Iterable<Path> children = stream::iterator;
                 for (Path child : children) {
-                    count += recurseFiles(child);
+                    recurseFiles(child, outputEntries);
                 }
             }
         } else if (path.toString().endsWith(".class")) {
@@ -449,11 +447,9 @@ public final class ModernizerMojo extends AbstractMojo {
                         name = mapToSource(path, testOutputPath, testSourcePath);
                     }
                     outputEntries.add(new OutputEntry(name, occurrence));
-                    ++count;
                 }
             }
         }
-        return count;
     }
 
     private Outputer buildOutputer() throws MojoExecutionException {
