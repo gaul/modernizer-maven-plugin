@@ -351,8 +351,8 @@ public final class ModernizerMojo extends AbstractMojo {
                         "Error opening violation file: " + path, fnfe);
             }
         }
-        try {
-            return Modernizer.parseFromXml(is);
+        try (InputStream stream = is) {
+            return Modernizer.parseFromXml(stream);
         } catch (IOException ioe) {
             throw new MojoExecutionException(
                     "Error reading violation data", ioe);
@@ -362,16 +362,14 @@ public final class ModernizerMojo extends AbstractMojo {
         } catch (SAXException saxe) {
             throw new MojoExecutionException(
                     "Error parsing violation data", saxe);
-        } finally {
-            Utils.closeQuietly(is);
         }
     }
 
     private Collection<String> readExclusionsFile(String exclusionsFilePath)
             throws MojoExecutionException {
-        InputStream is = null;
+        InputStream is;
+        Path path = FileSystems.getDefault().getPath(exclusionsFilePath);
         try {
-            Path path = FileSystems.getDefault().getPath(exclusionsFilePath);
             if (Files.exists(path)) {
                 is = Files.newInputStream(path);
             } else {
@@ -383,14 +381,17 @@ public final class ModernizerMojo extends AbstractMojo {
                             exclusionsFilePath);
                 }
             }
-
-            return Utils.filterCommentLines(Utils.readAllLines(is));
+        } catch (IOException ioe) {
+            throw new MojoExecutionException(
+                    "Error opening exclusion file: " +
+                    exclusionsFilePath, ioe);
+        }
+        try (InputStream stream = is) {
+            return Utils.filterCommentLines(Utils.readAllLines(stream));
         } catch (IOException ioe) {
             throw new MojoExecutionException(
                     "Error reading exclusion file: " +
                     exclusionsFilePath, ioe);
-        } finally {
-            Utils.closeQuietly(is);
         }
     }
 

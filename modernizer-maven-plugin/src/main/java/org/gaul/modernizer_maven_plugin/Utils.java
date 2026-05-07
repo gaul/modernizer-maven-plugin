@@ -17,7 +17,6 @@
 package org.gaul.modernizer_maven_plugin;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,17 +53,6 @@ final class Utils {
     static <T, U> Map<T, U> createImmutableMap(Map<T, U> map) {
         return Collections.unmodifiableMap(new HashMap<T, U>(
                 Objects.requireNonNull(map)));
-    }
-
-    static void closeQuietly(Closeable closeable) {
-        if (closeable == null) {
-            return;
-        }
-        try {
-            closeable.close();
-        } catch (IOException ioe) {
-            // swallow exception
-        }
     }
 
     static Collection<String> readAllLines(InputStream is) throws IOException {
