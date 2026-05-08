@@ -292,29 +292,8 @@ public final class ModernizerMojo extends AbstractMojo {
 
     private static Map<String, Violation> parseViolations(
             String violationsFilePath) throws MojoExecutionException {
-        InputStream is;
-        if (violationsFilePath.startsWith(CLASSPATH_PREFIX)) {
-            String classpath =
-                    violationsFilePath.substring(CLASSPATH_PREFIX.length());
-            checkArgument(classpath.startsWith("/"), format(
-                    "Only absolute classpath references are allowed, got [%s]",
-                    classpath));
-            is = Modernizer.class.getResourceAsStream(classpath);
-            if (is == null) {
-                throw new MojoExecutionException(
-                        "Error opening violation file: " + classpath);
-            }
-        } else {
-            Path path = FileSystems.getDefault().getPath(violationsFilePath);
-            try {
-                is = Files.newInputStream(path);
-            } catch (IOException fnfe) {
-                throw new MojoExecutionException(
-                        "Error opening violation file: " + path, fnfe);
-            }
-        }
-        try (InputStream stream = is) {
-            return Modernizer.parseFromXml(stream);
+        try (InputStream is = openViolations(violationsFilePath)) {
+            return Modernizer.parseFromXml(is);
         } catch (IOException ioe) {
             throw new MojoExecutionException(
                     "Error reading violation data", ioe);
@@ -324,6 +303,30 @@ public final class ModernizerMojo extends AbstractMojo {
         } catch (SAXException saxe) {
             throw new MojoExecutionException(
                     "Error parsing violation data", saxe);
+        }
+    }
+
+    private static InputStream openViolations(String violationsFilePath)
+            throws MojoExecutionException {
+        if (violationsFilePath.startsWith(CLASSPATH_PREFIX)) {
+            String classpath =
+                    violationsFilePath.substring(CLASSPATH_PREFIX.length());
+            checkArgument(classpath.startsWith("/"), format(
+                    "Only absolute classpath references are allowed, got [%s]",
+                    classpath));
+            InputStream is = Modernizer.class.getResourceAsStream(classpath);
+            if (is == null) {
+                throw new MojoExecutionException(
+                        "Error opening violation file: " + classpath);
+            }
+            return is;
+        }
+        Path path = FileSystems.getDefault().getPath(violationsFilePath);
+        try {
+            return Files.newInputStream(path);
+        } catch (IOException fnfe) {
+            throw new MojoExecutionException(
+                    "Error opening violation file: " + path, fnfe);
         }
     }
 
