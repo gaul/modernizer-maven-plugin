@@ -113,7 +113,11 @@ public final class Modernizer {
                         "' is not numeric: " + version, nfe);
             }
             Violation violation = new Violation(name, versionNum, comment);
-            map.put(violation.getName(), violation);
+            if (map.putIfAbsent(violation.getName(), violation) != null) {
+                throw new SAXException(
+                        "Duplicate <violation> with name: " +
+                        violation.getName());
+            }
         }
 
         return map;
