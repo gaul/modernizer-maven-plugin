@@ -817,6 +817,12 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/FileUtils.copyFile:(Ljava/io/File;Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.copy(Path, Path, CopyOption...)</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;)Ljava/util/List;</name>
     <version>7</version>
     <comment>Prefer java.nio.file.Files.readAllLines(Path, Charset)</comment>

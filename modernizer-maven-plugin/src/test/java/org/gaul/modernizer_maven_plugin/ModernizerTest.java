@@ -727,6 +727,7 @@ public final class ModernizerTest {
             object = org.apache.commons.io.Charsets.UTF_16LE;
             object = org.apache.commons.io.Charsets.UTF_16;
             FileUtils.readFileToByteArray((File) null);
+            FileUtils.copyFile((File) null, (File) null);
             FileUtils.readLines((File) null);
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
