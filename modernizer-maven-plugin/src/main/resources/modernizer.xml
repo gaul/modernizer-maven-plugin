@@ -717,7 +717,7 @@
   <violation>
     <name>java/util/Stack."&lt;init&gt;":()V</name>
     <version>6</version>
-    <comment>Prefer java.util.Deque</comment>
+    <comment>Prefer java.util.ArrayDeque</comment>
   </violation>
 
   <violation>
