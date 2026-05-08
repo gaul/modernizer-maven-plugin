@@ -1352,6 +1352,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/base/Joiner.join:(Ljava/lang/Iterable;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join(CharSequence, Iterable)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Strings.repeat:(Ljava/lang/String;I)Ljava/lang/String;</name>
     <version>11</version>
     <comment>Prefer java.lang.String.repeat(int)</comment>

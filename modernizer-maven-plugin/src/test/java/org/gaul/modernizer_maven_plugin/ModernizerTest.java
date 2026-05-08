@@ -67,6 +67,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -778,6 +779,7 @@ public final class ModernizerTest {
             Iterables.skip(null, 0);
             Iterables.limit(null, 0);
             Iterables.isEmpty(null);
+            Joiner.on(',').join((Iterable<?>) null);
             StringUtils.join((Iterable<String>) null, ',');
             StringUtils.join((Iterable<String>) null, null);
             Base64.decodeBase64("");
