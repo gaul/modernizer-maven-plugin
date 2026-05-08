@@ -75,19 +75,19 @@
   <violation>
     <name>com/google/common/base/Optional.absent:()Lcom/google/common/base/Optional;</name>
     <version>8</version>
-    <comment>Prefer java.util.Optional</comment>
+    <comment>Prefer java.util.Optional.empty()</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Optional.of:(Ljava/lang/Object;)Lcom/google/common/base/Optional;</name>
     <version>8</version>
-    <comment>Prefer java.util.Optional</comment>
+    <comment>Prefer java.util.Optional.of(Object)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Optional.fromNullable:(Ljava/lang/Object;)Lcom/google/common/base/Optional;</name>
     <version>8</version>
-    <comment>Prefer java.util.Optional</comment>
+    <comment>Prefer java.util.Optional.ofNullable(Object)</comment>
   </violation>
 
   <violation>
