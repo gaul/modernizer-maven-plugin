@@ -20,6 +20,7 @@ import static org.gaul.modernizer_maven_plugin.Utils.ASM_API;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -96,6 +97,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
         return new MethodVisitor(ASM_API, base) {
             private int lineNumber = -1;
             private boolean methodSuppressed = false;
+            private final List<ViolationOccurrence> pending = new ArrayList<>();
 
             @Override
             public void visitFieldInsn(int opcode, String owner, String name,
@@ -115,13 +117,14 @@ final class ModernizerClassVisitor extends ClassVisitor {
             @Override
             public AnnotationVisitor visitAnnotation(String desc,
                     boolean visible) {
-                methodSuppressed |= Type.getType(desc).getClassName()
-                    .equals(SuppressModernizer.class.getName());
-
-                String name = Type.getType(desc).getInternalName();
-                Violation violation = violations.get(name);
-                checkToken(name, violation, name, lineNumber);
-
+                if (Type.getType(desc).getClassName()
+                        .equals(SuppressModernizer.class.getName())) {
+                    methodSuppressed = true;
+                } else {
+                    String name = Type.getType(desc).getInternalName();
+                    Violation violation = violations.get(name);
+                    queueCheck(name, violation, name, lineNumber);
+                }
                 return super.visitAnnotation(desc, visible);
             }
 
@@ -129,7 +132,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     String desc) {
                 String token = owner + "." + name + ":" + desc;
                 Violation violation = violations.get(token);
-                checkToken(token, violation, name, lineNumber);
+                queueCheck(token, violation, name, lineNumber);
             }
 
             @Override
@@ -137,37 +140,54 @@ final class ModernizerClassVisitor extends ClassVisitor {
                 this.lineNumber = lineNumber;
             }
 
-            private void checkToken(String token, Violation violation,
-                    String name, int lineNumber) {
-                if (methodSuppressed) {
-                    return;
+            @Override
+            public void visitEnd() {
+                if (!methodSuppressed) {
+                    occurrences.addAll(pending);
                 }
-                ModernizerClassVisitor.this
-                    .checkToken(token, violation, name, lineNumber);
+                super.visitEnd();
+            }
+
+            private void queueCheck(String token, Violation violation,
+                    String name, int lineNumber) {
+                ViolationOccurrence occ =
+                        ModernizerClassVisitor.this.evaluate(token, violation,
+                                name, lineNumber);
+                if (occ != null) {
+                    pending.add(occ);
+                }
             }
         };
     }
 
     private void checkToken(String token, Violation violation, String name,
             int lineNumber) {
+        ViolationOccurrence occ = evaluate(token, violation, name, lineNumber);
+        if (occ != null) {
+            occurrences.add(occ);
+        }
+    }
+
+    private ViolationOccurrence evaluate(String token, Violation violation,
+            String name, int lineNumber) {
         // classIgnored is checked at visit()/visitMethod() so we never reach
         // this path on an ignored class.
-        if (violation != null && !exclusions.contains(token) &&
-                javaVersion >= violation.getVersion() &&
-                !ignorePackages.contains(packageName)) {
-            for (Pattern pattern : exclusionPatterns) {
-                if (pattern.matcher(token).matches()) {
-                    return;
-                }
-            }
-            for (String prefix : ignorePackages) {
-                if (packageName.startsWith(prefix + ".")) {
-                    return;
-                }
-            }
-            occurrences.add(new ViolationOccurrence(name, lineNumber,
-                    violation));
+        if (violation == null || exclusions.contains(token) ||
+                javaVersion < violation.getVersion() ||
+                ignorePackages.contains(packageName)) {
+            return null;
         }
+        for (Pattern pattern : exclusionPatterns) {
+            if (pattern.matcher(token).matches()) {
+                return null;
+            }
+        }
+        for (String prefix : ignorePackages) {
+            if (packageName.startsWith(prefix + ".")) {
+                return null;
+            }
+        }
+        return new ViolationOccurrence(name, lineNumber, violation);
     }
 
     private boolean computeClassIgnored() {
