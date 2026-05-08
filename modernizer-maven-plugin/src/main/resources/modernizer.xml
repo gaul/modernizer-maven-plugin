@@ -129,7 +129,7 @@
   <violation>
     <name>com/google/common/collect/Maps.newEnumMap:(Ljava/util/Map;)Ljava/util/EnumMap;</name>
     <version>7</version>
-    <comment>Prefer java.util.EnumMap&lt;&gt;(java.util.Map)</comment>
+    <comment>Prefer java.util.EnumMap&lt;&gt;(Map)</comment>
   </violation>
 
   <violation>
@@ -141,7 +141,7 @@
   <violation>
     <name>com/google/common/collect/Maps.newHashMap:(Ljava/util/Map;)Ljava/util/HashMap;</name>
     <version>7</version>
-    <comment>Prefer java.util.HashMap&lt;&gt;(java.util.Map)</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(Map)</comment>
   </violation>
 
   <violation>
@@ -171,7 +171,7 @@
   <violation>
     <name>com/google/common/collect/Maps.newLinkedHashMap:(Ljava/util/Map;)Ljava/util/LinkedHashMap;</name>
     <version>7</version>
-    <comment>Prefer java.util.LinkedHashMap&lt;&gt;(java.util.Map)</comment>
+    <comment>Prefer java.util.LinkedHashMap&lt;&gt;(Map)</comment>
   </violation>
 
   <violation>
@@ -183,25 +183,25 @@
   <violation>
     <name>com/google/common/collect/Maps.newTreeMap:(Ljava/util/Comparator;)Ljava/util/TreeMap;</name>
     <version>7</version>
-    <comment>Prefer java.util.TreeMap&lt;&gt;(java.util.Comparator)</comment>
+    <comment>Prefer java.util.TreeMap&lt;&gt;(Comparator)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Maps.newTreeMap:(Ljava/util/SortedMap;)Ljava/util/TreeMap;</name>
     <version>7</version>
-    <comment>Prefer java.util.TreeMap&lt;&gt;(java.util.SortedMap)</comment>
+    <comment>Prefer java.util.TreeMap&lt;&gt;(SortedMap)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Maps.unmodifiableNavigableMap:(Ljava/util/NavigableMap;)Ljava/util/NavigableMap;</name>
     <version>8</version>
-    <comment>Prefer java.util.Collections.unmodifiableNavigableMap(java.util.NavigableMap)</comment>
+    <comment>Prefer java.util.Collections.unmodifiableNavigableMap(NavigableMap)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Maps.synchronizedNavigableMap:(Ljava/util/NavigableMap;)Ljava/util/NavigableMap;</name>
     <version>8</version>
-    <comment>Prefer java.util.Collections.synchronizedNavigableMap(java.util.NavigableMap)</comment>
+    <comment>Prefer java.util.Collections.synchronizedNavigableMap(NavigableMap)</comment>
   </violation>
 
   <violation>
@@ -237,7 +237,7 @@
   <violation>
     <name>com/google/common/collect/Sets.newSetFromMap:(Ljava/util/Map;)Ljava/util/Set;</name>
     <version>7</version>
-    <comment>Prefer java.util.Collections.newSetFromMap(java.util.Map)</comment>
+    <comment>Prefer java.util.Collections.newSetFromMap(Map)</comment>
   </violation>
 
   <violation>
@@ -249,19 +249,19 @@
   <violation>
     <name>com/google/common/collect/Sets.newTreeSet:(Ljava/util/Comparator;)Ljava/util/TreeSet;</name>
     <version>7</version>
-    <comment>Prefer java.util.TreeSet&lt;&gt;(java.util.Comparator)</comment>
+    <comment>Prefer java.util.TreeSet&lt;&gt;(Comparator)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Sets.unmodifiableNavigableSet:(Ljava/util/NavigableSet;)Ljava/util/NavigableSet;</name>
     <version>8</version>
-    <comment>Prefer java.util.Collections.unmodifiableNavigableSet(java.util.NavigableSet)</comment>
+    <comment>Prefer java.util.Collections.unmodifiableNavigableSet(NavigableSet)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Sets.synchronizedNavigableSet:(Ljava/util/NavigableSet;)Ljava/util/NavigableSet;</name>
     <version>8</version>
-    <comment>Prefer java.util.Collections.synchronizedNavigableSet(java.util.NavigableSet)</comment>
+    <comment>Prefer java.util.Collections.synchronizedNavigableSet(NavigableSet)</comment>
   </violation>
 
   <violation>
@@ -345,7 +345,7 @@
   <violation>
     <name>com/google/common/io/Files.toByteArray:(Ljava/io/File;)[B</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
+    <comment>Prefer java.nio.file.Files.readAllBytes(Path)</comment>
   </violation>
 
   <violation>
@@ -501,19 +501,19 @@
   <violation>
     <name>java/io/InputStreamReader."&lt;init&gt;":(Ljava/io/InputStream;Ljava/lang/String;)V</name>
     <version>4</version>
-    <comment>Prefer java.io.InputStreamReader(java.io.InputStream, java.nio.charset.Charset)</comment>
+    <comment>Prefer java.io.InputStreamReader(InputStream, Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/OutputStreamWriter."&lt;init&gt;":(Ljava/io/OutputStream;Ljava/lang/String;)V</name>
     <version>4</version>
-    <comment>Prefer java.io.OutputStreamWriter(java.io.OutputStream, java.nio.charset.Charset)</comment>
+    <comment>Prefer java.io.OutputStreamWriter(OutputStream, Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/StringReader."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>24</version>
-    <comment>Prefer java.io.Reader.of(java.lang.CharSequence)</comment>
+    <comment>Prefer java.io.Reader.of(CharSequence)</comment>
   </violation>
 
   <violation>
@@ -573,19 +573,19 @@
   <violation>
     <name>java/lang/String.getBytes:(Ljava/lang/String;)[B</name>
     <version>6</version>
-    <comment>Prefer java.lang.String.getBytes(java.nio.charset.Charset)</comment>
+    <comment>Prefer java.lang.String.getBytes(Charset)</comment>
   </violation>
 
   <violation>
     <name>java/lang/String."&lt;init&gt;":([BIILjava/lang/String;)V</name>
     <version>6</version>
-    <comment>Prefer java.lang.String(byte[], int, int, java.nio.charset.Charset)</comment>
+    <comment>Prefer java.lang.String(byte[], int, int, Charset)</comment>
   </violation>
 
   <violation>
     <name>java/lang/String."&lt;init&gt;":([BLjava/lang/String;)V</name>
     <version>6</version>
-    <comment>Prefer java.lang.String(byte[], java.nio.charset.Charset)</comment>
+    <comment>Prefer java.lang.String(byte[], Charset)</comment>
   </violation>
 
   <violation>
@@ -795,25 +795,25 @@
   <violation>
     <name>org/apache/commons/io/FileUtils.readFileToByteArray:(Ljava/io/File;)[B</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.readAllBytes(java.nio.file.Path)</comment>
+    <comment>Prefer java.nio.file.Files.readAllBytes(Path)</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;)Ljava/util/List;</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+    <comment>Prefer java.nio.file.Files.readAllLines(Path, Charset)</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/util/List;</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+    <comment>Prefer java.nio.file.Files.readAllLines(Path, Charset)</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/FileUtils.readLines:(Ljava/io/File;Ljava/lang/String;)Ljava/util/List;</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.readAllLines(java.nio.file.Path, java.nio.charset.Charset)</comment>
+    <comment>Prefer java.nio.file.Files.readAllLines(Path, Charset)</comment>
   </violation>
 
   <violation>
@@ -1245,7 +1245,7 @@
   <violation>
     <name>com/google/common/collect/Iterables.filter:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Stream.filter(java.util.function.Predicate&lt;? super T&gt;)</comment>
+    <comment>Prefer Stream.filter(Predicate&lt;? super T&gt;)</comment>
   </violation>
 
   <violation>
@@ -1257,13 +1257,13 @@
   <violation>
     <name>com/google/common/collect/Iterables.any:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Z</name>
     <version>8</version>
-    <comment>Prefer Stream.anyMatch(java.util.function.Predicate&lt;? super T&gt;)</comment>
+    <comment>Prefer Stream.anyMatch(Predicate&lt;? super T&gt;)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Iterables.all:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Z</name>
     <version>8</version>
-    <comment>Prefer Stream.allMatch(java.util.function.Predicate&lt;? super T&gt;)</comment>
+    <comment>Prefer Stream.allMatch(Predicate&lt;? super T&gt;)</comment>
   </violation>
 
   <violation>
@@ -1287,7 +1287,7 @@
   <violation>
     <name>com/google/common/collect/Iterables.transform:(Ljava/lang/Iterable;Lcom/google/common/base/Function;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Stream.map(java.util.function.Function&lt;? super T, ? extends R&gt;)</comment>
+    <comment>Prefer Stream.map(Function&lt;? super T, ? extends R&gt;)</comment>
   </violation>
 
   <violation>
@@ -1419,19 +1419,19 @@
   <violation>
     <name>java/io/FileInputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.newInputStream(java.nio.file.Paths.get(String))</comment>
+    <comment>Prefer java.nio.file.Files.newInputStream(Paths.get(String))</comment>
   </violation>
 
   <violation>
     <name>java/io/FileInputStream."&lt;init&gt;":(Ljava/io/File;)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.newInputStream(java.nio.file.Path)</comment>
+    <comment>Prefer java.nio.file.Files.newInputStream(Path)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Paths.get(String))</comment>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Paths.get(String))</comment>
   </violation>
 
   <violation>
@@ -1443,7 +1443,7 @@
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/io/File;)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.newOutputStream(java.nio.file.Path)</comment>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path)</comment>
   </violation>
 
   <violation>
