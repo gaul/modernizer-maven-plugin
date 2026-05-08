@@ -825,6 +825,7 @@ public final class ModernizerTest {
             Base64.encodeBase64String((byte[]) null);
             Base64.encodeBase64((byte[]) null);
             DatatypeConverter.parseBase64Binary("");
+            DatatypeConverter.printBase64Binary(new byte[]{});
             Collections.sort(new ArrayList<String>());
             Collections.sort(new ArrayList<String>(), Comparator.naturalOrder());
         }
@@ -966,6 +967,7 @@ public final class ModernizerTest {
         private static void method() throws Exception {
             Hex.encodeHexString(new byte[]{});
             DatatypeConverter.printHexBinary(new byte[]{});
+            DatatypeConverter.parseHexBinary("");
         }
     }
 

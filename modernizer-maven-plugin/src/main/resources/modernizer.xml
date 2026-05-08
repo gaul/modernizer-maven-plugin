@@ -997,9 +997,21 @@
   </violation>
 
   <violation>
+    <name>javax/xml/bind/DatatypeConverter.printBase64Binary:([B)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[])</comment>
+  </violation>
+
+  <violation>
     <name>javax/xml/bind/DatatypeConverter.printHexBinary:([B)Ljava/lang/String;</name>
     <version>17</version>
     <comment>Prefer java.util.HexFormat.of().formatHex(byte[])</comment>
+  </violation>
+
+  <violation>
+    <name>javax/xml/bind/DatatypeConverter.parseHexBinary:(Ljava/lang/String;)[B</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().parseHex(String)</comment>
   </violation>
 
   <violation>
