@@ -367,6 +367,24 @@
   </violation>
 
   <violation>
+    <name>com/google/common/io/Files.copy:(Ljava/io/File;Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.copy(Path, Path, CopyOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/Files.move:(Ljava/io/File;Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.move(Path, Path, CopyOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/Files.append:(Ljava/lang/CharSequence;Ljava/io/File;Ljava/nio/charset/Charset;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, StandardOpenOption.APPEND)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/primitives/Chars.compare:(CC)I</name>
     <version>7</version>
     <comment>Prefer java.lang.Character.compare(char, char)</comment>
