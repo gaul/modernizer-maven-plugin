@@ -23,6 +23,7 @@ import com.google.common.base.Charsets;
 
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 
+@SuppressWarnings({"deprecation", "rawtypes"})
 public class SuppressModernizerTestClasses {
 
     @SuppressModernizer

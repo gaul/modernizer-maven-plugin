@@ -129,6 +129,7 @@ import org.junit.Test;
 import org.objectweb.asm.ClassReader;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@SuppressWarnings("deprecation")
 public final class ModernizerTest {
     private Map<String, Violation> violations;
     private static final Collection<String> NO_EXCLUSIONS =
