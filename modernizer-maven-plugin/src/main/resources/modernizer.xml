@@ -1436,6 +1436,18 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang3/Validate.notNull:(Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>7</version>
+    <comment>Prefer java.util.Objects.requireNonNull(Object)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/Validate.notNull:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>7</version>
+    <comment>Prefer java.util.Objects.requireNonNull(Object, String)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Joiner.join:(Ljava/lang/Iterable;)Ljava/lang/String;</name>
     <version>8</version>
     <comment>Prefer java.lang.String.join(CharSequence, Iterable)</comment>

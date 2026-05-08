@@ -111,6 +111,7 @@ import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.io.output.NullWriter;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.gaul.modernizer_maven_plugin
     .SuppressModernizerTestClasses.SuppressedOnClass;
@@ -730,6 +731,8 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
             Preconditions.checkNotNull(new Object());
+            Validate.notNull(new Object());
+            Validate.notNull(new Object(), "", new Object[0]);
         }
     }
 
