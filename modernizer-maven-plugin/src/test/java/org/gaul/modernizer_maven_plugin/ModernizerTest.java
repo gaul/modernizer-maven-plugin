@@ -417,6 +417,7 @@ public final class ModernizerTest {
         Modernizer modernizer = createModernizer("24");
         List<Class<?>> fixtures = List.of(
                 AllViolations.class,
+                Java4Violations.class,
                 Java5Violations.class,
                 Java6Violations.class,
                 Java7Violations.class,
@@ -611,10 +612,6 @@ public final class ModernizerTest {
             "deprecation",
             "JdkObsolete"})
         private static void method() throws Exception {
-            Object object;
-            new InputStreamReader((InputStream) null, "");
-            new OutputStreamWriter((OutputStream) null, "");
-            new Boolean(true);
             new Hashtable<Object, Object>(0, 0.0F);
             new Hashtable<Object, Object>(0);
             new Hashtable<Object, Object>();
@@ -623,6 +620,16 @@ public final class ModernizerTest {
             new Vector<Object>(1);
             new Vector<Object>(0, 0);
             new Vector<Object>((Collection<Object>) null);
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java4Violations {
+        @SuppressWarnings("BoxedPrimitiveConstructor")
+        private static void method() throws Exception {
+            new InputStreamReader((InputStream) null, "");
+            new OutputStreamWriter((OutputStream) null, "");
+            new Boolean(true);
         }
     }
 
