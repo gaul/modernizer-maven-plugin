@@ -98,23 +98,34 @@ public final class Modernizer {
                 continue;
             }
             Element element = (Element) nNode;
-            String version = element.getElementsByTagName("version").item(0)
-                    .getTextContent();
+            String name = requireChildText(element, "name");
+            String version = requireChildText(element, "version");
+            String comment = requireChildText(element, "comment");
             int versionNum;
-            if (version.startsWith("1.")) {
-                versionNum = Integer.parseInt(version.substring(2));
-            } else {
-                versionNum = Integer.parseInt(version);
+            try {
+                if (version.startsWith("1.")) {
+                    versionNum = Integer.parseInt(version.substring(2));
+                } else {
+                    versionNum = Integer.parseInt(version);
+                }
+            } catch (NumberFormatException nfe) {
+                throw new SAXException("<version> for violation '" + name +
+                        "' is not numeric: " + version, nfe);
             }
-            Violation violation = new Violation(
-                    element.getElementsByTagName("name").item(0)
-                            .getTextContent(),
-                    versionNum,
-                    element.getElementsByTagName("comment").item(0)
-                            .getTextContent());
+            Violation violation = new Violation(name, versionNum, comment);
             map.put(violation.getName(), violation);
         }
 
         return map;
+    }
+
+    private static String requireChildText(Element parent, String childName)
+            throws SAXException {
+        NodeList nodes = parent.getElementsByTagName(childName);
+        if (nodes.getLength() == 0) {
+            throw new SAXException("<violation> is missing required <" +
+                    childName + "> element");
+        }
+        return nodes.item(0).getTextContent();
     }
 }
