@@ -1424,6 +1424,18 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang3/ObjectUtils.firstNonNull:([Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>9</version>
+    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/ObjectUtils.defaultIfNull:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>9</version>
+    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Joiner.join:(Ljava/lang/Iterable;)Ljava/lang/String;</name>
     <version>8</version>
     <comment>Prefer java.lang.String.join(CharSequence, Iterable)</comment>

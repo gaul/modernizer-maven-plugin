@@ -109,6 +109,7 @@ import org.apache.commons.io.input.NullInputStream;
 import org.apache.commons.io.input.NullReader;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.io.output.NullWriter;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.gaul.modernizer_maven_plugin
@@ -853,6 +854,8 @@ public final class ModernizerTest {
             Streams.stream(OptionalDouble.empty());
             Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
             MoreObjects.firstNonNull("", "");
+            ObjectUtils.firstNonNull("", "");
+            ObjectUtils.defaultIfNull("", "");
         }
     }
 
