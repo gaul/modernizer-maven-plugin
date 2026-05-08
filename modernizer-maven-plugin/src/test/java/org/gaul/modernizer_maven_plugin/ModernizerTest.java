@@ -973,6 +973,7 @@ public final class ModernizerTest {
     private static class Java17Violations {
         private static void method() throws Exception {
             Hex.encodeHexString(new byte[]{});
+            Hex.decodeHex("");
             DatatypeConverter.printHexBinary(new byte[]{});
             DatatypeConverter.parseHexBinary("");
         }
