@@ -1611,7 +1611,7 @@
   <violation>
     <name>java/lang/Runtime.exec:(Ljava/lang/String;)Ljava/lang/Process;</name>
     <version>18</version>
-    <comment>Prefer java.lang.Runtime.exec(String[], String[]) or java.lang.ProcessBuilder</comment>
+    <comment>Prefer java.lang.Runtime.exec(String[]) or java.lang.ProcessBuilder</comment>
   </violation>
 
   <violation>
@@ -1623,7 +1623,7 @@
   <violation>
     <name>java/lang/Runtime.exec:(Ljava/lang/String;[Ljava/lang/String;Ljava/io/File;)Ljava/lang/Process;</name>
     <version>18</version>
-    <comment>Prefer java.lang.Runtime.exec(String[], String[]) or java.lang.ProcessBuilder</comment>
+    <comment>Prefer java.lang.Runtime.exec(String[], String[], File) or java.lang.ProcessBuilder</comment>
   </violation>
 
   <violation>
