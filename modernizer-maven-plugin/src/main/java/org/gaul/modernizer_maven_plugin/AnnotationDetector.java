@@ -20,12 +20,14 @@ import static org.gaul.modernizer_maven_plugin.Utils.ASM_API;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassReader;
@@ -64,18 +66,19 @@ final class AnnotationDetector {
     private void scan(Path path) throws IOException {
         if (!Files.exists(path)) {
             return;
-        } else if (Files.isDirectory(path)) {
-            try (Stream<Path> stream = Files.list(path)) {
-                Iterable<Path> children = stream::iterator;
-                for (Path child : children) {
-                    scan(child);
-                }
-            }
-        } else if (path.toString().endsWith(".class")) {
-            try (InputStream inputStream = Files.newInputStream(path)) {
-                scan(new ClassReader(inputStream));
-            }
         }
+        Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file,
+                    BasicFileAttributes attrs) throws IOException {
+                if (file.toString().endsWith(".class")) {
+                    try (InputStream is = Files.newInputStream(file)) {
+                        scan(new ClassReader(is));
+                    }
+                }
+                return FileVisitResult.CONTINUE;
+            }
+        });
     }
 
     private void scan(ClassReader classReader) {

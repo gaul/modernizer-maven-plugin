@@ -27,9 +27,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -40,7 +43,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import java.util.stream.Stream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -413,36 +415,41 @@ public final class ModernizerMojo extends AbstractMojo {
         if (!Files.exists(path)) {
             return;
         }
-        if (Files.isDirectory(path)) {
-            try (Stream<Path> stream = Files.list(path)) {
-                Iterable<Path> children = stream::iterator;
-                for (Path child : children) {
-                    recurseFiles(child, outputEntries);
+        Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file,
+                    BasicFileAttributes attrs) throws IOException {
+                if (file.toString().endsWith(".class")) {
+                    visitClassFile(file, outputEntries);
                 }
+                return FileVisitResult.CONTINUE;
             }
-        } else if (path.toString().endsWith(".class")) {
-            try (InputStream is = Files.newInputStream(path)) {
-                Collection<ViolationOccurrence> occurrences =
-                        modernizer.check(is);
-                Path outputPath = outputDirectory.toPath();
-                Path testOutputPath = testOutputDirectory.toPath();
-                Path sourcePath = sourceDirectory.toPath();
-                Path testSourcePath = testSourceDirectory.toPath();
-                // When one output directory is nested inside the other,
-                // match the more specific (longer) one first.
-                boolean testFirst = testOutputPath.startsWith(outputPath) &&
-                        !outputPath.startsWith(testOutputPath);
-                for (ViolationOccurrence occurrence : occurrences) {
-                    String name = path.toString();
-                    if (testFirst && path.startsWith(testOutputPath)) {
-                        name = mapToSource(path, testOutputPath, testSourcePath);
-                    } else if (path.startsWith(outputPath)) {
-                        name = mapToSource(path, outputPath, sourcePath);
-                    } else if (path.startsWith(testOutputPath)) {
-                        name = mapToSource(path, testOutputPath, testSourcePath);
-                    }
-                    outputEntries.add(new OutputEntry(name, occurrence));
+        });
+    }
+
+    private void visitClassFile(Path path, List<OutputEntry> outputEntries)
+            throws IOException {
+        try (InputStream is = Files.newInputStream(path)) {
+            Collection<ViolationOccurrence> occurrences =
+                    modernizer.check(is);
+            Path outputPath = outputDirectory.toPath();
+            Path testOutputPath = testOutputDirectory.toPath();
+            Path sourcePath = sourceDirectory.toPath();
+            Path testSourcePath = testSourceDirectory.toPath();
+            // When one output directory is nested inside the other,
+            // match the more specific (longer) one first.
+            boolean testFirst = testOutputPath.startsWith(outputPath) &&
+                    !outputPath.startsWith(testOutputPath);
+            for (ViolationOccurrence occurrence : occurrences) {
+                String name = path.toString();
+                if (testFirst && path.startsWith(testOutputPath)) {
+                    name = mapToSource(path, testOutputPath, testSourcePath);
+                } else if (path.startsWith(outputPath)) {
+                    name = mapToSource(path, outputPath, sourcePath);
+                } else if (path.startsWith(testOutputPath)) {
+                    name = mapToSource(path, testOutputPath, testSourcePath);
                 }
+                outputEntries.add(new OutputEntry(name, occurrence));
             }
         }
     }
