@@ -677,6 +677,7 @@ public final class ModernizerTest {
             Objects.equal(null, null);
             Objects.hashCode(null, null);
             Lists.newArrayList();
+            Lists.newArrayList(new Object[0]);
             Lists.newArrayListWithCapacity(0);
             Lists.newCopyOnWriteArrayList();
             Lists.newLinkedList();

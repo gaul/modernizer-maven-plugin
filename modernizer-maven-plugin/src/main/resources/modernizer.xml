@@ -103,6 +103,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Lists.newArrayList:([Ljava/lang/Object;)Ljava/util/ArrayList;</name>
+    <version>7</version>
+    <comment>Prefer new java.util.ArrayList&lt;&gt;(java.util.Arrays.asList(...))</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Lists.newCopyOnWriteArrayList:()Ljava/util/concurrent/CopyOnWriteArrayList;</name>
     <version>7</version>
     <comment>Prefer java.util.concurrent.CopyOnWriteArrayList&lt;&gt;()</comment>
