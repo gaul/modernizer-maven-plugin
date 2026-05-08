@@ -417,6 +417,7 @@ public final class ModernizerTest {
         Modernizer modernizer = createModernizer("24");
         List<Class<?>> fixtures = List.of(
                 AllViolations.class,
+                Java6Violations.class,
                 Java7Violations.class,
                 Java8Violations.class,
                 Java9Violations.class,
@@ -621,9 +622,6 @@ public final class ModernizerTest {
             new Integer(0);
             new Long(0L);
             new Short((short) 0);
-            "".getBytes("UTF-8");
-            new String((byte[]) null, 0, 0, "");
-            new String((byte[]) null, "");
             new StringBuffer();
             new StringBuffer(0);
             new StringBuffer("");
@@ -632,7 +630,6 @@ public final class ModernizerTest {
             new Hashtable<Object, Object>(0);
             new Hashtable<Object, Object>();
             new Hashtable<Object, Object>((Map<Object, Object>) null);
-            new Stack<Object>();
             new Vector<Object>();
             new Vector<Object>(1);
             new Vector<Object>(0, 0);
@@ -640,6 +637,17 @@ public final class ModernizerTest {
             object = Collections.EMPTY_LIST;
             object = Collections.EMPTY_MAP;
             object = Collections.EMPTY_SET;
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java6Violations {
+        @SuppressWarnings("JdkObsolete")
+        private static void method() throws Exception {
+            "".getBytes("UTF-8");
+            new String((byte[]) null, 0, 0, "");
+            new String((byte[]) null, "");
+            new Stack<Object>();
         }
     }
 
