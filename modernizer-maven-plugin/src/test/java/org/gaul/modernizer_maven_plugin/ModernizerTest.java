@@ -633,17 +633,9 @@ public final class ModernizerTest {
             new Vector<Object>(1);
             new Vector<Object>(0, 0);
             new Vector<Object>((Collection<Object>) null);
-            Preconditions.checkElementIndex(0, 0);
-            Preconditions.checkPositionIndexes(0, 0, 0);
             object = Collections.EMPTY_LIST;
             object = Collections.EMPTY_MAP;
             object = Collections.EMPTY_SET;
-            Streams.stream(Optional.empty());
-            Streams.stream(OptionalInt.empty());
-            Streams.stream(OptionalLong.empty());
-            Streams.stream(OptionalDouble.empty());
-            Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
-            MoreObjects.firstNonNull("", "");
         }
     }
 
@@ -824,6 +816,14 @@ public final class ModernizerTest {
             Collections.singletonList(null);
             Collections.singleton(null);
             Collections.singletonMap(null, null);
+            Preconditions.checkElementIndex(0, 0);
+            Preconditions.checkPositionIndexes(0, 0, 0);
+            Streams.stream(Optional.empty());
+            Streams.stream(OptionalInt.empty());
+            Streams.stream(OptionalLong.empty());
+            Streams.stream(OptionalDouble.empty());
+            Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
+            MoreObjects.firstNonNull("", "");
         }
     }
 
