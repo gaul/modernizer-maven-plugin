@@ -821,6 +821,8 @@ public final class ModernizerTest {
             Base64.encodeBase64String((byte[]) null);
             Base64.encodeBase64((byte[]) null);
             DatatypeConverter.parseBase64Binary("");
+            Collections.sort(new ArrayList<String>());
+            Collections.sort(new ArrayList<String>(), Comparator.naturalOrder());
         }
     }
 

@@ -691,6 +691,18 @@
   </violation>
 
   <violation>
+    <name>java/util/Collections.sort:(Ljava/util/List;)V</name>
+    <version>8</version>
+    <comment>Prefer java.util.List.sort(Comparator.naturalOrder())</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/Collections.sort:(Ljava/util/List;Ljava/util/Comparator;)V</name>
+    <version>8</version>
+    <comment>Prefer java.util.List.sort(Comparator)</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Enumeration</name>
     <version>2</version>
     <comment>Prefer java.util.Iterator</comment>
