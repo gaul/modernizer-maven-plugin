@@ -591,25 +591,25 @@
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":()V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder</comment>
+    <comment>Prefer java.lang.StringBuilder()</comment>
   </violation>
 
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":(I)V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder</comment>
+    <comment>Prefer java.lang.StringBuilder(int)</comment>
   </violation>
 
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder</comment>
+    <comment>Prefer java.lang.StringBuilder(String)</comment>
   </violation>
 
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":(Ljava/lang/CharSequence;)V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder</comment>
+    <comment>Prefer java.lang.StringBuilder(CharSequence)</comment>
   </violation>
 
   <violation>
@@ -693,25 +693,25 @@
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(IF)V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(int, float)</comment>
   </violation>
 
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(I)V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(int)</comment>
   </violation>
 
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":()V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;()</comment>
   </violation>
 
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(Ljava/util/Map;)V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(Map)</comment>
   </violation>
 
   <violation>
@@ -723,25 +723,25 @@
   <violation>
     <name>java/util/Vector."&lt;init&gt;":()V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;()</comment>
   </violation>
 
   <violation>
     <name>java/util/Vector."&lt;init&gt;":(I)V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(int)</comment>
   </violation>
 
   <violation>
     <name>java/util/Vector."&lt;init&gt;":(II)V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(int)</comment>
   </violation>
 
   <violation>
     <name>java/util/Vector."&lt;init&gt;":(Ljava/util/Collection;)V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(Collection)</comment>
   </violation>
 
   <violation>
