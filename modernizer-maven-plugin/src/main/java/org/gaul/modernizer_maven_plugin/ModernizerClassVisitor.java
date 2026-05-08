@@ -92,9 +92,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
         if (classIgnored) {
             return null;
         }
-        MethodVisitor base = super.visitMethod(access, methodName,
-                methodDescriptor, methodSignature, exceptions);
-        return new MethodVisitor(ASM_API, base) {
+        return new MethodVisitor(ASM_API) {
             private int lineNumber = -1;
             private boolean methodSuppressed = false;
             private final List<ViolationOccurrence> pending = new ArrayList<>();
@@ -125,7 +123,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     Violation violation = violations.get(name);
                     queueCheck(name, violation, name, lineNumber);
                 }
-                return super.visitAnnotation(desc, visible);
+                return null;
             }
 
             private void visitFieldOrMethod(String owner, String name,
