@@ -838,6 +838,7 @@ public final class ModernizerTest {
             IOUtils.copyLarge((Reader) null, (Writer) null);
             IOUtils.toByteArray((InputStream) null);
             IOUtils.toString((InputStream) null, (Charset) null);
+            Object.class.newInstance();
             new Boolean((String) null);
             new Byte((String) null);
             new Double((String) null);

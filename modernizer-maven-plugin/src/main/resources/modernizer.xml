@@ -1724,6 +1724,12 @@
   </violation>
 
   <violation>
+    <name>java/lang/Class.newInstance:()Ljava/lang/Object;</name>
+    <version>9</version>
+    <comment>Prefer java.lang.Class.getDeclaredConstructor().newInstance()</comment>
+  </violation>
+
+  <violation>
     <name>java/lang/Runtime.exec:(Ljava/lang/String;)Ljava/lang/Process;</name>
     <version>18</version>
     <comment>Prefer java.lang.Runtime.exec(String[]) or java.lang.ProcessBuilder</comment>
