@@ -1221,19 +1221,19 @@
   <violation>
     <name>com/google/common/collect/Iterables.concat:(Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Streams.concat(a, b, c)</comment>
+    <comment>Prefer Stream.of(a, b, c).flatMap(s -&gt; s)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Iterables.concat:(Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Streams.concat(a, b, c, d)</comment>
+    <comment>Prefer Stream.of(a, b, c, d).flatMap(s -&gt; s)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Iterables.concat:(Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Streams.concat(...)</comment>
+    <comment>Prefer Stream.of(...).flatMap(s -&gt; s)</comment>
   </violation>
 
   <violation>
