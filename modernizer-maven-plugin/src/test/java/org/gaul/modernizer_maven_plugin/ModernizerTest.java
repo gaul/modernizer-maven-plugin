@@ -416,7 +416,7 @@ public final class ModernizerTest {
     public void testAllViolations() throws Exception {
         Modernizer modernizer = createModernizer("24");
         List<Class<?>> fixtures = List.of(
-                AllViolations.class,
+                Java2Violations.class,
                 Java4Violations.class,
                 Java5Violations.class,
                 Java6Violations.class,
@@ -605,12 +605,8 @@ public final class ModernizerTest {
     }
 
     @SuppressModernizer
-    private static class AllViolations {
-        @SuppressWarnings(value = {
-            "BoxedPrimitiveConstructor",
-            "CheckReturnValue",
-            "deprecation",
-            "JdkObsolete"})
+    private static class Java2Violations {
+        @SuppressWarnings("JdkObsolete")
         private static void method() throws Exception {
             new Hashtable<Object, Object>(0, 0.0F);
             new Hashtable<Object, Object>(0);
