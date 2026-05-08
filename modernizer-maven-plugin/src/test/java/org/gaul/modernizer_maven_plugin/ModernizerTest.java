@@ -414,6 +414,8 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences = modernizer.check(
                 new ClassReader(AllViolations.class.getName()));
         occurrences.addAll(modernizer.check(
+                new ClassReader(Java7Violations.class.getName())));
+        occurrences.addAll(modernizer.check(
                 new ClassReader(Java8Violations.class.getName())));
         occurrences.addAll(modernizer.check(
             new ClassReader(Java9Violations.class.getName())));
@@ -604,6 +606,51 @@ public final class ModernizerTest {
             "JdkObsolete"})
         private static void method() throws Exception {
             Object object;
+            new InputStreamReader((InputStream) null, "");
+            new OutputStreamWriter((OutputStream) null, "");
+            new Boolean(true);
+            new Byte((byte) 0);
+            new Character((char) 0);
+            new Double(0.0);
+            new Float(0.0);
+            new Float(0.0F);
+            new Integer(0);
+            new Long(0L);
+            new Short((short) 0);
+            "".getBytes("UTF-8");
+            new String((byte[]) null, 0, 0, "");
+            new String((byte[]) null, "");
+            new StringBuffer();
+            new StringBuffer(0);
+            new StringBuffer("");
+            new StringBuffer((CharSequence) "");
+            new Hashtable<Object, Object>(0, 0.0F);
+            new Hashtable<Object, Object>(0);
+            new Hashtable<Object, Object>();
+            new Hashtable<Object, Object>((Map<Object, Object>) null);
+            new Stack<Object>();
+            new Vector<Object>();
+            new Vector<Object>(1);
+            new Vector<Object>(0, 0);
+            new Vector<Object>((Collection<Object>) null);
+            Preconditions.checkElementIndex(0, 0);
+            Preconditions.checkPositionIndexes(0, 0, 0);
+            object = Collections.EMPTY_LIST;
+            object = Collections.EMPTY_MAP;
+            object = Collections.EMPTY_SET;
+            Streams.stream(Optional.empty());
+            Streams.stream(OptionalInt.empty());
+            Streams.stream(OptionalLong.empty());
+            Streams.stream(OptionalDouble.empty());
+            Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
+            MoreObjects.firstNonNull("", "");
+        }
+    }
+
+    private static class Java7Violations {
+        @SuppressWarnings({"CheckReturnValue", "JdkObsolete"})
+        private static void method() throws Exception {
+            Object object;
             object = Charsets.ISO_8859_1;
             object = Charsets.US_ASCII;
             object = Charsets.UTF_8;
@@ -652,34 +699,7 @@ public final class ModernizerTest {
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);
             Atomics.newReferenceArray((Object[]) null);
-            new InputStreamReader((InputStream) null, "");
-            new OutputStreamWriter((OutputStream) null, "");
-            new Boolean(true);
-            new Byte((byte) 0);
-            new Character((char) 0);
-            new Double(0.0);
-            new Float(0.0);
-            new Float(0.0F);
-            new Integer(0);
-            new Long(0L);
-            new Short((short) 0);
-            "".getBytes("UTF-8");
-            new String((byte[]) null, 0, 0, "");
-            new String((byte[]) null, "");
-            new StringBuffer();
-            new StringBuffer(0);
-            new StringBuffer("");
-            new StringBuffer((CharSequence) "");
             ((HttpURLConnection) null).setFixedLengthStreamingMode(0);
-            new Hashtable<Object, Object>(0, 0.0F);
-            new Hashtable<Object, Object>(0);
-            new Hashtable<Object, Object>();
-            new Hashtable<Object, Object>((Map<Object, Object>) null);
-            new Stack<Object>();
-            new Vector<Object>();
-            new Vector<Object>(1);
-            new Vector<Object>(0, 0);
-            new Vector<Object>((Collection<Object>) null);
             object = org.apache.commons.io.Charsets.ISO_8859_1;
             object = org.apache.commons.io.Charsets.US_ASCII;
             object = org.apache.commons.io.Charsets.UTF_8;
@@ -691,17 +711,6 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
             Preconditions.checkNotNull(new Object());
-            Preconditions.checkElementIndex(0, 0);
-            Preconditions.checkPositionIndexes(0, 0, 0);
-            object = Collections.EMPTY_LIST;
-            object = Collections.EMPTY_MAP;
-            object = Collections.EMPTY_SET;
-            Streams.stream(Optional.empty());
-            Streams.stream(OptionalInt.empty());
-            Streams.stream(OptionalLong.empty());
-            Streams.stream(OptionalDouble.empty());
-            Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
-            MoreObjects.firstNonNull("", "");
         }
     }
 
