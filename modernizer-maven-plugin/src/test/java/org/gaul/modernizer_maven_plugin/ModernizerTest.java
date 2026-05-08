@@ -65,6 +65,7 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.bind.DatatypeConverter;
@@ -844,6 +845,9 @@ public final class ModernizerTest {
             IOUtils.toByteArray((InputStream) null);
             IOUtils.toString((InputStream) null, (Charset) null);
             Object.class.newInstance();
+            Matcher m = Pattern.compile("").matcher("");
+            m.appendReplacement(new StringBuffer(), "");
+            m.appendTail(new StringBuffer());
             new Boolean((String) null);
             new Byte((String) null);
             new Double((String) null);

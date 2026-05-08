@@ -631,6 +631,18 @@
   </violation>
 
   <violation>
+    <name>java/util/regex/Matcher.appendReplacement:(Ljava/lang/StringBuffer;Ljava/lang/String;)Ljava/util/regex/Matcher;</name>
+    <version>9</version>
+    <comment>Prefer java.util.regex.Matcher.appendReplacement(StringBuilder, String)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/regex/Matcher.appendTail:(Ljava/lang/StringBuffer;)Ljava/lang/StringBuffer;</name>
+    <version>9</version>
+    <comment>Prefer java.util.regex.Matcher.appendTail(StringBuilder)</comment>
+  </violation>
+
+  <violation>
     <name>java/net/HttpURLConnection.setFixedLengthStreamingMode:(I)V</name>
     <version>7</version>
     <comment>Prefer java.net.HttpURLConnection.setFixedLengthStreamingMode(long)</comment>
