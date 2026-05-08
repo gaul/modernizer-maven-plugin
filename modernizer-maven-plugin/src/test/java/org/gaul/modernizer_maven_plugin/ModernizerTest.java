@@ -911,6 +911,14 @@ public final class ModernizerTest {
             StringUtils.repeat("", 0);
             Files.toString((File) null, (Charset) null);
             Files.write("", (File) null, (Charset) null);
+            FileUtils.readFileToString((File) null);
+            FileUtils.readFileToString((File) null, (Charset) null);
+            FileUtils.readFileToString((File) null, (String) null);
+            FileUtils.writeStringToFile((File) null, "");
+            FileUtils.writeStringToFile((File) null, "", (Charset) null);
+            FileUtils.writeStringToFile((File) null, "", (String) null);
+            FileUtils.writeStringToFile((File) null, "", (Charset) null, true);
+            FileUtils.writeStringToFile((File) null, "", (String) null, true);
             new FileReader((File) null, (Charset) null);
             new FileReader((String) null, (Charset) null);
             new FileWriter((File) null, (Charset) null);

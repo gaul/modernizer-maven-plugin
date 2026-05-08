@@ -817,6 +817,54 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/FileUtils.readFileToString:(Ljava/io/File;)Ljava/lang/String;</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.readString(Path, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.readFileToString:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/lang/String;</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.readString(Path, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.readFileToString:(Ljava/io/File;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.readString(Path, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeStringToFile:(Ljava/io/File;Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeStringToFile:(Ljava/io/File;Ljava/lang/String;Ljava/nio/charset/Charset;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeStringToFile:(Ljava/io/File;Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeStringToFile:(Ljava/io/File;Ljava/lang/String;Ljava/nio/charset/Charset;Z)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeStringToFile:(Ljava/io/File;Ljava/lang/String;Ljava/lang/String;Z)V</name>
+    <version>11</version>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/io/IOUtils.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)I</name>
     <version>9</version>
     <comment>Prefer java.io.InputStream.transferTo(OutputStream)</comment>
