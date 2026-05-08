@@ -50,6 +50,7 @@ import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Formatter;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -411,45 +412,33 @@ public final class ModernizerTest {
     @Test
     public void testAllViolations() throws Exception {
         Modernizer modernizer = createModernizer("24");
-        Collection<ViolationOccurrence> occurrences = modernizer.check(
-                new ClassReader(AllViolations.class.getName()));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(Java7Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(Java8Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-            new ClassReader(Java9Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(Java10Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(Java11Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(Java12Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-            new ClassReader(Java15Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-            new ClassReader(Java17Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-            new ClassReader(Java18Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-            new ClassReader(Java19Violations.class.getName())));
-        occurrences.addAll(modernizer.check(
-            new ClassReader(Java24Violations.class.getName())));
-        // must visit inner classes manually
-        occurrences.addAll(modernizer.check(
-                new ClassReader(EnumerationTestClass.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(VoidFunction.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(VoidPredicate.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(VoidSupplier.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(AutowiredMethod.class.getName())));
-        occurrences.addAll(modernizer.check(
-                new ClassReader(ObjectProvider.class.getName())));
+        List<Class<?>> fixtures = List.of(
+                AllViolations.class,
+                Java7Violations.class,
+                Java8Violations.class,
+                Java9Violations.class,
+                Java10Violations.class,
+                Java11Violations.class,
+                Java12Violations.class,
+                Java15Violations.class,
+                Java17Violations.class,
+                Java18Violations.class,
+                Java19Violations.class,
+                Java24Violations.class,
+                // inner classes must be visited manually
+                EnumerationTestClass.class,
+                VoidFunction.class,
+                VoidPredicate.class,
+                VoidSupplier.class,
+                AutowiredMethod.class,
+                ObjectProvider.class);
+        Collection<ViolationOccurrence> occurrences = new ArrayList<>();
+        for (Class<?> fixture : fixtures) {
+            occurrences.addAll(modernizer.check(
+                    new ClassReader(fixture.getName())));
+        }
 
-        Collection<Violation> actualViolations = Lists.newArrayList();
+        Collection<Violation> actualViolations = new ArrayList<>();
         for (ViolationOccurrence occurrence : occurrences) {
             actualViolations.add(occurrence.getViolation());
         }
