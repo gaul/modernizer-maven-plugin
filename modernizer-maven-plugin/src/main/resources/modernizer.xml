@@ -1197,7 +1197,7 @@
   <violation>
     <name>com/google/common/collect/Iterables.frequency:(Ljava/lang/Iterable;Ljava/lang/Object;)I</name>
     <version>8</version>
-    <comment>Prefer Stream.filter(element::equals).count() or Stream.filter(Predicate.isEqual(element)).count()</comment>
+    <comment>Prefer Stream.filter(Predicate.isEqual(element)).count()</comment>
   </violation>
 
   <violation>
