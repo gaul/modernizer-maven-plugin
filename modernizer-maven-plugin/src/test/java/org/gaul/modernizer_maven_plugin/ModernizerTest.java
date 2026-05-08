@@ -124,8 +124,8 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
 import org.joda.time.format.DateTimeFormat;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.objectweb.asm.ClassReader;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -141,7 +141,7 @@ public final class ModernizerTest {
     private static final Set<String> NO_IGNORED_CLASS_NAMES =
         Collections.<String>emptySet();
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         try (InputStream is = Modernizer.class.getResourceAsStream(
                 "/modernizer.xml")) {

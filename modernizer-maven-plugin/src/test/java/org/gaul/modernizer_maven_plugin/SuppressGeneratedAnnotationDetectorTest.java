@@ -25,7 +25,7 @@ import java.util.TreeSet;
 import org.gaul.modernizer_maven_plugin.SuppressGeneratedTestClasses.GeneratedClass;
 import org.gaul.modernizer_maven_plugin.SuppressGeneratedTestClasses.NotGeneratedClass;
 import org.gaul.modernizer_maven_plugin.SuppressGeneratedTestClasses.PlainClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public final class SuppressGeneratedAnnotationDetectorTest {
 

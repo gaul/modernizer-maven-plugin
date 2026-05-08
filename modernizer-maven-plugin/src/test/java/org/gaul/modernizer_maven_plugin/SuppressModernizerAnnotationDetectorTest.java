@@ -26,7 +26,7 @@ import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.Suppressed
 import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnLocal;
 import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnLocalAnonymousInnerClass;
 import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnMembers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public final class SuppressModernizerAnnotationDetectorTest {
 
