@@ -27,37 +27,37 @@
   <violation>
     <name>com/google/common/base/Charsets.ISO_8859_1:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.ISO_8859_1</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Charsets.US_ASCII:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.US_ASCII</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Charsets.UTF_8:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_8</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Charsets.UTF_16BE:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_16BE</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Charsets.UTF_16LE:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_16LE</comment>
   </violation>
 
   <violation>
     <name>com/google/common/base/Charsets.UTF_16:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_16</comment>
   </violation>
 
   <violation>
@@ -759,37 +759,37 @@
   <violation>
     <name>org/apache/commons/io/Charsets.ISO_8859_1:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.ISO_8859_1</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/Charsets.US_ASCII:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.US_ASCII</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/Charsets.UTF_8:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_8</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/Charsets.UTF_16BE:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_16BE</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/Charsets.UTF_16LE:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_16LE</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/io/Charsets.UTF_16:Ljava/nio/charset/Charset;</name>
     <version>7</version>
-    <comment>Prefer java.nio.charset.StandardCharsets</comment>
+    <comment>Prefer java.nio.charset.StandardCharsets.UTF_16</comment>
   </violation>
 
   <violation>
