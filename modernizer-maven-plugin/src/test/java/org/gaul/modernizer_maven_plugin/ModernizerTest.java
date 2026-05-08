@@ -736,6 +736,7 @@ public final class ModernizerTest {
             Preconditions.checkNotNull(new Object());
             Validate.notNull(new Object());
             Validate.notNull(new Object(), "", new Object[0]);
+            ObjectUtils.toString(new Object(), "");
         }
     }
 

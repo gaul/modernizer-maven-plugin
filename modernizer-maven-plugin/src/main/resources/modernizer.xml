@@ -1466,6 +1466,12 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang3/ObjectUtils.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>7</version>
+    <comment>Prefer java.util.Objects.toString(Object, String)</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/lang3/Validate.notNull:(Ljava/lang/Object;)Ljava/lang/Object;</name>
     <version>7</version>
     <comment>Prefer java.util.Objects.requireNonNull(Object)</comment>
