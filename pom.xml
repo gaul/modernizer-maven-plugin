@@ -276,7 +276,7 @@
         </executions>
         <configuration>
           <javaVersion>${maven.compiler.source}</javaVersion>
-          <includeTestClasses>false</includeTestClasses>
+          <includeTestClasses>true</includeTestClasses>
         </configuration>
       </plugin>
       <plugin>

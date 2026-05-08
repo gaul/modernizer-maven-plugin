@@ -49,6 +49,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
@@ -109,6 +110,7 @@ import org.apache.commons.io.input.NullReader;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.io.output.NullWriter;
 import org.apache.commons.lang3.StringUtils;
+import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.gaul.modernizer_maven_plugin
     .SuppressModernizerTestClasses.SuppressedOnClass;
 import org.gaul.modernizer_maven_plugin
@@ -395,7 +397,7 @@ public final class ModernizerTest {
     @Test
     public void testAnnotationViolation() throws Exception {
         String name = TestAnnotation.class.getName().replace('.', '/');
-        Map<String, Violation> testViolations = Maps.newHashMap();
+        Map<String, Violation> testViolations = new HashMap<>();
         testViolations.put(name,
                 new Violation(name, 5, ""));
         Modernizer modernizer = new Modernizer("1.5", testViolations,
@@ -492,6 +494,7 @@ public final class ModernizerTest {
                 NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS);
     }
 
+    @SuppressModernizer
     private static class CharsetsTestClass {
         private final Object object = Charsets.UTF_8;
     }
@@ -504,16 +507,19 @@ public final class ModernizerTest {
         private final Object object = new ArrayList<Object>();
     }
 
+    @SuppressModernizer
     private static class StackTestClass {
         @SuppressWarnings("JdkObsolete")
         private final Object object = new Stack<Object>();
     }
 
+    @SuppressModernizer
     private static class VectorTestClass {
         @SuppressWarnings("JdkObsolete")
         private final Object object = new Vector<Object>();
     }
 
+    @SuppressModernizer
     private static class StringGetBytesString {
         private static void method() throws Exception {
             "".getBytes("UTF-8");
@@ -524,6 +530,7 @@ public final class ModernizerTest {
         private final Object object = "".getBytes(StandardCharsets.UTF_8);
     }
 
+    @SuppressModernizer
     private static class EnumerationTestClass implements Enumeration<Object> {
         @Override
         public boolean hasMoreElements() {
@@ -536,6 +543,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class VoidFunction implements Function<Void, Void> {
         @Override
         public Void apply(Void input) {
@@ -543,6 +551,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class VoidPredicate implements Predicate<Void> {
         @Override
         public boolean apply(Void input) {
@@ -555,6 +564,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class VoidSupplier implements Supplier<Void> {
         @Override
         public Void get() {
@@ -566,6 +576,7 @@ public final class ModernizerTest {
         // Nothing
     }
 
+    @SuppressModernizer
     private static class AnnotatedMethod {
         @TestAnnotation
         public void annotatedMethod() {
@@ -573,6 +584,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class AutowiredMethod {
         @Autowired
         AutowiredMethod() {
@@ -580,6 +592,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class ObjectProvider implements Provider<Object> {
         @Override
         public Object get() {
@@ -587,6 +600,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class AllViolations {
         @SuppressWarnings(value = {
             "BoxedPrimitiveConstructor",
@@ -628,6 +642,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java7Violations {
         @SuppressWarnings({"CheckReturnValue", "JdkObsolete"})
         private static void method() throws Exception {
@@ -695,6 +710,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java8Violations {
         @SuppressWarnings({"CheckReturnValue", "deprecation", "JdkObsolete"})
         private static void method() throws Exception {
@@ -782,6 +798,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java9Violations {
         @SuppressWarnings("deprecation")
         private static void method() throws Exception {
@@ -816,6 +833,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java10Violations {
         private static void method() throws Exception {
             CharStreams.copy((Readable) null, (Appendable) null);
@@ -856,6 +874,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java11Violations {
         @SuppressWarnings("deprecation")
         private static void method() throws Exception {
@@ -883,6 +902,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java12Violations {
         private static void method() throws Exception {
             ByteStreams.skipFully(null, 0L);
@@ -890,12 +910,14 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java15Violations {
         private static void method() throws Exception {
             String.format("%s", "");
         }
     }
 
+    @SuppressModernizer
     private static class Java17Violations {
         private static void method() throws Exception {
             Hex.encodeHexString(new byte[]{});
@@ -903,6 +925,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java18Violations {
         private static void method() throws Exception {
             Runtime.getRuntime().exec("");
@@ -911,6 +934,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java19Violations {
         private static void method() throws Exception {
             new Locale("");
@@ -924,6 +948,7 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
     private static class Java24Violations {
         private static void method() throws Exception {
             new StringReader("");
