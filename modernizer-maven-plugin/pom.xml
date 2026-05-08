@@ -127,6 +127,27 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>au.com.acegi</groupId>
+        <artifactId>xml-format-maven-plugin</artifactId>
+        <version>4.1.0</version>
+        <configuration>
+          <indentSize>2</indentSize>
+          <keepBlankLines>true</keepBlankLines>
+          <omitEncoding>true</omitEncoding>
+          <includes>
+            <include>src/main/resources/modernizer.xml</include>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>xml-check</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>

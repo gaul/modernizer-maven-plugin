@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <modernizer>
 
-<!--
-This file contains the standard set of violations for Modernizer.  The
-violation names use the same format that javap emits.
--->
+  <!--
+  This file contains the standard set of violations for Modernizer.  The
+  violation names use the same format that javap emits.
+  -->
+
   <violation>
     <name>com/google/common/base/Function</name>
     <version>8</version>
@@ -1202,13 +1203,13 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/collect/Iterables.cycle:(Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Stream.generate(() -> iterable).flatMap(Streams::stream)</comment>
+    <comment>Prefer Stream.generate(() -&gt; iterable).flatMap(Streams::stream)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Iterables.cycle:([Ljava/lang/Object;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Stream.generate(() -> array).flatMap(Arrays::stream)</comment>
+    <comment>Prefer Stream.generate(() -&gt; array).flatMap(Arrays::stream)</comment>
   </violation>
 
   <violation>
@@ -1238,7 +1239,7 @@ violation names use the same format that javap emits.
   <violation>
     <name>com/google/common/collect/Iterables.concat:([Ljava/lang/Iterable;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Stream.flatMap(s -> s)</comment>
+    <comment>Prefer Stream.flatMap(s -&gt; s)</comment>
   </violation>
 
   <violation>
