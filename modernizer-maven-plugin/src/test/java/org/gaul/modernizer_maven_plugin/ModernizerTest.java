@@ -417,6 +417,7 @@ public final class ModernizerTest {
         Modernizer modernizer = createModernizer("24");
         List<Class<?>> fixtures = List.of(
                 AllViolations.class,
+                Java5Violations.class,
                 Java6Violations.class,
                 Java7Violations.class,
                 Java8Violations.class,
@@ -614,6 +615,22 @@ public final class ModernizerTest {
             new InputStreamReader((InputStream) null, "");
             new OutputStreamWriter((OutputStream) null, "");
             new Boolean(true);
+            new Hashtable<Object, Object>(0, 0.0F);
+            new Hashtable<Object, Object>(0);
+            new Hashtable<Object, Object>();
+            new Hashtable<Object, Object>((Map<Object, Object>) null);
+            new Vector<Object>();
+            new Vector<Object>(1);
+            new Vector<Object>(0, 0);
+            new Vector<Object>((Collection<Object>) null);
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java5Violations {
+        @SuppressWarnings({"BoxedPrimitiveConstructor", "JdkObsolete"})
+        private static void method() throws Exception {
+            Object object;
             new Byte((byte) 0);
             new Character((char) 0);
             new Double(0.0);
@@ -626,14 +643,6 @@ public final class ModernizerTest {
             new StringBuffer(0);
             new StringBuffer("");
             new StringBuffer((CharSequence) "");
-            new Hashtable<Object, Object>(0, 0.0F);
-            new Hashtable<Object, Object>(0);
-            new Hashtable<Object, Object>();
-            new Hashtable<Object, Object>((Map<Object, Object>) null);
-            new Vector<Object>();
-            new Vector<Object>(1);
-            new Vector<Object>(0, 0);
-            new Vector<Object>((Collection<Object>) null);
             object = Collections.EMPTY_LIST;
             object = Collections.EMPTY_MAP;
             object = Collections.EMPTY_SET;
