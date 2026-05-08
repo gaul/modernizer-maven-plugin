@@ -1245,7 +1245,7 @@
   <violation>
     <name>com/google/common/collect/Iterables.filter:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Stream.filter(Predicate&lt;? super T&gt;)</comment>
+    <comment>Prefer Stream.filter(Predicate)</comment>
   </violation>
 
   <violation>
@@ -1257,13 +1257,13 @@
   <violation>
     <name>com/google/common/collect/Iterables.any:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Z</name>
     <version>8</version>
-    <comment>Prefer Stream.anyMatch(Predicate&lt;? super T&gt;)</comment>
+    <comment>Prefer Stream.anyMatch(Predicate)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/collect/Iterables.all:(Ljava/lang/Iterable;Lcom/google/common/base/Predicate;)Z</name>
     <version>8</version>
-    <comment>Prefer Stream.allMatch(Predicate&lt;? super T&gt;)</comment>
+    <comment>Prefer Stream.allMatch(Predicate)</comment>
   </violation>
 
   <violation>
@@ -1287,7 +1287,7 @@
   <violation>
     <name>com/google/common/collect/Iterables.transform:(Ljava/lang/Iterable;Lcom/google/common/base/Function;)Ljava/lang/Iterable;</name>
     <version>8</version>
-    <comment>Prefer Stream.map(Function&lt;? super T, ? extends R&gt;)</comment>
+    <comment>Prefer Stream.map(Function)</comment>
   </violation>
 
   <violation>
