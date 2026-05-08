@@ -81,7 +81,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
         }
         for (String itr : interfaces) {
             Violation violation = violations.get(itr);
-            checkToken(itr, violation, name, /*lineNumber=*/ -1);
+            checkToken(itr, violation, itr, /*lineNumber=*/ -1);
         }
     }
 
