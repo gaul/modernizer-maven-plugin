@@ -612,9 +612,6 @@ public final class ModernizerTest {
             object = Charsets.UTF_16;
             Objects.equal(null, null);
             Objects.hashCode(null, null);
-            com.google.common.base.Optional.absent();
-            com.google.common.base.Optional.of((Object) null);
-            com.google.common.base.Optional.fromNullable(null);
             Lists.newArrayList();
             Lists.newArrayListWithCapacity(0);
             Lists.newCopyOnWriteArrayList();
@@ -630,16 +627,12 @@ public final class ModernizerTest {
             Maps.newTreeMap();
             Maps.newTreeMap((Comparator<Object>) null);
             Maps.newTreeMap((SortedMap<Object, Object>) null);
-            Maps.unmodifiableNavigableMap(new TreeMap<Object, Object>());
-            Maps.synchronizedNavigableMap(new TreeMap<Object, Object>());
             Sets.newCopyOnWriteArraySet();
             Sets.newHashSet();
             Sets.newLinkedHashSet();
             Sets.newSetFromMap((Map<Object, Boolean>) null);
             Sets.newTreeSet();
             Sets.newTreeSet((Comparator<Object>) null);
-            Sets.unmodifiableNavigableSet(new TreeSet<Object>());
-            Sets.synchronizedNavigableSet(new TreeSet<Object>());
             Queues.newArrayDeque();
             Queues.newArrayBlockingQueue(0);
             Queues.newConcurrentLinkedQueue();
@@ -650,29 +643,11 @@ public final class ModernizerTest {
             Queues.newPriorityBlockingQueue();
             Queues.newPriorityQueue();
             Queues.newSynchronousQueue();
-            BaseEncoding.base64();
             Files.toByteArray((File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
             Longs.compare(0L, 0L);
             Shorts.compare((short) 0, (short) 0);
-            UnsignedInts.compare(0, 0);
-            UnsignedInts.divide(0, 0);
-            UnsignedInts.parseUnsignedInt("0");
-            UnsignedInts.parseUnsignedInt("0", 10);
-            UnsignedInts.remainder(0, 0);
-            UnsignedLongs.compare(0, 0);
-            UnsignedLongs.divide(0, 0);
-            UnsignedLongs.parseUnsignedLong("0");
-            UnsignedLongs.parseUnsignedLong("0", 10);
-            UnsignedLongs.remainder(0, 0);
-            Ints.checkedCast(0);
-            IntMath.checkedAdd(0, 0);
-            IntMath.checkedSubtract(0, 0);
-            IntMath.checkedMultiply(0, 0);
-            LongMath.checkedAdd(0, 0);
-            LongMath.checkedSubtract(0, 0);
-            LongMath.checkedMultiply(0, 0);
             Atomics.newReference();
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);
@@ -716,9 +691,49 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
             Preconditions.checkNotNull(new Object());
-            Preconditions.checkNotNull(new Object(), new Object());
             Preconditions.checkElementIndex(0, 0);
             Preconditions.checkPositionIndexes(0, 0, 0);
+            object = Collections.EMPTY_LIST;
+            object = Collections.EMPTY_MAP;
+            object = Collections.EMPTY_SET;
+            Streams.stream(Optional.empty());
+            Streams.stream(OptionalInt.empty());
+            Streams.stream(OptionalLong.empty());
+            Streams.stream(OptionalDouble.empty());
+            Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
+            MoreObjects.firstNonNull("", "");
+        }
+    }
+
+    private static class Java8Violations {
+        @SuppressWarnings({"CheckReturnValue", "deprecation", "JdkObsolete"})
+        private static void method() throws Exception {
+            com.google.common.base.Optional.absent();
+            com.google.common.base.Optional.of((Object) null);
+            com.google.common.base.Optional.fromNullable(null);
+            Maps.unmodifiableNavigableMap(new TreeMap<Object, Object>());
+            Maps.synchronizedNavigableMap(new TreeMap<Object, Object>());
+            Sets.unmodifiableNavigableSet(new TreeSet<Object>());
+            Sets.synchronizedNavigableSet(new TreeSet<Object>());
+            BaseEncoding.base64();
+            UnsignedInts.compare(0, 0);
+            UnsignedInts.divide(0, 0);
+            UnsignedInts.parseUnsignedInt("0");
+            UnsignedInts.parseUnsignedInt("0", 10);
+            UnsignedInts.remainder(0, 0);
+            UnsignedLongs.compare(0, 0);
+            UnsignedLongs.divide(0, 0);
+            UnsignedLongs.parseUnsignedLong("0");
+            UnsignedLongs.parseUnsignedLong("0", 10);
+            UnsignedLongs.remainder(0, 0);
+            Ints.checkedCast(0);
+            IntMath.checkedAdd(0, 0);
+            IntMath.checkedSubtract(0, 0);
+            IntMath.checkedMultiply(0, 0);
+            LongMath.checkedAdd(0, 0);
+            LongMath.checkedSubtract(0, 0);
+            LongMath.checkedMultiply(0, 0);
+            Preconditions.checkNotNull(new Object(), new Object());
             DateTime.now();
             DateTime.parse("");
             new DateTime(50L);
@@ -740,21 +755,6 @@ public final class ModernizerTest {
             Period.parse("");
             new Period(DateTime.now(), DateTime.now());
             DateTimeFormat.forPattern("");
-            object = Collections.EMPTY_LIST;
-            object = Collections.EMPTY_MAP;
-            object = Collections.EMPTY_SET;
-            Streams.stream(Optional.empty());
-            Streams.stream(OptionalInt.empty());
-            Streams.stream(OptionalLong.empty());
-            Streams.stream(OptionalDouble.empty());
-            Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
-            MoreObjects.firstNonNull("", "");
-        }
-    }
-
-    // TODO: move more methods from AllViolations to here
-    private static class Java8Violations {
-        private static void method() throws Exception {
             Iterables.getOnlyElement(null);
             Iterables.getOnlyElement(null, null);
             Iterables.frequency(null, null);
