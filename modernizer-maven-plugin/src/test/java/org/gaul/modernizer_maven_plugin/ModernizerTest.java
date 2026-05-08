@@ -711,6 +711,8 @@ public final class ModernizerTest {
             Queues.newPriorityQueue();
             Queues.newSynchronousQueue();
             Files.toByteArray((File) null);
+            Files.newReader((File) null, (Charset) null);
+            Files.newWriter((File) null, (Charset) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
             Longs.compare(0L, 0L);

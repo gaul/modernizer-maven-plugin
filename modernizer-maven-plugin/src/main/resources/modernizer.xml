@@ -355,6 +355,18 @@
   </violation>
 
   <violation>
+    <name>com/google/common/io/Files.newReader:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/io/BufferedReader;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newBufferedReader(Path, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/Files.newWriter:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/io/BufferedWriter;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newBufferedWriter(Path, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/primitives/Chars.compare:(CC)I</name>
     <version>7</version>
     <comment>Prefer java.lang.Character.compare(char, char)</comment>
