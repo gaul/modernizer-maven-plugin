@@ -907,6 +907,12 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/IOUtils.toString:(Ljava/io/InputStream;Ljava/nio/charset/Charset;)Ljava/lang/String;</name>
+    <version>9</version>
+    <comment>Prefer new String(InputStream.readAllBytes(), Charset)</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/io/output/NullOutputStream.NULL_OUTPUT_STREAM:Lorg/apache/commons/io/output/NullOutputStream;</name>
     <version>11</version>
     <comment>Prefer java.io.OutputStream.nullOutputStream()</comment>
