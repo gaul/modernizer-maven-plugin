@@ -901,6 +901,18 @@
   </violation>
 
   <violation>
+    <name>javax/xml/bind/DatatypeConverter.parseBase64Binary:(Ljava/lang/String;)[B</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.Decoder.decode(String)</comment>
+  </violation>
+
+  <violation>
+    <name>javax/xml/bind/DatatypeConverter.printHexBinary:([B)Ljava/lang/String;</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().formatHex(byte[])</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Preconditions.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object;</name>
     <version>7</version>
     <comment>Prefer java.util.Objects.requireNonNull(Object)</comment>

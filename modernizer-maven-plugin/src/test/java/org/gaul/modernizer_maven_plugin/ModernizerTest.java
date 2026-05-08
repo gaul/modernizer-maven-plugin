@@ -65,6 +65,8 @@ import java.util.TreeSet;
 import java.util.Vector;
 import java.util.regex.Pattern;
 
+import javax.xml.bind.DatatypeConverter;
+
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -786,6 +788,7 @@ public final class ModernizerTest {
             Base64.decodeBase64((byte[]) null);
             Base64.encodeBase64String((byte[]) null);
             Base64.encodeBase64((byte[]) null);
+            DatatypeConverter.parseBase64Binary("");
         }
     }
 
@@ -898,6 +901,7 @@ public final class ModernizerTest {
     private static class Java17Violations {
         private static void method() throws Exception {
             Hex.encodeHexString(new byte[]{});
+            DatatypeConverter.printHexBinary(new byte[]{});
         }
     }
 
