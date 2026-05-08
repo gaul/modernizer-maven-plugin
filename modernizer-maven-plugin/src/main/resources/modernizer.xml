@@ -1332,6 +1332,7 @@
     <comment>Prefer Stream.limit(long)</comment>
   </violation>
 
+  <!-- TODO: bump version to 11 and recommend stream.findAny().isEmpty() -->
   <violation>
     <name>com/google/common/collect/Iterables.isEmpty:(Ljava/lang/Iterable;)Z</name>
     <version>8</version>
