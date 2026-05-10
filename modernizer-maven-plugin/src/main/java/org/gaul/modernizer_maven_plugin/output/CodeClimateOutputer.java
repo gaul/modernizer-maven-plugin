@@ -104,26 +104,6 @@ public final class CodeClimateOutputer implements Outputer {
             this.location = location;
         }
 
-        public String getDescription() {
-            return description;
-        }
-
-        public String getCheckName() {
-            return checkName;
-        }
-
-        public String getFingerprint() {
-            return fingerprint;
-        }
-
-        public Severity getSeverity() {
-            return severity;
-        }
-
-        public Location getLocation() {
-            return location;
-        }
-
         @Override
         public boolean equals(Object o) {
             if (this == o) {
@@ -170,14 +150,6 @@ public final class CodeClimateOutputer implements Outputer {
             this.lines = lines;
         }
 
-        public String getPath() {
-            return path;
-        }
-
-        public Lines getLines() {
-            return lines;
-        }
-
         @Override
         public boolean equals(Object o) {
             if (this == o) {
@@ -209,10 +181,6 @@ public final class CodeClimateOutputer implements Outputer {
 
             private Lines(int begin) {
                 this.begin = begin;
-            }
-
-            public int getBegin() {
-                return begin;
             }
 
             @Override
