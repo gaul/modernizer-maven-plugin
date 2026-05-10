@@ -715,6 +715,7 @@ public final class ModernizerTest {
             Files.newReader((File) null, (Charset) null);
             Files.newWriter((File) null, (Charset) null);
             Files.copy((File) null, (File) null);
+            Files.createParentDirs((File) null);
             Files.move((File) null, (File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);

@@ -385,6 +385,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/io/Files.createParentDirs:(Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.createDirectories(Path)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/primitives/Chars.compare:(CC)I</name>
     <version>7</version>
     <comment>Prefer java.lang.Character.compare(char, char)</comment>
