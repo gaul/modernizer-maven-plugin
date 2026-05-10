@@ -223,7 +223,7 @@
             <compilerArg>-Xlint</compilerArg>
             <compilerArg>-XDcompilePolicy=simple</compilerArg>
             <compilerArg>--should-stop=ifError=FLOW</compilerArg>
-            <compilerArg>-Xplugin:ErrorProne -XepExcludedPaths:.*/src/test/java/.*</compilerArg>
+            <compilerArg>-Xplugin:ErrorProne -XepExcludedPaths:.*/(src/test/java|generated-sources)/.* -Xep:UnusedMethod:OFF</compilerArg>
           </compilerArgs>
           <annotationProcessorPaths>
             <path>
