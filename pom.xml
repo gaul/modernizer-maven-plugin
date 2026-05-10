@@ -30,8 +30,8 @@
   </scm>
 
   <properties>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
+    <maven.compiler.release>8</maven.compiler.release>
+    <maven.compiler.testRelease>11</maven.compiler.testRelease>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <njord.version>0.7.5</njord.version>
 
@@ -220,7 +220,7 @@
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
           <compilerArgs>
-            <compilerArg>-Xlint:all,-options</compilerArg>
+            <compilerArg>-Xlint</compilerArg>
             <compilerArg>-XDcompilePolicy=simple</compilerArg>
             <compilerArg>--should-stop=ifError=FLOW</compilerArg>
             <compilerArg>-Xplugin:ErrorProne -XepExcludedPaths:.*/src/test/java/.*</compilerArg>
@@ -315,7 +315,7 @@
           </execution>
         </executions>
         <configuration>
-          <javaVersion>${maven.compiler.source}</javaVersion>
+          <javaVersion>${maven.compiler.release}</javaVersion>
           <includeTestClasses>true</includeTestClasses>
         </configuration>
       </plugin>
@@ -384,7 +384,7 @@
                     <version>3.6.3</version>
                   </requireMavenVersion>
                   <requireJavaVersion>
-                    <version>1.${maven.compiler.source}</version>
+                    <version>17</version>
                   </requireJavaVersion>
                 </rules>
               </configuration>
