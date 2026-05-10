@@ -28,13 +28,17 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.SchemaFactory;
 
 import org.objectweb.asm.ClassReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public final class Modernizer {
     private final long javaVersion;
@@ -87,7 +91,26 @@ public final class Modernizer {
                 new HashMap<>();
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         dbFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        dbFactory.setNamespaceAware(true);
+        SchemaFactory sFactory = SchemaFactory.newInstance(
+                XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        try (InputStream xsd = Modernizer.class.getResourceAsStream(
+                "/modernizer.xsd")) {
+            dbFactory.setSchema(sFactory.newSchema(new StreamSource(xsd)));
+        }
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        dBuilder.setErrorHandler(new ErrorHandler() {
+            @Override
+            public void warning(SAXParseException e) { }
+            @Override
+            public void error(SAXParseException e) throws SAXException {
+                throw e;
+            }
+            @Override
+            public void fatalError(SAXParseException e) throws SAXException {
+                throw e;
+            }
+        });
         Document doc = dBuilder.parse(is);
         doc.getDocumentElement().normalize();
 
@@ -98,19 +121,17 @@ public final class Modernizer {
                 continue;
             }
             Element element = (Element) nNode;
-            String name = requireChildText(element, "name");
-            String version = requireChildText(element, "version");
-            String comment = requireChildText(element, "comment");
+            String name = element.getElementsByTagName("name").item(0)
+                    .getTextContent();
+            String version = element.getElementsByTagName("version").item(0)
+                    .getTextContent();
+            String comment = element.getElementsByTagName("comment").item(0)
+                    .getTextContent();
             int versionNum;
-            try {
-                if (version.startsWith("1.")) {
-                    versionNum = Integer.parseInt(version.substring(2));
-                } else {
-                    versionNum = Integer.parseInt(version);
-                }
-            } catch (NumberFormatException nfe) {
-                throw new SAXException("<version> for violation '" + name +
-                        "' is not numeric: " + version, nfe);
+            if (version.startsWith("1.")) {
+                versionNum = Integer.parseInt(version.substring(2));
+            } else {
+                versionNum = Integer.parseInt(version);
             }
             Violation violation = new Violation(name, versionNum, comment);
             if (map.putIfAbsent(violation.getName(), violation) != null) {
@@ -123,13 +144,4 @@ public final class Modernizer {
         return map;
     }
 
-    private static String requireChildText(Element parent, String childName)
-            throws SAXException {
-        NodeList nodes = parent.getElementsByTagName(childName);
-        if (nodes.getLength() == 0) {
-            throw new SAXException("<violation> is missing required <" +
-                    childName + "> element");
-        }
-        return nodes.item(0).getTextContent();
-    }
 }
