@@ -221,7 +221,8 @@
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
           <compilerArgs>
-            <compilerArg>-Xlint</compilerArg>
+            <compilerArg>-Xlint:all,-options,-classfile</compilerArg>
+            <compilerArg>-Werror</compilerArg>
             <compilerArg>-XDcompilePolicy=simple</compilerArg>
             <compilerArg>--should-stop=ifError=FLOW</compilerArg>
             <compilerArg>-Xplugin:ErrorProne -XepExcludedPaths:.*/(src/test/java|generated-sources)/.* -Xep:UnusedMethod:OFF</compilerArg>
