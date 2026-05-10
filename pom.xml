@@ -201,7 +201,7 @@
         </executions>
         <configuration>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
-          <violationSeverity>warning</violationSeverity>
+          <violationSeverity>error</violationSeverity>
         </configuration>
       </plugin>
       <plugin>
