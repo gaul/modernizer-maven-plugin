@@ -1333,6 +1333,12 @@
   </violation>
 
   <violation>
+    <name>java/util/stream/Collectors.toUnmodifiableList:()Ljava/util/stream/Collector;</name>
+    <version>16</version>
+    <comment>Prefer java.util.stream.Stream.toList()</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Iterables.getOnlyElement:(Ljava/lang/Iterable;)Ljava/lang/Object;</name>
     <version>8</version>
     <comment>Prefer Stream.collect(MoreCollectors.onlyElement())</comment>

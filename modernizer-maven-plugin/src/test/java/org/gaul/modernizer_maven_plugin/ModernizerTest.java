@@ -446,6 +446,7 @@ public final class ModernizerTest {
                 Java11Violations.class,
                 Java12Violations.class,
                 Java15Violations.class,
+                Java16Violations.class,
                 Java17Violations.class,
                 Java18Violations.class,
                 Java19Violations.class,
@@ -996,6 +997,13 @@ public final class ModernizerTest {
     private static class Java15Violations {
         private static void method() throws Exception {
             String.format("%s", "");
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java16Violations {
+        private static void method() throws Exception {
+            Collectors.toUnmodifiableList();
         }
     }
 
