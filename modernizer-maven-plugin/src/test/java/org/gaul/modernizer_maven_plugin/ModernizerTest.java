@@ -59,6 +59,7 @@ import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
@@ -645,7 +646,7 @@ public final class ModernizerTest {
 
     @SuppressModernizer
     private static class Java2Violations {
-        @SuppressWarnings("JdkObsolete")
+        @SuppressWarnings({"deprecation", "JdkObsolete"})
         private static void method() throws Exception {
             new Hashtable<Object, Object>(0, 0.0F);
             new Hashtable<Object, Object>(0);
@@ -655,6 +656,7 @@ public final class ModernizerTest {
             new Vector<Object>(1);
             new Vector<Object>(0, 0);
             new Vector<Object>((Collection<Object>) null);
+            new Properties().save((OutputStream) null, "");
         }
     }
 

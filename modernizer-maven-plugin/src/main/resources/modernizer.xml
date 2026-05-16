@@ -1978,4 +1978,10 @@
     <comment>Prefer java.util.zip.Inflater.getBytesWritten()</comment>
   </violation>
 
+  <violation>
+    <name>java/util/Properties.save:(Ljava/io/OutputStream;Ljava/lang/String;)V</name>
+    <version>2</version>
+    <comment>Prefer java.util.Properties.store(OutputStream, String)</comment>
+  </violation>
+
 </modernizer>
