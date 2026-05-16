@@ -49,4 +49,17 @@ public final class SuppressModernizerAnnotationDetectorTest {
             SuppressedOnMembers.InnerClass.class.getName().replace('.', '/')
         );
     }
+
+    @Test
+    public void itDetectsAnnotationFromAnyPackage() throws IOException {
+        Set<String> actual = SuppressModernizerAnnotationDetector.detect(
+            SuppressModernizerSimpleNameTestClasses.SuppressedOnClass.class,
+            SuppressModernizerSimpleNameTestClasses.SuppressedOnMembers.class
+        );
+
+        assertThat(new TreeSet<>(actual)).containsExactly(
+            SuppressModernizerSimpleNameTestClasses.SuppressedOnClass.class
+                .getName().replace('.', '/')
+        );
+    }
 }

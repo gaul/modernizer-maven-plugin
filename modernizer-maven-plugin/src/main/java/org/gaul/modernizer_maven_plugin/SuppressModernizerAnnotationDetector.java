@@ -20,9 +20,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 
-import org.gaul.modernizer_maven_annotations.SuppressModernizer;
-import org.objectweb.asm.Type;
-
 public final class SuppressModernizerAnnotationDetector {
     private SuppressModernizerAnnotationDetector() { }
 
@@ -37,8 +34,13 @@ public final class SuppressModernizerAnnotationDetector {
 
     private static AnnotationDetector newDetector() {
         return new AnnotationDetector(
-                desc -> Type.getType(desc).getClassName()
-                        .equals(SuppressModernizer.class.getName()),
+                SuppressModernizerAnnotationDetector::isSuppressModernizerAnnotation,
                 /*scanMethodBodies=*/ true);
+    }
+
+    static boolean isSuppressModernizerAnnotation(String desc) {
+        String simpleName = desc.substring(Math.max(desc.lastIndexOf('/'),
+                desc.lastIndexOf('$')) + 1);
+        return simpleName.equals("SuppressModernizer;");
     }
 }

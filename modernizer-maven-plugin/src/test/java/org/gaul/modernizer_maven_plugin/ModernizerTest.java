@@ -525,6 +525,36 @@ public final class ModernizerTest {
         assertThat(occurrences).isEmpty();
     }
 
+    @Test
+    public void testSuppressModernizerFromAnyPackage() throws Exception {
+        Set<String> ignoreClassNames = ImmutableSet.of(
+            SuppressModernizerSimpleNameTestClasses.SuppressedOnClass.class
+                .getName().replace('.', '/')
+        );
+        Modernizer modernizer = new Modernizer(
+            "1.10",
+            violations,
+            NO_EXCLUSIONS,
+            NO_EXCLUSION_PATTERNS,
+            NO_IGNORED_PACKAGES,
+            ignoreClassNames,
+            NO_EXCLUSION_PATTERNS
+        );
+
+        Set<Class<?>> classes = ImmutableSet.of(
+            SuppressModernizerSimpleNameTestClasses.SuppressedOnClass.class,
+            SuppressModernizerSimpleNameTestClasses.SuppressedOnMembers.class
+        );
+
+        Collection<ViolationOccurrence> occurrences = new ArrayList<>();
+        for (Class<?> clazz : classes) {
+            occurrences.addAll(
+                modernizer.check(new ClassReader(clazz.getName())));
+        }
+
+        assertThat(occurrences).isEmpty();
+    }
+
     /** Helper to create Modernizer object with default parameters. */
     private Modernizer createModernizer(String javaVersion) {
         return new Modernizer(javaVersion, violations, NO_EXCLUSIONS,

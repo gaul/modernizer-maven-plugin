@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Label;
@@ -114,8 +113,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
             @Override
             public AnnotationVisitor visitAnnotation(String desc,
                     boolean visible) {
-                if (Type.getType(desc).getClassName()
-                        .equals(SuppressModernizer.class.getName())) {
+                if (SuppressModernizerAnnotationDetector
+                        .isSuppressModernizerAnnotation(desc)) {
                     methodSuppressed = true;
                 } else {
                     String name = Type.getType(desc).getInternalName();
