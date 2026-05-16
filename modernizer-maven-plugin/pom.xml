@@ -135,7 +135,6 @@
       <plugin>
         <groupId>au.com.acegi</groupId>
         <artifactId>xml-format-maven-plugin</artifactId>
-        <version>4.1.0</version>
         <configuration>
           <indentSize>2</indentSize>
           <keepBlankLines>true</keepBlankLines>
