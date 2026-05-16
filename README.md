@@ -17,6 +17,13 @@ including third-party libraries like
 [Guava](https://github.com/google/guava),
 and [Joda-Time](https://www.joda.org/joda-time/).
 
+Requirements
+------------
+
+* Maven 3.6.3 or newer
+* JDK 8 or newer to run the plugin
+* JDK 17 or newer to build the plugin from source
+
 Configuration
 -------------
 
@@ -29,18 +36,18 @@ then invoke `mvn modernizer:modernizer`:
   <artifactId>modernizer-maven-plugin</artifactId>
   <version>3.3.0</version>
   <configuration>
-    <javaVersion>8</javaVersion>
+    <javaVersion>${maven.compiler.release}</javaVersion>
   </configuration>
 </plugin>
 ```
 
 The `<configuration>` stanza can contain several elements:
 
-* `<javaVersion>` enables violations based on target Java version, e.g., 8.  For example, Modernizer will detect uses of `Vector` as violations when targeting Java 1.2 but not when targeting Java 1.1.  Required parameter.
+* `<javaVersion>` target Java version, e.g., `8` or `1.8` — both forms are accepted for any release.  Modernizer reports a violation only when its `<version>` is at or below this value, so targeting Java 1.2 flags `Vector` but targeting Java 1.1 does not.  Required parameter; binding it to `${maven.compiler.release}` (or `${maven.compiler.target}`) keeps it in sync with the rest of the build.
 * `<failOnViolations>` fail phase if Modernizer detects any violations.  Defaults to true.
 * `<includeTestClasses>` run Modernizer on test classes.  Defaults to true.
-* `<violationsFile>` user-specified violation file.  Also disables standard violation checks. Can point to classpath using absolute paths, e.g. `classpath:/your/file.xml`.
-* `<violationsFiles>` user-specified violations file.  The latter files override violations from the former ones, including `violationsFile` and the default violations. Can point to classpath using absolute paths, e.g. `classpath:/your/file.xml`.
+* `<violationsFile>` user-specified violation file.  Also disables standard violation checks.  See [Custom violations](#custom-violations) below.
+* `<violationsFiles>` user-specified violation files.  Later files override violations from earlier ones, including `<violationsFile>` and the default violations.
 * `<exclusionsFile>` disables user-specified violations.  This is a text file with one exclusion per line in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.  Empty lines and lines starting with `#` are ignored.
 * `<exclusions>` violations to disable. Each exclusion should be in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
 * `<exclusionPatterns>` violation patterns to disable, specified using `<exclusionPattern>` child elements. Each exclusion should be a regular expression that matches the javap format: `java/lang/.*` of a violation.
@@ -48,8 +55,10 @@ The `<configuration>` stanza can contain several elements:
 * `<ignoreClassNamePatterns>` full qualified class names (incl. package) to ignore, specified using `<ignoreClassNamePattern>` child elements. Each exclusion should be a regular expression that matches a package and/or class; the package will be / not . separated (ASM's format).
 * `<ignoreGeneratedClasses>` classes annotated with an annotation whose retention policy is <code>runtime</code> or <code>class</code> and whose simple name contain "Generated" will be ignored. (Note: both [javax.annotation.Generated](https://docs.oracle.com/javase/8/docs/api/javax/annotation/Generated.html) and [javax.annotation.processing.Generated](https://docs.oracle.com/en/java/javase/11/docs/api/java.compiler/javax/annotation/processing/Generated.html) have [retention policy](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/annotation/RetentionPolicy.html) SOURCE (aka discarded by compiler).)
 
-To run Modernizer during the verify phase of your build, add the following to
-the modernizer `<plugin>` stanza in your pom.xml:
+Invoking `mvn modernizer:modernizer` runs the goal once.  For automatic
+checks during normal builds, bind it to a lifecycle phase via an
+`<execution>`.  For example, to run Modernizer during the verify phase, add
+the following to the modernizer `<plugin>` stanza in your pom.xml:
 
 ```xml
 <executions>
@@ -72,6 +81,18 @@ documents all of these.  The most commonly used flags:
 
 ### Output Formats
 
+For each violation Modernizer emits one line containing the source location
+and the recommended replacement.  Using the default `CONSOLE` format, output
+looks like:
+
+```
+[ERROR] src/main/java/org/example/Foo.java:42: Prefer java.util.ArrayList<>()
+[ERROR] src/main/java/org/example/Foo.java:57: Prefer java.nio.charset.StandardCharsets.UTF_8
+```
+
+When `<failOnViolations>` is `true` (the default), the build fails after the
+listing with the total violation count.
+
 The plugin can output Modernizer violations in one of many formats which can be configured with the `<configuration>`
 stanza using `<outputFormat>`.
 
@@ -85,11 +106,41 @@ GitLab uses this format for its code quality as shown [here](https://docs.gitlab
   * `<codeClimateSeverity>` Severity of Modernizer violations for CodeClimate: `INFO`, `MINOR`, `MAJOR`, `CRITICAL` or `BLOCKER`.
 Default is `MINOR`.
 
+### Custom violations
+
+Modernizer reads its rules from an XML file in the same format as the
+[bundled `modernizer.xml`](https://github.com/gaul/modernizer-maven-plugin/blob/master/modernizer-maven-plugin/src/main/resources/modernizer.xml).
+Point `<violationsFile>` at your own file to replace the defaults, or list
+additional files in `<violationsFiles>` to layer rules on top (later files
+override earlier ones).  Either path can be prefixed with `classpath:/` to
+load from the classpath.
+
+Each `<violation>` element accepts:
+
+* `<name>` API in javap format: `java/util/Vector` for a type, or
+  `java/lang/String.getBytes:(Ljava/lang/String;)[B` for a specific method
+* `<version>` lowest target Java version at which the API becomes legacy
+* `<comment>` recommended replacement, shown in violation output
+* `<until>` (optional) target Java version, exclusive, at which the rule
+  stops applying — useful when a newer replacement supersedes an older one
+
+```xml
+<?xml version="1.0"?>
+<modernizer>
+  <violation>
+    <name>com/example/legacy/OldThing</name>
+    <version>11</version>
+    <comment>Use com.example.modern.Thing instead</comment>
+  </violation>
+</modernizer>
+```
+
 Ignoring elements
 -----------------
 
-Code can suppress violations within a class or method via an annotation.  First
-add the following dependency to your `pom.xml`:
+Code can suppress violations on a class (or other type declaration),
+constructor, method, or type use via the `@SuppressModernizer` annotation.
+First add the following dependency to your `pom.xml`:
 
 ```xml
 <dependencies>
@@ -101,16 +152,26 @@ add the following dependency to your `pom.xml`:
 </dependencies>
 ```
 
-Then add `@SuppressModernizer` to the element to ignore:
+Then annotate the element to ignore:
 
 ```java
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 
+@SuppressModernizer
 public class Example {
+    @SuppressModernizer
+    public Example() { ... }
+
     @SuppressModernizer
     public static void method() { ... }
 }
 ```
+
+Modernizer matches the annotation by simple name, so any `@SuppressModernizer`
+in any package will suppress violations — the `modernizer-maven-annotations`
+dependency above is a convenient canonical copy but is not required.  Fields
+and packages cannot be suppressed because the annotation's `@Target` does not
+include them; use `<exclusions>` or `<ignoreClassNamePatterns>` instead.
 
 References
 ----------
