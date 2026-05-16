@@ -14,3 +14,8 @@ updates:
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 10
+    ignore:
+      # Pin to the Maven version declared in <prerequisites>; these are the
+      # support floor, not bleeding-edge libraries.
+      - dependency-name: "org.apache.maven:maven-plugin-api"
+      - dependency-name: "org.apache.maven:maven-core"
