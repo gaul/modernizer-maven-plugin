@@ -1996,4 +1996,10 @@
     <comment>Prefer java.net.URLEncoder.encode(String, String) with an explicit charset</comment>
   </violation>
 
+  <violation>
+    <name>java/util/logging/Logger.global:Ljava/util/logging/Logger;</name>
+    <version>7</version>
+    <comment>Prefer java.util.logging.Logger.getGlobal()</comment>
+  </violation>
+
 </modernizer>

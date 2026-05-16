@@ -69,6 +69,7 @@ import java.util.TreeSet;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -708,9 +709,10 @@ public final class ModernizerTest {
 
     @SuppressModernizer
     private static class Java7Violations {
-        @SuppressWarnings({"CheckReturnValue", "JdkObsolete"})
+        @SuppressWarnings({"CheckReturnValue", "deprecation", "JdkObsolete"})
         private static void method() throws Exception {
             Object object;
+            object = Logger.global;
             object = Charsets.ISO_8859_1;
             object = Charsets.US_ASCII;
             object = Charsets.UTF_8;
