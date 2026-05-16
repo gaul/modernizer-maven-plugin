@@ -1335,7 +1335,7 @@
   <violation>
     <name>java/util/stream/Collectors.toUnmodifiableList:()Ljava/util/stream/Collector;</name>
     <version>16</version>
-    <comment>Prefer java.util.stream.Stream.toList()</comment>
+    <comment>Prefer java.util.stream.Stream.toList(); note that Stream.toList() permits null elements while toUnmodifiableList() rejects them with NullPointerException</comment>
   </violation>
 
   <violation>
@@ -1531,13 +1531,13 @@
   <violation>
     <name>org/apache/commons/lang3/ObjectUtils.firstNonNull:([Ljava/lang/Object;)Ljava/lang/Object;</name>
     <version>9</version>
-    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object)</comment>
+    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object); note that it accepts only two arguments and throws NullPointerException when both are null, while ObjectUtils.firstNonNull returns null</comment>
   </violation>
 
   <violation>
     <name>org/apache/commons/lang3/ObjectUtils.defaultIfNull:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</name>
     <version>9</version>
-    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object)</comment>
+    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object); note that it throws NullPointerException when both arguments are null, while ObjectUtils.defaultIfNull returns null</comment>
   </violation>
 
   <violation>
@@ -1555,7 +1555,7 @@
   <violation>
     <name>org/apache/commons/lang3/Validate.notNull:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;</name>
     <version>7</version>
-    <comment>Prefer java.util.Objects.requireNonNull(Object, String)</comment>
+    <comment>Prefer java.util.Objects.requireNonNull(Object, String); note that requireNonNull uses the message literally while Validate.notNull formats it via String.format with the trailing arguments</comment>
   </violation>
 
   <violation>
