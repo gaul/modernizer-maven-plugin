@@ -15,6 +15,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <configLocation>checkstyle/checkstyle.xml</configLocation>
+          <headerLocation>checkstyle/copyright_header.txt</headerLocation>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.gaul</groupId>
+            <artifactId>modernizer-maven-policy</artifactId>
+            <version>${project.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>codes.rafael.modulemaker</groupId>
