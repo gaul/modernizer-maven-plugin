@@ -34,7 +34,7 @@ then invoke `mvn modernizer:modernizer`:
 <plugin>
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
-  <version>3.3.0</version>
+  <version>3.4.0</version>
   <configuration>
     <javaVersion>${maven.compiler.release}</javaVersion>
   </configuration>
@@ -147,7 +147,7 @@ First add the following dependency to your `pom.xml`:
   <dependency>
     <groupId>org.gaul</groupId>
     <artifactId>modernizer-maven-annotations</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
   </dependency>
 </dependencies>
 ```
