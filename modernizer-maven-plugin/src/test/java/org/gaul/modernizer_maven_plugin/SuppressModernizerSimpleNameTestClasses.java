@@ -27,7 +27,16 @@ import java.nio.charset.Charset;
 
 import com.google.common.base.Charsets;
 
+// The outer carries the canonical @SuppressModernizer so that older
+// modernizer plugin versions running against this project (which only
+// recognize the canonical FQN) suppress every inner class via prefix
+// matching.  The tests that exercise the simple-name behavior only scan
+// the inner classes directly, so the outer's annotation does not affect
+// what those tests observe.
+// TODO: remove this annotation when the build upgrades to modernizer
+// 3.4.0+, which recognizes any @SuppressModernizer by simple name.
 @SuppressWarnings("deprecation")
+@org.gaul.modernizer_maven_annotations.SuppressModernizer
 public class SuppressModernizerSimpleNameTestClasses {
 
     @Retention(CLASS)
