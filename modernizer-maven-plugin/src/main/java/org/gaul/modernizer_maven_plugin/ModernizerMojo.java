@@ -404,11 +404,20 @@ public final class ModernizerMojo extends AbstractMojo {
         }
     }
 
-    private static String mapToSource(Path classFile, Path outputRoot,
+    static String mapToSource(Path classFile, Path outputRoot,
             Path sourceRoot) {
         Path relative = outputRoot.relativize(classFile);
-        String name = sourceRoot.resolve(relative).toString();
-        return name.substring(0, name.length() - ".class".length()) + ".java";
+        Path sourceFile = sourceRoot.resolve(relative);
+        String fileName = sourceFile.getFileName().toString();
+        fileName = fileName.substring(0,
+                fileName.length() - ".class".length());
+        // Anonymous and nested classes (Foo$1.class, Foo$Bar.class) live
+        // in the outer class's source file; strip from the first $.
+        int dollar = fileName.indexOf('$');
+        if (dollar >= 0) {
+            fileName = fileName.substring(0, dollar);
+        }
+        return sourceFile.resolveSibling(fileName + ".java").toString();
     }
 
     private void recurseFiles(Path path, List<OutputEntry> outputEntries)
