@@ -1,5 +1,4 @@
-Modernizer Maven Plugin
-=======================
+# Modernizer Maven Plugin
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.gaul/modernizer-maven-plugin.svg)](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22modernizer-maven-plugin%22)
 
@@ -17,15 +16,13 @@ including third-party libraries like
 [Guava](https://github.com/google/guava),
 and [Joda-Time](https://www.joda.org/joda-time/).
 
-Requirements
-------------
+## Requirements
 
 * Maven 3.6.3 or newer
 * JDK 8 or newer to run the plugin
 * JDK 17 or newer to build the plugin from source
 
-Configuration
--------------
+## Configuration
 
 To run Modernizer, add the following to the `<plugins>` stanza in your pom.xml
 then invoke `mvn modernizer:modernizer`:
@@ -135,8 +132,7 @@ Each `<violation>` element accepts:
 </modernizer>
 ```
 
-Ignoring elements
------------------
+## Ignoring elements
 
 Code can suppress violations on a class (or other type declaration),
 constructor, method, or type use via the `@SuppressModernizer` annotation.
@@ -173,8 +169,7 @@ dependency above is a convenient canonical copy but is not required.  Fields
 and packages cannot be suppressed because the annotation's `@Target` does not
 include them; use `<exclusions>` or `<ignoreClassNamePatterns>` instead.
 
-References
-----------
+## References
 
 * [ASM](https://asm.ow2.org/) provides Java bytecode introspection which enables Modernizer's checks
 * [Checkstyle](https://checkstyle.org/) IllegalInstantiation and Regexp checks can mimic some of Modernizer's functionality
@@ -184,8 +179,7 @@ References
 * [Overstock.com library-detectors](https://github.com/overstock/library-detectors) detects uses of interfaces with @Beta annotations
 * [Policeman's Forbidden API Checker](https://github.com/policeman-tools/forbidden-apis) provides similar functionality to Modernizer
 
-License
--------
+## License
 Copyright (C) 2014-2026 Andrew Gaul
 
 Licensed under the Apache License, Version 2.0
