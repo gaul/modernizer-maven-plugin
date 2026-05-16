@@ -131,45 +131,45 @@
       </build>
     </profile>
     <profile>
-    <id>m2e-only</id>
-    <activation>
-      <property>
-        <!-- this property is set in Eclipse only, thus activating the profile automatically
-        and not annoying people that don't use Eclipse with the fake plugin -->
-        <name>m2e.version</name>
-      </property>
-    </activation>
-    <build>
-      <pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>org.eclipse.m2e</groupId>
-            <artifactId>lifecycle-mapping</artifactId>
-            <version>1.0.0</version>
-            <configuration>
-              <lifecycleMappingMetadata>
-                <pluginExecutions>
-                  <pluginExecution>
-                    <pluginExecutionFilter>
-                      <groupId>org.apache.maven.plugins</groupId>
-                      <artifactId>maven-plugin-plugin</artifactId>
-                      <versionRange>[0,)</versionRange>
-                      <goals>
-                        <goal>descriptor</goal>
-                        <goal>helpmojo</goal>
-                      </goals>
-                    </pluginExecutionFilter>
-                    <action>
-                      <ignore />
-                    </action>
-                  </pluginExecution>
-                </pluginExecutions>
-              </lifecycleMappingMetadata>
-            </configuration>
-          </plugin>
-        </plugins>
-      </pluginManagement>
-    </build>
+      <id>m2e-only</id>
+      <activation>
+        <property>
+          <!-- this property is set in Eclipse only, thus activating the profile automatically
+          and not annoying people that don't use Eclipse with the fake plugin -->
+          <name>m2e.version</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.eclipse.m2e</groupId>
+              <artifactId>lifecycle-mapping</artifactId>
+              <version>1.0.0</version>
+              <configuration>
+                <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-plugin-plugin</artifactId>
+                        <versionRange>[0,)</versionRange>
+                        <goals>
+                          <goal>descriptor</goal>
+                          <goal>helpmojo</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                  </pluginExecutions>
+                </lifecycleMappingMetadata>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
     </profile>
   </profiles>
 
