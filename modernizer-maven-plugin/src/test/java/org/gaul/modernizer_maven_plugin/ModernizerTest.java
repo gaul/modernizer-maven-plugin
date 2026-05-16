@@ -66,6 +66,8 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -1007,8 +1009,12 @@ public final class ModernizerTest {
 
     @SuppressModernizer
     private static class Java16Violations {
+        @SuppressWarnings("deprecation")
         private static void method() throws Exception {
             Collectors.toUnmodifiableList();
+            LogRecord record = new LogRecord(Level.INFO, "");
+            record.getThreadID();
+            record.setThreadID(0);
         }
     }
 

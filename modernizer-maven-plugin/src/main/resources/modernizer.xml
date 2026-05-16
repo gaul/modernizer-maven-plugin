@@ -1942,4 +1942,16 @@
     <comment>Prefer java.math.BigDecimal.setScale(int, RoundingMode)</comment>
   </violation>
 
+  <violation>
+    <name>java/util/logging/LogRecord.getThreadID:()I</name>
+    <version>16</version>
+    <comment>Prefer java.util.logging.LogRecord.getLongThreadID()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/logging/LogRecord.setThreadID:(I)V</name>
+    <version>16</version>
+    <comment>Prefer java.util.logging.LogRecord.setLongThreadID(long)</comment>
+  </violation>
+
 </modernizer>
