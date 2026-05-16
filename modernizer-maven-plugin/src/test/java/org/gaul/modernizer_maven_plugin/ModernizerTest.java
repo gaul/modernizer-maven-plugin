@@ -662,11 +662,13 @@ public final class ModernizerTest {
 
     @SuppressModernizer
     private static class Java4Violations {
-        @SuppressWarnings("BoxedPrimitiveConstructor")
+        @SuppressWarnings({"BoxedPrimitiveConstructor", "deprecation"})
         private static void method() throws Exception {
             new InputStreamReader((InputStream) null, "");
             new OutputStreamWriter((OutputStream) null, "");
             new Boolean(true);
+            URLDecoder.decode("");
+            URLEncoder.encode("");
         }
     }
 

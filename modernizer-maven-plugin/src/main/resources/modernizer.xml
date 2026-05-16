@@ -1984,4 +1984,16 @@
     <comment>Prefer java.util.Properties.store(OutputStream, String)</comment>
   </violation>
 
+  <violation>
+    <name>java/net/URLDecoder.decode:(Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>4</version>
+    <comment>Prefer java.net.URLDecoder.decode(String, String) with an explicit charset</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URLEncoder.encode:(Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>4</version>
+    <comment>Prefer java.net.URLEncoder.encode(String, String) with an explicit charset</comment>
+  </violation>
+
 </modernizer>
