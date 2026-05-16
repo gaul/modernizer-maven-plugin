@@ -1715,7 +1715,7 @@
   <violation>
     <name>java/io/FileReader."&lt;init&gt;":(Ljava/lang/String;Ljava/nio/charset/Charset;)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newBufferedReader(Paths.get(String), Charset)</comment>
+    <comment>Prefer java.nio.file.Files.newBufferedReader(Path.of(String), Charset)</comment>
   </violation>
 
   <violation>
@@ -1771,13 +1771,13 @@
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;Ljava/nio/charset/Charset;)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newBufferedWriter(Paths.get(String), Charset)</comment>
+    <comment>Prefer java.nio.file.Files.newBufferedWriter(Path.of(String), Charset)</comment>
   </violation>
 
   <violation>
     <name>java/io/FileWriter."&lt;init&gt;":(Ljava/lang/String;Ljava/nio/charset/Charset;Z)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newBufferedWriter(Paths.get(String), Charset, OpenOption...)</comment>
+    <comment>Prefer java.nio.file.Files.newBufferedWriter(Path.of(String), Charset, OpenOption...)</comment>
   </violation>
 
   <violation>
