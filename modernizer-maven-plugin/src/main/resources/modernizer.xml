@@ -1954,4 +1954,28 @@
     <comment>Prefer java.util.logging.LogRecord.setLongThreadID(long)</comment>
   </violation>
 
+  <violation>
+    <name>java/util/zip/Deflater.getTotalIn:()I</name>
+    <version>23</version>
+    <comment>Prefer java.util.zip.Deflater.getBytesRead()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/zip/Deflater.getTotalOut:()I</name>
+    <version>23</version>
+    <comment>Prefer java.util.zip.Deflater.getBytesWritten()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/zip/Inflater.getTotalIn:()I</name>
+    <version>23</version>
+    <comment>Prefer java.util.zip.Inflater.getBytesRead()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/zip/Inflater.getTotalOut:()I</name>
+    <version>23</version>
+    <comment>Prefer java.util.zip.Inflater.getBytesWritten()</comment>
+  </violation>
+
 </modernizer>

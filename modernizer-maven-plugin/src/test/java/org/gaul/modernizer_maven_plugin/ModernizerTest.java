@@ -71,6 +71,8 @@ import java.util.logging.LogRecord;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -453,6 +455,7 @@ public final class ModernizerTest {
                 Java17Violations.class,
                 Java18Violations.class,
                 Java19Violations.class,
+                Java23Violations.class,
                 Java24Violations.class,
                 // inner classes must be visited manually
                 EnumerationTestClass.class,
@@ -1048,6 +1051,19 @@ public final class ModernizerTest {
             Maps.newLinkedHashMapWithExpectedSize(0);
             Sets.newHashSetWithExpectedSize(0);
             Sets.newLinkedHashSetWithExpectedSize(0);
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java23Violations {
+        @SuppressWarnings("deprecation")
+        private static void method() throws Exception {
+            Deflater deflater = new Deflater();
+            deflater.getTotalIn();
+            deflater.getTotalOut();
+            Inflater inflater = new Inflater();
+            inflater.getTotalIn();
+            inflater.getTotalOut();
         }
     }
 
