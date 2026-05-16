@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
 import java.net.URI;
@@ -904,6 +905,10 @@ public final class ModernizerTest {
             MoreObjects.firstNonNull("", "");
             ObjectUtils.firstNonNull("", "");
             ObjectUtils.defaultIfNull("", "");
+            BigDecimal bd = BigDecimal.ZERO;
+            bd.divide(bd, 0);
+            bd.divide(bd, 0, 0);
+            bd.setScale(0, 0);
         }
     }
 

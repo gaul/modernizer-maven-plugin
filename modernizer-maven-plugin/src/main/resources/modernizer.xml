@@ -1924,4 +1924,22 @@
     <comment>Prefer java.lang.String.formatted(Object...)</comment>
   </violation>
 
+  <violation>
+    <name>java/math/BigDecimal.divide:(Ljava/math/BigDecimal;I)Ljava/math/BigDecimal;</name>
+    <version>9</version>
+    <comment>Prefer java.math.BigDecimal.divide(BigDecimal, RoundingMode)</comment>
+  </violation>
+
+  <violation>
+    <name>java/math/BigDecimal.divide:(Ljava/math/BigDecimal;II)Ljava/math/BigDecimal;</name>
+    <version>9</version>
+    <comment>Prefer java.math.BigDecimal.divide(BigDecimal, int, RoundingMode)</comment>
+  </violation>
+
+  <violation>
+    <name>java/math/BigDecimal.setScale:(II)Ljava/math/BigDecimal;</name>
+    <version>9</version>
+    <comment>Prefer java.math.BigDecimal.setScale(int, RoundingMode)</comment>
+  </violation>
+
 </modernizer>
