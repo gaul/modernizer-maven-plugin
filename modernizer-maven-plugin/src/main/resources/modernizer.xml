@@ -121,6 +121,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Lists.reverse:(Ljava/util/List;)Ljava/util/List;</name>
+    <version>21</version>
+    <comment>Prefer java.util.List.reversed()</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Maps.newConcurrentMap:()Ljava/util/concurrent/ConcurrentMap;</name>
     <version>7</version>
     <comment>Prefer java.util.concurrent.ConcurrentHashMap&lt;&gt;() or customize the map using com.google.common.collect.MapMaker</comment>

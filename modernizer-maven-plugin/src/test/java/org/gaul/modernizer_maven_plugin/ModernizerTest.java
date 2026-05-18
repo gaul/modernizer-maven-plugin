@@ -459,6 +459,7 @@ public final class ModernizerTest {
                 Java18Violations.class,
                 Java19Violations.class,
                 Java20Violations.class,
+                Java21Violations.class,
                 Java23Violations.class,
                 Java24Violations.class,
                 // inner classes must be visited manually
@@ -1142,6 +1143,13 @@ public final class ModernizerTest {
         private static void method() throws Exception {
             new URL("", "", 0, "", (URLStreamHandler) null);
             new URL((URL) null, "", (URLStreamHandler) null);
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java21Violations {
+        private static void method() throws Exception {
+            Lists.reverse(List.of());
         }
     }
 
