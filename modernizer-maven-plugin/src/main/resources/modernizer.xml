@@ -751,6 +751,12 @@
   </violation>
 
   <violation>
+    <name>java/util/Dictionary."&lt;init&gt;":()V</name>
+    <version>2</version>
+    <comment>Prefer java.util.Map</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Enumeration</name>
     <version>2</version>
     <comment>Prefer java.util.Iterator</comment>

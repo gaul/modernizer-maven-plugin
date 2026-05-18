@@ -50,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Formatter;
 import java.util.HashMap;
@@ -461,6 +462,7 @@ public final class ModernizerTest {
                 Java23Violations.class,
                 Java24Violations.class,
                 // inner classes must be visited manually
+                DictionaryTestClass.class,
                 EnumerationTestClass.class,
                 VoidFunction.class,
                 VoidPredicate.class,
@@ -603,6 +605,45 @@ public final class ModernizerTest {
     private static class UntilTest {
         public static void method() throws Exception {
             new FileInputStream("");
+        }
+    }
+
+    @SuppressModernizer
+    @SuppressWarnings("JdkObsolete")
+    private static class DictionaryTestClass extends Dictionary<Object, Object> {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return true;
+        }
+
+        @Override
+        public Enumeration<Object> keys() {
+            return null;
+        }
+
+        @Override
+        public Enumeration<Object> elements() {
+            return null;
+        }
+
+        @Override
+        public Object get(Object key) {
+            return null;
+        }
+
+        @Override
+        public Object put(Object key, Object value) {
+            return null;
+        }
+
+        @Override
+        public Object remove(Object key) {
+            return null;
         }
     }
 
