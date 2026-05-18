@@ -95,6 +95,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
@@ -876,6 +877,8 @@ public final class ModernizerTest {
             Sets.unmodifiableNavigableSet(new TreeSet<Object>());
             Sets.synchronizedNavigableSet(new TreeSet<Object>());
             Sets.newConcurrentHashSet();
+            Ordering.natural();
+            Ordering.usingToString();
             BaseEncoding.base64();
             UnsignedInts.compare(0, 0);
             UnsignedInts.divide(0, 0);

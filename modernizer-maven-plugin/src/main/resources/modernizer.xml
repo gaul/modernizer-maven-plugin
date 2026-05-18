@@ -1595,6 +1595,18 @@
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Ordering.natural:()Lcom/google/common/collect/Ordering;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.naturalOrder()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Ordering.usingToString:()Lcom/google/common/collect/Ordering;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.comparing(Object::toString)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Strings.repeat:(Ljava/lang/String;I)Ljava/lang/String;</name>
     <version>11</version>
     <comment>Prefer java.lang.String.repeat(int)</comment>
