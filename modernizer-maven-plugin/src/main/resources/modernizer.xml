@@ -2029,4 +2029,40 @@
     <comment>Prefer java.util.logging.Logger.getGlobal()</comment>
   </violation>
 
+  <violation>
+    <name>java/net/URL."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>4</version>
+    <comment>Prefer java.net.URI.toURL()</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URL."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>4</version>
+    <comment>Prefer java.net.URI.toURL()</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URL."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V</name>
+    <version>4</version>
+    <comment>Prefer java.net.URI.toURL()</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URL."&lt;init&gt;":(Ljava/net/URL;Ljava/lang/String;)V</name>
+    <version>4</version>
+    <comment>Prefer java.net.URI.toURL()</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URL."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/net/URLStreamHandler;)V</name>
+    <version>20</version>
+    <comment>Prefer java.net.URL.of(URI, URLStreamHandler)</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/URL."&lt;init&gt;":(Ljava/net/URL;Ljava/lang/String;Ljava/net/URLStreamHandler;)V</name>
+    <version>20</version>
+    <comment>Prefer java.net.URL.of(URI, URLStreamHandler)</comment>
+  </violation>
+
 </modernizer>

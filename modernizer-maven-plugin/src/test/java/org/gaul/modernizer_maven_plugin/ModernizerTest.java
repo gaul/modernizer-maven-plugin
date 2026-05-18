@@ -37,8 +37,10 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
 import java.net.URI;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.net.URLStreamHandler;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -457,6 +459,7 @@ public final class ModernizerTest {
                 Java17Violations.class,
                 Java18Violations.class,
                 Java19Violations.class,
+                Java20Violations.class,
                 Java23Violations.class,
                 Java24Violations.class,
                 // inner classes must be visited manually
@@ -700,6 +703,10 @@ public final class ModernizerTest {
             new Boolean(true);
             URLDecoder.decode("");
             URLEncoder.encode("");
+            new URL("");
+            new URL("", "", "");
+            new URL("", "", 0, "");
+            new URL((URL) null, "");
         }
     }
 
@@ -1087,6 +1094,15 @@ public final class ModernizerTest {
             Maps.newLinkedHashMapWithExpectedSize(0);
             Sets.newHashSetWithExpectedSize(0);
             Sets.newLinkedHashSetWithExpectedSize(0);
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java20Violations {
+        @SuppressWarnings("deprecation")
+        private static void method() throws Exception {
+            new URL("", "", 0, "", (URLStreamHandler) null);
+            new URL((URL) null, "", (URLStreamHandler) null);
         }
     }
 
