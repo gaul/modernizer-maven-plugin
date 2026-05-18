@@ -875,6 +875,7 @@ public final class ModernizerTest {
             Maps.synchronizedNavigableMap(new TreeMap<Object, Object>());
             Sets.unmodifiableNavigableSet(new TreeSet<Object>());
             Sets.synchronizedNavigableSet(new TreeSet<Object>());
+            Sets.newConcurrentHashSet();
             BaseEncoding.base64();
             UnsignedInts.compare(0, 0);
             UnsignedInts.divide(0, 0);

@@ -217,6 +217,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Sets.newConcurrentHashSet:()Ljava/util/Set;</name>
+    <version>8</version>
+    <comment>Prefer java.util.concurrent.ConcurrentHashMap.newKeySet()</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Sets.newCopyOnWriteArraySet:()Ljava/util/concurrent/CopyOnWriteArraySet;</name>
     <version>7</version>
     <comment>Prefer java.util.concurrent.CopyOnWriteArraySet&lt;&gt;()</comment>
