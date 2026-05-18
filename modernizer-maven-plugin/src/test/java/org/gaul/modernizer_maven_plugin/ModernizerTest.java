@@ -124,10 +124,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
-import org.gaul.modernizer_maven_plugin
-    .SuppressModernizerTestClasses.SuppressedOnClass;
-import org.gaul.modernizer_maven_plugin
-    .SuppressModernizerTestClasses.SuppressedOnMembers;
+import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnClass;
+import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnMembers;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;

@@ -348,6 +348,24 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>net.revelc.code</groupId>
+        <artifactId>impsort-maven-plugin</artifactId>
+        <configuration>
+          <groups>java.,javax.,com.,org.</groups>
+          <staticGroups>*</staticGroups>
+          <removeUnused>true</removeUnused>
+        </configuration>
+        <executions>
+          <execution>
+            <id>check-imports</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -463,6 +481,11 @@
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
           <version>4.9.8.3</version>
+        </plugin>
+        <plugin>
+          <groupId>net.revelc.code</groupId>
+          <artifactId>impsort-maven-plugin</artifactId>
+          <version>1.13.0</version>
         </plugin>
         <plugin>
           <groupId>org.gaul</groupId>
