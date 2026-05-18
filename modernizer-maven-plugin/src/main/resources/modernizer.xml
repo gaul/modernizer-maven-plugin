@@ -397,6 +397,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/io/Files.readLines:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/util/List;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.readAllLines(Path, Charset)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/primitives/Chars.compare:(CC)I</name>
     <version>7</version>
     <comment>Prefer java.lang.Character.compare(char, char)</comment>

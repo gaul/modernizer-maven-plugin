@@ -836,6 +836,7 @@ public final class ModernizerTest {
             Files.copy((File) null, (File) null);
             Files.createParentDirs((File) null);
             Files.move((File) null, (File) null);
+            Files.readLines((File) null, (Charset) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
             Longs.compare(0L, 0L);
