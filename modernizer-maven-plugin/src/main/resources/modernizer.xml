@@ -741,19 +741,19 @@
   <violation>
     <name>java/util/Collections.singletonList:(Ljava/lang/Object;)Ljava/util/List;</name>
     <version>9</version>
-    <comment>Prefer java.util.List.of(Object)</comment>
+    <comment>Prefer java.util.List.of(Object) which rejects null elements</comment>
   </violation>
 
   <violation>
     <name>java/util/Collections.singleton:(Ljava/lang/Object;)Ljava/util/Set;</name>
     <version>9</version>
-    <comment>Prefer java.util.Set.of(Object)</comment>
+    <comment>Prefer java.util.Set.of(Object) which rejects null elements</comment>
   </violation>
 
   <violation>
     <name>java/util/Collections.singletonMap:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map;</name>
     <version>9</version>
-    <comment>Prefer java.util.Map.of(Object, Object)</comment>
+    <comment>Prefer java.util.Map.of(Object, Object) which rejects null keys and values</comment>
   </violation>
 
   <violation>
