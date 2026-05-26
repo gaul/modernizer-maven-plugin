@@ -40,6 +40,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
     private final Collection<String> ignorePackages;
     private final Set<String> ignoreClassNames;
     private final Collection<Pattern> ignoreFullClassNamePatterns;
+    private final boolean ignoreGeneratedClasses;
     private final Collection<ViolationOccurrence> occurrences =
             new ArrayList<ViolationOccurrence>();
     private String packageName;
@@ -51,7 +52,8 @@ final class ModernizerClassVisitor extends ClassVisitor {
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
             Set<String> ignoreClassNames,
-            Collection<Pattern> ignoreFullClassNamePatterns) {
+            Collection<Pattern> ignoreFullClassNamePatterns,
+            boolean ignoreGeneratedClasses) {
         super(ASM_API);
         Utils.checkArgument(javaVersion >= 0);
         this.javaVersion = javaVersion;
@@ -62,6 +64,7 @@ final class ModernizerClassVisitor extends ClassVisitor {
         this.ignoreClassNames = Objects.requireNonNull(ignoreClassNames);
         this.ignoreFullClassNamePatterns =
                 Objects.requireNonNull(ignoreFullClassNamePatterns);
+        this.ignoreGeneratedClasses = ignoreGeneratedClasses;
     }
 
     @Override
@@ -115,6 +118,10 @@ final class ModernizerClassVisitor extends ClassVisitor {
                     boolean visible) {
                 if (SuppressModernizerAnnotationDetector
                         .isSuppressModernizerAnnotation(desc)) {
+                    methodSuppressed = true;
+                } else if (ignoreGeneratedClasses &&
+                        SuppressGeneratedAnnotationDetector
+                                .isGeneratedAnnotation(desc)) {
                     methodSuppressed = true;
                 } else {
                     String name = Type.getType(desc).getInternalName();

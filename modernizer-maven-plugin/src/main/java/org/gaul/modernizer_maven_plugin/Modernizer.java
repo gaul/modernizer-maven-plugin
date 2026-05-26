@@ -50,13 +50,15 @@ public final class Modernizer {
     private final Collection<String> ignorePackages;
     private final Set<String> ignoreClassNames;
     private final Collection<Pattern> ignoreFullClassNamePatterns;
+    private final boolean ignoreGeneratedClasses;
 
     public Modernizer(String javaVersion, Map<String, Collection<Violation>> violations,
             Collection<String> exclusions,
             Collection<Pattern> exclusionPatterns,
             Collection<String> ignorePackages,
             Set<String> ignoreClassNames,
-            Collection<Pattern> ignoreClassNamePatterns) {
+            Collection<Pattern> ignoreClassNamePatterns,
+            boolean ignoreGeneratedClasses) {
         long version;
         if (javaVersion.startsWith("1.")) {
             version = Long.parseLong(javaVersion.substring(2));
@@ -72,12 +74,38 @@ public final class Modernizer {
         this.ignoreClassNames =  Utils.createImmutableSet(ignoreClassNames);
         this.ignoreFullClassNamePatterns
             = Utils.createImmutableSet(ignoreClassNamePatterns);
+        this.ignoreGeneratedClasses = ignoreGeneratedClasses;
+    }
+
+    /**
+     * Equivalent to the primary constructor with {@code ignoreGeneratedClasses}
+     * disabled, preserving the behavior of releases before method- and
+     * constructor-level {@code @Generated} suppression existed. Retained for
+     * backwards compatibility with external callers such as the Gradle
+     * Modernizer plugin.
+     *
+     * @deprecated use the constructor that accepts {@code ignoreGeneratedClasses}
+     */
+    @Deprecated
+    // Not @InlineMe: callers should migrate deliberately and choose their own
+    // ignoreGeneratedClasses value rather than inline the false default.
+    @SuppressWarnings("InlineMeSuggester")
+    public Modernizer(String javaVersion, Map<String, Collection<Violation>> violations,
+            Collection<String> exclusions,
+            Collection<Pattern> exclusionPatterns,
+            Collection<String> ignorePackages,
+            Set<String> ignoreClassNames,
+            Collection<Pattern> ignoreClassNamePatterns) {
+        this(javaVersion, violations, exclusions, exclusionPatterns,
+                ignorePackages, ignoreClassNames, ignoreClassNamePatterns,
+                /*ignoreGeneratedClasses=*/ false);
     }
 
     public Collection<ViolationOccurrence> check(ClassReader classReader) {
         ModernizerClassVisitor classVisitor = new ModernizerClassVisitor(
                 javaVersion, violations, exclusions, exclusionPatterns,
-                ignorePackages, ignoreClassNames, ignoreFullClassNamePatterns);
+                ignorePackages, ignoreClassNames, ignoreFullClassNamePatterns,
+                ignoreGeneratedClasses);
         classReader.accept(classVisitor, 0);
         return classVisitor.getOccurrences();
     }

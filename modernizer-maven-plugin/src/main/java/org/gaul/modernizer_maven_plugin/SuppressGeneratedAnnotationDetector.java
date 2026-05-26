@@ -38,7 +38,7 @@ public final class SuppressGeneratedAnnotationDetector {
                 /*scanMethodBodies=*/ false);
     }
 
-    private static boolean isGeneratedAnnotation(String desc) {
+    static boolean isGeneratedAnnotation(String desc) {
         String simpleName = desc.substring(Math.max(desc.lastIndexOf('/'),
                 desc.lastIndexOf('$')) + 1);
         return simpleName.equals("Generated;");

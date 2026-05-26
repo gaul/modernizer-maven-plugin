@@ -295,7 +295,7 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences = new Modernizer(
                 "1.6", violations, exclusions, NO_EXCLUSION_PATTERNS,
                 NO_IGNORED_PACKAGES, NO_IGNORED_CLASS_NAMES,
-                NO_EXCLUSION_PATTERNS
+                NO_EXCLUSION_PATTERNS, true
         ).check(cr);
         assertThat(occurrences).hasSize(0);
     }
@@ -309,7 +309,7 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences = new Modernizer(
                 "1.6", violations, NO_EXCLUSIONS, exclusionPatterns,
                 NO_IGNORED_PACKAGES, NO_IGNORED_CLASS_NAMES,
-                NO_EXCLUSION_PATTERNS
+                NO_EXCLUSION_PATTERNS, true
         ).check(cr);
         assertThat(occurrences).hasSize(0);
     }
@@ -322,7 +322,8 @@ public final class ModernizerTest {
                 StringGetBytesString.class.getPackage().getName());
         Collection<ViolationOccurrence> occurrences = new Modernizer(
                 "1.6", violations, NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS,
-                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS
+                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS,
+                true
         ).check(cr);
         assertThat(occurrences).hasSize(0);
     }
@@ -334,7 +335,8 @@ public final class ModernizerTest {
         Collection<String> ignorePackages = Collections.singleton("org.gaul");
         Collection<ViolationOccurrence> occurrences = new Modernizer(
                 "1.6", violations, NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS,
-                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS
+                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS,
+                true
         ).check(cr);
         assertThat(occurrences).hasSize(0);
     }
@@ -346,7 +348,8 @@ public final class ModernizerTest {
         Collection<String> ignorePackages = Collections.singleton("org");
         Collection<ViolationOccurrence> occurrences = new Modernizer(
                 "1.6", violations, NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS,
-                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS
+                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS,
+                true
         ).check(cr);
         assertThat(occurrences).hasSize(0);
     }
@@ -358,7 +361,8 @@ public final class ModernizerTest {
         Collection<String> ignorePackages = Collections.singleton("org.gau");
         Collection<ViolationOccurrence> occurrences = new Modernizer(
                 "1.6", violations, NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS,
-                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS
+                ignorePackages, NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS,
+                true
         ).check(cr);
         assertThat(occurrences).hasSize(1);
     }
@@ -372,7 +376,7 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences = new Modernizer(
                 "1.6", violations, NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS,
                 NO_IGNORED_PACKAGES, NO_IGNORED_CLASS_NAMES,
-                ignoreClassNamePatterns
+                ignoreClassNamePatterns, true
         ).check(cr);
         assertThat(occurrences).hasSize(0);
     }
@@ -416,13 +420,39 @@ public final class ModernizerTest {
                 Collections.singleton(new Violation(name, 5, OptionalInt.empty(), "")));
         Modernizer modernizer = new Modernizer("1.5", testViolations,
                 NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS, NO_IGNORED_PACKAGES,
-                NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS);
+                NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS, true);
         ClassReader cr = new ClassReader(AnnotatedMethod.class.getName());
         Collection<ViolationOccurrence> occurences =
                 modernizer.check(cr);
         assertThat(occurences).hasSize(1);
         assertThat(occurences.iterator().next().getViolation().getName())
                 .isEqualTo(name);
+    }
+
+    @Test
+    public void testIgnoreGeneratedClassesOnMembers() throws Exception {
+        String name = TestAnnotation.class.getName().replace('.', '/');
+        Map<String, Collection<Violation>> testViolations = new HashMap<>();
+        testViolations.put(name, Collections.singleton(
+                new Violation(name, 5, OptionalInt.empty(), "")));
+        String className = GeneratedMembers.class.getName();
+
+        // @Generated methods and constructors are suppressed, but the plain
+        // method still reports a violation.
+        Collection<ViolationOccurrence> ignored = new Modernizer(
+                "1.5", testViolations, NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS,
+                NO_IGNORED_PACKAGES, NO_IGNORED_CLASS_NAMES,
+                NO_EXCLUSION_PATTERNS, /* ignoreGeneratedClasses */ true
+        ).check(new ClassReader(className));
+        assertThat(ignored).hasSize(1);
+
+        // Without the option every annotated member reports a violation.
+        Collection<ViolationOccurrence> notIgnored = new Modernizer(
+                "1.5", testViolations, NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS,
+                NO_IGNORED_PACKAGES, NO_IGNORED_CLASS_NAMES,
+                NO_EXCLUSION_PATTERNS, /* ignoreGeneratedClasses */ false
+        ).check(new ClassReader(className));
+        assertThat(notIgnored).hasSize(3);
     }
 
     @Test
@@ -511,7 +541,8 @@ public final class ModernizerTest {
             NO_EXCLUSION_PATTERNS,
             NO_IGNORED_PACKAGES,
             ignoreClassNames,
-            NO_EXCLUSION_PATTERNS
+            NO_EXCLUSION_PATTERNS,
+            true
         );
 
         Set<Class<?>> classes = ImmutableSet.of(
@@ -543,7 +574,8 @@ public final class ModernizerTest {
             NO_EXCLUSION_PATTERNS,
             NO_IGNORED_PACKAGES,
             ignoreClassNames,
-            NO_EXCLUSION_PATTERNS
+            NO_EXCLUSION_PATTERNS,
+            true
         );
 
         Set<Class<?>> classes = ImmutableSet.of(
@@ -564,7 +596,7 @@ public final class ModernizerTest {
     private Modernizer createModernizer(String javaVersion) {
         return new Modernizer(javaVersion, violations, NO_EXCLUSIONS,
                 NO_EXCLUSION_PATTERNS, NO_IGNORED_PACKAGES,
-                NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS);
+                NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS, true);
     }
 
     @SuppressModernizer
@@ -699,6 +731,32 @@ public final class ModernizerTest {
     private static class AnnotatedMethod {
         @TestAnnotation
         public void annotatedMethod() {
+            // Nothing
+        }
+    }
+
+    // Marker annotation whose simple name matches the @Generated detection
+    // used by ignoreGeneratedClasses, mimicking Lombok's @lombok.Generated.
+    private @interface Generated {
+        // Nothing
+    }
+
+    @SuppressModernizer
+    private static class GeneratedMembers {
+        @Generated
+        @TestAnnotation
+        GeneratedMembers() {
+            // Nothing
+        }
+
+        @TestAnnotation
+        public void plainMethod() {
+            // Nothing
+        }
+
+        @Generated
+        @TestAnnotation
+        public void generatedMethod() {
             // Nothing
         }
     }
