@@ -36,7 +36,7 @@
     <project.build.outputTimestamp>2026-05-16T16:06:52Z</project.build.outputTimestamp>
     <njord.version>0.7.5</njord.version>
 
-    <asm.version>9.10</asm.version>
+    <asm.version>9.10.1</asm.version>
     <error-prone.version>2.49.0</error-prone.version>
     <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
     <maven-plugin-plugin.version>3.15.2</maven-plugin-plugin.version>
