@@ -1050,6 +1050,10 @@ public final class ModernizerTest {
             Joiner.on(',').join((Object) null, (Object) null, (Object) null);
             StringUtils.join((Iterable<String>) null, ',');
             StringUtils.join((Iterable<String>) null, null);
+            StringUtils.join((Iterator<String>) null, ',');
+            StringUtils.join((Iterator<String>) null, (String) null);
+            StringUtils.join((Object[]) null, ',');
+            StringUtils.join((Object[]) null, (String) null);
             Base64.decodeBase64("");
             Base64.decodeBase64((byte[]) null);
             Base64.encodeBase64String((byte[]) null);

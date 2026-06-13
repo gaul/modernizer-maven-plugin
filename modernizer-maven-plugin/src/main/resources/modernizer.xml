@@ -2091,6 +2091,30 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang3/StringUtils.join:(Ljava/util/Iterator;C)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/StringUtils.join:(Ljava/util/Iterator;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/StringUtils.join:([Ljava/lang/Object;C)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/StringUtils.join:([Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/lang3/StringUtils.repeat:(Ljava/lang/String;I)Ljava/lang/String;</name>
     <version>11</version>
     <comment>Prefer java.lang.String.repeat(int)</comment>
