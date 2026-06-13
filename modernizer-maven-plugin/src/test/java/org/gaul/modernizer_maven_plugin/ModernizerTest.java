@@ -56,6 +56,7 @@ import java.util.Enumeration;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1044,6 +1045,9 @@ public final class ModernizerTest {
             Iterables.limit(null, 0);
             Iterables.isEmpty(null);
             Joiner.on(',').join((Iterable<?>) null);
+            Joiner.on(',').join((Iterator<?>) null);
+            Joiner.on(',').join((Object[]) null);
+            Joiner.on(',').join((Object) null, (Object) null, (Object) null);
             StringUtils.join((Iterable<String>) null, ',');
             StringUtils.join((Iterable<String>) null, null);
             Base64.decodeBase64("");

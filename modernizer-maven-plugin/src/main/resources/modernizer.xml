@@ -1806,6 +1806,24 @@
   </violation>
 
   <violation>
+    <name>com/google/common/base/Joiner.join:(Ljava/util/Iterator;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Joiner.join:([Ljava/lang/Object;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/base/Joiner.join:(Ljava/lang/Object;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Ordering.natural:()Lcom/google/common/collect/Ordering;</name>
     <version>8</version>
     <comment>Prefer java.util.Comparator.naturalOrder()</comment>
