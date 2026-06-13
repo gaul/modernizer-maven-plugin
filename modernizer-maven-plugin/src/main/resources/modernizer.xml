@@ -961,6 +961,18 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/FileUtils.writeByteArrayToFile:(Ljava/io/File;[B)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.write(Path, byte[], OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeByteArrayToFile:(Ljava/io/File;[BZ)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.write(Path, byte[], OpenOption...)</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/io/IOUtils.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)I</name>
     <version>9</version>
     <comment>Prefer java.io.InputStream.transferTo(OutputStream)</comment>
@@ -1646,6 +1658,12 @@
     <name>com/google/common/io/Files.write:(Ljava/lang/CharSequence;Ljava/io/File;Ljava/nio/charset/Charset;)V</name>
     <version>11</version>
     <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/Files.write:([BLjava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.write(Path, byte[], OpenOption...)</comment>
   </violation>
 
   <violation>

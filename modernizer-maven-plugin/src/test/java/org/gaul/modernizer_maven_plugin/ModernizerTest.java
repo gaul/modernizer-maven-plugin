@@ -890,6 +890,7 @@ public final class ModernizerTest {
             Queues.newPriorityQueue();
             Queues.newSynchronousQueue();
             Files.toByteArray((File) null);
+            Files.write(new byte[0], (File) null);
             Files.newReader((File) null, (Charset) null);
             Files.newWriter((File) null, (Charset) null);
             Files.copy((File) null, (File) null);
@@ -912,6 +913,8 @@ public final class ModernizerTest {
             object = org.apache.commons.io.Charsets.UTF_16LE;
             object = org.apache.commons.io.Charsets.UTF_16;
             FileUtils.readFileToByteArray((File) null);
+            FileUtils.writeByteArrayToFile((File) null, new byte[0]);
+            FileUtils.writeByteArrayToFile((File) null, new byte[0], true);
             FileUtils.copyFile((File) null, (File) null);
             FileUtils.readLines((File) null);
             FileUtils.readLines((File) null, (Charset) null);
