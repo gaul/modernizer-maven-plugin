@@ -106,6 +106,7 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.math.IntMath;
 import com.google.common.math.LongMath;
+import com.google.common.net.InetAddresses;
 import com.google.common.primitives.Booleans;
 import com.google.common.primitives.Bytes;
 import com.google.common.primitives.Chars;
@@ -498,6 +499,7 @@ public final class ModernizerTest {
                 Java19Violations.class,
                 Java20Violations.class,
                 Java21Violations.class,
+                Java22Violations.class,
                 Java23Violations.class,
                 Java24Violations.class,
                 // inner classes must be visited manually
@@ -1258,6 +1260,13 @@ public final class ModernizerTest {
             Floats.constrainToRange(0.0F, 0.0F, 0.0F);
             Ints.constrainToRange(0, 0, 0);
             Longs.constrainToRange(0L, 0L, 0L);
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java22Violations {
+        private static void method() throws Exception {
+            InetAddresses.forString("127.0.0.1");
         }
     }
 

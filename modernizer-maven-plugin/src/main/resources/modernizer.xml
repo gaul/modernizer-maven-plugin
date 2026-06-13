@@ -2336,4 +2336,10 @@
     <comment>Prefer java.net.URL.of(URI, URLStreamHandler)</comment>
   </violation>
 
+  <violation>
+    <name>com/google/common/net/InetAddresses.forString:(Ljava/lang/String;)Ljava/net/InetAddress;</name>
+    <version>22</version>
+    <comment>Prefer java.net.InetAddress.ofLiteral(String)</comment>
+  </violation>
+
 </modernizer>
