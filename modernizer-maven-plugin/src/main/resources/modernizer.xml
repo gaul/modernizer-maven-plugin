@@ -1680,7 +1680,14 @@
   <violation>
     <name>com/google/common/collect/Iterables.getLast:(Ljava/lang/Iterable;)Ljava/lang/Object;</name>
     <version>10</version>
+    <until>21</until>
     <comment>Prefer Streams.findLast(stream).orElseThrow()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Iterables.getLast:(Ljava/lang/Iterable;)Ljava/lang/Object;</name>
+    <version>21</version>
+    <comment>Prefer java.util.SequencedCollection.getLast()</comment>
   </violation>
 
   <violation>
