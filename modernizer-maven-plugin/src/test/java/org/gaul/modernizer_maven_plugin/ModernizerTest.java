@@ -925,6 +925,12 @@ public final class ModernizerTest {
             object = org.apache.commons.io.Charsets.UTF_16BE;
             object = org.apache.commons.io.Charsets.UTF_16LE;
             object = org.apache.commons.io.Charsets.UTF_16;
+            object = org.apache.commons.codec.Charsets.ISO_8859_1;
+            object = org.apache.commons.codec.Charsets.US_ASCII;
+            object = org.apache.commons.codec.Charsets.UTF_8;
+            object = org.apache.commons.codec.Charsets.UTF_16BE;
+            object = org.apache.commons.codec.Charsets.UTF_16LE;
+            object = org.apache.commons.codec.Charsets.UTF_16;
             FileUtils.readFileToByteArray((File) null);
             FileUtils.writeByteArrayToFile((File) null, new byte[0]);
             FileUtils.writeByteArrayToFile((File) null, new byte[0], true);
