@@ -433,6 +433,30 @@
   </violation>
 
   <violation>
+    <name>com/google/common/primitives/Booleans.compare:(ZZ)I</name>
+    <version>7</version>
+    <comment>Prefer java.lang.Boolean.compare(boolean, boolean)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Doubles.compare:(DD)I</name>
+    <version>4</version>
+    <comment>Prefer java.lang.Double.compare(double, double)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Floats.compare:(FF)I</name>
+    <version>4</version>
+    <comment>Prefer java.lang.Float.compare(float, float)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/SignedBytes.compare:(BB)I</name>
+    <version>7</version>
+    <comment>Prefer java.lang.Byte.compare(byte, byte)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/primitives/UnsignedInts.compare:(II)I</name>
     <version>8</version>
     <comment>Prefer java.lang.Integer.compareUnsigned(int, int)</comment>
@@ -532,6 +556,126 @@
     <name>com/google/common/math/LongMath.checkedMultiply:(JJ)J</name>
     <version>8</version>
     <comment>Prefer java.lang.Math.multiplyExact(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Booleans.hashCode:(Z)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Boolean.hashCode(boolean)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Bytes.hashCode:(B)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Byte.hashCode(byte)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Chars.hashCode:(C)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Character.hashCode(char)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Doubles.hashCode:(D)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Double.hashCode(double)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Floats.hashCode:(F)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Float.hashCode(float)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Ints.hashCode:(I)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Integer.hashCode(int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Longs.hashCode:(J)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Long.hashCode(long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Shorts.hashCode:(S)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Short.hashCode(short)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Doubles.isFinite:(D)Z</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Double.isFinite(double)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Floats.isFinite:(F)Z</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Float.isFinite(float)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Doubles.constrainToRange:(DDD)D</name>
+    <version>21</version>
+    <comment>Prefer java.lang.Math.clamp(double, double, double)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Floats.constrainToRange:(FFF)F</name>
+    <version>21</version>
+    <comment>Prefer java.lang.Math.clamp(float, float, float)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Ints.constrainToRange:(III)I</name>
+    <version>21</version>
+    <comment>Prefer java.lang.Math.clamp(long, int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/Longs.constrainToRange:(JJJ)J</name>
+    <version>21</version>
+    <comment>Prefer java.lang.Math.clamp(long, long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/IntMath.mod:(II)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Math.floorMod(int, int); note that IntMath.mod throws for non-positive m while Math.floorMod accepts any nonzero modulus</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/LongMath.mod:(JJ)J</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Math.floorMod(long, long); note that LongMath.mod throws for non-positive m while Math.floorMod accepts any nonzero modulus</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedBytes.toInt:(B)I</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Byte.toUnsignedInt(byte)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedInts.toLong:(I)J</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Integer.toUnsignedLong(int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedInts.toString:(I)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Integer.toUnsignedString(int)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/primitives/UnsignedLongs.toString:(J)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.Long.toUnsignedString(long)</comment>
   </violation>
 
   <violation>

@@ -106,10 +106,16 @@ import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.math.IntMath;
 import com.google.common.math.LongMath;
+import com.google.common.primitives.Booleans;
+import com.google.common.primitives.Bytes;
 import com.google.common.primitives.Chars;
+import com.google.common.primitives.Doubles;
+import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import com.google.common.primitives.Shorts;
+import com.google.common.primitives.SignedBytes;
+import com.google.common.primitives.UnsignedBytes;
 import com.google.common.primitives.UnsignedInts;
 import com.google.common.primitives.UnsignedLongs;
 import com.google.common.util.concurrent.Atomics;
@@ -807,6 +813,8 @@ public final class ModernizerTest {
             new URL("", "", "");
             new URL("", "", 0, "");
             new URL((URL) null, "");
+            Doubles.compare(0.0, 0.0);
+            Floats.compare(0.0F, 0.0F);
         }
     }
 
@@ -902,6 +910,8 @@ public final class ModernizerTest {
             Ints.compare(0, 0);
             Longs.compare(0L, 0L);
             Shorts.compare((short) 0, (short) 0);
+            Booleans.compare(false, false);
+            SignedBytes.compare((byte) 0, (byte) 0);
             Atomics.newReference();
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);
@@ -961,6 +971,22 @@ public final class ModernizerTest {
             LongMath.checkedAdd(0, 0);
             LongMath.checkedSubtract(0, 0);
             LongMath.checkedMultiply(0, 0);
+            Booleans.hashCode(false);
+            Bytes.hashCode((byte) 0);
+            Chars.hashCode((char) 0);
+            Doubles.hashCode(0.0);
+            Floats.hashCode(0.0F);
+            Ints.hashCode(0);
+            Longs.hashCode(0L);
+            Shorts.hashCode((short) 0);
+            Doubles.isFinite(0.0);
+            Floats.isFinite(0.0F);
+            IntMath.mod(0, 1);
+            LongMath.mod(0L, 1L);
+            UnsignedBytes.toInt((byte) 0);
+            UnsignedInts.toLong(0);
+            UnsignedInts.toString(0);
+            UnsignedLongs.toString(0L);
             Preconditions.checkNotNull(new Object(), new Object());
             DateTime.now();
             DateTime.parse("");
@@ -1219,6 +1245,10 @@ public final class ModernizerTest {
     private static class Java21Violations {
         private static void method() throws Exception {
             Lists.reverse(List.of());
+            Doubles.constrainToRange(0.0, 0.0, 0.0);
+            Floats.constrainToRange(0.0F, 0.0F, 0.0F);
+            Ints.constrainToRange(0, 0, 0);
+            Longs.constrainToRange(0L, 0L, 0L);
         }
     }
 
