@@ -691,6 +691,18 @@
   </violation>
 
   <violation>
+    <name>java/net/URLConnection.getContentLength:()I</name>
+    <version>7</version>
+    <comment>Prefer java.net.URLConnection.getContentLengthLong()</comment>
+  </violation>
+
+  <violation>
+    <name>java/net/HttpURLConnection.getContentLength:()I</name>
+    <version>7</version>
+    <comment>Prefer java.net.URLConnection.getContentLengthLong()</comment>
+  </violation>
+
+  <violation>
     <name>java/nio/file/Paths.get:(Ljava/lang/String;[Ljava/lang/String;)Ljava/nio/file/Path;</name>
     <version>11</version>
     <comment>Prefer java.nio.file.Path.of(String, String...)</comment>

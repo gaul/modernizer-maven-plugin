@@ -38,6 +38,7 @@ import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
@@ -906,6 +907,8 @@ public final class ModernizerTest {
             Atomics.newReferenceArray(0);
             Atomics.newReferenceArray((Object[]) null);
             ((HttpURLConnection) null).setFixedLengthStreamingMode(0);
+            ((URLConnection) null).getContentLength();
+            ((HttpURLConnection) null).getContentLength();
             object = org.apache.commons.io.Charsets.ISO_8859_1;
             object = org.apache.commons.io.Charsets.US_ASCII;
             object = org.apache.commons.io.Charsets.UTF_8;
