@@ -1117,6 +1117,9 @@ public final class ModernizerTest {
             new Scanner((Path) null, "");
             new Scanner((ReadableByteChannel) null, "");
             Optional.empty().get();
+            OptionalInt.empty().getAsInt();
+            OptionalLong.empty().getAsLong();
+            OptionalDouble.empty().getAsDouble();
             new File(new File(""), "");
             new File("");
             new File("", "");

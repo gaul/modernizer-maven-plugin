@@ -2096,6 +2096,24 @@
   </violation>
 
   <violation>
+    <name>java/util/OptionalInt.getAsInt:()I</name>
+    <version>10</version>
+    <comment>Prefer java.util.OptionalInt.orElseThrow()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/OptionalLong.getAsLong:()J</name>
+    <version>10</version>
+    <comment>Prefer java.util.OptionalLong.orElseThrow()</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/OptionalDouble.getAsDouble:()D</name>
+    <version>10</version>
+    <comment>Prefer java.util.OptionalDouble.orElseThrow()</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/codec/binary/Hex.encodeHexString:([B)Ljava/lang/String;</name>
     <version>17</version>
     <comment>Prefer java.util.HexFormat.of().formatHex(byte[])</comment>
