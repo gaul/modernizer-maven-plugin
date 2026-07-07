@@ -128,6 +128,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.CharSequenceReader;
 import org.apache.commons.io.input.NullInputStream;
 import org.apache.commons.io.input.NullReader;
 import org.apache.commons.io.output.NullOutputStream;
@@ -1327,6 +1328,7 @@ public final class ModernizerTest {
     private static class Java24Violations {
         private static void method() throws Exception {
             new StringReader("");
+            new CharSequenceReader("");
         }
     }
 

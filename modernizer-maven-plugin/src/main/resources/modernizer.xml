@@ -1351,6 +1351,12 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/input/CharSequenceReader."&lt;init&gt;":(Ljava/lang/CharSequence;)V</name>
+    <version>24</version>
+    <comment>Prefer java.io.Reader.of(CharSequence)</comment>
+  </violation>
+
+  <violation>
     <name>sun/misc/BASE64Decoder.decodeBuffer:(Ljava/lang/String;)[B</name>
     <version>8</version>
     <comment>Prefer java.util.Base64.Decoder.decode(String); note that it rejects line breaks and other non-Base64 characters which BASE64Decoder ignores; use Base64.getMimeDecoder() for lenient decoding</comment>
