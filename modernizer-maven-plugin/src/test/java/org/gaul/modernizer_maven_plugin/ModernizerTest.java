@@ -70,6 +70,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.Stack;
+import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -868,6 +869,9 @@ public final class ModernizerTest {
             Floats.compare(0.0F, 0.0F);
             org.apache.commons.lang.math.NumberUtils.compare(0.0, 0.0);
             org.apache.commons.lang.math.NumberUtils.compare(0.0F, 0.0F);
+            new StringTokenizer("");
+            new StringTokenizer("", "");
+            new StringTokenizer("", "", true);
         }
     }
 

@@ -979,6 +979,24 @@
   </violation>
 
   <violation>
+    <name>java/util/StringTokenizer."&lt;init&gt;":(Ljava/lang/String;)V</name>
+    <version>4</version>
+    <comment>Prefer java.lang.String.split(String)</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/StringTokenizer."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
+    <version>4</version>
+    <comment>Prefer java.lang.String.split(String); note that split takes a regular expression rather than a set of delimiter characters</comment>
+  </violation>
+
+  <violation>
+    <name>java/util/StringTokenizer."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;Z)V</name>
+    <version>4</version>
+    <comment>Prefer java.lang.String.split(String); note that split takes a regular expression rather than a set of delimiter characters</comment>
+  </violation>
+
+  <violation>
     <name>java/util/Vector."&lt;init&gt;":()V</name>
     <version>2</version>
     <comment>Prefer java.util.ArrayList&lt;&gt;()</comment>
