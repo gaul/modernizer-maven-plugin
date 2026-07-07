@@ -135,6 +135,7 @@ import org.apache.commons.io.output.NullWriter;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnClass;
 import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnMembers;
@@ -919,6 +920,10 @@ public final class ModernizerTest {
             Shorts.compare((short) 0, (short) 0);
             Booleans.compare(false, false);
             SignedBytes.compare((byte) 0, (byte) 0);
+            NumberUtils.compare((byte) 0, (byte) 0);
+            NumberUtils.compare(0, 0);
+            NumberUtils.compare(0L, 0L);
+            NumberUtils.compare((short) 0, (short) 0);
             Atomics.newReference();
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);

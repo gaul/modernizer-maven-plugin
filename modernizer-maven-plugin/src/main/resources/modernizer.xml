@@ -1908,6 +1908,30 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang3/math/NumberUtils.compare:(BB)I</name>
+    <version>7</version>
+    <comment>Prefer java.lang.Byte.compare(byte, byte)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/math/NumberUtils.compare:(II)I</name>
+    <version>7</version>
+    <comment>Prefer java.lang.Integer.compare(int, int)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/math/NumberUtils.compare:(JJ)I</name>
+    <version>7</version>
+    <comment>Prefer java.lang.Long.compare(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/math/NumberUtils.compare:(SS)I</name>
+    <version>7</version>
+    <comment>Prefer java.lang.Short.compare(short, short)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Joiner.join:(Ljava/lang/Iterable;)Ljava/lang/String;</name>
     <version>8</version>
     <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
