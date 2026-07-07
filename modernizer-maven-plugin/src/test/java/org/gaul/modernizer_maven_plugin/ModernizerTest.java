@@ -141,6 +141,7 @@ import org.apache.commons.io.output.NullWriter;
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
@@ -1022,6 +1023,8 @@ public final class ModernizerTest {
             object = org.apache.commons.io.Charsets.UTF_16LE;
             object = org.apache.commons.io.Charsets.UTF_16;
             object = IOUtils.LINE_SEPARATOR;
+            object = SystemUtils.LINE_SEPARATOR;
+            object = org.apache.commons.lang.SystemUtils.LINE_SEPARATOR;
             object = org.apache.commons.codec.Charsets.ISO_8859_1;
             object = org.apache.commons.codec.Charsets.US_ASCII;
             object = org.apache.commons.codec.Charsets.UTF_8;
