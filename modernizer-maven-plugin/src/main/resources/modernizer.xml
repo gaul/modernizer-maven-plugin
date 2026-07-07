@@ -135,7 +135,7 @@
   <violation>
     <name>com/google/common/collect/Maps.newEnumMap:(Ljava/lang/Class;)Ljava/util/EnumMap;</name>
     <version>7</version>
-    <comment>Prefer java.util.EnumMap&lt;&gt;()</comment>
+    <comment>Prefer java.util.EnumMap&lt;&gt;(Class)</comment>
   </violation>
 
   <violation>
@@ -254,7 +254,7 @@
 
   <violation>
     <name>com/google/common/collect/Sets.newSetFromMap:(Ljava/util/Map;)Ljava/util/Set;</name>
-    <version>7</version>
+    <version>6</version>
     <comment>Prefer java.util.Collections.newSetFromMap(Map)</comment>
   </violation>
 
@@ -393,13 +393,13 @@
   <violation>
     <name>com/google/common/io/Files.append:(Ljava/lang/CharSequence;Ljava/io/File;Ljava/nio/charset/Charset;)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, StandardOpenOption.APPEND)</comment>
+    <comment>Prefer java.nio.file.Files.writeString(Path, CharSequence, Charset, StandardOpenOption.CREATE, StandardOpenOption.APPEND)</comment>
   </violation>
 
   <violation>
     <name>com/google/common/io/Files.createParentDirs:(Ljava/io/File;)V</name>
     <version>7</version>
-    <comment>Prefer java.nio.file.Files.createDirectories(Path)</comment>
+    <comment>Prefer java.nio.file.Files.createDirectories(Path.getParent())</comment>
   </violation>
 
   <violation>
@@ -993,7 +993,7 @@
   <violation>
     <name>org/apache/commons/codec/binary/Base64.decodeBase64:(Ljava/lang/String;)[B</name>
     <version>8</version>
-    <comment>Prefer java.util.Base64.Decoder.decode(String)</comment>
+    <comment>Prefer java.util.Base64.Decoder.decode(String); note that it rejects line breaks and other non-Base64 characters which decodeBase64 ignores; use Base64.getMimeDecoder() for lenient decoding</comment>
   </violation>
 
   <violation>
@@ -1245,13 +1245,13 @@
   <violation>
     <name>sun/misc/BASE64Decoder.decodeBuffer:(Ljava/lang/String;)[B</name>
     <version>8</version>
-    <comment>Prefer java.util.Base64.Decoder.decode(String)</comment>
+    <comment>Prefer java.util.Base64.Decoder.decode(String); note that it rejects line breaks and other non-Base64 characters which BASE64Decoder ignores; use Base64.getMimeDecoder() for lenient decoding</comment>
   </violation>
 
   <violation>
     <name>sun/misc/BASE64Encoder.encode:([B)Ljava/lang/String;</name>
     <version>8</version>
-    <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[])</comment>
+    <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[]); note that it does not emit line breaks like BASE64Encoder; use Base64.getMimeEncoder() to wrap lines</comment>
   </violation>
 
   <violation>
@@ -1269,7 +1269,7 @@
   <violation>
     <name>javax/xml/bind/DatatypeConverter.printHexBinary:([B)Ljava/lang/String;</name>
     <version>17</version>
-    <comment>Prefer java.util.HexFormat.of().formatHex(byte[])</comment>
+    <comment>Prefer java.util.HexFormat.of().withUpperCase().formatHex(byte[])</comment>
   </violation>
 
   <violation>
@@ -1305,7 +1305,7 @@
   <violation>
     <name>com/google/inject/Provider</name>
     <version>5</version>
-    <comment>Prefer javax.inject.Provider</comment>
+    <comment>Prefer jakarta.inject.Provider or javax.inject.Provider</comment>
   </violation>
 
   <violation>
@@ -1323,7 +1323,7 @@
   <violation>
     <name>org/joda/time/DateTime."&lt;init&gt;":(J)V</name>
     <version>8</version>
-    <comment>Prefer java.time.ZonedDateTime</comment>
+    <comment>Prefer java.time.Instant.ofEpochMilli(long).atZone(ZoneId)</comment>
   </violation>
 
   <violation>
@@ -1365,7 +1365,7 @@
   <violation>
     <name>org/joda/time/LocalDate."&lt;init&gt;":(J)V</name>
     <version>8</version>
-    <comment>Prefer java.time.LocalDate</comment>
+    <comment>Prefer java.time.Instant.ofEpochMilli(long).atZone(ZoneId).toLocalDate()</comment>
   </violation>
 
   <violation>
@@ -1383,7 +1383,7 @@
   <violation>
     <name>org/joda/time/LocalTime."&lt;init&gt;":(J)V</name>
     <version>8</version>
-    <comment>Prefer java.time.LocalTime</comment>
+    <comment>Prefer java.time.Instant.ofEpochMilli(long).atZone(ZoneId).toLocalTime()</comment>
   </violation>
 
   <violation>
@@ -1401,7 +1401,7 @@
   <violation>
     <name>org/joda/time/LocalDateTime."&lt;init&gt;":(J)V</name>
     <version>8</version>
-    <comment>Prefer java.time.LocalDateTime</comment>
+    <comment>Prefer java.time.LocalDateTime.ofInstant(Instant.ofEpochMilli(long), ZoneId)</comment>
   </violation>
 
   <violation>
@@ -1479,7 +1479,7 @@
   <violation>
     <name>java/util/Formatter."&lt;init&gt;":(Ljava/io/File;Ljava/lang/String;)V</name>
     <version>10</version>
-    <comment>Prefer java.util.Formatter(File, Charset)</comment>
+    <comment>Prefer java.util.Formatter(File, Charset, Locale)</comment>
   </violation>
 
   <violation>
@@ -1491,7 +1491,7 @@
   <violation>
     <name>java/util/Formatter."&lt;init&gt;":(Ljava/io/OutputStream;Ljava/lang/String;)V</name>
     <version>10</version>
-    <comment>Prefer java.util.Formatter(OutputStream, Charset)</comment>
+    <comment>Prefer java.util.Formatter(OutputStream, Charset, Locale)</comment>
   </violation>
 
   <violation>
@@ -1503,7 +1503,7 @@
   <violation>
     <name>java/util/Formatter."&lt;init&gt;":(Ljava/lang/String;Ljava/lang/String;)V</name>
     <version>10</version>
-    <comment>Prefer java.util.Formatter(String, Charset)</comment>
+    <comment>Prefer java.util.Formatter(String, Charset, Locale)</comment>
   </violation>
 
   <violation>
@@ -1932,13 +1932,13 @@
     <name>java/io/FileInputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>7</version>
     <until>11</until>
-    <comment>Prefer java.nio.file.Files.newInputStream(java.nio.file.Paths.get(String))</comment>
+    <comment>Prefer java.nio.file.Files.newInputStream(Paths.get(String))</comment>
   </violation>
 
   <violation>
     <name>java/io/FileInputStream."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newInputStream(java.nio.file.Path.of(String))</comment>
+    <comment>Prefer java.nio.file.Files.newInputStream(Path.of(String))</comment>
   </violation>
 
   <violation>
@@ -1970,7 +1970,7 @@
   <violation>
     <name>java/io/FileOutputStream."&lt;init&gt;":(Ljava/lang/String;Z)V</name>
     <version>11</version>
-    <comment>Prefer java.nio.file.Files.newOutputStream(Path.of(String), CREATE, APPEND, WRITE)</comment>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path.of(String), CREATE, APPEND)</comment>
   </violation>
 
   <violation>
@@ -2171,7 +2171,7 @@
   <violation>
     <name>org/apache/commons/codec/binary/Base64.decodeBase64:([B)[B</name>
     <version>8</version>
-    <comment>Prefer java.util.Base64.Decoder</comment>
+    <comment>Prefer java.util.Base64.Decoder; note that it rejects line breaks and other non-Base64 characters which decodeBase64 ignores; use Base64.getMimeDecoder() for lenient decoding</comment>
   </violation>
 
   <violation>

@@ -470,12 +470,12 @@ public final class ModernizerTest {
         Collection<ViolationOccurrence> occurrences = createModernizer("10").check(cr);
         assertThat(occurrences).hasSize(1);
         assertThat(occurrences.iterator().next().getViolation().getComment())
-                .isEqualTo("Prefer java.nio.file.Files.newInputStream(java.nio.file.Paths.get(String))");
+                .isEqualTo("Prefer java.nio.file.Files.newInputStream(Paths.get(String))");
 
         occurrences = createModernizer("11").check(cr);
         assertThat(occurrences).hasSize(1);
         assertThat(occurrences.iterator().next().getViolation().getComment())
-                .isEqualTo("Prefer java.nio.file.Files.newInputStream(java.nio.file.Path.of(String))");
+                .isEqualTo("Prefer java.nio.file.Files.newInputStream(Path.of(String))");
     }
 
     @Test
@@ -846,12 +846,13 @@ public final class ModernizerTest {
 
     @SuppressModernizer
     private static class Java6Violations {
-        @SuppressWarnings("JdkObsolete")
+        @SuppressWarnings({"CheckReturnValue", "JdkObsolete"})
         private static void method() throws Exception {
             "".getBytes("UTF-8");
             new String((byte[]) null, 0, 0, "");
             new String((byte[]) null, "");
             new Stack<Object>();
+            Sets.newSetFromMap((Map<Object, Boolean>) null);
         }
     }
 
@@ -888,7 +889,6 @@ public final class ModernizerTest {
             Sets.newCopyOnWriteArraySet();
             Sets.newHashSet();
             Sets.newLinkedHashSet();
-            Sets.newSetFromMap((Map<Object, Boolean>) null);
             Sets.newTreeSet();
             Sets.newTreeSet((Comparator<Object>) null);
             Queues.newArrayDeque();
