@@ -2570,4 +2570,64 @@
     <comment>Prefer java.net.InetAddress.ofLiteral(String)</comment>
   </violation>
 
+  <violation>
+    <name>org/bouncycastle/util/encoders/Base64.toBase64String:([B)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.Encoder.encodeToString(byte[])</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Base64.encode:([B)[B</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.Encoder</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Base64.decode:(Ljava/lang/String;)[B</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.Decoder.decode(String); note that it rejects line breaks and other whitespace which decode ignores; use Base64.getMimeDecoder() for lenient decoding</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Base64.decode:([B)[B</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.Decoder; note that it rejects line breaks and other whitespace which decode ignores; use Base64.getMimeDecoder() for lenient decoding</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Hex.toHexString:([B)Ljava/lang/String;</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().formatHex(byte[])</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Hex.toHexString:([BII)Ljava/lang/String;</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().formatHex(byte[], int, int); note that formatHex takes an exclusive to index rather than a length</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Hex.encode:([B)[B</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().formatHex(byte[])</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Hex.decode:(Ljava/lang/String;)[B</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().parseHex(String); note that parseHex rejects whitespace which decode ignores</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Hex.decode:([B)[B</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().parseHex(String); note that parseHex rejects whitespace which decode ignores</comment>
+  </violation>
+
+  <violation>
+    <name>org/bouncycastle/util/encoders/Hex.decodeStrict:(Ljava/lang/String;)[B</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().parseHex(String)</comment>
+  </violation>
+
 </modernizer>

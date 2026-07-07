@@ -1084,6 +1084,10 @@ public final class ModernizerTest {
             Base64.encodeBase64Chunked((byte[]) null);
             DatatypeConverter.parseBase64Binary("");
             DatatypeConverter.printBase64Binary(new byte[]{});
+            org.bouncycastle.util.encoders.Base64.toBase64String(null);
+            org.bouncycastle.util.encoders.Base64.encode(null);
+            org.bouncycastle.util.encoders.Base64.decode("");
+            org.bouncycastle.util.encoders.Base64.decode((byte[]) null);
             Collections.sort(new ArrayList<String>());
             Collections.sort(new ArrayList<String>(), Comparator.naturalOrder());
             FileUtils.lineIterator((File) null);
@@ -1258,6 +1262,12 @@ public final class ModernizerTest {
             Hex.decodeHex(new char[]{});
             DatatypeConverter.printHexBinary(new byte[]{});
             DatatypeConverter.parseHexBinary("");
+            org.bouncycastle.util.encoders.Hex.toHexString(new byte[]{});
+            org.bouncycastle.util.encoders.Hex.toHexString(new byte[]{}, 0, 0);
+            org.bouncycastle.util.encoders.Hex.encode(new byte[]{});
+            org.bouncycastle.util.encoders.Hex.decode("");
+            org.bouncycastle.util.encoders.Hex.decode(new byte[]{});
+            org.bouncycastle.util.encoders.Hex.decodeStrict("");
         }
     }
 
