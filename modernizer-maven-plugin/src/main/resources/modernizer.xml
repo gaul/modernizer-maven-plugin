@@ -1986,6 +1986,54 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang3/time/FastDateFormat.getInstance:(Ljava/lang/String;)Lorg/apache/commons/lang3/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/time/FastDateFormat.getInstance:(Ljava/lang/String;Ljava/util/Locale;)Lorg/apache/commons/lang3/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String, Locale)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/time/FastDateFormat.getInstance:(Ljava/lang/String;Ljava/util/TimeZone;)Lorg/apache/commons/lang3/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String).withZone(ZoneId)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang3/time/FastDateFormat.getInstance:(Ljava/lang/String;Ljava/util/TimeZone;Ljava/util/Locale;)Lorg/apache/commons/lang3/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String, Locale).withZone(ZoneId)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/time/FastDateFormat.getInstance:(Ljava/lang/String;)Lorg/apache/commons/lang/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/time/FastDateFormat.getInstance:(Ljava/lang/String;Ljava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String, Locale)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/time/FastDateFormat.getInstance:(Ljava/lang/String;Ljava/util/TimeZone;)Lorg/apache/commons/lang/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String).withZone(ZoneId)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/time/FastDateFormat.getInstance:(Ljava/lang/String;Ljava/util/TimeZone;Ljava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;</name>
+    <version>8</version>
+    <comment>Prefer java.time.format.DateTimeFormatter.ofPattern(String, Locale).withZone(ZoneId)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Joiner.join:(Ljava/lang/Iterable;)Ljava/lang/String;</name>
     <version>8</version>
     <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>

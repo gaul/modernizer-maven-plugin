@@ -70,6 +70,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.Stack;
+import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
@@ -140,6 +141,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.gaul.modernizer_maven_annotations.SuppressModernizer;
 import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnClass;
 import org.gaul.modernizer_maven_plugin.SuppressModernizerTestClasses.SuppressedOnMembers;
@@ -1131,6 +1133,17 @@ public final class ModernizerTest {
             org.apache.commons.lang.StringUtils.join((Iterator<?>) null, "");
             org.apache.commons.lang.StringUtils.join((Object[]) null, ',');
             org.apache.commons.lang.StringUtils.join((Object[]) null, "");
+            FastDateFormat.getInstance("");
+            FastDateFormat.getInstance("", (Locale) null);
+            FastDateFormat.getInstance("", (TimeZone) null);
+            FastDateFormat.getInstance("", (TimeZone) null, (Locale) null);
+            org.apache.commons.lang.time.FastDateFormat.getInstance("");
+            org.apache.commons.lang.time.FastDateFormat
+                    .getInstance("", (Locale) null);
+            org.apache.commons.lang.time.FastDateFormat
+                    .getInstance("", (TimeZone) null);
+            org.apache.commons.lang.time.FastDateFormat
+                    .getInstance("", (TimeZone) null, (Locale) null);
             Base64.decodeBase64("");
             Base64.decodeBase64((byte[]) null);
             Base64.encodeBase64String((byte[]) null);
