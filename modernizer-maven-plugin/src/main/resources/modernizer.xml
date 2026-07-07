@@ -1896,7 +1896,19 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang/ObjectUtils.defaultIfNull:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>9</version>
+    <comment>Prefer java.util.Objects.requireNonNullElse(Object, Object); note that it throws NullPointerException when both arguments are null, while ObjectUtils.defaultIfNull returns null</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/lang3/ObjectUtils.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>7</version>
+    <comment>Prefer java.util.Objects.toString(Object, String)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/ObjectUtils.toString:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;</name>
     <version>7</version>
     <comment>Prefer java.util.Objects.toString(Object, String)</comment>
   </violation>
@@ -1911,6 +1923,18 @@
     <name>org/apache/commons/lang3/Validate.notNull:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;</name>
     <version>7</version>
     <comment>Prefer java.util.Objects.requireNonNull(Object, String); note that requireNonNull uses the message literally while Validate.notNull formats it via String.format with the trailing arguments</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/Validate.notNull:(Ljava/lang/Object;)V</name>
+    <version>7</version>
+    <comment>Prefer java.util.Objects.requireNonNull(Object); note that it throws NullPointerException instead of IllegalArgumentException</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/Validate.notNull:(Ljava/lang/Object;Ljava/lang/String;)V</name>
+    <version>7</version>
+    <comment>Prefer java.util.Objects.requireNonNull(Object, String); note that it throws NullPointerException instead of IllegalArgumentException</comment>
   </violation>
 
   <violation>
@@ -1935,6 +1959,18 @@
     <name>org/apache/commons/lang3/math/NumberUtils.compare:(SS)I</name>
     <version>7</version>
     <comment>Prefer java.lang.Short.compare(short, short)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/math/NumberUtils.compare:(DD)I</name>
+    <version>4</version>
+    <comment>Prefer java.lang.Double.compare(double, double)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/math/NumberUtils.compare:(FF)I</name>
+    <version>4</version>
+    <comment>Prefer java.lang.Float.compare(float, float)</comment>
   </violation>
 
   <violation>
@@ -2265,7 +2301,49 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang/StringUtils.join:(Ljava/util/Collection;C)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/StringUtils.join:(Ljava/util/Collection;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/StringUtils.join:(Ljava/util/Iterator;C)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/StringUtils.join:(Ljava/util/Iterator;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/StringUtils.join:([Ljava/lang/Object;C)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/StringUtils.join:([Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/lang3/StringUtils.repeat:(Ljava/lang/String;I)Ljava/lang/String;</name>
+    <version>11</version>
+    <comment>Prefer java.lang.String.repeat(int)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/lang/StringUtils.repeat:(Ljava/lang/String;I)Ljava/lang/String;</name>
     <version>11</version>
     <comment>Prefer java.lang.String.repeat(int)</comment>
   </violation>

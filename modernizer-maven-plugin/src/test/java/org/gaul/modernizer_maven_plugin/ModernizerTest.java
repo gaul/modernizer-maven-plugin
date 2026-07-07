@@ -863,6 +863,8 @@ public final class ModernizerTest {
             new URL((URL) null, "");
             Doubles.compare(0.0, 0.0);
             Floats.compare(0.0F, 0.0F);
+            org.apache.commons.lang.math.NumberUtils.compare(0.0, 0.0);
+            org.apache.commons.lang.math.NumberUtils.compare(0.0F, 0.0F);
         }
     }
 
@@ -1008,6 +1010,9 @@ public final class ModernizerTest {
             Validate.notNull(new Object());
             Validate.notNull(new Object(), "", new Object[0]);
             ObjectUtils.toString(new Object(), "");
+            org.apache.commons.lang.ObjectUtils.toString(new Object(), "");
+            org.apache.commons.lang.Validate.notNull(new Object());
+            org.apache.commons.lang.Validate.notNull(new Object(), "");
             IteratorUtils.emptyIterator();
         }
     }
@@ -1118,6 +1123,12 @@ public final class ModernizerTest {
             StringUtils.join((Iterator<String>) null, (String) null);
             StringUtils.join((Object[]) null, ',');
             StringUtils.join((Object[]) null, (String) null);
+            org.apache.commons.lang.StringUtils.join((Collection<?>) null, ',');
+            org.apache.commons.lang.StringUtils.join((Collection<?>) null, "");
+            org.apache.commons.lang.StringUtils.join((Iterator<?>) null, ',');
+            org.apache.commons.lang.StringUtils.join((Iterator<?>) null, "");
+            org.apache.commons.lang.StringUtils.join((Object[]) null, ',');
+            org.apache.commons.lang.StringUtils.join((Object[]) null, "");
             Base64.decodeBase64("");
             Base64.decodeBase64((byte[]) null);
             Base64.encodeBase64String((byte[]) null);
@@ -1189,6 +1200,7 @@ public final class ModernizerTest {
             MoreObjects.firstNonNull("", "");
             ObjectUtils.firstNonNull("", "");
             ObjectUtils.defaultIfNull("", "");
+            org.apache.commons.lang.ObjectUtils.defaultIfNull("", "");
             BigDecimal bd = BigDecimal.ZERO;
             bd.divide(bd, 0);
             bd.divide(bd, 0, 0);
@@ -1254,6 +1266,7 @@ public final class ModernizerTest {
             new NullInputStream();
             new NullReader();
             StringUtils.repeat("", 0);
+            org.apache.commons.lang.StringUtils.repeat("", 0);
             Files.toString((File) null, (Charset) null);
             Files.write("", (File) null, (Charset) null);
             Files.append("", (File) null, (Charset) null);
