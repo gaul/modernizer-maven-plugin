@@ -2630,4 +2630,82 @@
     <comment>Prefer java.util.HexFormat.of().parseHex(String)</comment>
   </violation>
 
+  <violation>
+    <name>org/apache/commons/collections4/Predicate</name>
+    <version>8</version>
+    <comment>Prefer java.util.function.Predicate</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/Transformer</name>
+    <version>8</version>
+    <comment>Prefer java.util.function.Function</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/Factory</name>
+    <version>8</version>
+    <comment>Prefer java.util.function.Supplier</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/Closure</name>
+    <version>8</version>
+    <comment>Prefer java.util.function.Consumer</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.NATURAL_COMPARATOR:Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.naturalOrder()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.naturalComparator:()Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.naturalOrder()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.reversedComparator:(Ljava/util/Comparator;)Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.reversed()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.chainedComparator:(Ljava/util/Collection;)Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.thenComparing(Comparator)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.chainedComparator:([Ljava/util/Comparator;)Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.thenComparing(Comparator)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.nullHighComparator:(Ljava/util/Comparator;)Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.nullsLast(Comparator)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.nullLowComparator:(Ljava/util/Comparator;)Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.nullsFirst(Comparator)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/ComparatorUtils.transformedComparator:(Ljava/util/Comparator;Lorg/apache/commons/collections4/Transformer;)Ljava/util/Comparator;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Comparator.comparing(Function, Comparator)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/collections4/IteratorUtils.emptyIterator:()Lorg/apache/commons/collections4/ResettableIterator;</name>
+    <version>7</version>
+    <comment>Prefer java.util.Collections.emptyIterator()</comment>
+  </violation>
+
 </modernizer>

@@ -126,6 +126,8 @@ import com.google.inject.Provider;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.collections4.ComparatorUtils;
+import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.CharSequenceReader;
@@ -512,6 +514,10 @@ public final class ModernizerTest {
                 VoidFunction.class,
                 VoidPredicate.class,
                 VoidSupplier.class,
+                VoidCollectionsPredicate.class,
+                VoidTransformer.class,
+                VoidFactory.class,
+                VoidClosure.class,
                 AutowiredMethod.class,
                 ObjectProvider.class);
         Collection<ViolationOccurrence> occurrences = new ArrayList<>();
@@ -733,6 +739,42 @@ public final class ModernizerTest {
         @Override
         public Void get() {
             return null;
+        }
+    }
+
+    @SuppressModernizer
+    private static class VoidCollectionsPredicate
+            implements org.apache.commons.collections4.Predicate<Void> {
+        @Override
+        public boolean evaluate(Void input) {
+            return true;
+        }
+    }
+
+    @SuppressModernizer
+    private static class VoidTransformer
+            implements org.apache.commons.collections4.Transformer<Void, Void> {
+        @Override
+        public Void transform(Void input) {
+            return null;
+        }
+    }
+
+    @SuppressModernizer
+    private static class VoidFactory
+            implements org.apache.commons.collections4.Factory<Void> {
+        @Override
+        public Void create() {
+            return null;
+        }
+    }
+
+    @SuppressModernizer
+    private static class VoidClosure
+            implements org.apache.commons.collections4.Closure<Void> {
+        @Override
+        public void execute(Void input) {
+            // Nothing
         }
     }
 
@@ -966,6 +1008,7 @@ public final class ModernizerTest {
             Validate.notNull(new Object());
             Validate.notNull(new Object(), "", new Object[0]);
             ObjectUtils.toString(new Object(), "");
+            IteratorUtils.emptyIterator();
         }
     }
 
@@ -1092,6 +1135,16 @@ public final class ModernizerTest {
             Collections.sort(new ArrayList<String>(), Comparator.naturalOrder());
             FileUtils.lineIterator((File) null);
             FileUtils.lineIterator((File) null, "");
+            Object object = ComparatorUtils.NATURAL_COMPARATOR;
+            ComparatorUtils.naturalComparator();
+            ComparatorUtils.reversedComparator((Comparator<Object>) null);
+            ComparatorUtils.chainedComparator(
+                    (Collection<Comparator<Object>>) null);
+            ComparatorUtils.chainedComparator((Comparator<Object>[]) null);
+            ComparatorUtils.nullHighComparator((Comparator<Object>) null);
+            ComparatorUtils.nullLowComparator((Comparator<Object>) null);
+            ComparatorUtils.transformedComparator((Comparator<Object>) null,
+                    null);
         }
     }
 
