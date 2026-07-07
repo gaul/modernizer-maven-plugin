@@ -932,6 +932,7 @@ public final class ModernizerTest {
             object = org.apache.commons.io.Charsets.UTF_16BE;
             object = org.apache.commons.io.Charsets.UTF_16LE;
             object = org.apache.commons.io.Charsets.UTF_16;
+            object = IOUtils.LINE_SEPARATOR;
             object = org.apache.commons.codec.Charsets.ISO_8859_1;
             object = org.apache.commons.codec.Charsets.US_ASCII;
             object = org.apache.commons.codec.Charsets.UTF_8;
@@ -1093,6 +1094,8 @@ public final class ModernizerTest {
             IOUtils.copyLarge((Reader) null, (Writer) null);
             IOUtils.toByteArray((InputStream) null);
             IOUtils.toString((InputStream) null, (Charset) null);
+            IOUtils.toString((InputStream) null);
+            IOUtils.toString((InputStream) null, "");
             Object.class.newInstance();
             Matcher m = Pattern.compile("").matcher("");
             m.appendReplacement(new StringBuffer(), "");
