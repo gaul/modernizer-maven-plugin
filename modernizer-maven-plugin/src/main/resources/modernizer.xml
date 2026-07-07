@@ -403,6 +403,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/io/Files.createTempDir:()Ljava/io/File;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.createTempDirectory(String, FileAttribute...)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/io/Files.readLines:(Ljava/io/File;Ljava/nio/charset/Charset;)Ljava/util/List;</name>
     <version>7</version>
     <comment>Prefer java.nio.file.Files.readAllLines(Path, Charset)</comment>
@@ -1926,6 +1932,18 @@
     <name>java/io/File."&lt;init&gt;":(Ljava/net/URI;)V</name>
     <version>11</version>
     <comment>Prefer java.nio.file.Path.of(URI)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File.createTempFile:(Ljava/lang/String;Ljava/lang/String;)Ljava/io/File;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.createTempFile(String, String, FileAttribute...)</comment>
+  </violation>
+
+  <violation>
+    <name>java/io/File.createTempFile:(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;)Ljava/io/File;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.createTempFile(Path, String, String, FileAttribute...)</comment>
   </violation>
 
   <violation>

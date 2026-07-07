@@ -907,8 +907,11 @@ public final class ModernizerTest {
             Files.newWriter((File) null, (Charset) null);
             Files.copy((File) null, (File) null);
             Files.createParentDirs((File) null);
+            Files.createTempDir();
             Files.move((File) null, (File) null);
             Files.readLines((File) null, (Charset) null);
+            File.createTempFile("", "");
+            File.createTempFile("", "", (File) null);
             Chars.compare((char) 0, (char) 0);
             Ints.compare(0, 0);
             Longs.compare(0L, 0L);
