@@ -135,6 +135,7 @@ import org.apache.commons.io.input.NullInputStream;
 import org.apache.commons.io.input.NullReader;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.io.output.NullWriter;
+import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -969,6 +970,7 @@ public final class ModernizerTest {
             NumberUtils.compare(0, 0);
             NumberUtils.compare(0L, 0L);
             NumberUtils.compare((short) 0, (short) 0);
+            CharUtils.compare((char) 0, (char) 0);
             Atomics.newReference();
             Atomics.newReference((Object) null);
             Atomics.newReferenceArray(0);

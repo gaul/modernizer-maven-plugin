@@ -1974,6 +1974,12 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/lang3/CharUtils.compare:(CC)I</name>
+    <version>7</version>
+    <comment>Prefer java.lang.Character.compare(char, char)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/base/Joiner.join:(Ljava/lang/Iterable;)Ljava/lang/String;</name>
     <version>8</version>
     <comment>Prefer java.lang.String.join or use java.util.stream.Stream with java.util.stream.Collectors.joining</comment>
