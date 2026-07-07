@@ -217,6 +217,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Maps.immutableEntry:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/Map$Entry;</name>
+    <version>9</version>
+    <comment>Prefer java.util.Map.entry(Object, Object) which rejects null keys and values</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Sets.newConcurrentHashSet:()Ljava/util/Set;</name>
     <version>8</version>
     <comment>Prefer java.util.concurrent.ConcurrentHashMap.newKeySet()</comment>

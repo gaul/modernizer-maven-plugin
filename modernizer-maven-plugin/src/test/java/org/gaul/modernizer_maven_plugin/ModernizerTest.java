@@ -1200,6 +1200,7 @@ public final class ModernizerTest {
             Streams.stream(OptionalDouble.empty());
             Iterators.forEnumeration(NetworkInterface.getNetworkInterfaces());
             MoreObjects.firstNonNull("", "");
+            Maps.immutableEntry(null, null);
             ObjectUtils.firstNonNull("", "");
             ObjectUtils.defaultIfNull("", "");
             org.apache.commons.lang.ObjectUtils.defaultIfNull("", "");
