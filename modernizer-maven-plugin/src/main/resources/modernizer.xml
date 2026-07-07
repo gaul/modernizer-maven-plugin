@@ -2864,4 +2864,10 @@
     <comment>Prefer java.util.Collections.emptyIterator()</comment>
   </violation>
 
+  <violation>
+    <name>com/google/auto/value/AutoValue</name>
+    <version>16</version>
+    <comment>Prefer Java records</comment>
+  </violation>
+
 </modernizer>

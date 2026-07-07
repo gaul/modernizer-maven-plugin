@@ -86,6 +86,7 @@ import java.util.zip.Inflater;
 
 import javax.xml.bind.DatatypeConverter;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -448,6 +449,23 @@ public final class ModernizerTest {
     }
 
     @Test
+    public void testClassAnnotationViolation() throws Exception {
+        String name = TestAnnotation.class.getName().replace('.', '/');
+        Map<String, Collection<Violation>> testViolations = new HashMap<>();
+        testViolations.put(name,
+                Collections.singleton(new Violation(name, 5, OptionalInt.empty(), "")));
+        Modernizer modernizer = new Modernizer("1.5", testViolations,
+                NO_EXCLUSIONS, NO_EXCLUSION_PATTERNS, NO_IGNORED_PACKAGES,
+                NO_IGNORED_CLASS_NAMES, NO_EXCLUSION_PATTERNS, true);
+        ClassReader cr = new ClassReader(AnnotatedClass.class.getName());
+        Collection<ViolationOccurrence> occurences =
+                modernizer.check(cr);
+        assertThat(occurences).hasSize(1);
+        assertThat(occurences.iterator().next().getViolation().getName())
+                .isEqualTo(name);
+    }
+
+    @Test
     public void testIgnoreGeneratedClassesOnMembers() throws Exception {
         String name = TestAnnotation.class.getName().replace('.', '/');
         Map<String, Collection<Violation>> testViolations = new HashMap<>();
@@ -522,6 +540,7 @@ public final class ModernizerTest {
                 VoidTransformer.class,
                 VoidFactory.class,
                 VoidClosure.class,
+                AutoValueClass.class,
                 AutowiredMethod.class,
                 ObjectProvider.class);
         Collection<ViolationOccurrence> occurrences = new ArrayList<>();
@@ -782,6 +801,12 @@ public final class ModernizerTest {
         }
     }
 
+    @SuppressModernizer
+    @AutoValue
+    abstract static class AutoValueClass {
+        abstract String value();
+    }
+
     private @interface TestAnnotation {
         // Nothing
     }
@@ -792,6 +817,12 @@ public final class ModernizerTest {
         public void annotatedMethod() {
             // Nothing
         }
+    }
+
+    @SuppressModernizer
+    @TestAnnotation
+    private static class AnnotatedClass {
+        // Nothing
     }
 
     // Marker annotation whose simple name matches the @Generated detection

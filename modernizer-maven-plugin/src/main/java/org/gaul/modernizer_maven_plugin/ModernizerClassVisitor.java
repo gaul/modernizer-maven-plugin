@@ -87,6 +87,16 @@ final class ModernizerClassVisitor extends ClassVisitor {
     }
 
     @Override
+    public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+        if (classIgnored) {
+            return null;
+        }
+        String name = Type.getType(desc).getInternalName();
+        checkToken(name, violations.get(name), name, /*lineNumber=*/ -1);
+        return null;
+    }
+
+    @Override
     public MethodVisitor visitMethod(int access, String methodName,
             String methodDescriptor, String methodSignature,
             String[] exceptions) {
