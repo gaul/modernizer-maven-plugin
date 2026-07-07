@@ -1009,6 +1009,12 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/codec/binary/Base64.encodeBase64URLSafeString:([B)Ljava/lang/String;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.getUrlEncoder().withoutPadding().encodeToString(byte[])</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/codec/Charsets.ISO_8859_1:Ljava/nio/charset/Charset;</name>
     <version>7</version>
     <comment>Prefer java.nio.charset.StandardCharsets.ISO_8859_1</comment>
@@ -2280,6 +2286,18 @@
     <name>org/apache/commons/codec/binary/Base64.encodeBase64:([B)[B</name>
     <version>8</version>
     <comment>Prefer java.util.Base64.Encoder</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/codec/binary/Base64.encodeBase64URLSafe:([B)[B</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.getUrlEncoder().withoutPadding().encode(byte[])</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/codec/binary/Base64.encodeBase64Chunked:([B)[B</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.getMimeEncoder().encode(byte[]); note that it omits the trailing line break which encodeBase64Chunked appends</comment>
   </violation>
 
   <violation>

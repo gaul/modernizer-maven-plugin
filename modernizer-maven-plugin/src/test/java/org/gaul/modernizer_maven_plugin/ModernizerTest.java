@@ -1073,6 +1073,9 @@ public final class ModernizerTest {
             Base64.decodeBase64((byte[]) null);
             Base64.encodeBase64String((byte[]) null);
             Base64.encodeBase64((byte[]) null);
+            Base64.encodeBase64URLSafe((byte[]) null);
+            Base64.encodeBase64URLSafeString((byte[]) null);
+            Base64.encodeBase64Chunked((byte[]) null);
             DatatypeConverter.parseBase64Binary("");
             DatatypeConverter.printBase64Binary(new byte[]{});
             Collections.sort(new ArrayList<String>());
