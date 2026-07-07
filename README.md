@@ -13,7 +13,7 @@ For example, Modernizer can detect uses of:
 * Guava `ByteStreams.toByteArray(InputStream)` instead of `InputStream.readAllBytes()`.
 
 The default configuration detects
-[over 300 legacy APIs](https://github.com/gaul/modernizer-maven-plugin/blob/master/modernizer-maven-plugin/src/main/resources/modernizer.xml),
+[over 400 legacy APIs](https://github.com/gaul/modernizer-maven-plugin/blob/master/modernizer-maven-plugin/src/main/resources/modernizer.xml),
 including third-party libraries like
 [Apache Commons](https://commons.apache.org/),
 [Guava](https://github.com/google/guava),
