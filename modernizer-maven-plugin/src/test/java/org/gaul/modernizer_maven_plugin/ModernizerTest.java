@@ -45,6 +45,7 @@ import java.net.URLStreamHandler;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.CopyOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -944,6 +945,16 @@ public final class ModernizerTest {
             FileUtils.readLines((File) null);
             FileUtils.readLines((File) null, (Charset) null);
             FileUtils.readLines((File) null, "");
+            FileUtils.writeLines((File) null, (Collection<?>) null);
+            FileUtils.writeLines((File) null, (Collection<?>) null, true);
+            FileUtils.writeLines((File) null, "", (Collection<?>) null);
+            FileUtils.writeLines((File) null, "", (Collection<?>) null, true);
+            FileUtils.openInputStream((File) null);
+            FileUtils.openOutputStream((File) null);
+            FileUtils.openOutputStream((File) null, true);
+            FileUtils.forceMkdir((File) null);
+            FileUtils.moveFile((File) null, (File) null);
+            FileUtils.moveFile((File) null, (File) null, (CopyOption[]) null);
             Preconditions.checkNotNull(new Object());
             Validate.notNull(new Object());
             Validate.notNull(new Object(), "", new Object[0]);
@@ -1065,6 +1076,8 @@ public final class ModernizerTest {
             DatatypeConverter.printBase64Binary(new byte[]{});
             Collections.sort(new ArrayList<String>());
             Collections.sort(new ArrayList<String>(), Comparator.naturalOrder());
+            FileUtils.lineIterator((File) null);
+            FileUtils.lineIterator((File) null, "");
         }
     }
 
@@ -1200,6 +1213,7 @@ public final class ModernizerTest {
         private static void method() throws Exception {
             ByteStreams.skipFully(null, 0L);
             IOUtils.skipFully((InputStream) null, 0L);
+            FileUtils.contentEquals((File) null, (File) null);
         }
     }
 

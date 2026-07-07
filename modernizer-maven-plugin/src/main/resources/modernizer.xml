@@ -1171,6 +1171,84 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/FileUtils.writeLines:(Ljava/io/File;Ljava/util/Collection;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.write(Path, Iterable, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeLines:(Ljava/io/File;Ljava/util/Collection;Z)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.write(Path, Iterable, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeLines:(Ljava/io/File;Ljava/lang/String;Ljava/util/Collection;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.write(Path, Iterable, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.writeLines:(Ljava/io/File;Ljava/lang/String;Ljava/util/Collection;Z)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.write(Path, Iterable, Charset, OpenOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.openInputStream:(Ljava/io/File;)Ljava/io/FileInputStream;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newInputStream(Path)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.openOutputStream:(Ljava/io/File;)Ljava/io/FileOutputStream;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path, OpenOption...); note that openOutputStream creates missing parent directories</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.openOutputStream:(Ljava/io/File;Z)Ljava/io/FileOutputStream;</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.newOutputStream(Path, OpenOption...); note that openOutputStream creates missing parent directories</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.forceMkdir:(Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.createDirectories(Path)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.moveFile:(Ljava/io/File;Ljava/io/File;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.move(Path, Path, CopyOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.moveFile:(Ljava/io/File;Ljava/io/File;[Ljava/nio/file/CopyOption;)V</name>
+    <version>7</version>
+    <comment>Prefer java.nio.file.Files.move(Path, Path, CopyOption...)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.contentEquals:(Ljava/io/File;Ljava/io/File;)Z</name>
+    <version>12</version>
+    <comment>Prefer java.nio.file.Files.mismatch(Path, Path) == -1; note that mismatch throws NoSuchFileException for missing files while contentEquals returns true when both are missing</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.lineIterator:(Ljava/io/File;)Lorg/apache/commons/io/LineIterator;</name>
+    <version>8</version>
+    <comment>Prefer java.nio.file.Files.lines(Path, Charset)</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/FileUtils.lineIterator:(Ljava/io/File;Ljava/lang/String;)Lorg/apache/commons/io/LineIterator;</name>
+    <version>8</version>
+    <comment>Prefer java.nio.file.Files.lines(Path, Charset)</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/io/IOUtils.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)I</name>
     <version>9</version>
     <comment>Prefer java.io.InputStream.transferTo(OutputStream)</comment>
