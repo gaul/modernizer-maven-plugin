@@ -1245,7 +1245,11 @@ public final class ModernizerTest {
     private static class Java17Violations {
         private static void method() throws Exception {
             Hex.encodeHexString(new byte[]{});
+            Hex.encodeHexString(new byte[]{}, true);
+            Hex.encodeHex(new byte[]{});
+            Hex.encodeHex(new byte[]{}, true);
             Hex.decodeHex("");
+            Hex.decodeHex(new char[]{});
             DatatypeConverter.printHexBinary(new byte[]{});
             DatatypeConverter.parseHexBinary("");
         }
