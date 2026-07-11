@@ -1351,6 +1351,18 @@
   </violation>
 
   <violation>
+    <name>org/apache/commons/io/IOUtils.toString:(Ljava/io/Reader;)Ljava/lang/String;</name>
+    <version>25</version>
+    <comment>Prefer java.io.Reader.readAllAsString()</comment>
+  </violation>
+
+  <violation>
+    <name>org/apache/commons/io/IOUtils.readLines:(Ljava/io/Reader;)Ljava/util/List;</name>
+    <version>25</version>
+    <comment>Prefer java.io.Reader.readAllLines()</comment>
+  </violation>
+
+  <violation>
     <name>org/apache/commons/io/IOUtils.LINE_SEPARATOR:Ljava/lang/String;</name>
     <version>7</version>
     <comment>Prefer java.lang.System.lineSeparator()</comment>
@@ -2181,6 +2193,18 @@
     <name>com/google/common/io/CharStreams.nullWriter:()Ljava/io/Writer;</name>
     <version>11</version>
     <comment>Prefer java.io.Writer.nullWriter()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/CharStreams.readLines:(Ljava/lang/Readable;)Ljava/util/List;</name>
+    <version>25</version>
+    <comment>Prefer java.io.Reader.readAllLines()</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/CharStreams.toString:(Ljava/lang/Readable;)Ljava/lang/String;</name>
+    <version>25</version>
+    <comment>Prefer java.io.Reader.readAllAsString()</comment>
   </violation>
 
   <violation>

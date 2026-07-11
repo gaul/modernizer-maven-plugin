@@ -532,6 +532,7 @@ public final class ModernizerTest {
                 Java22Violations.class,
                 Java23Violations.class,
                 Java24Violations.class,
+                Java25Violations.class,
                 Java26Violations.class,
                 // inner classes must be visited manually
                 DictionaryTestClass.class,
@@ -1461,6 +1462,17 @@ public final class ModernizerTest {
         private static void method() throws Exception {
             new StringReader("");
             new CharSequenceReader("");
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java25Violations {
+        private static void method() throws Exception {
+            Reader reader = Reader.nullReader();
+            IOUtils.toString(reader);
+            IOUtils.readLines(reader);
+            CharStreams.toString(reader);
+            CharStreams.readLines(reader);
         }
     }
 
