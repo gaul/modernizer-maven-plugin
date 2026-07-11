@@ -553,6 +553,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/math/IntMath.checkedPow:(II)I</name>
+    <version>25</version>
+    <comment>Prefer java.lang.Math.powExact(int, int)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/math/LongMath.checkedAdd:(JJ)J</name>
     <version>8</version>
     <comment>Prefer java.lang.Math.addExact(long, long)</comment>
@@ -568,6 +574,12 @@
     <name>com/google/common/math/LongMath.checkedMultiply:(JJ)J</name>
     <version>8</version>
     <comment>Prefer java.lang.Math.multiplyExact(long, long)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/math/LongMath.checkedPow:(JI)J</name>
+    <version>25</version>
+    <comment>Prefer java.lang.Math.powExact(long, int)</comment>
   </violation>
 
   <violation>

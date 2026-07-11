@@ -1473,6 +1473,8 @@ public final class ModernizerTest {
             IOUtils.readLines(reader);
             CharStreams.toString(reader);
             CharStreams.readLines(reader);
+            IntMath.checkedPow(0, 0);
+            LongMath.checkedPow(0L, 0);
         }
     }
 
