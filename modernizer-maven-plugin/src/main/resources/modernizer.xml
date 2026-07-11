@@ -2106,6 +2106,30 @@
   </violation>
 
   <violation>
+    <name>com/google/common/collect/Comparators.max:(Ljava/lang/Comparable;Ljava/lang/Comparable;)Ljava/lang/Comparable;</name>
+    <version>26</version>
+    <comment>Prefer java.util.Comparator.naturalOrder().max(T, T)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Comparators.min:(Ljava/lang/Comparable;Ljava/lang/Comparable;)Ljava/lang/Comparable;</name>
+    <version>26</version>
+    <comment>Prefer java.util.Comparator.naturalOrder().min(T, T)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Comparators.max:(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)Ljava/lang/Object;</name>
+    <version>26</version>
+    <comment>Prefer java.util.Comparator.max(T, T)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Comparators.min:(Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Comparator;)Ljava/lang/Object;</name>
+    <version>26</version>
+    <comment>Prefer java.util.Comparator.min(T, T)</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/collect/Ordering.natural:()Lcom/google/common/collect/Ordering;</name>
     <version>8</version>
     <comment>Prefer java.util.Comparator.naturalOrder()</comment>
@@ -2115,6 +2139,18 @@
     <name>com/google/common/collect/Ordering.usingToString:()Lcom/google/common/collect/Ordering;</name>
     <version>8</version>
     <comment>Prefer java.util.Comparator.comparing(Object::toString)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Ordering.max:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>26</version>
+    <comment>Prefer java.util.Comparator.max(T, T)</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/collect/Ordering.min:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;</name>
+    <version>26</version>
+    <comment>Prefer java.util.Comparator.min(T, T)</comment>
   </violation>
 
   <violation>

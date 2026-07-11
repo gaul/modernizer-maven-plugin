@@ -96,6 +96,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Comparators;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
@@ -1469,6 +1470,12 @@ public final class ModernizerTest {
             "".equalsIgnoreCase("");
             "".compareToIgnoreCase("");
             Object object = String.CASE_INSENSITIVE_ORDER;
+            Comparators.max("", "");
+            Comparators.min("", "");
+            Comparators.max("", "", Comparator.naturalOrder());
+            Comparators.min("", "", Comparator.naturalOrder());
+            Ordering.from(Comparator.<String>naturalOrder()).max("", "");
+            Ordering.from(Comparator.<String>naturalOrder()).min("", "");
         }
     }
 
