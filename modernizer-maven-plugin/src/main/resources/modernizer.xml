@@ -805,6 +805,24 @@
   </violation>
 
   <violation>
+    <name>java/lang/String.CASE_INSENSITIVE_ORDER:Ljava/util/Comparator;</name>
+    <version>26</version>
+    <comment>Prefer java.lang.String.UNICODE_CASEFOLD_ORDER; note that Unicode full case folding treats additional strings as equal such as "Fuß" and "FUSS" and is not documented as serializable</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/String.compareToIgnoreCase:(Ljava/lang/String;)I</name>
+    <version>26</version>
+    <comment>Prefer java.lang.String.compareToFoldCase(String); note that Unicode full case folding treats additional strings as equal such as "Fuß" and "FUSS"</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z</name>
+    <version>26</version>
+    <comment>Prefer java.lang.String.equalsFoldCase(String); note that Unicode full case folding matches additional strings such as "Fuß" and "FUSS"</comment>
+  </violation>
+
+  <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":()V</name>
     <version>5</version>
     <comment>Prefer java.lang.StringBuilder()</comment>

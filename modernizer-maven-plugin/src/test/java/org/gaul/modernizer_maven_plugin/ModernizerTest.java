@@ -508,7 +508,7 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        int maxVersion = 24;
+        int maxVersion = 26;
         Modernizer modernizer = createModernizer(String.valueOf(maxVersion));
         List<Class<?>> fixtures = List.of(
                 Java2Violations.class,
@@ -531,6 +531,7 @@ public final class ModernizerTest {
                 Java22Violations.class,
                 Java23Violations.class,
                 Java24Violations.class,
+                Java26Violations.class,
                 // inner classes must be visited manually
                 DictionaryTestClass.class,
                 EnumerationTestClass.class,
@@ -1459,6 +1460,15 @@ public final class ModernizerTest {
         private static void method() throws Exception {
             new StringReader("");
             new CharSequenceReader("");
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java26Violations {
+        private static void method() throws Exception {
+            "".equalsIgnoreCase("");
+            "".compareToIgnoreCase("");
+            Object object = String.CASE_INSENSITIVE_ORDER;
         }
     }
 
