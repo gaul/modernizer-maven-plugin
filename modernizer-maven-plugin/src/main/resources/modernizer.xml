@@ -349,9 +349,21 @@
   </violation>
 
   <violation>
+    <name>com/google/common/io/BaseEncoding.base16:()Lcom/google/common/io/BaseEncoding;</name>
+    <version>17</version>
+    <comment>Prefer java.util.HexFormat.of().withUpperCase(); note that HexFormat.parseHex accepts lowercase digits which decode rejects</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/io/BaseEncoding.base64:()Lcom/google/common/io/BaseEncoding;</name>
     <version>8</version>
     <comment>Prefer java.util.Base64.Decoder or java.util.Base64.Encoder</comment>
+  </violation>
+
+  <violation>
+    <name>com/google/common/io/BaseEncoding.base64Url:()Lcom/google/common/io/BaseEncoding;</name>
+    <version>8</version>
+    <comment>Prefer java.util.Base64.getUrlDecoder() or java.util.Base64.getUrlEncoder()</comment>
   </violation>
 
   <violation>

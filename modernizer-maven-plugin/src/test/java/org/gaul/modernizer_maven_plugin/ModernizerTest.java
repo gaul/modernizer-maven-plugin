@@ -1077,6 +1077,7 @@ public final class ModernizerTest {
             Ordering.natural();
             Ordering.usingToString();
             BaseEncoding.base64();
+            BaseEncoding.base64Url();
             UnsignedInts.compare(0, 0);
             UnsignedInts.divide(0, 0);
             UnsignedInts.parseUnsignedInt("0");
@@ -1376,7 +1377,9 @@ public final class ModernizerTest {
 
     @SuppressModernizer
     private static class Java17Violations {
+        @SuppressWarnings("CheckReturnValue")
         private static void method() throws Exception {
+            BaseEncoding.base16();
             Hex.encodeHexString(new byte[]{});
             Hex.encodeHexString(new byte[]{}, true);
             Hex.encodeHex(new byte[]{});
