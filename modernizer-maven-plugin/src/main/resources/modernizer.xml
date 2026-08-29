@@ -1017,7 +1017,7 @@
   <violation>
     <name>java/util/Stack."&lt;init&gt;":()V</name>
     <version>6</version>
-    <comment>Prefer java.util.ArrayDeque</comment>
+    <comment>Prefer java.util.ArrayDeque (note: iteration order differs; Stack iterates bottom-to-top, ArrayDeque iterates top-to-bottom)</comment>
   </violation>
 
   <violation>
