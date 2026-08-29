@@ -849,25 +849,25 @@
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":()V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder()</comment>
+    <comment>Prefer java.lang.StringBuilder(); note that StringBuffer is synchronized while StringBuilder is not</comment>
   </violation>
 
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":(I)V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder(int)</comment>
+    <comment>Prefer java.lang.StringBuilder(int); note that StringBuffer is synchronized while StringBuilder is not</comment>
   </violation>
 
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":(Ljava/lang/String;)V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder(String)</comment>
+    <comment>Prefer java.lang.StringBuilder(String); note that StringBuffer is synchronized while StringBuilder is not</comment>
   </violation>
 
   <violation>
     <name>java/lang/StringBuffer."&lt;init&gt;":(Ljava/lang/CharSequence;)V</name>
     <version>5</version>
-    <comment>Prefer java.lang.StringBuilder(CharSequence)</comment>
+    <comment>Prefer java.lang.StringBuilder(CharSequence); note that StringBuffer is synchronized while StringBuilder is not</comment>
   </violation>
 
   <violation>
@@ -993,25 +993,25 @@
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(IF)V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap&lt;&gt;(int, float)</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(int, float); note that Hashtable is synchronized while HashMap is not</comment>
   </violation>
 
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(I)V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap&lt;&gt;(int)</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(int); note that Hashtable is synchronized while HashMap is not</comment>
   </violation>
 
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":()V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap&lt;&gt;()</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(); note that Hashtable is synchronized while HashMap is not</comment>
   </violation>
 
   <violation>
     <name>java/util/Hashtable."&lt;init&gt;":(Ljava/util/Map;)V</name>
     <version>2</version>
-    <comment>Prefer java.util.HashMap&lt;&gt;(Map)</comment>
+    <comment>Prefer java.util.HashMap&lt;&gt;(Map); note that Hashtable is synchronized while HashMap is not</comment>
   </violation>
 
   <violation>
@@ -1041,25 +1041,25 @@
   <violation>
     <name>java/util/Vector."&lt;init&gt;":()V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList&lt;&gt;()</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(); note that Vector is synchronized while ArrayList is not</comment>
   </violation>
 
   <violation>
     <name>java/util/Vector."&lt;init&gt;":(I)V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList&lt;&gt;(int)</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(int); note that Vector is synchronized while ArrayList is not</comment>
   </violation>
 
   <violation>
     <name>java/util/Vector."&lt;init&gt;":(II)V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList&lt;&gt;(int)</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(int); note that Vector is synchronized while ArrayList is not</comment>
   </violation>
 
   <violation>
     <name>java/util/Vector."&lt;init&gt;":(Ljava/util/Collection;)V</name>
     <version>2</version>
-    <comment>Prefer java.util.ArrayList&lt;&gt;(Collection)</comment>
+    <comment>Prefer java.util.ArrayList&lt;&gt;(Collection); note that Vector is synchronized while ArrayList is not</comment>
   </violation>
 
   <violation>
