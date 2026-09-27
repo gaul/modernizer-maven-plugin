@@ -2196,6 +2196,12 @@
   </violation>
 
   <violation>
+    <name>com/google/common/base/Utf8.encodedLength:(Ljava/lang/CharSequence;)I</name>
+    <version>27</version>
+    <comment>Prefer java.lang.String.encodedLength(StandardCharsets.UTF_8); note that it counts the replacement byte for unpaired surrogates which Utf8.encodedLength rejects with IllegalArgumentException</comment>
+  </violation>
+
+  <violation>
     <name>com/google/common/io/ByteStreams.nullOutputStream:()Ljava/io/OutputStream;</name>
     <version>11</version>
     <comment>Prefer java.io.OutputStream.nullOutputStream()</comment>
@@ -2772,6 +2778,54 @@
     <name>java/util/zip/Inflater.getTotalOut:()I</name>
     <version>23</version>
     <comment>Prefer java.util.zip.Inflater.getBytesWritten()</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/reflect/Modifier.toString:(I)Ljava/lang/String;</name>
+    <version>27</version>
+    <comment>Prefer java.lang.reflect.Class.accessFlags(), Member.accessFlags() or toGenericString(); note that Modifier.toString(int) may report an incomplete or incorrect list of modifiers since flag interpretation depends on context</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/reflect/Modifier.classModifiers:()I</name>
+    <version>27</version>
+    <comment>Prefer java.lang.reflect.AccessFlag.Location.CLASS.flagsMask(); note that it covers class file access flags rather than Java language modifiers</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/reflect/Modifier.interfaceModifiers:()I</name>
+    <version>27</version>
+    <comment>Prefer java.lang.reflect.AccessFlag.Location.CLASS.flagsMask(); note that it covers class file access flags rather than Java language modifiers</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/reflect/Modifier.constructorModifiers:()I</name>
+    <version>27</version>
+    <comment>Prefer java.lang.reflect.AccessFlag.Location.METHOD.flagsMask(); note that it covers class file access flags rather than Java language modifiers</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/reflect/Modifier.methodModifiers:()I</name>
+    <version>27</version>
+    <comment>Prefer java.lang.reflect.AccessFlag.Location.METHOD.flagsMask(); note that it covers class file access flags rather than Java language modifiers</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/reflect/Modifier.fieldModifiers:()I</name>
+    <version>27</version>
+    <comment>Prefer java.lang.reflect.AccessFlag.Location.FIELD.flagsMask(); note that it covers class file access flags rather than Java language modifiers</comment>
+  </violation>
+
+  <violation>
+    <name>java/lang/reflect/Modifier.parameterModifiers:()I</name>
+    <version>27</version>
+    <comment>Prefer java.lang.reflect.AccessFlag.Location.METHOD_PARAMETER.flagsMask(); note that it covers class file access flags rather than Java language modifiers</comment>
+  </violation>
+
+  <violation>
+    <name>java/security/KeyStore.getCreationDate:(Ljava/lang/String;)Ljava/util/Date;</name>
+    <version>27</version>
+    <comment>Prefer java.security.KeyStore.getCreationInstant(String)</comment>
   </violation>
 
   <violation>

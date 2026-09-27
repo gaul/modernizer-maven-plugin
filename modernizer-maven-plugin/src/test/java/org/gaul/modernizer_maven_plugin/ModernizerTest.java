@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.NetworkInterface;
@@ -48,6 +49,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.CopyOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -96,6 +98,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
+import com.google.common.base.Utf8;
 import com.google.common.collect.Comparators;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -509,7 +512,7 @@ public final class ModernizerTest {
 
     @Test
     public void testAllViolations() throws Exception {
-        int maxVersion = 26;
+        int maxVersion = 27;
         Modernizer modernizer = createModernizer(String.valueOf(maxVersion));
         List<Class<?>> fixtures = List.of(
                 Java2Violations.class,
@@ -534,6 +537,7 @@ public final class ModernizerTest {
                 Java24Violations.class,
                 Java25Violations.class,
                 Java26Violations.class,
+                Java27Violations.class,
                 // inner classes must be visited manually
                 DictionaryTestClass.class,
                 EnumerationTestClass.class,
@@ -1493,6 +1497,22 @@ public final class ModernizerTest {
             Comparators.min("", "", Comparator.naturalOrder());
             Ordering.from(Comparator.<String>naturalOrder()).max("", "");
             Ordering.from(Comparator.<String>naturalOrder()).min("", "");
+        }
+    }
+
+    @SuppressModernizer
+    private static class Java27Violations {
+        @SuppressWarnings("deprecation")
+        private static void method() throws Exception {
+            KeyStore.getInstance(KeyStore.getDefaultType()).getCreationDate("");
+            Utf8.encodedLength("");
+            Modifier.toString(0);
+            Modifier.classModifiers();
+            Modifier.interfaceModifiers();
+            Modifier.constructorModifiers();
+            Modifier.methodModifiers();
+            Modifier.fieldModifiers();
+            Modifier.parameterModifiers();
         }
     }
 
