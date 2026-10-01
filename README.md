@@ -46,8 +46,9 @@ The `<configuration>` stanza can contain several elements:
 * `<javaVersion>` target Java version, e.g., `8` or `1.8` — both forms are accepted for any release.  Modernizer reports a violation only when its `<version>` is at or below this value, so targeting Java 1.2 flags `Vector` but targeting Java 1.1 does not.  Required parameter; binding it to `${maven.compiler.release}` (or `${maven.compiler.target}`) keeps it in sync with the rest of the build.
 * `<failOnViolations>` fail phase if Modernizer detects any violations.  Defaults to true.
 * `<includeTestClasses>` run Modernizer on test classes.  Defaults to true.
+* `<includeDefaultViolations>` load the bundled `classpath:/modernizer.xml` rules when `<violationsFile>` is omitted.  Defaults to true.  Set to false for an empty base rule set; no violations file is required.  Explicit `<violationsFile>` and `<violationsFiles>` values are still applied.  See [Custom violations](#custom-violations) below.
 * `<violationsFile>` user-specified violation file.  Also disables standard violation checks.  See [Custom violations](#custom-violations) below.
-* `<violationsFiles>` user-specified violation files.  Later files override violations from earlier ones, including `<violationsFile>` and the default violations.
+* `<violationsFiles>` user-specified violation files.  Later files override violations from earlier ones, including `<violationsFile>` and the default violations when those are the base.
 * `<exclusionsFile>` disables user-specified violations.  This is a text file with one exclusion per line in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.  Empty lines and lines starting with `#` are ignored.
 * `<exclusions>` violations to disable. Each exclusion should be in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
 * `<exclusionPatterns>` violation patterns to disable, specified using `<exclusionPattern>` child elements. Each exclusion should be a regular expression that matches the javap format: `java/lang/.*` of a violation.
@@ -77,6 +78,7 @@ Command-line flags can override Modernizer configuration and
 documents all of these.  The most commonly used flags:
 
 * `-Dmodernizer.failOnViolations` - fail phase if violations detected, defaults to true
+* `-Dmodernizer.includeDefaultViolations` - load bundled rules when violationsFile is omitted, defaults to true
 * `-Dmodernizer.skip` - skip plugin execution, defaults to false
 
 ### Output Formats
@@ -112,8 +114,84 @@ Modernizer reads its rules from an XML file in the same format as the
 [bundled `modernizer.xml`](https://github.com/gaul/modernizer-maven-plugin/blob/master/modernizer-maven-plugin/src/main/resources/modernizer.xml).
 Point `<violationsFile>` at your own file to replace the defaults, or list
 additional files in `<violationsFiles>` to layer rules on top (later files
-override earlier ones).  Either path can be prefixed with `classpath:/` to
-load from the classpath.
+override earlier ones, including `<violationsFile>` and the bundled rules).
+Either path can be prefixed with `classpath:/` to load from the classpath.
+An explicit `classpath:/modernizer.xml` loads the bundled rules, including
+when `<includeDefaultViolations>` is false.
+
+`<includeDefaultViolations>` selects the base rule set when
+`<violationsFile>` is omitted.  It defaults to true and loads the bundled
+`classpath:/modernizer.xml`.  Set it to false, or pass
+`-Dmodernizer.includeDefaultViolations=false`, to start from an empty rule
+set.  No violations file is required in that case.  A configured
+`<violationsFile>` or `<violationsFiles>` list is still loaded.
+`<violationsFiles>` layers onto that base (the bundled file, an explicit
+`<violationsFile>`, or the empty set), and a later file overrides earlier
+definitions of the same API.  `javaVersion` is still required.
+`<skip>` bypasses execution.
+
+Precedence when the plugin runs:
+
+1. `<skip>` (`-Dmodernizer.skip`) bypasses execution.
+2. `<javaVersion>` is required.
+3. An explicit `<violationsFile>` is the base and replaces the bundled
+   defaults, whether `<includeDefaultViolations>` is true or false.
+4. With `<violationsFile>` omitted, the bundled rules are the base when
+   `<includeDefaultViolations>` is true, and the base is empty when it is
+   false.
+5. `<violationsFiles>` entries are applied in order on that base.  Later
+   files override earlier definitions of the same API.
+
+A parent POM can wire Modernizer up without imposing the bundled checks.
+Child modules inherit that empty base, opt back into the defaults, or
+supply their own rules.
+
+Parent:
+
+```xml
+<plugin>
+  <groupId>org.gaul</groupId>
+  <artifactId>modernizer-maven-plugin</artifactId>
+  <version>3.4.0</version>
+  <configuration>
+    <javaVersion>${maven.compiler.release}</javaVersion>
+    <includeDefaultViolations>false</includeDefaultViolations>
+  </configuration>
+  <executions>
+    <execution>
+      <id>modernizer</id>
+      <phase>verify</phase>
+      <goals>
+        <goal>modernizer</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
+Child that enables the bundled defaults:
+
+```xml
+<plugin>
+  <groupId>org.gaul</groupId>
+  <artifactId>modernizer-maven-plugin</artifactId>
+  <configuration>
+    <includeDefaultViolations>true</includeDefaultViolations>
+  </configuration>
+</plugin>
+```
+
+Child that keeps the inherited empty base and applies only its own file:
+
+```xml
+<plugin>
+  <groupId>org.gaul</groupId>
+  <artifactId>modernizer-maven-plugin</artifactId>
+  <configuration>
+    <violationsFile>${project.basedir}/modernizer.xml</violationsFile>
+  </configuration>
+</plugin>
+```
 
 Each `<violation>` element accepts:
 
