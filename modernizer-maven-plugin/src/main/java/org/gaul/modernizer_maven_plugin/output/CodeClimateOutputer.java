@@ -197,7 +197,7 @@ public final class CodeClimateOutputer implements Outputer {
 
             @Override
             public int hashCode() {
-                return Objects.hash(begin);
+                return Integer.hashCode(begin);
             }
 
             @Override
