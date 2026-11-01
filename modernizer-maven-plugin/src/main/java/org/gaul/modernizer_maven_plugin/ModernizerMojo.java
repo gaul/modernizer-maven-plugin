@@ -36,6 +36,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,8 @@ import org.xml.sax.SAXException;
 public final class ModernizerMojo extends AbstractMojo {
 
     private static final String CLASSPATH_PREFIX = "classpath:";
+    private static final String DEFAULT_VIOLATIONS_FILE =
+            CLASSPATH_PREFIX + "/modernizer.xml";
 
     /** The maven project (effective pom). */
     @Parameter(defaultValue = "${project}", readonly = true)
@@ -106,27 +109,49 @@ public final class ModernizerMojo extends AbstractMojo {
     private boolean includeTestClasses = true;
 
     /**
-     * User-specified violation file. Also disables standard violation checks.
-     * Can point to files from classpath using an absolute path, e.g.:
+     * Include the bundled {@code classpath:/modernizer.xml} rules when
+     * {@code violationsFile} is not configured (null or empty). Set to {@code false} to
+     * start from an empty rule set, for example from a parent POM, without
+     * requiring an empty violations file. Explicit {@code violationsFile}
+     * and {@code violationsFiles} values are still loaded. An explicit
+     * {@code classpath:/modernizer.xml} loads the bundled rules even when
+     * this is {@code false}.
+     *
+     * @since 3.6.0
+     */
+    @Parameter(defaultValue = "true",
+               property = "modernizer.includeDefaultViolations")
+    private boolean includeDefaultViolations = true;
+
+    /**
+     * User-specified violation file. When set, it is the base rule set and
+     * replaces the bundled rules, whether or not
+     * {@code includeDefaultViolations} is true. When omitted, the base is
+     * the bundled rules if {@code includeDefaultViolations} is true, and
+     * empty otherwise. Entries in {@code violationsFiles} are then layered
+     * on top of that base. Can point to files from classpath using an
+     * absolute path, e.g.:
      *
      * classpath:/modernizer.xml
      *
-     * for the default violations file.
+     * for the bundled violations file.
      */
     @Parameter(property = "modernizer.violationsFile")
-    private String violationsFile = "classpath:/modernizer.xml";
+    private String violationsFile;
 
     /**
      * User-specified violation files. The violations loaded from
      * violationsFiles override the ones specified in violationsFile (or the
-     * default violations file if no violationsFile is given). Violations from
+     * default violations file if no violationsFile is given and
+     * includeDefaultViolations is true). When the base rule set is empty,
+     * violationsFiles are applied to that empty set. Violations from
      * the latter files override violations from the former files.
      *
      * Can point to files from classpath using an absolute path, e.g.:
      *
      * classpath:/modernizer.xml
      *
-     * for the default violations file.
+     * for the bundled violations file.
      */
     @Parameter(property = "modernizer.violationsFiles")
     private List<String> violationsFiles = emptyList();
@@ -237,8 +262,15 @@ public final class ModernizerMojo extends AbstractMojo {
 
         LogLevel logLevel = parseLogLevel(violationLogLevel);
 
-        Map<String, Collection<Violation>> allViolations =
-                parseViolations(violationsFile);
+        // parseViolations returns a fresh mutable map, so use it as the base
+        Map<String, Collection<Violation>> allViolations;
+        if (violationsFile != null && !violationsFile.isEmpty()) {
+            allViolations = parseViolations(violationsFile);
+        } else if (includeDefaultViolations) {
+            allViolations = parseViolations(DEFAULT_VIOLATIONS_FILE);
+        } else {
+            allViolations = new HashMap<>();
+        }
         for (String violationsFilePath : violationsFiles) {
             allViolations.putAll(parseViolations(violationsFilePath));
         }
